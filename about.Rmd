@@ -31,6 +31,19 @@ Kolegij će osposobiti studente za razumijevanje modernih izvora i alata za obra
 
 <br>
 
+### Literatura
+
+Koristiti ćemo mnoštvo različitih knjiga i resursa koje će biti dostupne na linkovima kod svakog predavanja.
+
+Sljedeća knjiga ulazi u obaveznu literaturu za kolegij:
+
+<a href="http://barbra-coco.dyndns.org/yuri/R/R%20for%20Data%20Science-%20Import,%20Tidy,%20Transform,%20Visualize,%20and%20Model%20Data.pdf">R for Data Science</a>
+<br><i>od Garrett Grolemund-a i  Hadley Wickham-a</i> 
+<br>Ovo je literatura za R. Dostupna je i <a href="https://r4ds.had.co.nz/">bookdown</a> verzija.
+
+
+<br>
+
 ### Polaganje ispita i kolokvija
 
 Studentima se preporuča i omogućuje da polože kolegij kroz prezentaciju i dva kolokvija. Sustav bodovanja za studente koji polažu kolegij preko kolokvija: moguće je skupiti 100 bodova, pri tome je na prezentaciji moguće ostvariti do 10 bodova, a na svakom kolokviju do 40 bodova. Pri tome je sustav bodovanja jednak kao kod ispita(vidi niže!).
