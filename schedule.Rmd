@@ -7,6 +7,9 @@ title: " "
 <br>
 <br>
 
+*Napomena*: .html i .Rmd formati predavanja su dostupni u [repozitoriju](https://github.com/BrbanMiro/WebObradaPodataka).
+<br>
+
 ## Predavanje 01: Pregled kolegija i studentskih obveza
 
 
@@ -25,7 +28,6 @@ title: " "
 - Big data" u društvenim i humanističkim znanostima
 
 
-<b>Format predavanja:</b> <a href="/Predavanja/03_VRSTEdtaXAR.html">.html</a> | <a href="/Predavanja/03_VRSTEdtaXAR.Rmd">.Rmd</a> 
 <br><b>Čitanje: </b><a href="/Literatura/Vrste_podataka.pdf">Vrste podataka-poglavlje u knjizi</a> + <a href="/Literatura/Sociology in the Era of Big Data.pdf">Sociology in the Era of Big Data</a> + <a href="/Literatura/VELIKI PODACI – VELIKI IZAZOV ZA SOCIOLOGIJU.pdf">Veliki podatci-veliki izazov za sociologiju</a> + <a href="/Literatura/Msc_mastruko_Kristalna kugla.pdf">Uloga big data, algoritama i prediktivne analitike u konstrukciji zbilje</a>
 <br>
 <br>
@@ -43,7 +45,6 @@ title: " "
 - Upravljanje modernim podatcima
 
 
-<b>Format predavanja:</b> <a href="/Predavanja/03_IZVORIdtaXAR.html">.html</a> | <a href="/Predavanja/03_IZVORIdtaXAR.Rmd">.Rmd</a> 
 <br><b>Čitanje: </b><a href="/Literatura/BDSources.pdf">Big Data ekosistem u društvenim istraživanjima</a>
 <br>
 <br>
@@ -60,7 +61,7 @@ title: " "
 - Indeksiranje
  
 
-<b>Format predavanja:</b> <a href="/Predavanja/04_OSNOVE_R.html">.html</a> | <a href="/Predavanja/04_OSNOVE_R.Rmd">.Rmd</a> + <a href="/Predavanja/04_OSNOVE_R_ggplot2.html">.html (ggplot2)</a> | <a href="/Predavanja/04_OSNOVE_R_ggplot2.Rmd">.Rmd (ggplot2)</a>
+
 <br><b>Čitanje: </b><a href="https://www.srce.unizg.hr/files/srce/docs/edu/R/s720_polaznik.pdf">Uvod u R - skripta I</a> + </b><a href="https://cran.r-project.org/doc/contrib/Kasum+Legovic-UvodUr.pdf">Uvod u R - skripta II</a> + </b><a href="https://learningstatisticswithr.com/lsr-0.6.pdf">LSR, poglavlja 3 i 4</a>
 <br>
 <br>
@@ -75,7 +76,6 @@ title: " "
 - Dodatak predavanju: data.table
 
 
-<b>Format predavanja:</b> <a href="/Predavanja/05_MANIPULACIJA_tidy.html">.html</a> | <a href="/Predavanja/05_MANIPULACIJA_tidy.Rmd">.Rmd</a> + <a href="/Predavanja/05_MANIPULACIJA_dt.html">.html (data.table)</a> | <a href="/Predavanja/05_MANIPULACIJA_dt.Rmd">.Rmd (data.table)</a>
 <br><b>Čitanje: </b><a href="https://vita.had.co.nz/papers/tidy-data.pdf">Tidy Data članak od Hadley Wickham-a</a>
 <br>
 <br>
@@ -92,7 +92,6 @@ title: " "
 - Praktični primjeri
 
 
-<b>Format predavanja:</b> <a href="/Predavanja/06_WEBSCRAP.html">.html (WebScrap I)</a> | <a href="/Predavanja/06_WEBSCRAP.Rmd">.Rmd (WebScrap I)</a> + <a href="/Predavanja/06_WEBSCRAP_I.html">.html (WebScrap II)</a> | <a href="/Predavanja/06_WEBSCRAP_I.Rmd">.Rmd ((WebScrap II)</a>
 <br><b>Čitanje: </b><a href="">Pokušajte "scrapati" nešto sa Web-a!</a>
 <br>
 <br>
@@ -108,7 +107,6 @@ title: " "
 - Resursi za učenje
 
 
-<b>Format predavanja:</b> <a href="/Predavanja/07_BAZE.html">.html</a> | <a href="/Predavanja/07_BAZE.Rmd">.Rmd</a>
 <br><b>Čitanje: </b><a href="https://wizardzines.com/zines/sql/">Knjiga *Become A Select Star* od Julia-e Evans.</a>
 <br>
 <br>
@@ -128,7 +126,6 @@ title: " "
 
 
 
-<b>Format predavanja:</b> <a href="/Predavanja/08_STATS.html">.html</a> | <a href="/Predavanja/08_STATS.Rmd">.Rmd</a>
 <br><b>Čitanje: </b><a href="">Izbor po želji iz dodatnih resursa.</a>
 <br>
 <br>
@@ -146,7 +143,6 @@ title: " "
 - Interpretabilnost modela
 
 
-<b>Format predavanja:</b> <a href="/Predavanja/09_ML.html">.html</a> | <a href="/Predavanja/09_ML.Rmd">.Rmd</a>
 <br><b>Čitanje: </b><a href="">Izbor po želji iz dodatnih resursa.</a>
 <br>
 <br>
@@ -163,7 +159,6 @@ title: " "
 - Analiza važnosti pojmova
 
 
-<b>Format predavanja:</b> <a href="/Predavanja/10_TXT.html">.html</a> | <a href="/Predavanja/10_TXT.Rmd">.Rmd</a>
 <br><b>Čitanje: </b><a href="http://eprints.lse.ac.uk/86659/1/Benoit_Text%20analysis%20in%20R_2018.pdf">Vodič za analizu teksta u R</a>
 <br>
 <br>
@@ -177,7 +172,6 @@ title: " "
 - R Markdown sintaksa i funkcionalnosti
 
 
-<b>Format predavanja:</b> <a href="/Predavanja/11_RMD.html">.html</a> | <a href="/Predavanja/10_RMD.Rmd">.Rmd</a>
 <br><b>Čitanje: </b><a href="https://dukespace.lib.duke.edu/dspace/bitstream/handle/10161/8374/Baumer_R%20Markdown-Integrating%20a%20Reproducible%20Analysis%20Tool%20into%20Introductory%20Statistics.pdf?sequence=1"> Članak o Reproducible Analysis</a>
 <br>
 <br>

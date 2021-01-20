@@ -15,7 +15,7 @@ U zimskom , ljetnom i jesenskom ispitnom roku studenti imaju završni pismeni is
 
 <br>
 
-# Studentska prezentacija/seminarski rad
+# Prezentacija/seminarski rad
 
 Svi studenti tijekom semestra moraju održati jednu prezentaciju prema zadanoj literaturi u .ppt formi. Izlagači moraju pripremiti na kraju prezentacije i nekoliko (2-3) ključnih pitanja za raspravu koju imamo na kraju obrađene teme. Prezentaciju je potrebno poslati profesoru na e-mail najkasnije u petak, tjedan dana prije seminara.
 

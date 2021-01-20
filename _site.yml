@@ -42,7 +42,7 @@ navbar:
           
     - text: "Literatura"
       href: literatura.html
-    - text: "Vijesti"
+    - text: "Obavjesti"
       href: news.html  
     - text: "Ocjenjivanje"
       href: evaluation.html
