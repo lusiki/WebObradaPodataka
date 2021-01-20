@@ -40,7 +40,7 @@ navbar:
         - text: "Prezentacija, objava i djeljenje rezultata"
           href: "https://raw.githack.com/BrbanMiro/Obrada-podataka/main/Predavanja/11_RMD.html"
           
-    - text: "Obavjesti"
+    - text: "Obavijesti"
       href: news.html  
     - text: "Resursi"
       href: resources.html   
