@@ -8,8 +8,7 @@ navbar:
       href: about.html
     - text: "Raspored"
       href: schedule.html
-    - text: "Literatura"
-      href: literatura.html
+    
     - text: "Predavanja"
       menu:
         - text: "Uvod u kolegij"
@@ -20,6 +19,8 @@ navbar:
           href: "https://raw.githack.com/BrbanMiro/Obrada-podataka/main/Predavanja/03_IZVORIdtaXAR.html"
         - text: "Osnove programskog jezika R"
           href: "https://raw.githack.com/BrbanMiro/Obrada-podataka/main/Predavanja/04_OSNOVE_R.html"
+        - text: "Vizualizacija podataka (ggplot2)"
+          href: "https://raw.githack.com/BrbanMiro/Obrada-podataka/main/Predavanja/04_OSNOVE_R_ggplot2.html"
         - text: "Manipulacija podatcima I"
           href: "https://raw.githack.com/BrbanMiro/Obrada-podataka/main/Predavanja/05_MANIPULACIJA_tidy.html"
         - text: "Manipulacija podatcima II"
@@ -38,7 +39,11 @@ navbar:
           href: "https://raw.githack.com/BrbanMiro/Obrada-podataka/main/Predavanja/10_TXT.html"  
         - text: "Prezentacija, objava i djeljenje rezultata"
           href: "https://raw.githack.com/BrbanMiro/Obrada-podataka/main/Predavanja/11_RMD.html"
-        
+          
+    - text: "Literatura"
+      href: literatura.html
+    - text: "Vijesti"
+      href: news.html  
     - text: "Ocjenjivanje"
       href: evaluation.html
     - text: "Resursi"
