@@ -44,8 +44,6 @@ navbar:
       href: literatura.html
     - text: "Obavjesti"
       href: news.html  
-    - text: "Ocjenjivanje"
-      href: evaluation.html
     - text: "Resursi"
       href: resources.html   
         
