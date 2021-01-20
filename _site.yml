@@ -1,0 +1,52 @@
+name: "Obrada Podataka" 
+navbar:
+  title: "Stats 201"
+  left:
+    - text: "Osnovne informacije"
+      href: index.html
+    - text: "O kolegiju"
+      href: about.html
+    - text: "Raspored"
+      href: schedule.html
+    - text: "Literatura"
+      href: literatura.html
+    - text: "Predavanja"
+      menu:
+        - text: "Uvod u kolegij"
+          href: "https://github.com/BrbanMiro/Statistika/blob/main/Moduli/01_UVOD.pdf"
+        - text: "Uvod u R"
+          href: "https://raw.githack.com/BrbanMiro/Statistika/main/Moduli/02_UVOD_U_R.pdf" 
+        - text: "Deskriptivna statistika"
+          href: "https://raw.githack.com/BrbanMiro/Statistika/main/Moduli/03_DESKRIPTIVNA_STATISTIKA_xar.html"
+        - text: "Grafikoni i vizualizacije"
+          href: "https://raw.githack.com/BrbanMiro/Statistika/main/Moduli/04_GRAFIKONI_I_VIZUALIZACIJE_xar.html"
+        - text: "Distribucije"
+          href: "https://raw.githack.com/BrbanMiro/Statistika/main/Moduli/05_VJEROJATNOST.html"
+        - text: "Uzorak i populacija"
+          href: "https://raw.githack.com/BrbanMiro/Statistika/main/Moduli/06_UZORAK_POPULACIJA.html"
+        - text: "Testiranje hipoteza"
+          href: "https://raw.githack.com/BrbanMiro/Statistika/main/Moduli/07_HIPOTEZE.html"
+        - text: "Kategorijalna analiza"
+          href: "https://raw.githack.com/BrbanMiro/Statistika/main/Moduli/08_KATEGORIJALNA_ANALIZA.html"
+        - text: "Usporedba prosjeka"
+          href: "https://raw.githack.com/BrbanMiro/Statistika/main/Moduli/09_USPOREDBA_PROSJEKA.html"
+        - text: "ANOVA"
+          href: "https://raw.githack.com/BrbanMiro/Statistika/main/Moduli/10_ANOVA.html"
+        - text: "Linearna regresija"
+        
+    - text: "Ocjenjivanje"
+      href: evaluation.html
+    - text: "Resursi"
+      href: resources.html   
+        
+  right:
+    - text: "O stranici"
+      href: site-info.html
+    - icon: ion-social-github
+      href: https://github.com/BrbanMiro/WebObradaPodataka
+output_dir: "docs"
+output:
+  html_document:
+    theme: flatly
+    highlight: textmate
+    
