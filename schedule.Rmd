@@ -18,6 +18,14 @@ title: " "
 - Rasprava: Podatkovna znanost i *Big Data*
 
 
+
+<br><b>Čitanje: </b><a href="https://seankross.com/chi-2019/kross-guo-chi-2019.pdf">Podatkovna znanost u biznisu i akademiji</a>
+<br>
+<br>
+
+https://seankross.com/chi-2019/kross-guo-chi-2019.pdf
+
+
 ## Predavanje 02: Vrste podataka
 
 - Strukturirani i ne-strukturirani podatci
@@ -126,7 +134,7 @@ title: " "
 
 
 
-<br><b>Čitanje: </b><a href="">Izbor po želji iz dodatnih resursa.</a>
+<br><b>Čitanje: </b><a href="https://projecteuclid.org/download/pdf_1/euclid.ss/1009213726">"Dvije kulture" statističkog modeliranja</a>
 <br>
 <br>
 
