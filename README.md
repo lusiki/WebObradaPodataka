@@ -6,7 +6,7 @@
 
 
 
-# Obrada podataka
+# Obrada podataka novi
 
 *OpenSource* kolegij na diplomskoj razini 'Obrada podataka'u zimskom semestru akademske godine 2019/20 na Fakultetu hrvatskih studija u Zagrebu koji izvodi [Luka Sikic](https://www.lukasikic.info/),PhD. Kolegij je prvenstveno namijenjen sociolozima ali i prilagođen za studente iz drugih društvenih zananosti poput politologije, komunikologije, povijesti i ekonomije.
 
