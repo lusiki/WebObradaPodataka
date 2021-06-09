@@ -12,33 +12,33 @@ navbar:
     - text: "Predavanja"
       menu:
         - text: "Uvod u kolegij"
-          href: "https://raw.githack.com/BrbanMiro/Obrada-podataka/main/Predavanja/01_UVOD_XAR.html"
+          href: "https://raw.githack.com/lusiki/WebObradaPodataka/main/Predavanja/01_UVOD_XAR.html"
         - text: "Vrste podataka"
-          href: "https://raw.githack.com/BrbanMiro/Obrada-podataka/main/Predavanja/03_VRSTEdtaXAR.html" 
+          href: "https://raw.githack.com/lusiki/WebObradaPodataka/main/Predavanja/03_VRSTEdtaXAR.html" 
         - text: "Izvori podataka"
-          href: "https://raw.githack.com/BrbanMiro/Obrada-podataka/main/Predavanja/03_IZVORIdtaXAR.html"
+          href: "https://raw.githack.com/lusiki/WebObradaPodataka/main/Predavanja/03_IZVORIdtaXAR.html"
         - text: "Osnove programskog jezika R"
-          href: "https://raw.githack.com/BrbanMiro/Obrada-podataka/main/Predavanja/04_OSNOVE_R.html"
+          href: "https://raw.githack.com/lusiki/WebObradaPodataka/main/Predavanja/04_OSNOVE_R.html"
         - text: "Vizualizacija podataka (ggplot2)"
-          href: "https://raw.githack.com/BrbanMiro/Obrada-podataka/main/Predavanja/04_OSNOVE_R_ggplot2.html"
+          href: "https://raw.githack.com/lusiki/WebObradaPodataka/main/Predavanja/04_OSNOVE_R_ggplot2.html"
         - text: "Manipulacija podatcima I"
-          href: "https://raw.githack.com/BrbanMiro/Obrada-podataka/main/Predavanja/05_MANIPULACIJA_tidy.html"
+          href: "https://raw.githack.com/lusiki/WebObradaPodataka/main/Predavanja/05_MANIPULACIJA_tidy.html"
         - text: "Manipulacija podatcima II"
-          href: "https://raw.githack.com/BrbanMiro/Obrada-podataka/main/Predavanja/05_MANIPULACIJA_dt.html"
+          href: "https://raw.githack.com/lusiki/WebObradaPodataka/main/Predavanja/05_MANIPULACIJA_dt.html"
         - text: "Prikupljanje podataka s interneta I"
-          href: "https://raw.githack.com/BrbanMiro/Obrada-podataka/main/Predavanja/06_WEBSCRAP.html"
+          href: "https://raw.githack.com/lusiki/WebObradaPodataka/main/Predavanja/06_WEBSCRAP.html"
         - text: "Prikupljanje podataka s interneta II"
-          href: "https://raw.githack.com/BrbanMiro/Obrada-podataka/main/Predavanja/06_WEBSCRAP_I.html"
+          href: "https://raw.githack.com/lusiki/WebObradaPodataka/main/Predavanja/06_WEBSCRAP_I.html"
         - text: "Rad s bazama podataka"
-          href: "https://raw.githack.com/BrbanMiro/Obrada-podataka/main/Predavanja/07_BAZE.html"
+          href: "https://raw.githack.com/lusiki/WebObradaPodataka/main/Predavanja/07_BAZE.html"
         - text: "Statistička analiza"
-          href: "https://raw.githack.com/BrbanMiro/Obrada-podataka/main/Predavanja/08_STATS.html"
+          href: "https://raw.githack.com/lusiki/WebObradaPodataka/main/Predavanja/08_STATS.html"
         - text: "Strojno učenje"
-          href: "https://raw.githack.com/BrbanMiro/Obrada-podataka/main/Predavanja/09_ML.html"
+          href: "https://raw.githack.com/lusiki/WebObradaPodataka/main/Predavanja/09_ML.html"
         - text: "Analiza teksta"
-          href: "https://raw.githack.com/BrbanMiro/Obrada-podataka/main/Predavanja/10_TXT.html"  
+          href: "https://raw.githack.com/lusiki/WebObradaPodataka/main/Predavanja/10_TXT.html"  
         - text: "Prezentacija, objava i djeljenje rezultata"
-          href: "https://raw.githack.com/BrbanMiro/Obrada-podataka/main/Predavanja/11_RMD.html"
+          href: "https://raw.githack.com/lusiki/WebObradaPodataka/main/Predavanja/11_RMD.html"
           
     - text: "Obavijesti"
       href: news.html  
@@ -49,7 +49,7 @@ navbar:
     - text: "O stranici"
       href: site-info.html
     - icon: ion-social-github
-      href: https://github.com/BrbanMiro/WebObradaPodataka
+      href: https://github.com/lusiki/WebObradaPodataka
 output_dir: "docs"
 output:
   html_document:
