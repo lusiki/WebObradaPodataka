@@ -138,7 +138,7 @@ layout: true
 * Visok stupanj kontrole
 * Planirani dizajn
 * Longitudinalni i studije slučaja
-* Problem generalizacije rezulatata
+* Problem generalizacije rezultata
 
 ---
 &lt;br&gt;
@@ -171,7 +171,7 @@ layout: true
 &lt;br&gt;
 ### Strukturirane baze podataka
 
-* Omogućuje kvanitativnu analizu
+* Omogućuju kvanitativnu analizu
 * Makro i mezzo razina analize
 * Potrebno prilagoditi podatke prije modeliranja
 * Institucionalni i uređeni podatci
@@ -198,7 +198,7 @@ layout: false
 ---
 
 layout:true
-# Moderni izvori podataka (BigData)
+# Suvremeni izvori podataka (BigData)
 
 ---
 &lt;br&gt;
@@ -215,20 +215,21 @@ layout:true
 
 * Internet, pametni uređaji, pametni senzori
 * Nova podatkovna paradigma
+* Napredna tehnološka infrastruktura
 
 ---
 &lt;br&gt;
 &lt;br&gt;
-&lt;br&gt;
+
 
 ### NOVA ISTRAŽIVAČKA PARADIGMA 
 
 * Analiza počinje od podataka (ne od teorije)
 * Potrebne tehničke vještine
-* Složena i memorijski zahtjevna analitika
+* Složena i memorijski (RAM) zahtjevna analitika
 * Noviteti u prezentaciji i komunikaciji rezultata
 * Poslovne primjene prednjače
-* Primjena u društvenim istraživanjima je u povojima
+* Primjena u društvenim istraživanjima je u povojima (*computational social science*)
 * Potrebno definirati novu arhitekturu (ekosistem)
 
 .footnote[[*] [Khunova revolucija!?](https://journals.sagepub.com/doi/10.1177/2053951714528481)]
@@ -236,33 +237,34 @@ layout:true
 ---
 class: inverse, middle
 layout:false
-# Web KAO IZVOR PODATAKA
+# Web 
 ---
 layout:true
-# Web KAO IZVOR PODATAKA
+# Web 
 ---
 &lt;br&gt;
 &lt;br&gt;
 &lt;br&gt;
 &lt;br&gt;
 &lt;br&gt;
-**Ciljevi analiza društvenog ponašanja:**
-1. Objašnjenje
+**Izvrstan izvor podataka za:**
+1. objašnjenje,
 &lt;br&gt;
 &lt;br&gt;
-2. Modeliranje
+2. modeliranje,
 &lt;br&gt;
 &lt;br&gt;
-3. 'Nowcasting'
+3. 'nowcasting',
 &lt;br&gt;
-&lt;br&gt;
-4. Predviđanje
+i
+4. predviđanje
+
+**društvenih pojava**.
 
 ---
 
-### Google
+### Google trendovi
 
-**Google trends:**
 1. [Analiza prodaje kuća](https://rpubs.com/tonytusharjr/newhomes)
 &lt;br&gt;
 &lt;br&gt;
@@ -288,7 +290,7 @@ layout:true
 
 ---
 
-### Google trends (praktični primjer u R)
+### Google trendovi
 
 
 ```r
@@ -296,24 +298,25 @@ layout:true
 library (gtrendsR) 
 library(ggplot2)
 
-#ključne riječi
-keywords=c("virus","korupcija","ekonomija")
+#kljucne rijeci
+keywords &lt;- c("virus", "korupcija", "ekonomija")
 #GEO
-country=c('HR')
+country &lt;- c('HR')
 #vremenski raspon
-time=("2010-01-01 2018-08-27")
+time &lt;- ("2010-01-01 2021-10-04")
 #kanali
-channel='web'
+channel &lt;- 'web'
 # funkcija
-trends = gtrends(keywords, gprop =channel,geo=country, time = time )
+trends &lt;- gtrends(keywords, gprop = channel,geo = country, time = time )
 #samo 'interes kroz vrijeme'
-time_trend=trends$interest_over_time
+time_trend &lt;- trends$interest_over_time
 ```
 
 ---
 
-### Google trends (praktični primjer u R)
-
+### Google trendovi
+ &lt;br&gt;
+ 
 
 ```r
 # pregledaj podatke
@@ -322,17 +325,18 @@ head(time_trend,5)
 
 ```
 #&gt;         date hits keyword geo                  time gprop category
-#&gt; 1 2010-01-01   72   virus  HR 2010-01-01 2018-08-27   web        0
-#&gt; 2 2010-02-01   55   virus  HR 2010-01-01 2018-08-27   web        0
-#&gt; 3 2010-03-01   62   virus  HR 2010-01-01 2018-08-27   web        0
-#&gt; 4 2010-04-01   36   virus  HR 2010-01-01 2018-08-27   web        0
-#&gt; 5 2010-05-01   45   virus  HR 2010-01-01 2018-08-27   web        0
+#&gt; 1 2010-01-01    5   virus  HR 2010-01-01 2021-10-04   web        0
+#&gt; 2 2010-02-01    5   virus  HR 2010-01-01 2021-10-04   web        0
+#&gt; 3 2010-03-01    6   virus  HR 2010-01-01 2021-10-04   web        0
+#&gt; 4 2010-04-01    4   virus  HR 2010-01-01 2021-10-04   web        0
+#&gt; 5 2010-05-01    3   virus  HR 2010-01-01 2021-10-04   web        0
 ```
 
 ---
 
-### Google trends (praktični primjer u R)
-
+### Google trendovi
+ &lt;br&gt;
+ 
 
 ```r
 # Vizualizacija
@@ -342,14 +346,15 @@ plot &lt;- ggplot(data = time_trend,
                xlab('Vrijeme') + 
                ylab('Relativni interes') +
                theme_bw() +
-               theme(legend.title = element_blank(), legend.position = "bottom",
+               theme(legend.title = element_blank(),
+                     legend.position = "bottom",
                      legend.text = element_text (size = 12)) + 
                ggtitle("Google volumen pretrage")
 ```
 
 ---
 
-### Google trends (praktični primjer u R)
+### Google trendovi
 
 
 ```r
@@ -361,23 +366,21 @@ plot
 
 ---
 
-### Google trends (praktični primjer u R)
+### Google trendovi
 
 
 ```r
 # sve u jednom redu koda :-)
 plot(gtrendsR::gtrends(keyword = c("virus","korupcija","ekonomija"),
                        geo = "HR",
-                       time = "2010-01-01 2018-08-27"))
+                       time = "2010-01-01 2021-10-04"))
 ```
 
 &lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-6-1.svg" style="display: block; margin: auto;" /&gt;
 
 ---
 &lt;br&gt;
-&lt;br&gt;
 ### Twitter
-
 
 * Najpoznatiji mikroblogging servis
 &lt;br&gt;
@@ -402,7 +405,7 @@ plot(gtrendsR::gtrends(keyword = c("virus","korupcija","ekonomija"),
 
 ---
 
-### Twitter (praktični primjer u R)
+### Twitter 
 
 
 
@@ -436,36 +439,44 @@ tweets &lt;- search_tweets(q = c("#Hrvatska"),
 
 ---
 
-### Twitter (praktični primjer u R)
+### Twitter 
 
 
 ```r
 # pregledj podatke
-head(tweets[,2:5], n = 2)
+head(tweets[,2:5], n = 10)
 ```
 
 ```
-#&gt; # A tibble: 2 x 4
-#&gt;   status_id           created_at          screen_name     text                  
-#&gt;   &lt;chr&gt;               &lt;dttm&gt;              &lt;chr&gt;           &lt;chr&gt;                 
-#&gt; 1 1445036697838891015 2021-10-04 14:42:50 mallumiquingas  Korisnici aplikacije ~
-#&gt; 2 1445028039344201729 2021-10-04 14:08:26 crodestinations Veli Rat Lighthouse –~
+#&gt; # A tibble: 10 x 4
+#&gt;    status_id           created_at          screen_name text                     
+#&gt;    &lt;chr&gt;               &lt;dttm&gt;              &lt;chr&gt;       &lt;chr&gt;                    
+#&gt;  1 1445105256224993291 2021-10-04 19:15:16 dicVeritas  "#Video Hrvatski politič~
+#&gt;  2 1445098797256826890 2021-10-04 18:49:36 dicVeritas  "Praćenje suđenja za rat~
+#&gt;  3 1444736905862582273 2021-10-03 18:51:34 dicVeritas  "U nedjelju dopunski izb~
+#&gt;  4 1445091373594648581 2021-10-04 18:20:06 90Souviens  "Le 5 octobre 1993 mouru~
+#&gt;  5 1445091346142928897 2021-10-04 18:20:00 vijesti_tv  "Radovi na Pelješkom mos~
+#&gt;  6 1444532647766659072 2021-10-03 05:19:56 vijesti_tv  "Prije nešto više od pol~
+#&gt;  7 1445000643991818245 2021-10-04 12:19:34 vijesti_tv  "Na startu prvenstva por~
+#&gt;  8 1444759101347700738 2021-10-03 20:19:46 vijesti_tv  "Dvije mlade vozačice, u~
+#&gt;  9 1444577831556628482 2021-10-03 08:19:28 vijesti_tv  "Zbog radova na vodoopsk~
+#&gt; 10 1444623240899477508 2021-10-03 11:19:55 vijesti_tv  "Svečana dodjela nagrada~
 ```
 
 ---
 
-### Twitter (praktični primjer u R)
+### Twitter 
 
 
 ```r
 # pregledaj korisnike
-users &lt;- search_users("#Hrvatska",
+users &lt;- search_users("#turizam",
                       n = 100)
 length(unique(users$location)) # provjeri
 ```
 
 ```
-#&gt; [1] 32
+#&gt; [1] 39
 ```
 
 ```r
@@ -477,7 +488,7 @@ plotTW &lt;- users %&gt;%
   ggplot(aes(location)) +
   geom_bar() + 
   coord_flip() +
-  labs(x = "Lokacija",
+  labs(x = "",
   y = "Broj",
   title = "Twitter korisnici - jedinstvene lokacije") +
   theme(legend.title = element_blank(), legend.position = "bottom",
@@ -487,7 +498,7 @@ plotTW &lt;- users %&gt;%
 
 ---
 
-### Twitter (praktični primjer u R)
+### Twitter 
 
 
 ```r
@@ -499,9 +510,9 @@ plotTW
 
 ---
 
-### Twitter (praktični primjer u R)
-
-
+### Twitter 
+ &lt;br&gt;
+ &lt;br&gt;
 
 ```r
 hashtag_pat &lt;- "#[a-zA-Z0-9_-ー\\.]+" # regex za tweet-ove
@@ -517,7 +528,7 @@ top_20_hashtags &lt;- as.character(as.data.frame(top_20_freqs)[,1]) # napravi st
 
 ---
 
-### Twitter (praktični primjer u R)
+### Twitter 
 
 
 ```r
@@ -527,21 +538,19 @@ top_20_freqs
 
 ```
 #&gt; hashtag_word
-#&gt;          hrvatska           croatia           vijesti          croatian 
-#&gt;               199                70                70                68 
-#&gt;          business         marketing          racunalo        smartphone 
-#&gt;                19                19                19                19 
-#&gt;        technology            jadran         dalmacija         vijestihr 
-#&gt;                19                14                13                13 
-#&gt;       photography            travel          kroatien             split 
-#&gt;                12                12                 9                 9 
-#&gt;   vijestihrvatska               hžv croatiafulloflife            kutina 
-#&gt;                 9                 8                 7                 7
+#&gt;        hrvatska         vijesti        croatian         croatia        business 
+#&gt;             199              74              71              64              18 
+#&gt;       marketing        racunalo      smartphone      technology          jadran 
+#&gt;              18              18              18              18              15 
+#&gt;       dalmacija       vijestihr           split          srbija          travel 
+#&gt;              14              13              10               9               9 
+#&gt;             hžv        kroatien vijestihrvatska          kutina     photography 
+#&gt;               8               8               8               7               7
 ```
 
 ---
 
-### Twitter (praktični primjer u R)
+### Twitter 
 
 
 ```r
@@ -562,10 +571,9 @@ layout:false
 ---
 
 layout:true
-# DRUŠTVENE MREŽE KAO IZVOR PODATAKA
+# DRUŠTVENE MREŽE 
 
 ---
-&lt;br&gt;
 &lt;br&gt;
 **Popularne društvene mreže**
 &lt;br&gt;
@@ -585,7 +593,7 @@ layout:true
 7. Flickr
 
 
-.footnote[[*] [Knjiga!](http://www.pzs.dstu.dp.ua/DataMining/social/bibl/Social%20Media%20Mining%20with%20R.pdf)]
+.footnote[[*] [Kolegij!](https://lusiki.github.io/Learning-Social-Media-Analytics/])
 
 ---
 
@@ -611,7 +619,7 @@ layout:true
 
 ---
 
-### Web scraping (praktični mikro primjer u R)
+### Web scraping 
 
 
 ```r
@@ -634,7 +642,7 @@ cSize &lt;- cSize %&gt;%
 ```
 ---
 
-### Web scraping (praktični mikro primjer u R)
+### Web scraping 
 
 
 ```r
@@ -660,7 +668,7 @@ head(cSize, 10)
 
 ---
 
-### Web scraping (praktični mikro primjer u R)
+### Web scraping 
 
 
 ```r
@@ -678,7 +686,7 @@ plot &lt;- ggplot(data = cSize[1:10,],
 
 ---
 
-### Web scraping (praktični mikro primjer u R)
+### Web scraping 
 
 
 ```r
@@ -717,11 +725,11 @@ layout:true
 ---
 class: inverse, middle
 layout:false
-# UPRAVLJANJE MODERNIM PODATCIMA
+# UPRAVLJANJE SUVREMENIM PODATCIMA
 ---
 
 layout:true
-# UPRAVLJANJE MODERNIM PODATCIMA
+# UPRAVLJANJE SUVREMENIM PODATCIMA
 ---
 &lt;br&gt;
 &lt;br&gt;
@@ -785,9 +793,9 @@ layout:true
 
 2. BigData kao nova istraživačka paradigma
 
-3. Moderni izvori podataka: Web, SocMedia, App
+3. Suvremeni izvori podataka: Web, SocMedia, App
 
-4. Ekosistem za upravljanje BigData-om
+4. DataScience za upravljanje BigData-om
 
 ---
 class: inverse, middle
