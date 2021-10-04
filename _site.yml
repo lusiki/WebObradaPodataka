@@ -1,6 +1,6 @@
 name: "Obrada Podataka" 
 navbar:
-  title: "Stats 201"
+  title: "Stats 202"
   left:
     - text: "Osnovne informacije"
       href: index.html
