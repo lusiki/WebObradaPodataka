@@ -103,7 +103,7 @@ title: " "
 <br>
 <br>
 
-## Predavanje 07: Rad sa bazama podataka<
+## Predavanje 07: Rad sa bazama podataka
 
 
 - Baze podatka
