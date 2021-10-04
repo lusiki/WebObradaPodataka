@@ -21,7 +21,7 @@ pagetitle: "Osnovne informacije"
 <br>
 <br>
 
-Dobrodošli na stranice kolegija <b>Obrada podataka</b> koji u zimskom semestru, 2020/21 izvodi [Luka Šikić](https://www.lukasikic.info/) na Fakultetu hrvatskih studija u Zagrebu. Kolegij je prvenstveno namijenjen studentima sociologije na diplomskoj razini, a može koristiti svim studentima društvenih i humanističkih smjerova koji su upoznati s osnovama statistike.
+Dobrodošli na stranice kolegija <b>Obrada podataka</b> koji u zimskom semestru, 2021/21 izvodi [Luka Šikić](https://www.lukasikic.info/) na Fakultetu hrvatskih studija u Zagrebu. Kolegij je prvenstveno namijenjen studentima sociologije na diplomskoj razini, a može koristiti svim studentima društvenih i humanističkih smjerova koji su upoznati s osnovama statistike.
 
 <br>
 <br>
@@ -31,8 +31,8 @@ Dobrodošli na stranice kolegija <b>Obrada podataka</b> koji u zimskom semestru,
 ### Predavač
 
 [Luka Šikić](https://www.lukasikic.info/)</br>
-Hrvatski studiji, Katedra za sociologiju</br>
-<b>Konzultacije</b>&nbsp;&nbsp;&nbsp;Četvrtkom,&nbsp;17:30-18:30</br>
+Fakultet hrvatskih studija, Odsjek za sociologiju</br>
+<b>Konzultacije</b>&nbsp;&nbsp;&nbsp;Četvrtkom,&nbsp;15:00-16:00</br>
 mail: lsikic@hrstud.hr</br>
 mob:  + 385 98 162 30 52</br>
 
