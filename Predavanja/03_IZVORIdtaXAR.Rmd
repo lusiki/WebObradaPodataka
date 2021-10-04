@@ -1,7 +1,7 @@
 ---
 title: "OBRADA PODATAKA"
 # subtitle: "<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>"
-subtitle: "Predavanje 3: Izvori podataka"
+subtitle: "Predavanje 3: Suvremeni izvori podataka u društvenim istraživanjima"
 author: "Luka Sikic, PhD"
 date: "Fakultet hrvatskih studija | [OP](https://github.com/BrbanMiro/Obrada-podataka)" #"`r format(Sys.time(), '%d %B %Y')`"
 output:
@@ -159,10 +159,9 @@ tidy_table <- function(x, terms, highlight_row = 1, highlight_color = "black", h
 ```
 
 
-layout: true
-class: middle
+
 # PREGLED PREDAVANJA
----
+
 <br>
 <br>
 <br>
@@ -177,7 +176,7 @@ class: middle
 - Upravljanje modernim podatcima
 
 
-.footnote[[*]Korištenje R za dohvat (modernih) izvora podataka]
+.footnote[[*]Korištenje jezika R za dohvat (suvremenih) izvora podataka!]
 
 ---
 class: inverse, middle
@@ -272,7 +271,7 @@ layout: true
 * Visok stupanj kontrole
 * Planirani dizajn
 * Longitudinalni i studije slučaja
-* Problem generalizacije rezulatata
+* Problem generalizacije rezultata
 
 ---
 <br>
@@ -305,7 +304,7 @@ layout: true
 <br>
 ### Strukturirane baze podataka
 
-* Omogućuje kvanitativnu analizu
+* Omogućuju kvanitativnu analizu
 * Makro i mezzo razina analize
 * Potrebno prilagoditi podatke prije modeliranja
 * Institucionalni i uređeni podatci
@@ -524,8 +523,8 @@ plot(gtrendsR::gtrends(keyword = c("virus","korupcija","ekonomija"),
 ```{r echo=FALSE}
 key <- "VaspMZezW3cjji4CKUdxhJorb"
 kSecret <- "bCDPEIS559T7AfEVruPv4HoDueAWqr8Gp2NXy2VnX7k0aEVtqy"
-tkn <- "1486088228-657Om30LfATyCMCXJad9HTPqx8eHdtOeuFyWgo8"
-tSecret <- "GpSHw4FCQHp8JAy1EaU81R09LPkHuNhXtXWcPdYdDdphV"
+tkn <- "1486088228-yVKcKilh0B4I3mg3whfLtLIpDwM7trDirLdQMKy"
+tSecret <- "rvC0kOcmLR2K3cVYCisoU98gjv5sQsSrm5sueppKxBn2v"
 app <- "izprobavanje"
 ```
 
