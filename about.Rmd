@@ -13,13 +13,13 @@ title: " "
 
 <br>
 
-Kolegij polazi od računalnog pristupa društvenim znanostima (**computational social science (CSS)**) i modernih izvora podatka puput Web-a, aplikacija, društvenih mreža, urbanih senzora i dr. Fokus je na korištenju računalnih tehnologija za obradu i analizu (velikog volumena) podataka. Kolegij nije zamišljen kao sveobuhvatna referenca za rad s *Big Data* tehnologijama u društvenim znanostima jer materijali ne pokrivaju: rad sa terminalom (*Bash Shell*), rad sa platformama za suradnju i razmjenu koda (*Git*, *GitHub*), rad sa *Docker*-om, programiranje i iteraciju, paralelno programiranje, rad u oblaku (*Cloud*). 
+Kolegij polazi od računalnog pristupa društvenim znanostima (**computational social science (CSS)**) i modernih izvora podatka puput Web-a, aplikacija, društvenih mreža, urbanih senzora i dr. Fokus je na korištenju računalnih tehnologija za obradu i analizu podataka (**Data Science**) te kolegij ne predstavlja sveobuhvatnu referencu za rad s *Big Data* tehnologijama u društvenim znanostima. Ipak, sadržaj kolegija će studentima koristiti kao korisno polazište za daljnji studij *Big Data* principa i alata u drštvenim znanostima i općenito. Za studente zainteresirane za rad sa *Big Data* tehnologijama se preporuča samostalno nadupunjavanje kolegija temama: rad sa terminalom (*Bash Shell*), rad sa platformama za suradnju i razmjenu koda (*Git*, *GitHub*), rad sa *Docker*-om, programiranje i iteraciju, paralelno programiranje, rad u oblaku (*Cloud*). 
 
 <br>
 
-Cilj kolegija je upoznavanje sa:
+Cilj kolegija je upoznavanje studenata sa:
 
-1) Ekosustavom modernog upravljanja podatcima (*Big Data*)
+1) Ekosustavom modernog upravljanja podatcima (*Data Science*)
 2) Alatima za obradu i manipulaciju podataka (*paketi u programskom jeziku R*, *SQL*, *Spark* )
 3) Modernom metodologijom za analizu podataka (*regresija, strojno učenje, obrada teksta - NLP*)
 4) Alatima za prezentaciju i dijeljenje rezulata (*Markdown, Git*)
@@ -27,7 +27,7 @@ Cilj kolegija je upoznavanje sa:
 
 <br>
 
-Kolegij će osposobiti studente za razumijevanje modernih izvora i alata za obradu podataka, te omogućiti uključivanje u modernu istraživačku paradigmu i tehnološke (*frontier*) tokove. Osim naglaska na akdemsku primjenu stečenog znanja, kroz kolegij će se studentima olakšati uključivanje u poslovni IT sektor na strani analitike i projektnog menadžmenta.
+Kolegij će osposobiti studente za razumijevanje modernih izvora podataka te metodolgije i alata za obradu podataka. To će studentima omogućiti uključivanje u modernu istraživačku paradigmu i tehnološke (*frontier*) tokove. Osim naglaska na akademsku primjenu stečenog znanja, kroz kolegij će se studentima olakšati uključivanje u poslovni IT sektor na strani analitike i projektnog menadžmenta.
 
 <br>
 
@@ -39,7 +39,7 @@ Sljedeća knjiga ulazi u obaveznu literaturu za kolegij:
 
 <a href="http://barbra-coco.dyndns.org/yuri/R/R%20for%20Data%20Science-%20Import,%20Tidy,%20Transform,%20Visualize,%20and%20Model%20Data.pdf">R for Data Science</a>
 <br><i>od Garrett Grolemund-a i  Hadley Wickham-a</i> 
-<br>Ovo je literatura za R. Dostupna je i <a href="https://r4ds.had.co.nz/">bookdown</a> verzija.
+<br>Ovo je referenca za rad sa jezikom R. Dostupna je i <a href="https://r4ds.had.co.nz/">bookdown</a> verzija.
 
 
 <br>
