@@ -33,7 +33,6 @@ class: center, middle, inverse, title-slide
 &lt;br&gt;
 &lt;br&gt;
 
-- Kategorije izvora podatka
 - Klasični izvori podataka 
 - Moderni izvori podataka (BigData)
 - Web 
@@ -45,63 +44,6 @@ class: center, middle, inverse, title-slide
 
 .footnote[[*]Korištenje jezika R za dohvat (suvremenih) izvora podataka!]
 
----
-class: inverse, middle
-layout: false
-# Kategorije izvora podataka
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
-1. Primarni
-&lt;br&gt;
-&lt;br&gt;
-2. Sekundarni
-&lt;br&gt;
-&lt;br&gt;
-3. Tercijarni
-
----
-layout: true
-# Kategorije izvora podataka
----
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
-
-### Primarni
-* Prikupljeni od strane istraživača
-* Zahtjevni 
-* Promatranje, eksperimenti, upitnici, intervju
-* Skupi
-* Specifični
-* Pouzdani
-
----
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
-
-### Sekundarni
-
-* Otprije prikupljeni
-* Podatci iz prošlosti
-* Jednostavnost
-* Publikacije, knjige, časopisi, zapisi
-* Ekonomični
-* Obrađeni i prilagođeni
-* Manje pouzdani
-
----
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
-
-### Tercijarni
-
-* Kombinacija primarnih i sekundarnih
-* Nisu osnova za akademska istraživanja
-* Često anonimni
-* Riječnici, pregledi literature, izvještaji, tutoriali, vodiči
 
 ---
 class: inverse, middle
@@ -451,16 +393,16 @@ head(tweets[,2:5], n = 10)
 #&gt; # A tibble: 10 x 4
 #&gt;    status_id           created_at          screen_name text                     
 #&gt;    &lt;chr&gt;               &lt;dttm&gt;              &lt;chr&gt;       &lt;chr&gt;                    
-#&gt;  1 1445105256224993291 2021-10-04 19:15:16 dicVeritas  "#Video Hrvatski politič~
-#&gt;  2 1445098797256826890 2021-10-04 18:49:36 dicVeritas  "Praćenje suđenja za rat~
-#&gt;  3 1444736905862582273 2021-10-03 18:51:34 dicVeritas  "U nedjelju dopunski izb~
-#&gt;  4 1445091373594648581 2021-10-04 18:20:06 90Souviens  "Le 5 octobre 1993 mouru~
-#&gt;  5 1445091346142928897 2021-10-04 18:20:00 vijesti_tv  "Radovi na Pelješkom mos~
-#&gt;  6 1444532647766659072 2021-10-03 05:19:56 vijesti_tv  "Prije nešto više od pol~
-#&gt;  7 1445000643991818245 2021-10-04 12:19:34 vijesti_tv  "Na startu prvenstva por~
-#&gt;  8 1444759101347700738 2021-10-03 20:19:46 vijesti_tv  "Dvije mlade vozačice, u~
-#&gt;  9 1444577831556628482 2021-10-03 08:19:28 vijesti_tv  "Zbog radova na vodoopsk~
-#&gt; 10 1444623240899477508 2021-10-03 11:19:55 vijesti_tv  "Svečana dodjela nagrada~
+#&gt;  1 1445108875494150151 2021-10-04 19:29:39 Lergalerga  "Kužiš ti koji su to mah~
+#&gt;  2 1444691823956529156 2021-10-03 15:52:26 Lergalerga  "Sve tuke neka rade svoj~
+#&gt;  3 1444692092459098124 2021-10-03 15:53:30 Lergalerga  "Pčele neka rade svoj po~
+#&gt;  4 1444692006777806857 2021-10-03 15:53:10 Lergalerga  "Sve p**** neka rade svo~
+#&gt;  5 1444974626862518273 2021-10-04 10:36:12 Lergalerga  "Tajči je žrtva obračuna~
+#&gt;  6 1444977441030737924 2021-10-04 10:47:22 Lergalerga  "#hrvatska #Zadar\n\nhtt~
+#&gt;  7 1444691723586789382 2021-10-03 15:52:02 Lergalerga  "Sve tuče neka rade svoj~
+#&gt;  8 1445020972029984769 2021-10-04 13:40:21 Lergalerga  "Tko je prijetio petri s~
+#&gt;  9 1444545661622435840 2021-10-03 06:11:38 Lergalerga  "U crkvu .. crkva jedini~
+#&gt; 10 1444691611125010435 2021-10-03 15:51:35 Lergalerga  "Ste tuce neka rade svoj~
 ```
 
 ---
@@ -539,13 +481,13 @@ top_20_freqs
 ```
 #&gt; hashtag_word
 #&gt;        hrvatska         vijesti        croatian         croatia        business 
-#&gt;             199              74              71              64              18 
+#&gt;             199              74              71              63              18 
 #&gt;       marketing        racunalo      smartphone      technology          jadran 
-#&gt;              18              18              18              18              15 
+#&gt;              18              18              18              18              14 
 #&gt;       dalmacija       vijestihr           split          srbija          travel 
-#&gt;              14              13              10               9               9 
-#&gt;             hžv        kroatien vijestihrvatska          kutina     photography 
-#&gt;               8               8               8               7               7
+#&gt;              13              12              10               9               9 
+#&gt;             hžv        kroatien          kutina     photography vijestihrvatska 
+#&gt;               8               8               7               7               7
 ```
 
 ---
@@ -793,9 +735,9 @@ layout:true
 
 2. BigData kao nova istraživačka paradigma
 
-3. Suvremeni izvori podataka: Web, SocMedia, App
+3. Suvremeni izvori podataka: Web, SocMedia, App i dr.
 
-4. DataScience za upravljanje BigData-om
+4. DataScience za upravljanje suvremenim podatcima
 
 ---
 class: inverse, middle

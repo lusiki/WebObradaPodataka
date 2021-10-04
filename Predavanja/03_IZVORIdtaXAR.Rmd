@@ -166,7 +166,6 @@ tidy_table <- function(x, terms, highlight_row = 1, highlight_color = "black", h
 <br>
 <br>
 
-- Kategorije izvora podatka
 - Klasični izvori podataka 
 - Moderni izvori podataka (BigData)
 - Web 
@@ -178,63 +177,6 @@ tidy_table <- function(x, terms, highlight_row = 1, highlight_color = "black", h
 
 .footnote[[*]Korištenje jezika R za dohvat (suvremenih) izvora podataka!]
 
----
-class: inverse, middle
-layout: false
-# Kategorije izvora podataka
-<br>
-<br>
-<br>
-1. Primarni
-<br>
-<br>
-2. Sekundarni
-<br>
-<br>
-3. Tercijarni
-
----
-layout: true
-# Kategorije izvora podataka
----
-<br>
-<br>
-<br>
-
-### Primarni
-* Prikupljeni od strane istraživača
-* Zahtjevni 
-* Promatranje, eksperimenti, upitnici, intervju
-* Skupi
-* Specifični
-* Pouzdani
-
----
-<br>
-<br>
-<br>
-
-### Sekundarni
-
-* Otprije prikupljeni
-* Podatci iz prošlosti
-* Jednostavnost
-* Publikacije, knjige, časopisi, zapisi
-* Ekonomični
-* Obrađeni i prilagođeni
-* Manje pouzdani
-
----
-<br>
-<br>
-<br>
-
-### Tercijarni
-
-* Kombinacija primarnih i sekundarnih
-* Nisu osnova za akademska istraživanja
-* Često anonimni
-* Riječnici, pregledi literature, izvještaji, tutoriali, vodiči
 
 ---
 class: inverse, middle
@@ -849,9 +791,9 @@ layout:true
 
 2. BigData kao nova istraživačka paradigma
 
-3. Suvremeni izvori podataka: Web, SocMedia, App
+3. Suvremeni izvori podataka: Web, SocMedia, App i dr.
 
-4. DataScience za upravljanje BigData-om
+4. DataScience za upravljanje suvremenim podatcima
 
 ---
 class: inverse, middle
