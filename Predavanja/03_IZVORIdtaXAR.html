@@ -37,12 +37,12 @@ class: center, middle, inverse, title-slide
 - Moderni izvori podataka (BigData)
 - Web 
 - Društvene mreže 
-- Web stranice i aplikacije
+- Aplikacije
 - Senzori  
 - Upravljanje modernim podatcima
 
 
-.footnote[[*]Korištenje jezika R za dohvat (suvremenih) izvora podataka!]
+.footnote[[*]Strojni dohvat (suvremenih) izvora podataka!]
 
 
 ---
@@ -132,7 +132,7 @@ layout: false
 2. Društvene mreže
 &lt;br&gt;
 &lt;br&gt;
-3. Web stranice i aplikacije 
+3. Aplikacije 
 &lt;br&gt;
 &lt;br&gt;
 4. Senzorni uređaji
@@ -190,378 +190,35 @@ layout:true
 &lt;br&gt;
 &lt;br&gt;
 **Izvrstan izvor podataka za:**
-1. objašnjenje,
+1. objašnjenje
 &lt;br&gt;
 &lt;br&gt;
-2. modeliranje,
+2. modeliranje
 &lt;br&gt;
 &lt;br&gt;
-3. 'nowcasting',
+3. 'nowcasting'
 &lt;br&gt;
-i
+&lt;br&gt;
 4. predviđanje
 
-**društvenih pojava**.
-
----
-
-### Google trendovi
-
-1. [Analiza prodaje kuća](https://rpubs.com/tonytusharjr/newhomes)
-&lt;br&gt;
-&lt;br&gt;
-2. [Potražnja za autombilima](https://aisel.aisnet.org/icis2017/DataScience/Presentations/1/)
-&lt;br&gt;
-&lt;br&gt;
-3. [Turistička potražnja](https://www.researchgate.net/publication/336516335_Forecasting_international_tourism_demand_in_Croatia_using_Google_Trends)
-&lt;br&gt;
-&lt;br&gt;
-4. [Nezaposlenost](https://www.sciencedirect.com/science/article/abs/pii/S1544612319301072)
-&lt;br&gt;
-&lt;br&gt;
-5. [Kretanja na dioničkim tržištima](https://www.emerald.com/insight/content/doi/10.1108/JED-07-2019-0017/full/pdf?title=stock-market-activity-and-google-trends-the-case-of-a-developing-economy)
-&lt;br&gt;
-&lt;br&gt;
-6. [Kupnje kino ulazinica](https://www.tandfonline.com/doi/abs/10.1080/13504851.2011.613744)
-&lt;br&gt;
-&lt;br&gt;
-7. [Politički radikalizam u Kini](https://martinctc.github.io/blog/vignette-google-trends-with-gtrendsr/)
-&lt;br&gt;
-&lt;br&gt;
-8. [Političkih stavova](https://journals.sagepub.com/doi/full/10.1177/2378023118760414)
-
----
-
-### Google trendovi
-
-
-```r
-# paketi
-library (gtrendsR) 
-library(ggplot2)
-
-#kljucne rijeci
-keywords &lt;- c("virus", "korupcija", "ekonomija")
-#GEO
-country &lt;- c('HR')
-#vremenski raspon
-time &lt;- ("2010-01-01 2021-10-04")
-#kanali
-channel &lt;- 'web'
-# funkcija
-trends &lt;- gtrends(keywords, gprop = channel,geo = country, time = time )
-#samo 'interes kroz vrijeme'
-time_trend &lt;- trends$interest_over_time
-```
-
----
-
-### Google trendovi
- &lt;br&gt;
- 
-
-```r
-# pregledaj podatke
-head(time_trend,5)
-```
-
-```
-#&gt;         date hits keyword geo                  time gprop category
-#&gt; 1 2010-01-01    5   virus  HR 2010-01-01 2021-10-04   web        0
-#&gt; 2 2010-02-01    5   virus  HR 2010-01-01 2021-10-04   web        0
-#&gt; 3 2010-03-01    6   virus  HR 2010-01-01 2021-10-04   web        0
-#&gt; 4 2010-04-01    4   virus  HR 2010-01-01 2021-10-04   web        0
-#&gt; 5 2010-05-01    3   virus  HR 2010-01-01 2021-10-04   web        0
-```
-
----
-
-### Google trendovi
- &lt;br&gt;
- 
-
-```r
-# Vizualizacija
-plot &lt;- ggplot(data = time_trend,
-               aes(x = date, y = hits, group = keyword, col = keyword)) +
-               geom_line() +
-               xlab('Vrijeme') + 
-               ylab('Relativni interes') +
-               theme_bw() +
-               theme(legend.title = element_blank(),
-                     legend.position = "bottom",
-                     legend.text = element_text (size = 12)) + 
-               ggtitle("Google volumen pretrage")
-```
-
----
-
-### Google trendovi
-
-
-```r
-# prikaži
-plot
-```
-
-&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-5-1.svg" style="display: block; margin: auto;" /&gt;
-
----
-
-### Google trendovi
-
-
-```r
-# sve u jednom redu koda :-)
-plot(gtrendsR::gtrends(keyword = c("virus","korupcija","ekonomija"),
-                       geo = "HR",
-                       time = "2010-01-01 2021-10-04"))
-```
-
-&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-6-1.svg" style="display: block; margin: auto;" /&gt;
-
----
-&lt;br&gt;
-### Twitter
-
-* Najpoznatiji mikroblogging servis
-&lt;br&gt;
-&lt;br&gt;
-* Brojni radovi i analize
-&lt;br&gt;
-&lt;br&gt;
-* [Popularan u kvantitativnoj politologiji](http://pablobarbera.com/static/social-media-data-generators.pdf)
-&lt;br&gt;
-&lt;br&gt;
-* [Predviđanje političkih ishoda](https://core.ac.uk/reader/11310530)
-&lt;br&gt;
-&lt;br&gt;
-* [Predviđanje dioničkih trendova](http://cs229.stanford.edu/proj2011/GoelMittal-StockMarketPredictionUsingTwitterSentimentAnalysis.pdf)
-&lt;br&gt;
-&lt;br&gt;
-* [Praćenje javnog mijenja](https://openknowledge.worldbank.org/bitstream/handle/10986/22656/The0pulse0of0p0eform0in0El0Salvador.pdf?sequence=1&amp;isAllowed=y)
-&lt;br&gt;
-&lt;br&gt;
-
-.footnote[[*] [Podrška za analizu u R](https://towardsdatascience.com/a-guide-to-mining-and-analysing-tweets-with-r-2f56818fdd16)]
-
----
-
-### Twitter 
-
-
-
-
-```r
-library (rtweet) # paket
-# stvori token
-twitter_token &lt;- create_token(
-  app = app,
-  consumer_key = key,
-  consumer_secret = kSecret,
-  access_token = tkn,
-  access_secret = tSecret)
-```
-
-
-
-```r
-# objavi iz R
-post_tweet("Look, i'm tweeting from R!")
-```
-
-
-
-```r
-# prikupi rezultate
-tweets &lt;- search_tweets(q = c("#Hrvatska"),
-                               n = 200)
-# geolokacija                               
-```
-
----
-
-### Twitter 
-
-
-```r
-# pregledj podatke
-head(tweets[,2:5], n = 10)
-```
-
-```
-#&gt; # A tibble: 10 x 4
-#&gt;    status_id           created_at          screen_name text                     
-#&gt;    &lt;chr&gt;               &lt;dttm&gt;              &lt;chr&gt;       &lt;chr&gt;                    
-#&gt;  1 1445108875494150151 2021-10-04 19:29:39 Lergalerga  "Kužiš ti koji su to mah~
-#&gt;  2 1444691823956529156 2021-10-03 15:52:26 Lergalerga  "Sve tuke neka rade svoj~
-#&gt;  3 1444692092459098124 2021-10-03 15:53:30 Lergalerga  "Pčele neka rade svoj po~
-#&gt;  4 1444692006777806857 2021-10-03 15:53:10 Lergalerga  "Sve p**** neka rade svo~
-#&gt;  5 1444974626862518273 2021-10-04 10:36:12 Lergalerga  "Tajči je žrtva obračuna~
-#&gt;  6 1444977441030737924 2021-10-04 10:47:22 Lergalerga  "#hrvatska #Zadar\n\nhtt~
-#&gt;  7 1444691723586789382 2021-10-03 15:52:02 Lergalerga  "Sve tuče neka rade svoj~
-#&gt;  8 1445020972029984769 2021-10-04 13:40:21 Lergalerga  "Tko je prijetio petri s~
-#&gt;  9 1444545661622435840 2021-10-03 06:11:38 Lergalerga  "U crkvu .. crkva jedini~
-#&gt; 10 1444691611125010435 2021-10-03 15:51:35 Lergalerga  "Ste tuce neka rade svoj~
-```
-
----
-
-### Twitter 
-
-
-```r
-# pregledaj korisnike
-users &lt;- search_users("#turizam",
-                      n = 100)
-length(unique(users$location)) # provjeri
-```
-
-```
-#&gt; [1] 39
-```
-
-```r
-library(tidyverse) # paket 
-library(ggplot2)   # paket
-# vizualiziraj
-plotTW &lt;- users %&gt;%
-  slice(1:8) %&gt;%
-  ggplot(aes(location)) +
-  geom_bar() + 
-  coord_flip() +
-  labs(x = "",
-  y = "Broj",
-  title = "Twitter korisnici - jedinstvene lokacije") +
-  theme(legend.title = element_blank(), legend.position = "bottom",
-                     legend.text = element_text (size = 5))
-```
-
-
----
-
-### Twitter 
-
-
-```r
-# prikaži grafikon
-plotTW
-```
-
-&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-13-1.svg" style="display: block; margin: auto;" /&gt;
-
----
-
-### Twitter 
- &lt;br&gt;
- &lt;br&gt;
-
-```r
-hashtag_pat &lt;- "#[a-zA-Z0-9_-ー\\.]+" # regex za tweet-ove
-hashtag &lt;- str_extract_all(tweets$text, hashtag_pat) # izvuci tweetove
-# uredi podatke
-hashtag_word &lt;- unlist(hashtag)
-hashtag_word &lt;- tolower(hashtag_word) # mala slova
-hashtag_word &lt;- gsub("[[:punct:]ー]", "", hashtag_word) # makni inerpunkciju
-hashtag_count &lt;- table(hashtag_word) # tabulliraj
-top_20_freqs &lt;- sort(hashtag_count, decreasing = TRUE)[1:20] # sortiraj
-top_20_hashtags &lt;- as.character(as.data.frame(top_20_freqs)[,1]) # napravi stringove
-```
-
----
-
-### Twitter 
-
-
-```r
-# prikaži rezultate
-top_20_freqs
-```
-
-```
-#&gt; hashtag_word
-#&gt;        hrvatska         vijesti        croatian         croatia        business 
-#&gt;             199              74              71              63              18 
-#&gt;       marketing        racunalo      smartphone      technology          jadran 
-#&gt;              18              18              18              18              14 
-#&gt;       dalmacija       vijestihr           split          srbija          travel 
-#&gt;              13              12              10               9               9 
-#&gt;             hžv        kroatien          kutina     photography vijestihrvatska 
-#&gt;               8               8               7               7               7
-```
-
----
-
-### Twitter 
-
-
-```r
-# vizualizacija 
-library(wordcloud) # paket
-wordcloud(top_20_hashtags, top_20_freqs, scale=c(3.5,1.5), # oblak riječi
-          random.order=FALSE, rot.per=.25)
-```
-
-&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-16-1.svg" style="display: block; margin: auto;" /&gt;
-
-
----
-class: inverse, middle
-layout:false
-# DRUŠTVENE MREŽE KAO IZVOR PODATAKA
-
----
-
-layout:true
-# DRUŠTVENE MREŽE 
-
----
-&lt;br&gt;
-**Popularne društvene mreže**
-&lt;br&gt;
-&lt;br&gt;
-1. [Facebook](https://www.kaggle.com/chrisbow/an-introduction-to-facebook-ad-analysis-using-r) [(Vidi takodjer!)](https://www.residualthoughts.com/2018/02/12/analyzing-facebook-messages-in-r/)
-&lt;br&gt;
-2. [LinkedIn](https://github.com/mpiccirilli/Rlinkedin)
-&lt;br&gt;
-3. [Youtube](https://rpubs.com/arafath/YouTubeVideos_Analysis)
-&lt;br&gt;
-4. [Instagram](https://github.com/JonasSchroeder/InstaCrawlR)
-&lt;br&gt;
-5. Google+
-&lt;br&gt;
-6. Tumblr
-&lt;br&gt;
-7. Flickr
-
-
-.footnote[[*] [Kolegij!](https://lusiki.github.io/Learning-Social-Media-Analytics/])
-
----
-
-class: inverse, middle
-layout:false
-# WEB STRANICE I APLIKACIJE
-
----
-layout:true
-# WEB STRANICE I APLIKACIJE
-
 ---
 &lt;br&gt;
 &lt;br&gt;
 &lt;br&gt;
-
+&lt;br&gt;
 **Prikupljanje podataka**
-
+&lt;br&gt;
+&lt;br&gt;
 1. [Web-Scraping](https://www.datacamp.com/community/tutorials/r-web-scraping-rvest) 
 &lt;br&gt;
 &lt;br&gt;
-2. Analiza trgovačkih platformi (Amazon)
+2. API
 
 ---
 
 ### Web scraping 
+
+- Preuzimanje [podataka](https://www.dzs.hr/Hrv/censuses/census2011/results/htm/H01_06_01/H01_06_01.html) o stanovništvu u najvećim hrvatskim gradovima 
 
 
 ```r
@@ -636,17 +293,323 @@ plot &lt;- ggplot(data = cSize[1:10,],
 plot
 ```
 
-&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-20-1.svg" style="display: block; margin: auto;" /&gt;
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-5-1.svg" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+### API - Google trendovi
+
+
+```r
+# paketi
+library (gtrendsR) 
+library(ggplot2)
+
+#kljucne rijeci
+keywords &lt;- c("virus", "korupcija", "ekonomija")
+#GEO
+country &lt;- c('HR')
+#vremenski raspon
+time &lt;- ("2010-01-01 2021-10-04")
+#kanali
+channel &lt;- 'web'
+# funkcija
+trends &lt;- gtrends(keywords, gprop = channel,geo = country, time = time )
+#samo 'interes kroz vrijeme'
+time_trend &lt;- trends$interest_over_time
+```
+
+---
+
+### API - Google trendovi
+ &lt;br&gt;
+ 
+
+```r
+# pregledaj podatke
+head(time_trend,5)
+```
+
+```
+#&gt;         date hits keyword geo                  time gprop category
+#&gt; 1 2010-01-01    5   virus  HR 2010-01-01 2021-10-04   web        0
+#&gt; 2 2010-02-01    5   virus  HR 2010-01-01 2021-10-04   web        0
+#&gt; 3 2010-03-01    5   virus  HR 2010-01-01 2021-10-04   web        0
+#&gt; 4 2010-04-01    4   virus  HR 2010-01-01 2021-10-04   web        0
+#&gt; 5 2010-05-01    3   virus  HR 2010-01-01 2021-10-04   web        0
+```
+
+---
+
+### API - Google trendovi
+ &lt;br&gt;
+ 
+
+```r
+# Vizualizacija
+plot &lt;- ggplot(data = time_trend,
+               aes(x = date, y = hits, group = keyword, col = keyword)) +
+               geom_line() +
+               xlab('Vrijeme') + 
+               ylab('Relativni interes') +
+               theme_bw() +
+               theme(legend.title = element_blank(),
+                     legend.position = "bottom",
+                     legend.text = element_text (size = 12)) + 
+               ggtitle("Google volumen pretrage")
+```
+
+---
+
+### API - Google trendovi
+
+
+```r
+# prikaži
+plot
+```
+
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-9-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+### API - Google trendovi
+
+
+```r
+# sve u jednom redu koda :-)
+plot(gtrendsR::gtrends(keyword = c("virus","korupcija","ekonomija"),
+                       geo = "HR",
+                       time = "2010-01-01 2021-10-04"))
+```
+
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-10-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+### Istraživanja na osnovi google trendova
+
+1. [Analiza prodaje kuća](https://rpubs.com/tonytusharjr/newhomes)
+&lt;br&gt;
+&lt;br&gt;
+2. [Potražnja za autombilima](https://aisel.aisnet.org/icis2017/DataScience/Presentations/1/)
+&lt;br&gt;
+&lt;br&gt;
+3. [Turistička potražnja](https://www.researchgate.net/publication/336516335_Forecasting_international_tourism_demand_in_Croatia_using_Google_Trends)
+&lt;br&gt;
+&lt;br&gt;
+4. [Nezaposlenost](https://www.sciencedirect.com/science/article/abs/pii/S1544612319301072)
+&lt;br&gt;
+&lt;br&gt;
+5. [Kretanja na dioničkim tržištima](https://www.emerald.com/insight/content/doi/10.1108/JED-07-2019-0017/full/pdf?title=stock-market-activity-and-google-trends-the-case-of-a-developing-economy)
+&lt;br&gt;
+&lt;br&gt;
+6. [Kupnje kino ulazinica](https://www.tandfonline.com/doi/abs/10.1080/13504851.2011.613744)
+&lt;br&gt;
+&lt;br&gt;
+7. [Politički radikalizam u Kini](https://martinctc.github.io/blog/vignette-google-trends-with-gtrendsr/)
+&lt;br&gt;
+&lt;br&gt;
+8. [Političkih stavova](https://journals.sagepub.com/doi/full/10.1177/2378023118760414)
+
+---
+class: inverse, middle
+layout:false
+# DRUŠTVENE MREŽE KAO IZVOR PODATAKA
+
+---
+
+layout:true
+# DRUŠTVENE MREŽE 
+
+---
+&lt;br&gt;
+**Popularne društvene mreže**
+&lt;br&gt;
+&lt;br&gt;
+1. [Facebook](https://www.kaggle.com/chrisbow/an-introduction-to-facebook-ad-analysis-using-r) [(Vidi takodjer!)](https://www.residualthoughts.com/2018/02/12/analyzing-facebook-messages-in-r/)
+&lt;br&gt;
+2. [LinkedIn](https://github.com/mpiccirilli/Rlinkedin)
+&lt;br&gt;
+3. [Youtube](https://rpubs.com/arafath/YouTubeVideos_Analysis)
+&lt;br&gt;
+4. [Instagram](https://github.com/JonasSchroeder/InstaCrawlR)
+&lt;br&gt;
+5. Google+
+&lt;br&gt;
+6. Tumblr
+&lt;br&gt;
+7. Flickr
+
+
+.footnote[[*] [Kolegij!](https://lusiki.github.io/Learning-Social-Media-Analytics/])
+
+---
+
+### API-kalipsa
+
+
+---
+&lt;br&gt;
+### Twitter
+
+* Najpoznatiji mikroblogging servis
+&lt;br&gt;
+&lt;br&gt;
+* Brojni radovi i analize
+&lt;br&gt;
+&lt;br&gt;
+* [Popularan u kvantitativnoj politologiji](http://pablobarbera.com/static/social-media-data-generators.pdf)
+&lt;br&gt;
+&lt;br&gt;
+* [Predviđanje političkih ishoda](https://core.ac.uk/reader/11310530)
+&lt;br&gt;
+&lt;br&gt;
+* [Predviđanje dioničkih trendova](http://cs229.stanford.edu/proj2011/GoelMittal-StockMarketPredictionUsingTwitterSentimentAnalysis.pdf)
+&lt;br&gt;
+&lt;br&gt;
+* [Praćenje javnog mijenja](https://openknowledge.worldbank.org/bitstream/handle/10986/22656/The0pulse0of0p0eform0in0El0Salvador.pdf?sequence=1&amp;isAllowed=y)
+&lt;br&gt;
+&lt;br&gt;
+
+.footnote[[*] [Podrška za analizu u R](https://towardsdatascience.com/a-guide-to-mining-and-analysing-tweets-with-r-2f56818fdd16)]
+
+---
+
+### Twitter 
+
+
+
+
+```r
+library (rtweet) # paket
+# stvori token
+twitter_token &lt;- create_token(
+  app = app,
+  consumer_key = key,
+  consumer_secret = kSecret,
+  access_token = tkn,
+  access_secret = tSecret)
+```
+
+
+
+```r
+# objavi iz R
+post_tweet("Look, i'm tweeting from R!")
+```
+
+
+
+```r
+# prikupi rezultate
+tweets &lt;- search_tweets(q = c("#Hrvatska"),
+                               n = 200)
+# geolokacija                               
+```
+
+---
+
+### Twitter 
+
+
+```r
+# pregledj podatke
+head(tweets[,2:5], n = 10)
+```
+
+```
+#&gt; # A tibble: 10 x 4
+#&gt;    status_id           created_at          screen_name     text                 
+#&gt;    &lt;chr&gt;               &lt;dttm&gt;              &lt;chr&gt;           &lt;chr&gt;                
+#&gt;  1 1445310816736223233 2021-10-05 08:52:05 lokalnahrvatska #Međimurskažupanija ~
+#&gt;  2 1445309577868845056 2021-10-05 08:47:10 lokalnahrvatska #Zagrebačkažupanija ~
+#&gt;  3 1445309574450454531 2021-10-05 08:47:09 lokalnahrvatska #Zagrebačkažupanija ~
+#&gt;  4 1444978628601827328 2021-10-04 10:52:06 lokalnahrvatska #UdrugagradovaRH : T~
+#&gt;  5 1445305782371819520 2021-10-05 08:32:05 lokalnahrvatska #Samobor : Svjetski ~
+#&gt;  6 1445302011294097408 2021-10-05 08:17:06 lokalnahrvatska #Kutina : Čestitka g~
+#&gt;  7 1445300751572553730 2021-10-05 08:12:06 lokalnahrvatska #Ivanec : U GRADSKOM~
+#&gt;  8 1445022689383571456 2021-10-04 13:47:11 lokalnahrvatska #Dubrovačkoneretvans~
+#&gt;  9 1445022684526649348 2021-10-04 13:47:09 lokalnahrvatska #Dubrovačkoneretvans~
+#&gt; 10 1444917041882963970 2021-10-04 06:47:22 lokalnahrvatska #Vrlika : OTVORENA K~
+```
+
+---
+
+### Twitter 
+ &lt;br&gt;
+ &lt;br&gt;
+
+```r
+hashtag_pat &lt;- "#[a-zA-Z0-9_-ー\\.]+" # regex za tweet-ove
+hashtag &lt;- str_extract_all(tweets$text, hashtag_pat) # izvuci tweetove
+# uredi podatke
+hashtag_word &lt;- unlist(hashtag)
+hashtag_word &lt;- tolower(hashtag_word) # mala slova
+hashtag_word &lt;- gsub("[[:punct:]ー]", "", hashtag_word) # makni inerpunkciju
+hashtag_count &lt;- table(hashtag_word) # tabulliraj
+top_20_freqs &lt;- sort(hashtag_count, decreasing = TRUE)[1:20] # sortiraj
+top_20_hashtags &lt;- as.character(as.data.frame(top_20_freqs)[,1]) # napravi stringove
+```
+
+---
+
+### Twitter 
+
+
+```r
+# prikaži rezultate
+top_20_freqs
+```
+
+```
+#&gt; hashtag_word
+#&gt;    hrvatska     vijesti    croatian     croatia      travel      jadran 
+#&gt;         200          81          78          65          16          14 
+#&gt;    business   dalmacija   marketing    racunalo  smartphone  technology 
+#&gt;          13          13          13          13          13          13 
+#&gt;   vijestihr photography      zagreb      kutina       split      sunset 
+#&gt;          12          10           9           8           8           8 
+#&gt;      autumn    colorful 
+#&gt;           7           7
+```
+
+---
+
+### Twitter 
+
+
+```r
+# vizualizacija 
+library(wordcloud) # paket
+wordcloud(top_20_hashtags, top_20_freqs, scale=c(3.5,1.5), # oblak riječi
+          random.order=FALSE, rot.per=.25)
+```
+
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-18-1.svg" style="display: block; margin: auto;" /&gt;
+
 
 ---
 
 class: inverse, middle
 layout:false
-# APLIKACIJE I SENZORNI UREĐAJI
+# APLIKACIJE
+
+---
+layout:true
+# APLIKACIJE
+
+
+---
+
+class: inverse, middle
+layout:false
+# SENZORNI UREĐAJI
 ---
 
 layout:true
-# APLIKACIJE I SENZORNI UREĐAJI
+# SENZORNI UREĐAJI
 ---
 
 **Prikupljanje podataka**
@@ -688,6 +651,8 @@ layout:true
 .pull-right[
 **Strukturiranje podataka**
 * Čišćenje
+* Manipulacija
+* Programski pristup
 * Standardizacija
 * Spajanje baza
 * NLP(txt.)

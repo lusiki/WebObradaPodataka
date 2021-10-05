@@ -170,12 +170,12 @@ tidy_table <- function(x, terms, highlight_row = 1, highlight_color = "black", h
 - Moderni izvori podataka (BigData)
 - Web 
 - Društvene mreže 
-- Web stranice i aplikacije
+- Aplikacije
 - Senzori  
 - Upravljanje modernim podatcima
 
 
-.footnote[[*]Korištenje jezika R za dohvat (suvremenih) izvora podataka!]
+.footnote[[*]Strojni dohvat (suvremenih) izvora podataka!]
 
 
 ---
@@ -265,7 +265,7 @@ layout: false
 2. Društvene mreže
 <br>
 <br>
-3. Web stranice i aplikacije 
+3. Aplikacije 
 <br>
 <br>
 4. Senzorni uređaji
@@ -323,22 +323,168 @@ layout:true
 <br>
 <br>
 **Izvrstan izvor podataka za:**
-1. objašnjenje,
+1. objašnjenje
 <br>
 <br>
-2. modeliranje,
+2. modeliranje
 <br>
 <br>
-3. 'nowcasting',
+3. 'nowcasting'
 <br>
-i
+<br>
 4. predviđanje
 
-**društvenih pojava**.
+---
+<br>
+<br>
+<br>
+<br>
+**Prikupljanje podataka**
+<br>
+<br>
+1. [Web-Scraping](https://www.datacamp.com/community/tutorials/r-web-scraping-rvest) 
+<br>
+<br>
+2. API
 
 ---
 
-### Google trendovi
+### Web scraping 
+
+- Preuzimanje [podataka](https://www.dzs.hr/Hrv/censuses/census2011/results/htm/H01_06_01/H01_06_01.html) o stanovništvu u najvećim hrvatskim gradovima 
+
+```{r}
+library(rvest) # paket
+url <- "https://www.dzs.hr/Hrv/censuses/census2011/results/htm/H01_06_01/H01_06_01.html" # www
+# preuzmi tablicu sa www
+citySize <- url %>%
+              xml2::read_html() %>% 
+              html_nodes('table') %>%
+              html_table()
+# izvadi korisne djelove
+cSize <- as_tibble(citySize[[2]],
+                   .name_repair = ~ c("Grad","Stanovnici","opcina","stan2"))
+# prilagodi podatke
+cSize <- cSize %>%
+  select(Grad,Stanovnici) %>%
+  mutate(Stanovnici = as.numeric(Stanovnici)) %>%
+  mutate(Grad = toupper(Grad)) %>%
+  arrange(desc(Stanovnici))
+
+
+```
+---
+
+### Web scraping 
+
+```{r echo = TRUE}
+# pregledaj podatke
+head(cSize, 10)
+```
+
+---
+
+### Web scraping 
+
+```{r echo = TRUE}
+# vizualizacija
+plot <- ggplot(data = cSize[1:10,],
+               aes(x = Grad, y = Stanovnici)) +
+               geom_bar(stat = "identity") +
+               xlab('Grad') + 
+               ylab('Broj stanovnika') +
+               theme_bw() +
+               theme(legend.title = element_blank(), legend.position = "bottom",
+                     legend.text = element_text (size = 9), axis.text.x=element_text(angle=45,hjust=1)) + 
+               ggtitle("Hrvatski gradovi po veličini")
+```
+
+---
+
+### Web scraping 
+
+```{r echo = TRUE, fig.width=6, fig.height=3}
+# pregled grafikona
+plot
+```
+
+
+---
+
+### API - Google trendovi
+
+```{r echo=T}
+# paketi
+library (gtrendsR) 
+library(ggplot2)
+
+#kljucne rijeci
+keywords <- c("virus", "korupcija", "ekonomija")
+#GEO
+country <- c('HR')
+#vremenski raspon
+time <- ("2010-01-01 2021-10-04")
+#kanali
+channel <- 'web'
+# funkcija
+trends <- gtrends(keywords, gprop = channel,geo = country, time = time )
+#samo 'interes kroz vrijeme'
+time_trend <- trends$interest_over_time
+
+```
+
+---
+
+### API - Google trendovi
+ <br>
+ 
+```{r echo = TRUE}
+# pregledaj podatke
+head(time_trend,5)
+```
+
+---
+
+### API - Google trendovi
+ <br>
+ 
+```{r echo=TRUE, fig.width=5, fig.height=3}
+# Vizualizacija
+plot <- ggplot(data = time_trend,
+               aes(x = date, y = hits, group = keyword, col = keyword)) +
+               geom_line() +
+               xlab('Vrijeme') + 
+               ylab('Relativni interes') +
+               theme_bw() +
+               theme(legend.title = element_blank(),
+                     legend.position = "bottom",
+                     legend.text = element_text (size = 12)) + 
+               ggtitle("Google volumen pretrage")
+```
+
+---
+
+### API - Google trendovi
+
+```{r  echo=TRUE, fig.width=5, fig.height=3}
+# prikaži
+plot
+```
+
+---
+
+### API - Google trendovi
+
+```{r echo=TRUE, fig.width=5, fig.height=3}
+# sve u jednom redu koda :-)
+plot(gtrendsR::gtrends(keyword = c("virus","korupcija","ekonomija"),
+                       geo = "HR",
+                       time = "2010-01-01 2021-10-04"))
+```
+
+---
+
+### Istraživanja na osnovi google trendova
 
 1. [Analiza prodaje kuća](https://rpubs.com/tonytusharjr/newhomes)
 <br>
@@ -364,77 +510,41 @@ i
 8. [Političkih stavova](https://journals.sagepub.com/doi/full/10.1177/2378023118760414)
 
 ---
-
-### Google trendovi
-
-```{r echo=T}
-# paketi
-library (gtrendsR) 
-library(ggplot2)
-
-#kljucne rijeci
-keywords <- c("virus", "korupcija", "ekonomija")
-#GEO
-country <- c('HR')
-#vremenski raspon
-time <- ("2010-01-01 2021-10-04")
-#kanali
-channel <- 'web'
-# funkcija
-trends <- gtrends(keywords, gprop = channel,geo = country, time = time )
-#samo 'interes kroz vrijeme'
-time_trend <- trends$interest_over_time
-
-```
+class: inverse, middle
+layout:false
+# DRUŠTVENE MREŽE KAO IZVOR PODATAKA
 
 ---
 
-### Google trendovi
- <br>
- 
-```{r echo = TRUE}
-# pregledaj podatke
-head(time_trend,5)
-```
+layout:true
+# DRUŠTVENE MREŽE 
+
+---
+<br>
+**Popularne društvene mreže**
+<br>
+<br>
+1. [Facebook](https://www.kaggle.com/chrisbow/an-introduction-to-facebook-ad-analysis-using-r) [(Vidi takodjer!)](https://www.residualthoughts.com/2018/02/12/analyzing-facebook-messages-in-r/)
+<br>
+2. [LinkedIn](https://github.com/mpiccirilli/Rlinkedin)
+<br>
+3. [Youtube](https://rpubs.com/arafath/YouTubeVideos_Analysis)
+<br>
+4. [Instagram](https://github.com/JonasSchroeder/InstaCrawlR)
+<br>
+5. Google+
+<br>
+6. Tumblr
+<br>
+7. Flickr
+
+
+.footnote[[*] [Kolegij!](https://lusiki.github.io/Learning-Social-Media-Analytics/])
 
 ---
 
-### Google trendovi
- <br>
- 
-```{r echo=TRUE, fig.width=5, fig.height=3}
-# Vizualizacija
-plot <- ggplot(data = time_trend,
-               aes(x = date, y = hits, group = keyword, col = keyword)) +
-               geom_line() +
-               xlab('Vrijeme') + 
-               ylab('Relativni interes') +
-               theme_bw() +
-               theme(legend.title = element_blank(),
-                     legend.position = "bottom",
-                     legend.text = element_text (size = 12)) + 
-               ggtitle("Google volumen pretrage")
-```
+### API-kalipsa
 
----
-
-### Google trendovi
-
-```{r  echo=TRUE, fig.width=5, fig.height=3}
-# prikaži
-plot
-```
-
----
-
-### Google trendovi
-
-```{r echo=TRUE, fig.width=5, fig.height=3}
-# sve u jednom redu koda :-)
-plot(gtrendsR::gtrends(keyword = c("virus","korupcija","ekonomija"),
-                       geo = "HR",
-                       time = "2010-01-01 2021-10-04"))
-```
 
 ---
 <br>
@@ -510,41 +620,6 @@ head(tweets[,2:5], n = 10)
 ---
 
 ### Twitter 
-
-```{r echo = TRUE}
-# pregledaj korisnike
-users <- search_users("#turizam",
-                      n = 100)
-length(unique(users$location)) # provjeri
-
-library(tidyverse) # paket 
-library(ggplot2)   # paket
-# vizualiziraj
-plotTW <- users %>%
-  slice(1:8) %>%
-  ggplot(aes(location)) +
-  geom_bar() + 
-  coord_flip() +
-  labs(x = "",
-  y = "Broj",
-  title = "Twitter korisnici - jedinstvene lokacije") +
-  theme(legend.title = element_blank(), legend.position = "bottom",
-                     legend.text = element_text (size = 5))
-```
-
-
----
-
-### Twitter 
-
-```{r echo = TRUE, fig.width=5, fig.height=3}
-# prikaži grafikon
-plotTW
-```
-
----
-
-### Twitter 
  <br>
  <br>
 ```{r echo = TRUE}
@@ -582,127 +657,25 @@ wordcloud(top_20_hashtags, top_20_freqs, scale=c(3.5,1.5), # oblak riječi
 
 
 ---
+
 class: inverse, middle
 layout:false
-# DRUŠTVENE MREŽE KAO IZVOR PODATAKA
+# APLIKACIJE
 
 ---
-
 layout:true
-# DRUŠTVENE MREŽE 
+# APLIKACIJE
 
----
-<br>
-**Popularne društvene mreže**
-<br>
-<br>
-1. [Facebook](https://www.kaggle.com/chrisbow/an-introduction-to-facebook-ad-analysis-using-r) [(Vidi takodjer!)](https://www.residualthoughts.com/2018/02/12/analyzing-facebook-messages-in-r/)
-<br>
-2. [LinkedIn](https://github.com/mpiccirilli/Rlinkedin)
-<br>
-3. [Youtube](https://rpubs.com/arafath/YouTubeVideos_Analysis)
-<br>
-4. [Instagram](https://github.com/JonasSchroeder/InstaCrawlR)
-<br>
-5. Google+
-<br>
-6. Tumblr
-<br>
-7. Flickr
-
-
-.footnote[[*] [Kolegij!](https://lusiki.github.io/Learning-Social-Media-Analytics/])
 
 ---
 
 class: inverse, middle
 layout:false
-# WEB STRANICE I APLIKACIJE
-
----
-layout:true
-# WEB STRANICE I APLIKACIJE
-
----
-<br>
-<br>
-<br>
-
-**Prikupljanje podataka**
-
-1. [Web-Scraping](https://www.datacamp.com/community/tutorials/r-web-scraping-rvest) 
-<br>
-<br>
-2. Analiza trgovačkih platformi (Amazon)
-
----
-
-### Web scraping 
-
-```{r}
-library(rvest) # paket
-url <- "https://www.dzs.hr/Hrv/censuses/census2011/results/htm/H01_06_01/H01_06_01.html" # www
-# preuzmi tablicu sa www
-citySize <- url %>%
-              xml2::read_html() %>% 
-              html_nodes('table') %>%
-              html_table()
-# izvadi korisne djelove
-cSize <- as_tibble(citySize[[2]],
-                   .name_repair = ~ c("Grad","Stanovnici","opcina","stan2"))
-# prilagodi podatke
-cSize <- cSize %>%
-  select(Grad,Stanovnici) %>%
-  mutate(Stanovnici = as.numeric(Stanovnici)) %>%
-  mutate(Grad = toupper(Grad)) %>%
-  arrange(desc(Stanovnici))
-
-
-```
----
-
-### Web scraping 
-
-```{r echo = TRUE}
-# pregledaj podatke
-head(cSize, 10)
-```
-
----
-
-### Web scraping 
-
-```{r echo = TRUE}
-# vizualizacija
-plot <- ggplot(data = cSize[1:10,],
-               aes(x = Grad, y = Stanovnici)) +
-               geom_bar(stat = "identity") +
-               xlab('Grad') + 
-               ylab('Broj stanovnika') +
-               theme_bw() +
-               theme(legend.title = element_blank(), legend.position = "bottom",
-                     legend.text = element_text (size = 9), axis.text.x=element_text(angle=45,hjust=1)) + 
-               ggtitle("Hrvatski gradovi po veličini")
-```
-
----
-
-### Web scraping 
-
-```{r echo = TRUE, fig.width=6, fig.height=3}
-# pregled grafikona
-plot
-```
-
----
-
-class: inverse, middle
-layout:false
-# APLIKACIJE I SENZORNI UREĐAJI
+# SENZORNI UREĐAJI
 ---
 
 layout:true
-# APLIKACIJE I SENZORNI UREĐAJI
+# SENZORNI UREĐAJI
 ---
 
 **Prikupljanje podataka**
@@ -744,6 +717,8 @@ layout:true
 .pull-right[
 **Strukturiranje podataka**
 * Čišćenje
+* Manipulacija
+* Programski pristup
 * Standardizacija
 * Spajanje baza
 * NLP(txt.)
