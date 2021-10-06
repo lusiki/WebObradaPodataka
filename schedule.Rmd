@@ -35,7 +35,7 @@ title: " "
 - Big data" u društvenim i humanističkim znanostima
 
 
-<br><b>Čitanje: </b><a href="/Literatura/Vrste_podataka.pdf">Vrste podataka-poglavlje u knjizi</a> + <a href="/Literatura/Sociology in the Era of Big Data.pdf">Sociology in the Era of Big Data</a> + <a href="/Literatura/VELIKI PODACI – VELIKI IZAZOV ZA SOCIOLOGIJU.pdf">Veliki podatci-veliki izazov za sociologiju</a> + <a href="/Literatura/Msc_mastruko_Kristalna kugla.pdf">Uloga big data, algoritama i prediktivne analitike u konstrukciji zbilje</a>
+<br><b>Čitanje: </b><a href="https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/Vrste_podataka.pdf">Vrste podataka-poglavlje u knjizi</a> + <a href="https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/Sociology%20in%20the%20Era%20of%20Big%20Data.pdf">Sociology in the Era of Big Data</a> + <a href="https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/VELIKI%20PODACI%20%E2%80%93%20VELIKI%20IZAZOV%20ZA%20SOCIOLOGIJU.pdf">Veliki podatci-veliki izazov za sociologiju</a> + <a href="https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/Msc_mastruko_Kristalna%20kugla.pdf">Uloga big data, algoritama i prediktivne analitike u konstrukciji zbilje</a>
 <br>
 <br>
 
@@ -52,7 +52,7 @@ title: " "
 - Upravljanje modernim podatcima
 
 
-<br><b>Čitanje: </b><a href="/Literatura/BDSources.pdf">Big Data ekosistem u društvenim istraživanjima</a>
+<br><b>Čitanje: </b><a href="https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/BDSources.pdf">Big Data ekosistem u društvenim istraživanjima</a>
 <br>
 <br>
 
