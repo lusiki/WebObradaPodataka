@@ -159,9 +159,9 @@ title: " "
 
 - Što je analiza teksta
 - Primjeri analize teksta
-- Uvoz i priprema teksta (preprocesing korpusa)
-- Format teksta za analizu (TidyText vs DTM)
-- Deskriptivna analiza teksta (frekvencije riječi)
+- Uvoz i priprema teksta 
+- Format teksta za analizu 
+- Deskriptivna analiza teksta 
 - Analiza sentimenta
 - Analiza važnosti pojmova
 
