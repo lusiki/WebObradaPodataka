@@ -307,7 +307,7 @@ library (gtrendsR)
 library(ggplot2)
 
 #kljucne rijeci
-keywords &lt;- c("zavjera", "cjepljenje", "prosvjedi","mjere")
+keywords &lt;- c("zavjera", "cjepljenje", "prosvjedi")
 #GEO
 country &lt;- c('HR')
 #vremenski raspon
@@ -334,13 +334,13 @@ tail(sample_n(time_trend,7),7)
 
 ```
 #&gt;         date hits    keyword geo                  time gprop category
-#&gt; 1 2021-01-17   &lt;1    zavjera  HR 2018-01-01 2021-10-06   web        0
-#&gt; 2 2018-08-26    0    zavjera  HR 2018-01-01 2021-10-06   web        0
-#&gt; 3 2018-07-15    0 cjepljenje  HR 2018-01-01 2021-10-06   web        0
-#&gt; 4 2018-06-17   &lt;1  prosvjedi  HR 2018-01-01 2021-10-06   web        0
-#&gt; 5 2019-02-24    4      mjere  HR 2018-01-01 2021-10-06   web        0
-#&gt; 6 2018-10-14    5      mjere  HR 2018-01-01 2021-10-06   web        0
-#&gt; 7 2019-06-16   &lt;1 cjepljenje  HR 2018-01-01 2021-10-06   web        0
+#&gt; 1 2018-12-23    5    zavjera  HR 2018-01-01 2021-10-06   web        0
+#&gt; 2 2020-06-28    0 cjepljenje  HR 2018-01-01 2021-10-06   web        0
+#&gt; 3 2018-06-10    0 cjepljenje  HR 2018-01-01 2021-10-06   web        0
+#&gt; 4 2019-11-03    0    zavjera  HR 2018-01-01 2021-10-06   web        0
+#&gt; 5 2019-12-29    0    zavjera  HR 2018-01-01 2021-10-06   web        0
+#&gt; 6 2021-05-02    4    zavjera  HR 2018-01-01 2021-10-06   web        0
+#&gt; 7 2020-05-31    7    zavjera  HR 2018-01-01 2021-10-06   web        0
 ```
 
 ---
@@ -350,6 +350,7 @@ tail(sample_n(time_trend,7),7)
  
 
 ```r
+library(lubridate)
 # Vizualizacija
 plot &lt;- ggplot(data = time_trend,
                aes(x = date, y = hits, group = keyword, col = keyword)) +
@@ -416,6 +417,47 @@ plot(gtrendsR::gtrends(keyword = c("zavjera", "cjepljenje", "prosvjedi","mjere")
 &lt;br&gt;
 8. [Političkih stavova](https://journals.sagepub.com/doi/full/10.1177/2378023118760414)
 
+
+
+---
+
+### API - COVID19 podatci
+
+
+```r
+library(tidycovid19)
+library(zoo)
+
+df &lt;- download_merged_data(cached = TRUE, silent = TRUE)
+
+covid &lt;- df %&gt;%
+  filter(iso3c == "HRV") %&gt;%
+  mutate(
+    new_cases = confirmed - lag(confirmed),
+    ave_new_cases = rollmean(new_cases, 7, na.pad=TRUE, align="right")) %&gt;%
+  filter(!is.na(new_cases), !is.na(ave_new_cases)) %&gt;%
+  ggplot(aes(x = date)) +
+  geom_bar(aes(y = new_cases), stat = "identity", fill = "lightblue") +
+  geom_line(aes(y = ave_new_cases), color ="red") +
+  theme_minimal() +
+  xlab("Novi slučajevi") + 
+  ylab("Datum")
+```
+
+
+---
+
+### API - COVID19 podatci
+
+
+
+```r
+covid
+```
+
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-12-1.svg" style="display: block; margin: auto;" /&gt;
+
+
 ---
 class: inverse, middle
 layout:false
@@ -450,8 +492,11 @@ layout:true
 
 ---
 
-### API-kalipsa
+### Najvažniji trendovi
 
+- API-kalipsa (Cambridge Analytica)
+- [Social Dilemma](https://www.thesocialdilemma.com/)
+- poslovni vs. istraživački sektor 
 
 ---
 &lt;br&gt;
@@ -524,18 +569,18 @@ head(tweets[,2:5], n = 10)
 
 ```
 #&gt; # A tibble: 10 x 4
-#&gt;    status_id           created_at          screen_name     text                 
-#&gt;    &lt;chr&gt;               &lt;dttm&gt;              &lt;chr&gt;           &lt;chr&gt;                
-#&gt;  1 1445677008978022416 2021-10-06 09:07:12 lokalnahrvatska #Drniš : Donesena od~
-#&gt;  2 1445677000899715079 2021-10-06 09:07:11 lokalnahrvatska #Drniš : Gradonačeln~
-#&gt;  3 1445332213122408453 2021-10-05 10:17:07 lokalnahrvatska #Lepoglava : Obiljež~
-#&gt;  4 1445673209781579776 2021-10-06 08:52:07 lokalnahrvatska #Međimurskažupanija ~
-#&gt;  5 1445671969366573059 2021-10-06 08:47:11 lokalnahrvatska #Splitskodalmatinska~
-#&gt;  6 1445671963695976448 2021-10-06 08:47:10 lokalnahrvatska #Zagrebačkažupanija ~
-#&gt;  7 1445666984335589381 2021-10-06 08:27:22 lokalnahrvatska #Pula : Privremena r~
-#&gt;  8 1445666976316096521 2021-10-06 08:27:21 lokalnahrvatska #Požega : Završila L~
-#&gt;  9 1445666962185461768 2021-10-06 08:27:17 lokalnahrvatska #Pula : Zamjena dotr~
-#&gt; 10 1445476936822575111 2021-10-05 19:52:12 lokalnahrvatska #UdrugagradovaRH : U~
+#&gt;    status_id           created_at          screen_name text                     
+#&gt;    &lt;chr&gt;               &lt;dttm&gt;              &lt;chr&gt;       &lt;chr&gt;                    
+#&gt;  1 1445831086613823491 2021-10-06 19:19:27 vijesti_tv  "Vodovod i kanalizacija ~
+#&gt;  2 1445649926285713425 2021-10-06 07:19:35 vijesti_tv  "1. i 2. listopada 2021.~
+#&gt;  3 1445423604620042244 2021-10-05 16:20:16 vijesti_tv  "Gradonačelnica Supetra,~
+#&gt;  4 1445559559418900482 2021-10-06 01:20:30 vijesti_tv  "Već nekoliko godina Skr~
+#&gt;  5 1445785897669218306 2021-10-06 16:19:54 vijesti_tv  "Jake snage Državnog ins~
+#&gt;  6 1445378272834031618 2021-10-05 13:20:08 vijesti_tv  "Danas oko 16 sati jedan~
+#&gt;  7 1445332964364128260 2021-10-05 10:20:06 vijesti_tv  "Na Mažuranićevom šetali~
+#&gt;  8 1445468764061847555 2021-10-05 19:19:43 vijesti_tv  "Juraj Dalmatinac Šibenč~
+#&gt;  9 1445695307631652871 2021-10-06 10:19:55 vijesti_tv  "Gradonačelnik Grada Sin~
+#&gt; 10 1445604800343674886 2021-10-06 04:20:17 vijesti_tv  "Stisak ruke na kraju og~
 ```
 
 ---
@@ -568,14 +613,14 @@ top_20_freqs
 
 ```
 #&gt; hashtag_word
-#&gt;     hrvatska      vijesti     croatian      croatia       autumn       natgeo 
-#&gt;          201           76           73           70           17           17 
-#&gt; natgeotravel nationalpark       nature    dalmacija       jadran       sunset 
-#&gt;           17           17           17           14           13           13 
-#&gt;    vijestihr     business    marketing     racunalo   smartphone   technology 
-#&gt;           13           12           12           12           12           12 
-#&gt;       travel naturelovers 
-#&gt;           11           10
+#&gt;     hrvatska     croatian      vijesti      croatia     business    marketing 
+#&gt;          201           84           84           61           15           15 
+#&gt;     racunalo   smartphone   technology       autumn       natgeo natgeotravel 
+#&gt;           15           15           15           13           13           13 
+#&gt;       nature    dalmacija       jadran    vijestihr       sunset nationalpark 
+#&gt;           13           12           12           12           11           10 
+#&gt; naturelovers      sunrise 
+#&gt;           10           10
 ```
 
 ---
@@ -590,7 +635,7 @@ wordcloud(top_20_hashtags, top_20_freqs, scale=c(3.5,1.5), # oblak riječi
           random.order=FALSE, rot.per=.25)
 ```
 
-&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-18-1.svg" style="display: block; margin: auto;" /&gt;
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-20-1.svg" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -602,6 +647,109 @@ layout:false
 ---
 layout:true
 # APLIKACIJE
+
+---
+
+### Analiza korištenja vlastitih mobilnih aplikacija 
+
+
+```r
+# Učitaj pakete
+library(jsonlite)
+library(tidyverse)
+library(patchwork)
+# Učitaj podatke
+android &lt;- jsonlite::fromJSON("../Dta/MyActivity.json")
+# pregledaj podatke
+glimpse(android)
+```
+
+```
+#&gt; Rows: 7,603
+#&gt; Columns: 5
+#&gt; $ header   &lt;chr&gt; "Novine Hrvatska", "Slack", "OnePlus Launcher", "Google", "Go~
+#&gt; $ title    &lt;chr&gt; "Used Novine Hrvatska", "Used Slack", "Used OnePlus Launcher"~
+#&gt; $ titleUrl &lt;chr&gt; "https://play.google.com/store/apps/details?id=org.enovine.cr~
+#&gt; $ time     &lt;chr&gt; "2021-10-06T17:25:56.919Z", "2021-10-06T17:25:29.410Z", "2021~
+#&gt; $ products &lt;list&gt; "Android", "Android", "Android", "Android", "Android", "Andr~
+```
+
+```r
+# prilagodi datum
+android %&gt;% 
+  mutate(date = lubridate::date(time), month =lubridate::month(time))-&gt;android
+```
+
+---
+
+### Analiza korištenja vlastitih mobilnih aplikacija 
+&lt;br&gt;
+&lt;br&gt;
+
+```r
+# napravi grafikon
+najAplikacije &lt;- android %&gt;% 
+  count(header, sort = TRUE)  %&gt;% 
+  head(20) %&gt;% 
+  mutate(header = fct_reorder(header, n)) %&gt;% 
+  ggplot() + geom_col(aes(y = header, x = n)) +
+  theme_minimal() +
+  ylab("") +
+  xlab("") +
+  labs(title = "Najkorištenije aplikacije",
+       subtitle = "Korištenje vlastitog Android mobilnog uredaja",
+       caption = "Podatci:Google Takeout")
+```
+
+---
+
+### Analiza korištenja vlastitih mobilnih aplikacija
+
+
+
+```r
+# prikaži grafički 
+najAplikacije
+```
+
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-23-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+### Analiza korištenja vlastitih mobilnih aplikacija
+
+
+```r
+android %&gt;% 
+  filter(month %in% '7') %&gt;% # ponovi i za listopad/nije prikazano zbog prostora
+  group_by(month, header) %&gt;% 
+  summarise(n = n()) %&gt;% 
+  arrange(desc(n)) %&gt;% 
+  head(10) %&gt;% #View()
+  mutate(header = fct_reorder(header, n)) %&gt;% 
+  ggplot() + geom_col(aes(y = header, x = n)) +
+  theme_minimal() +
+  ylab("") +
+  xlab("") +
+  labs(title = "Najkorištenije aplikacije u srpnju",
+       subtitle = "Korištenje vlastitog Android mobilnog uredaja",
+       caption = "Podatci:Google Takeout") -&gt; najAplikacije7
+```
+
+
+
+---
+
+### Analiza korištenja vlastitih mobilnih aplikacija
+
+
+
+```r
+# prikaži grafički
+najAplikacije7 / najAplikacije10
+```
+
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-26-1.svg" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -629,6 +777,45 @@ layout:true
  3. Kartične transakcije (predviđanje bankrota, marketing, ponašanje potrošača)
 
 .footnote[[*] Pravno osjetljivi podatci!]
+
+
+---
+
+### Google mobilnost
+
+
+```r
+df %&gt;% # podatci iz paketa 
+  filter(iso3c == "HRV", date &gt;= "2020-02-21") %&gt;%
+  mutate(gov_interventions = (soc_dist + mov_rest)/
+           max(soc_dist + mov_rest, na.rm = TRUE),
+         lockdown = lockdown == 1) %&gt;%
+  select(date, lockdown, gov_interventions, starts_with("gcmr_")) %&gt;%
+  pivot_longer(cols = c(5:9), names_to = "Mjere", values_to = "value") %&gt;%
+  na.omit() -&gt; dta
+
+mobilnost &lt;- ggplot(dta, aes(x = date, y = value, group = Mjere, color = Mjere)) + 
+  theme_minimal() +
+  annotate("rect", xmin = min(dta$date[dta$lockdown]), xmax = max(dta$date), 
+           ymin = -Inf, ymax = Inf, 
+           fill = "lightblue", color = NA, alpha = 0.2) +
+  geom_line() +
+  xlab("Vrijednost") +
+  ylab("Datum")
+```
+
+---
+
+### Google mobilnost
+
+
+```r
+# prikaži grafički
+mobilnost
+```
+
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-28-1.svg" style="display: block; margin: auto;" /&gt;
+
 
 ---
 class: inverse, middle

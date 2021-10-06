@@ -419,7 +419,7 @@ library (gtrendsR)
 library(ggplot2)
 
 #kljucne rijeci
-keywords <- c("zavjera", "cjepljenje", "prosvjedi","mjere")
+keywords <- c("zavjera", "cjepljenje", "prosvjedi")
 #GEO
 country <- c('HR')
 #vremenski raspon
@@ -450,6 +450,7 @@ tail(sample_n(time_trend,7),7)
  <br>
  
 ```{r echo=TRUE, fig.width=5, fig.height=3}
+library(lubridate)
 # Vizualizacija
 plot <- ggplot(data = time_trend,
                aes(x = date, y = hits, group = keyword, col = keyword)) +
@@ -461,13 +462,14 @@ plot <- ggplot(data = time_trend,
                      legend.position = "bottom",
                      legend.text = element_text (size = 12)) + 
                ggtitle("Google volumen pretrage")
+  
 ```
 
 ---
 
 ### API - Google trendovi
 
-```{r  echo=TRUE, fig.width=5, fig.height=3}
+```{r  echo=TRUE, fig.width=5, fig.height=4}
 # prikaži
 plot
 ```
@@ -510,6 +512,45 @@ plot(gtrendsR::gtrends(keyword = c("zavjera", "cjepljenje", "prosvjedi","mjere")
 <br>
 8. [Političkih stavova](https://journals.sagepub.com/doi/full/10.1177/2378023118760414)
 
+
+
+---
+
+### API - COVID19 podatci
+
+```{r ,fig.width=6, fig.height=3}
+library(tidycovid19)
+library(zoo)
+
+df <- download_merged_data(cached = TRUE, silent = TRUE)
+
+covid <- df %>%
+  filter(iso3c == "HRV") %>%
+  mutate(
+    new_cases = confirmed - lag(confirmed),
+    ave_new_cases = rollmean(new_cases, 7, na.pad=TRUE, align="right")) %>%
+  filter(!is.na(new_cases), !is.na(ave_new_cases)) %>%
+  ggplot(aes(x = date)) +
+  geom_bar(aes(y = new_cases), stat = "identity", fill = "lightblue") +
+  geom_line(aes(y = ave_new_cases), color ="red") +
+  theme_minimal() +
+  xlab("Novi slučajevi") + 
+  ylab("Datum")
+```
+
+
+---
+
+### API - COVID19 podatci
+
+
+```{r, fig.width=6, fig.height=4}
+
+covid
+
+```
+
+
 ---
 class: inverse, middle
 layout:false
@@ -544,8 +585,11 @@ layout:true
 
 ---
 
-### API-kalipsa
+### Najvažniji trendovi
 
+- API-kalipsa (Cambridge Analytica)
+- [Social Dilemma](https://www.thesocialdilemma.com/)
+- poslovni vs. istraživački sektor 
 
 ---
 <br>
@@ -649,7 +693,7 @@ top_20_freqs
 
 ### Twitter 
 
-```{r echo = TRUE, fig.width=6, fig.height=3 }
+```{r echo = TRUE, fig.width=7, fig.height=4 }
 # vizualizacija 
 library(wordcloud) # paket
 wordcloud(top_20_hashtags, top_20_freqs, scale=c(3.5,1.5), # oblak riječi
@@ -666,6 +710,103 @@ layout:false
 ---
 layout:true
 # APLIKACIJE
+
+---
+
+### Analiza korištenja vlastitih mobilnih aplikacija 
+
+```{r}
+# Učitaj pakete
+library(jsonlite)
+library(tidyverse)
+library(patchwork)
+# Učitaj podatke
+android <- jsonlite::fromJSON("../Dta/MyActivity.json")
+# pregledaj podatke
+glimpse(android)
+# prilagodi datum
+android %>% 
+  mutate(date = lubridate::date(time), month =lubridate::month(time))->android
+```
+
+---
+
+### Analiza korištenja vlastitih mobilnih aplikacija 
+<br>
+<br>
+```{r}
+# napravi grafikon
+najAplikacije <- android %>% 
+  count(header, sort = TRUE)  %>% 
+  head(20) %>% 
+  mutate(header = fct_reorder(header, n)) %>% 
+  ggplot() + geom_col(aes(y = header, x = n)) +
+  theme_minimal() +
+  ylab("") +
+  xlab("") +
+  labs(title = "Najkorištenije aplikacije",
+       subtitle = "Korištenje vlastitog Android mobilnog uredaja",
+       caption = "Podatci:Google Takeout")
+```
+
+---
+
+### Analiza korištenja vlastitih mobilnih aplikacija
+
+
+```{r fig.width=7, fig.height=4}
+# prikaži grafički 
+najAplikacije
+```
+
+---
+
+### Analiza korištenja vlastitih mobilnih aplikacija
+
+```{r warning= FALSE}
+android %>% 
+  filter(month %in% '7') %>% # ponovi i za listopad/nije prikazano zbog prostora
+  group_by(month, header) %>% 
+  summarise(n = n()) %>% 
+  arrange(desc(n)) %>% 
+  head(10) %>% #View()
+  mutate(header = fct_reorder(header, n)) %>% 
+  ggplot() + geom_col(aes(y = header, x = n)) +
+  theme_minimal() +
+  ylab("") +
+  xlab("") +
+  labs(title = "Najkorištenije aplikacije u srpnju",
+       subtitle = "Korištenje vlastitog Android mobilnog uredaja",
+       caption = "Podatci:Google Takeout") -> najAplikacije7
+```
+
+```{r echo=FALSE}
+android %>% 
+  filter(month %in% '10') %>% 
+  group_by(month, header) %>% 
+  summarise(n = n()) %>% 
+  arrange(desc(n)) %>% 
+  head(10) %>% #View()
+  mutate(header = fct_reorder(header, n)) %>% 
+  ggplot() + geom_col(aes(y = header, x = n)) +
+  theme_minimal() +
+  ylab("") +
+  xlab("") +
+  labs(title = "Najkorištenije aplikacije u listopadu",
+       subtitle = "Korištenje vlastitog Android mobilnog uredaja",
+       caption = "Podatci:Google Takeout") -> najAplikacije10
+
+```
+
+---
+
+### Analiza korištenja vlastitih mobilnih aplikacija
+
+
+```{r  fig.width=7, fig.height=5}
+# prikaži grafički
+najAplikacije7 / najAplikacije10
+```
 
 
 ---
@@ -693,6 +834,42 @@ layout:true
  3. Kartične transakcije (predviđanje bankrota, marketing, ponašanje potrošača)
 
 .footnote[[*] Pravno osjetljivi podatci!]
+
+
+---
+
+### Google mobilnost
+
+```{r ,fig.width=6, fig.height=3}
+
+df %>% # podatci iz paketa 
+  filter(iso3c == "HRV", date >= "2020-02-21") %>%
+  mutate(gov_interventions = (soc_dist + mov_rest)/
+           max(soc_dist + mov_rest, na.rm = TRUE),
+         lockdown = lockdown == 1) %>%
+  select(date, lockdown, gov_interventions, starts_with("gcmr_")) %>%
+  pivot_longer(cols = c(5:9), names_to = "Mjere", values_to = "value") %>%
+  na.omit() -> dta
+
+mobilnost <- ggplot(dta, aes(x = date, y = value, group = Mjere, color = Mjere)) + 
+  theme_minimal() +
+  annotate("rect", xmin = min(dta$date[dta$lockdown]), xmax = max(dta$date), 
+           ymin = -Inf, ymax = Inf, 
+           fill = "lightblue", color = NA, alpha = 0.2) +
+  geom_line() +
+  xlab("Vrijednost") +
+  ylab("Datum")
+```
+
+---
+
+### Google mobilnost
+
+```{r ,fig.width=7, fig.height=4}
+# prikaži grafički
+mobilnost
+```
+
 
 ---
 class: inverse, middle
