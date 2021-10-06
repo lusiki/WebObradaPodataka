@@ -26,7 +26,7 @@ Kolegij će osposobiti studente za razumijevanje modernih izvora i alata za obra
 # Raspored
 
 <b>Predavanja</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Četvrtkom,&nbsp;16:00–17:30
-<br><b>Konzultacije</b>&nbsp;&nbsp;&nbsp;Četvrtkom,&nbsp;17:30-18:30
+<br><b>Konzultacije</b>&nbsp;&nbsp;&nbsp;Četvrtkom,&nbsp;15:00-16:00
 
 # Knjige
 
