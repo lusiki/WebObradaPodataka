@@ -16,7 +16,7 @@ class: center, middle, inverse, title-slide
 # OBRADA PODATAKA
 ## Predavanje 3: Suvremeni izvori podataka u društvenim istraživanjima
 ### Luka Sikic, PhD
-### Fakultet hrvatskih studija | <a href="https://github.com/BrbanMiro/Obrada-podataka">OP</a>
+### Fakultet hrvatskih studija | <a href="https://lusiki.github.io/WebObradaPodataka/index.html">OP</a>
 
 ---
 
@@ -307,11 +307,11 @@ library (gtrendsR)
 library(ggplot2)
 
 #kljucne rijeci
-keywords &lt;- c("virus", "korupcija", "ekonomija")
+keywords &lt;- c("zavjera", "cjepljenje", "prosvjedi","mjere")
 #GEO
 country &lt;- c('HR')
 #vremenski raspon
-time &lt;- ("2010-01-01 2021-10-04")
+time &lt;- paste("2018-01-01", Sys.Date())
 #kanali
 channel &lt;- 'web'
 # funkcija
@@ -327,17 +327,20 @@ time_trend &lt;- trends$interest_over_time
  
 
 ```r
+library(tidyverse)
 # pregledaj podatke
-head(time_trend,5)
+tail(sample_n(time_trend,7),7)
 ```
 
 ```
-#&gt;         date hits keyword geo                  time gprop category
-#&gt; 1 2010-01-01    5   virus  HR 2010-01-01 2021-10-04   web        0
-#&gt; 2 2010-02-01    5   virus  HR 2010-01-01 2021-10-04   web        0
-#&gt; 3 2010-03-01    5   virus  HR 2010-01-01 2021-10-04   web        0
-#&gt; 4 2010-04-01    4   virus  HR 2010-01-01 2021-10-04   web        0
-#&gt; 5 2010-05-01    3   virus  HR 2010-01-01 2021-10-04   web        0
+#&gt;         date hits    keyword geo                  time gprop category
+#&gt; 1 2021-01-17   &lt;1    zavjera  HR 2018-01-01 2021-10-06   web        0
+#&gt; 2 2018-08-26    0    zavjera  HR 2018-01-01 2021-10-06   web        0
+#&gt; 3 2018-07-15    0 cjepljenje  HR 2018-01-01 2021-10-06   web        0
+#&gt; 4 2018-06-17   &lt;1  prosvjedi  HR 2018-01-01 2021-10-06   web        0
+#&gt; 5 2019-02-24    4      mjere  HR 2018-01-01 2021-10-06   web        0
+#&gt; 6 2018-10-14    5      mjere  HR 2018-01-01 2021-10-06   web        0
+#&gt; 7 2019-06-16   &lt;1 cjepljenje  HR 2018-01-01 2021-10-06   web        0
 ```
 
 ---
@@ -379,9 +382,9 @@ plot
 
 ```r
 # sve u jednom redu koda :-)
-plot(gtrendsR::gtrends(keyword = c("virus","korupcija","ekonomija"),
+plot(gtrendsR::gtrends(keyword = c("zavjera", "cjepljenje", "prosvjedi","mjere"),
                        geo = "HR",
-                       time = "2010-01-01 2021-10-04"))
+                       time = time))
 ```
 
 &lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-10-1.svg" style="display: block; margin: auto;" /&gt;
@@ -523,16 +526,16 @@ head(tweets[,2:5], n = 10)
 #&gt; # A tibble: 10 x 4
 #&gt;    status_id           created_at          screen_name     text                 
 #&gt;    &lt;chr&gt;               &lt;dttm&gt;              &lt;chr&gt;           &lt;chr&gt;                
-#&gt;  1 1445310816736223233 2021-10-05 08:52:05 lokalnahrvatska #Međimurskažupanija ~
-#&gt;  2 1445309577868845056 2021-10-05 08:47:10 lokalnahrvatska #Zagrebačkažupanija ~
-#&gt;  3 1445309574450454531 2021-10-05 08:47:09 lokalnahrvatska #Zagrebačkažupanija ~
-#&gt;  4 1444978628601827328 2021-10-04 10:52:06 lokalnahrvatska #UdrugagradovaRH : T~
-#&gt;  5 1445305782371819520 2021-10-05 08:32:05 lokalnahrvatska #Samobor : Svjetski ~
-#&gt;  6 1445302011294097408 2021-10-05 08:17:06 lokalnahrvatska #Kutina : Čestitka g~
-#&gt;  7 1445300751572553730 2021-10-05 08:12:06 lokalnahrvatska #Ivanec : U GRADSKOM~
-#&gt;  8 1445022689383571456 2021-10-04 13:47:11 lokalnahrvatska #Dubrovačkoneretvans~
-#&gt;  9 1445022684526649348 2021-10-04 13:47:09 lokalnahrvatska #Dubrovačkoneretvans~
-#&gt; 10 1444917041882963970 2021-10-04 06:47:22 lokalnahrvatska #Vrlika : OTVORENA K~
+#&gt;  1 1445677008978022416 2021-10-06 09:07:12 lokalnahrvatska #Drniš : Donesena od~
+#&gt;  2 1445677000899715079 2021-10-06 09:07:11 lokalnahrvatska #Drniš : Gradonačeln~
+#&gt;  3 1445332213122408453 2021-10-05 10:17:07 lokalnahrvatska #Lepoglava : Obiljež~
+#&gt;  4 1445673209781579776 2021-10-06 08:52:07 lokalnahrvatska #Međimurskažupanija ~
+#&gt;  5 1445671969366573059 2021-10-06 08:47:11 lokalnahrvatska #Splitskodalmatinska~
+#&gt;  6 1445671963695976448 2021-10-06 08:47:10 lokalnahrvatska #Zagrebačkažupanija ~
+#&gt;  7 1445666984335589381 2021-10-06 08:27:22 lokalnahrvatska #Pula : Privremena r~
+#&gt;  8 1445666976316096521 2021-10-06 08:27:21 lokalnahrvatska #Požega : Završila L~
+#&gt;  9 1445666962185461768 2021-10-06 08:27:17 lokalnahrvatska #Pula : Zamjena dotr~
+#&gt; 10 1445476936822575111 2021-10-05 19:52:12 lokalnahrvatska #UdrugagradovaRH : U~
 ```
 
 ---
@@ -565,14 +568,14 @@ top_20_freqs
 
 ```
 #&gt; hashtag_word
-#&gt;    hrvatska     vijesti    croatian     croatia      travel      jadran 
-#&gt;         200          81          78          65          16          14 
-#&gt;    business   dalmacija   marketing    racunalo  smartphone  technology 
-#&gt;          13          13          13          13          13          13 
-#&gt;   vijestihr photography      zagreb      kutina       split      sunset 
-#&gt;          12          10           9           8           8           8 
-#&gt;      autumn    colorful 
-#&gt;           7           7
+#&gt;     hrvatska      vijesti     croatian      croatia       autumn       natgeo 
+#&gt;          201           76           73           70           17           17 
+#&gt; natgeotravel nationalpark       nature    dalmacija       jadran       sunset 
+#&gt;           17           17           17           14           13           13 
+#&gt;    vijestihr     business    marketing     racunalo   smartphone   technology 
+#&gt;           13           12           12           12           12           12 
+#&gt;       travel naturelovers 
+#&gt;           11           10
 ```
 
 ---

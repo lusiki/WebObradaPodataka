@@ -3,7 +3,7 @@ title: "OBRADA PODATAKA"
 # subtitle: "<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>"
 subtitle: "Predavanje 3: Suvremeni izvori podataka u društvenim istraživanjima"
 author: "Luka Sikic, PhD"
-date: "Fakultet hrvatskih studija | [OP](https://github.com/BrbanMiro/Obrada-podataka)" #"`r format(Sys.time(), '%d %B %Y')`"
+date: "Fakultet hrvatskih studija | [OP](https://lusiki.github.io/WebObradaPodataka/index.html)" #"`r format(Sys.time(), '%d %B %Y')`"
 output:
   xaringan::moon_reader:
     css: [default, metropolis, metropolis-fonts] 
@@ -419,11 +419,11 @@ library (gtrendsR)
 library(ggplot2)
 
 #kljucne rijeci
-keywords <- c("virus", "korupcija", "ekonomija")
+keywords <- c("zavjera", "cjepljenje", "prosvjedi","mjere")
 #GEO
 country <- c('HR')
 #vremenski raspon
-time <- ("2010-01-01 2021-10-04")
+time <- paste("2018-01-01", Sys.Date())
 #kanali
 channel <- 'web'
 # funkcija
@@ -439,8 +439,9 @@ time_trend <- trends$interest_over_time
  <br>
  
 ```{r echo = TRUE}
+library(tidyverse)
 # pregledaj podatke
-head(time_trend,5)
+tail(sample_n(time_trend,7),7)
 ```
 
 ---
@@ -477,9 +478,9 @@ plot
 
 ```{r echo=TRUE, fig.width=5, fig.height=3}
 # sve u jednom redu koda :-)
-plot(gtrendsR::gtrends(keyword = c("virus","korupcija","ekonomija"),
+plot(gtrendsR::gtrends(keyword = c("zavjera", "cjepljenje", "prosvjedi","mjere"),
                        geo = "HR",
-                       time = "2010-01-01 2021-10-04"))
+                       time = time))
 ```
 
 ---
