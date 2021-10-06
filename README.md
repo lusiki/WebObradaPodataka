@@ -8,7 +8,7 @@
 
 # Obrada podataka 
 
-*OpenSource* kolegij na diplomskoj razini 'Obrada podataka'u zimskom semestru akademske godine 2021/22 na Fakultetu hrvatskih studija u Zagrebu koji izvodi [Luka Sikic](https://www.lukasikic.info/),PhD. Kolegij je prvenstveno namijenjen sociolozima ali i prilagođen za studente iz drugih društvenih zananosti poput politologije, komunikologije, povijesti i ekonomije.
+*OpenSource* kolegij na diplomskoj razini 'Obrada podataka'u zimskom semestru akademske godine 2021/22 na Fakultetu hrvatskih studija u Zagrebu koji izvodi [Luka Sikic](https://www.lukasikic.info/),PhD. Kolegij je prvenstveno namijenjen sociolozima ali i prilagođen za studente iz drugih društvenih zananosti poput politologije, komunikologije, povijesti i ekonomije te služi kao [premosnica](http://croecon.contentio.biz/post/2021-03-16-nova-statistika/) od osnovne razine statističkih znanja do primjene statistike u modernom i praktičnom kontekstu. 
 
 Kolegij polazi od **Big Data** pristupa društvenim znanostima i modernih izvora podatka puput Web-a, aplikacija, društvenih mreža, urbanih senzora i dr. Metodološki fokus je na **computational social science (CSS)** principima i korištenju računalnih tehnologija za obradu i analizu (velikog volumena) podataka. Kolegij nije zamišljen kao sveobuhvatna referenca za rad s *Big Data* tehnologijama u društvenim znanostima jer materijali ne pokrivaju: rad sa terminalom (*Bash Shell*), rad sa platformama za suradnju i razmjenu koda (*Git*, *GitHub*), rad sa *Docker*-om, programiranje i iteraciju, paralelno programiranje, rad u oblaku (*Cloud*). 
 
