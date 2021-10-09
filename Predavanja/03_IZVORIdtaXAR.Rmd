@@ -158,7 +158,49 @@ tidy_table <- function(x, terms, highlight_row = 1, highlight_color = "black", h
 }
 ```
 
+# UVODNO
+<br>
+<br>
+<br>
+- Nastupno predavanje za izbor u znanstveno-nastavno zvanje docenta
+<br>
+<br>
+- Kolegij **Obrada podataka** (30 sati/2 ECTS)
+<br>
+<br>
+- Obvezni kolegij I. godine dvopredmetnog diplomskog studija sociologije
+<br>
+<br>
+- 15 upisanih studenata
+<br>
+<br>
+- Kolegij dostupan na [poveznici](https://lusiki.github.io/WebObradaPodataka/index.html)
+<br>
+<br>
+- *OpenSource* repozitorij na [GitHub](https://github.com/lusiki/WebObradaPodataka)-u 
+<br>
 
+---
+
+# Literatura 
+
+##### Obvezna
+
+1. Blazquez-Soriano, A.,Domenech, J., 2017. Big Data sources and methods for social and economic analyses. [članak na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/BDSources.pdf) 
+
+2. Shu-Heng, C. (Ed.), 2018. Big Data in Computational Social Science and Humanities. [poglavlje knjige na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/Shu-Heng%20Chen%20-%20Big%20Data%20in%20Computational%20Social%20Science%20and%20Humanities-Springer%20(2018).pdf)
+
+
+##### Dodatna
+
+3. Mcfarland, D, Lewis, K. and Goldberg, A., 2016. Sociology in the Era of Big Data: The Ascent of Forensic Social Science. [članak na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/Sociology%20in%20the%20Era%20of%20Big%20Data.pdf)
+
+4. Maštruko, N., 2020. Kristalna kugla jedinica i nula. [diplomski rad na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/Msc_mastruko_Kristalna%20kugla.pdf)
+ 
+5. Novi statistički kurikul, 2021. [blog post na poveznici](http://croecon.contentio.biz/post/2021-03-16-nova-statistika/)
+
+
+---
 
 # PREGLED PREDAVANJA
 

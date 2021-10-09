@@ -25,7 +25,49 @@ class: center, middle, inverse, title-slide
 
 
 
+# UVODNO
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+- Nastupno predavanje za izbor u znanstveno-nastavno zvanje docenta
+&lt;br&gt;
+&lt;br&gt;
+- Kolegij **Obrada podataka** (30 sati/2 ECTS)
+&lt;br&gt;
+&lt;br&gt;
+- Obvezni kolegij I. godine dvopredmetnog diplomskog studija sociologije
+&lt;br&gt;
+&lt;br&gt;
+- 15 upisanih studenata
+&lt;br&gt;
+&lt;br&gt;
+- Kolegij dostupan na [poveznici](https://lusiki.github.io/WebObradaPodataka/index.html)
+&lt;br&gt;
+&lt;br&gt;
+- *OpenSource* repozitorij na [GitHub](https://github.com/lusiki/WebObradaPodataka)-u 
+&lt;br&gt;
 
+---
+
+# Literatura 
+
+##### Obvezna
+
+1. Blazquez-Soriano, A.,Domenech, J., 2017. Big Data sources and methods for social and economic analyses. [članak na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/BDSources.pdf) 
+
+2. Shu-Heng, C. (Ed.), 2018. Big Data in Computational Social Science and Humanities. [poglavlje knjige na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/Shu-Heng%20Chen%20-%20Big%20Data%20in%20Computational%20Social%20Science%20and%20Humanities-Springer%20(2018).pdf)
+
+
+##### Dodatna
+
+3. Mcfarland, D, Lewis, K. and Goldberg, A., 2016. Sociology in the Era of Big Data: The Ascent of Forensic Social Science. [članak na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/Sociology%20in%20the%20Era%20of%20Big%20Data.pdf)
+
+4. Maštruko, N., 2020. Kristalna kugla jedinica i nula. [diplomski rad na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/Msc_mastruko_Kristalna%20kugla.pdf)
+ 
+5. Novi statistički kurikul, 2021. [blog post na poveznici](http://croecon.contentio.biz/post/2021-03-16-nova-statistika/)
+
+
+---
 
 # PREGLED PREDAVANJA
 
@@ -334,13 +376,13 @@ tail(sample_n(time_trend,7),7)
 
 ```
 #&gt;         date hits    keyword geo                  time gprop category
-#&gt; 1 2018-12-23    5    zavjera  HR 2018-01-01 2021-10-06   web        0
-#&gt; 2 2020-06-28    0 cjepljenje  HR 2018-01-01 2021-10-06   web        0
-#&gt; 3 2018-06-10    0 cjepljenje  HR 2018-01-01 2021-10-06   web        0
-#&gt; 4 2019-11-03    0    zavjera  HR 2018-01-01 2021-10-06   web        0
-#&gt; 5 2019-12-29    0    zavjera  HR 2018-01-01 2021-10-06   web        0
-#&gt; 6 2021-05-02    4    zavjera  HR 2018-01-01 2021-10-06   web        0
-#&gt; 7 2020-05-31    7    zavjera  HR 2018-01-01 2021-10-06   web        0
+#&gt; 1 2019-01-13    0 cjepljenje  HR 2018-01-01 2021-10-09   web        0
+#&gt; 2 2020-12-06   16 cjepljenje  HR 2018-01-01 2021-10-09   web        0
+#&gt; 3 2020-07-19    5 cjepljenje  HR 2018-01-01 2021-10-09   web        0
+#&gt; 4 2021-02-21    0    zavjera  HR 2018-01-01 2021-10-09   web        0
+#&gt; 5 2021-02-14   38 cjepljenje  HR 2018-01-01 2021-10-09   web        0
+#&gt; 6 2018-12-16    0    zavjera  HR 2018-01-01 2021-10-09   web        0
+#&gt; 7 2020-06-21    0 cjepljenje  HR 2018-01-01 2021-10-09   web        0
 ```
 
 ---
@@ -569,18 +611,18 @@ head(tweets[,2:5], n = 10)
 
 ```
 #&gt; # A tibble: 10 x 4
-#&gt;    status_id           created_at          screen_name text                     
-#&gt;    &lt;chr&gt;               &lt;dttm&gt;              &lt;chr&gt;       &lt;chr&gt;                    
-#&gt;  1 1445831086613823491 2021-10-06 19:19:27 vijesti_tv  "Vodovod i kanalizacija ~
-#&gt;  2 1445649926285713425 2021-10-06 07:19:35 vijesti_tv  "1. i 2. listopada 2021.~
-#&gt;  3 1445423604620042244 2021-10-05 16:20:16 vijesti_tv  "Gradonačelnica Supetra,~
-#&gt;  4 1445559559418900482 2021-10-06 01:20:30 vijesti_tv  "Već nekoliko godina Skr~
-#&gt;  5 1445785897669218306 2021-10-06 16:19:54 vijesti_tv  "Jake snage Državnog ins~
-#&gt;  6 1445378272834031618 2021-10-05 13:20:08 vijesti_tv  "Danas oko 16 sati jedan~
-#&gt;  7 1445332964364128260 2021-10-05 10:20:06 vijesti_tv  "Na Mažuranićevom šetali~
-#&gt;  8 1445468764061847555 2021-10-05 19:19:43 vijesti_tv  "Juraj Dalmatinac Šibenč~
-#&gt;  9 1445695307631652871 2021-10-06 10:19:55 vijesti_tv  "Gradonačelnik Grada Sin~
-#&gt; 10 1445604800343674886 2021-10-06 04:20:17 vijesti_tv  "Stisak ruke na kraju og~
+#&gt;    status_id           created_at          screen_name  text                    
+#&gt;    &lt;chr&gt;               &lt;dttm&gt;              &lt;chr&gt;        &lt;chr&gt;                   
+#&gt;  1 1446915414575964161 2021-10-09 19:08:11 lothianjamie "I’m wondering if I’ll ~
+#&gt;  2 1446911056425664513 2021-10-09 18:50:52 Adriana_hr95 "Osim uvjerljive pobjed~
+#&gt;  3 1446818909009633287 2021-10-09 12:44:43 Adriana_hr95 "Luka Modrić zaradio ve~
+#&gt;  4 1446909829218324481 2021-10-09 18:46:00 golhr        "Osim uvjerljive pobjed~
+#&gt;  5 1446798186048368641 2021-10-09 11:22:22 golhr        "VIDEO Pogledajte golov~
+#&gt;  6 1446438473741733890 2021-10-08 11:33:00 golhr        "VIDEO Posljednje infor~
+#&gt;  7 1446818225749049348 2021-10-09 12:42:00 golhr        "Luka Modrić zaradio ve~
+#&gt;  8 1446529825385193484 2021-10-08 17:36:00 golhr        "Utakmica CIPAR – HRVAT~
+#&gt;  9 1446499374956105732 2021-10-08 15:35:00 golhr        "Dalić na Cipru nahvali~
+#&gt; 10 1446879378562904066 2021-10-09 16:45:00 golhr        "Najveći dobitak obrana~
 ```
 
 ---
@@ -613,14 +655,14 @@ top_20_freqs
 
 ```
 #&gt; hashtag_word
-#&gt;     hrvatska     croatian      vijesti      croatia     business    marketing 
-#&gt;          201           84           84           61           15           15 
-#&gt;     racunalo   smartphone   technology       autumn       natgeo natgeotravel 
-#&gt;           15           15           15           13           13           13 
-#&gt;       nature    dalmacija       jadran    vijestihr       sunset nationalpark 
-#&gt;           13           12           12           12           11           10 
-#&gt; naturelovers      sunrise 
-#&gt;           10           10
+#&gt;    hrvatska    croatian     croatia     vijesti     nogomet      cypcro 
+#&gt;         200          61          59          55          29          22 
+#&gt;         wcq budiponosan     beproud    business      cyprus    football 
+#&gt;          21          20          18          17          17          17 
+#&gt;   marketing    racunalo  smartphone  technology     vatreni    worldcup 
+#&gt;          17          17          17          17          17          17 
+#&gt; &lt;U+03C0&gt;&lt;U+03BF&gt;&lt;U+03B4&gt;&lt;U+03CC&gt;&lt;U+03C3&gt;&lt;U+03C6&gt;&lt;U+03B1&gt;&lt;U+03B9&gt;&lt;U+03C1&gt;&lt;U+03BF&gt;         cro 
+#&gt;          15          15
 ```
 
 ---
