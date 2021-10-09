@@ -188,7 +188,7 @@ tidy_table <- function(x, terms, highlight_row = 1, highlight_color = "black", h
 
 1. Blazquez-Soriano, A.,Domenech, J., 2017. Big Data sources and methods for social and economic analyses. [članak na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/BDSources.pdf) 
 
-2. Shu-Heng, C. (Ed.), 2018. Big Data in Computational Social Science and Humanities. [poglavlje knjige na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/Shu-Heng%20Chen%20-%20Big%20Data%20in%20Computational%20Social%20Science%20and%20Humanities-Springer%20(2018).pdf)
+2. Shu-Heng, C. (Ed.), 2018. Big Data in Computational Social Science and Humanities. [poglavlje knjige na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/Shu-Heng%20Chen%20-%20Big%20Data%20in%20Computational%20Social%20Science%20and%20Humanities-Springer.pdf)
 
 
 ##### Dodatna
@@ -988,7 +988,12 @@ layout:true
 
 3. Suvremeni izvori podataka: Web, SocMedia, App i dr.
 
-4. DataScience za upravljanje suvremenim podatcima
+4. DataScience alati za upravljanje suvremenim podatcima
+
+<br>
+<br>
+<br>
+*Ključni pojmovi: veliki podatci, računalne društvene znanosti, podatkovne znanosti, nova istraživačka paradigma*
 
 ---
 class: inverse, middle

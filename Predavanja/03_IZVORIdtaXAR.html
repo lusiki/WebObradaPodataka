@@ -55,7 +55,7 @@ class: center, middle, inverse, title-slide
 
 1. Blazquez-Soriano, A.,Domenech, J., 2017. Big Data sources and methods for social and economic analyses. [članak na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/BDSources.pdf) 
 
-2. Shu-Heng, C. (Ed.), 2018. Big Data in Computational Social Science and Humanities. [poglavlje knjige na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/Shu-Heng%20Chen%20-%20Big%20Data%20in%20Computational%20Social%20Science%20and%20Humanities-Springer%20(2018).pdf)
+2. Shu-Heng, C. (Ed.), 2018. Big Data in Computational Social Science and Humanities. [poglavlje knjige na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/Shu-Heng%20Chen%20-%20Big%20Data%20in%20Computational%20Social%20Science%20and%20Humanities-Springer.pdf)
 
 
 ##### Dodatna
@@ -376,13 +376,13 @@ tail(sample_n(time_trend,7),7)
 
 ```
 #&gt;         date hits    keyword geo                  time gprop category
-#&gt; 1 2019-01-13    0 cjepljenje  HR 2018-01-01 2021-10-09   web        0
-#&gt; 2 2020-12-06   16 cjepljenje  HR 2018-01-01 2021-10-09   web        0
-#&gt; 3 2020-07-19    5 cjepljenje  HR 2018-01-01 2021-10-09   web        0
-#&gt; 4 2021-02-21    0    zavjera  HR 2018-01-01 2021-10-09   web        0
-#&gt; 5 2021-02-14   38 cjepljenje  HR 2018-01-01 2021-10-09   web        0
-#&gt; 6 2018-12-16    0    zavjera  HR 2018-01-01 2021-10-09   web        0
-#&gt; 7 2020-06-21    0 cjepljenje  HR 2018-01-01 2021-10-09   web        0
+#&gt; 1 2019-08-11    0  prosvjedi  HR 2018-01-01 2021-10-09   web        0
+#&gt; 2 2019-09-15    0    zavjera  HR 2018-01-01 2021-10-09   web        0
+#&gt; 3 2020-06-14    0 cjepljenje  HR 2018-01-01 2021-10-09   web        0
+#&gt; 4 2020-10-18    6  prosvjedi  HR 2018-01-01 2021-10-09   web        0
+#&gt; 5 2019-03-17   12 cjepljenje  HR 2018-01-01 2021-10-09   web        0
+#&gt; 6 2019-02-17    0    zavjera  HR 2018-01-01 2021-10-09   web        0
+#&gt; 7 2019-07-21    0    zavjera  HR 2018-01-01 2021-10-09   web        0
 ```
 
 ---
@@ -611,18 +611,18 @@ head(tweets[,2:5], n = 10)
 
 ```
 #&gt; # A tibble: 10 x 4
-#&gt;    status_id           created_at          screen_name  text                    
-#&gt;    &lt;chr&gt;               &lt;dttm&gt;              &lt;chr&gt;        &lt;chr&gt;                   
-#&gt;  1 1446915414575964161 2021-10-09 19:08:11 lothianjamie "I’m wondering if I’ll ~
-#&gt;  2 1446911056425664513 2021-10-09 18:50:52 Adriana_hr95 "Osim uvjerljive pobjed~
-#&gt;  3 1446818909009633287 2021-10-09 12:44:43 Adriana_hr95 "Luka Modrić zaradio ve~
-#&gt;  4 1446909829218324481 2021-10-09 18:46:00 golhr        "Osim uvjerljive pobjed~
-#&gt;  5 1446798186048368641 2021-10-09 11:22:22 golhr        "VIDEO Pogledajte golov~
-#&gt;  6 1446438473741733890 2021-10-08 11:33:00 golhr        "VIDEO Posljednje infor~
-#&gt;  7 1446818225749049348 2021-10-09 12:42:00 golhr        "Luka Modrić zaradio ve~
-#&gt;  8 1446529825385193484 2021-10-08 17:36:00 golhr        "Utakmica CIPAR – HRVAT~
-#&gt;  9 1446499374956105732 2021-10-08 15:35:00 golhr        "Dalić na Cipru nahvali~
-#&gt; 10 1446879378562904066 2021-10-09 16:45:00 golhr        "Najveći dobitak obrana~
+#&gt;    status_id           created_at          screen_name text                     
+#&gt;    &lt;chr&gt;               &lt;dttm&gt;              &lt;chr&gt;       &lt;chr&gt;                    
+#&gt;  1 1446929228465938441 2021-10-09 20:03:05 ICTracunalo "\U0001f449 Acer Aspire ~
+#&gt;  2 1446449136438497281 2021-10-08 12:15:22 ICTracunalo "\U0001f449 UŽIVO Hrvats~
+#&gt;  3 1446898784961761290 2021-10-09 18:02:07 ICTracunalo "\U0001f449 Samsungov sm~
+#&gt;  4 1446780370486190083 2021-10-09 10:11:34 ICTracunalo "\U0001f449 Oppo A54s: o~
+#&gt;  5 1446566561733615625 2021-10-08 20:01:58 ICTracunalo "\U0001f449 Honor 50 ipa~
+#&gt;  6 1446836808768229376 2021-10-09 13:55:50 ICTracunalo "\U0001f449 Xiaomi Mi De~
+#&gt;  7 1446747824968945669 2021-10-09 08:02:15 ICTracunalo "\U0001f449 Xiaomi Mi Mi~
+#&gt;  8 1446716023097397255 2021-10-09 05:55:53 ICTracunalo "\U0001f449 Google Pixel~
+#&gt;  9 1446536402452291585 2021-10-08 18:02:08 ICTracunalo "\U0001f449 Motorola Mot~
+#&gt; 10 1446475872471506949 2021-10-08 14:01:36 ICTracunalo "\U0001f449 POCO M4 Pro ~
 ```
 
 ---
@@ -655,12 +655,12 @@ top_20_freqs
 
 ```
 #&gt; hashtag_word
-#&gt;    hrvatska    croatian     croatia     vijesti     nogomet      cypcro 
-#&gt;         200          61          59          55          29          22 
-#&gt;         wcq budiponosan     beproud    business      cyprus    football 
-#&gt;          21          20          18          17          17          17 
-#&gt;   marketing    racunalo  smartphone  technology     vatreni    worldcup 
-#&gt;          17          17          17          17          17          17 
+#&gt;    hrvatska     croatia    croatian     vijesti     nogomet      cypcro 
+#&gt;         200          60          60          54          29          22 
+#&gt;         wcq budiponosan     beproud    business   marketing    racunalo 
+#&gt;          21          20          18          18          18          18 
+#&gt;  smartphone  technology      cyprus    football     vatreni    worldcup 
+#&gt;          18          18          17          17          17          17 
 #&gt; &lt;U+03C0&gt;&lt;U+03BF&gt;&lt;U+03B4&gt;&lt;U+03CC&gt;&lt;U+03C3&gt;&lt;U+03C6&gt;&lt;U+03B1&gt;&lt;U+03B9&gt;&lt;U+03C1&gt;&lt;U+03BF&gt;         cro 
 #&gt;          15          15
 ```
@@ -934,7 +934,12 @@ layout:true
 
 3. Suvremeni izvori podataka: Web, SocMedia, App i dr.
 
-4. DataScience za upravljanje suvremenim podatcima
+4. DataScience alati za upravljanje suvremenim podatcima
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+*Ključni pojmovi: veliki podatci, računalne društvene znanosti, podatkovne znanosti, nova istraživačka paradigma*
 
 ---
 class: inverse, middle
