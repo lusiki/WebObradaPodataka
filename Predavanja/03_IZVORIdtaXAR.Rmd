@@ -222,7 +222,7 @@ tidy_table <- function(x, terms, highlight_row = 1, highlight_color = "black", h
 
 .pull-right[
 
-#### **Moderni izvori podataka (BigData)***
+#### **Moderni izvori podataka (BigData)**
 
 - Web 
 - Društvene mreže 
@@ -419,7 +419,8 @@ layout:true
 - Preuzimanje [podataka](https://www.dzs.hr/Hrv/censuses/census2011/results/htm/H01_06_01/H01_06_01.html) o stanovništvu u najvećim hrvatskim gradovima 
 
 ```{r}
-library(rvest) # paket
+# paket
+library(rvest) 
 url <- "https://www.dzs.hr/Hrv/censuses/census2011/results/htm/H01_06_01/H01_06_01.html" # www
 # preuzmi tablicu sa www
 citySize <- url %>%
@@ -453,7 +454,7 @@ head(cSize, 10)
 
 ```{r echo = TRUE}
 # vizualizacija
-plot <- ggplot(data = cSize[1:10,],
+gradovi <- ggplot(data = cSize[1:10,],
                aes(x = Grad, y = Stanovnici)) +
                geom_bar(stat = "identity") +
                xlab('Grad') + 
@@ -470,7 +471,7 @@ plot <- ggplot(data = cSize[1:10,],
 
 ```{r echo = TRUE, fig.width=6, fig.height=3}
 # pregled grafikona
-plot
+gradovi
 ```
 
 
@@ -482,7 +483,6 @@ plot
 # paketi
 library (gtrendsR) 
 library(ggplot2)
-
 #kljucne rijeci
 keywords <- c("zavjera", "cjepljenje", "prosvjedi")
 #GEO
@@ -495,7 +495,6 @@ channel <- 'web'
 trends <- gtrends(keywords, gprop = channel,geo = country, time = time )
 #samo 'interes kroz vrijeme'
 time_trend <- trends$interest_over_time
-
 ```
 
 ---
@@ -516,8 +515,9 @@ tail(sample_n(time_trend,7),7)
  <br>
  
 ```{r echo=TRUE, fig.width=5, fig.height=3}
+# paket
 library(lubridate)
-# Vizualizacija
+# napravi grafikon 
 google_pretraga <- ggplot(data = time_trend,
                aes(x = date, y = hits, group = keyword, col = keyword)) +
                geom_line() +
@@ -536,7 +536,7 @@ google_pretraga <- ggplot(data = time_trend,
 ### API - Google trendovi
 
 ```{r  echo=TRUE, fig.width=5, fig.height=4}
-# prikaži
+# prikaži 
 google_pretraga
 ```
 
@@ -658,12 +658,12 @@ layout:true
 <br>
 <br>
 <br>
-- API-kalipsa (Cambridge Analytica)
+- API-kalipsa i *Cambridge Analytica* slučaj
 <br>
-- [Social Dilemma](https://www.thesocialdilemma.com/)
+- Poslovne primjene prednjače
 <br>
-- Poslovni vs. istraživački sektor 
-
+<br>
+<br>
 
 .footnote[[*] [Dokumentarni film Social Dilemma](https://www.thesocialdilemma.com/)
 
@@ -740,10 +740,8 @@ head(tweets[,2:5], n = 10)
 
 ---
 
-<br>
-<br>
-
 ### Twitter 
+<br>
 
 ```{r echo = TRUE}
 # regex za tweet-ove
@@ -815,8 +813,7 @@ android %>%
 
 ---
 
-### Analiza korištenja vlastitih mobilnih aplikacija 
-<br>
+### Primjer analize korištenja vlastitih mobilnih aplikacija<br>
 <br>
 ```{r}
 # napravi grafikon
@@ -845,7 +842,7 @@ najAplikacije
 
 ---
 
-### Analiza korištenja vlastitih mobilnih aplikacija
+### Primjer analize korištenja vlastitih mobilnih aplikacija
 
 ```{r warning= FALSE}
 android %>% 
@@ -884,8 +881,7 @@ android %>%
 
 ---
 
-### Analiza korištenja vlastitih mobilnih aplikacija
-
+### Primjer analize korištenja vlastitih mobilnih aplikacija
 
 ```{r  fig.width=7, fig.height=5}
 # prikaži grafički
@@ -1020,14 +1016,13 @@ layout:true
 
 ---
 <br>
-<br>
 *Pregled predavanja:*
 
 - klasični izvori podataka u društvenim znanostima
 
 - BigData kao nova istraživačka paradigma
 
-- suvremeni izvori podataka: Web, SocMedia, App i dr.
+- suvremeni izvori podataka: Web, društveni mediji, aplikacije, senzori
 
 - DataScience alati za upravljanje suvremenim podatcima
 
@@ -1035,7 +1030,14 @@ layout:true
 <br>
 <br>
 *Ključni pojmovi:*
-veliki podatci, računalne društvene znanosti, podatkovne znanosti, nova istraživačka paradigma*
+
+- veliki podatci
+
+- računalne društvene znanosti
+
+- podatkovne znanosti
+
+- nova istraživačka paradigma*
 
 ---
 class: inverse, middle
