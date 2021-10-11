@@ -399,14 +399,14 @@ tail(sample_n(time_trend,7),7)
 ```
 
 ```
-#&gt;         date hits   keyword geo                  time gprop category
-#&gt; 1 2021-06-20    0   zavjera  HR 2018-01-01 2021-10-11   web        0
-#&gt; 2 2018-03-18    0   zavjera  HR 2018-01-01 2021-10-11   web        0
-#&gt; 3 2020-05-10   12 prosvjedi  HR 2018-01-01 2021-10-11   web        0
-#&gt; 4 2020-01-12    0   zavjera  HR 2018-01-01 2021-10-11   web        0
-#&gt; 5 2021-04-25    5   zavjera  HR 2018-01-01 2021-10-11   web        0
-#&gt; 6 2018-12-16   21 prosvjedi  HR 2018-01-01 2021-10-11   web        0
-#&gt; 7 2021-09-19    5 prosvjedi  HR 2018-01-01 2021-10-11   web        0
+#&gt;         date hits    keyword geo                  time gprop category
+#&gt; 1 2019-04-21    5 cjepljenje  HR 2018-01-01 2021-10-11   web        0
+#&gt; 2 2021-02-21   34 cjepljenje  HR 2018-01-01 2021-10-11   web        0
+#&gt; 3 2020-05-17    0    zavjera  HR 2018-01-01 2021-10-11   web        0
+#&gt; 4 2019-12-01    9  prosvjedi  HR 2018-01-01 2021-10-11   web        0
+#&gt; 5 2020-01-05    0    zavjera  HR 2018-01-01 2021-10-11   web        0
+#&gt; 6 2021-09-26   16 cjepljenje  HR 2018-01-01 2021-10-11   web        0
+#&gt; 7 2019-06-02    9 cjepljenje  HR 2018-01-01 2021-10-11   web        0
 ```
 
 ---
@@ -649,16 +649,16 @@ head(tweets[,2:5], n = 10)
 #&gt; # A tibble: 10 x 4
 #&gt;    status_id           created_at          screen_name     text                 
 #&gt;    &lt;chr&gt;               &lt;dttm&gt;              &lt;chr&gt;           &lt;chr&gt;                
-#&gt;  1 1447604803346051073 2021-10-11 16:47:34 RSE_Balkan      "Još traje istraga p~
-#&gt;  2 1447604424088723457 2021-10-11 16:46:04 HRTsport        "Navijači #Hrvatska ~
-#&gt;  3 1447602141116329991 2021-10-11 16:37:00 punkuferhr      "Glasajte za naše: H~
-#&gt;  4 1447600380972453893 2021-10-11 16:30:00 golhr           "Velika pobjeda hrva~
-#&gt;  5 1446909829218324481 2021-10-09 18:46:00 golhr           "Osim uvjerljive pob~
-#&gt;  6 1447193699851456517 2021-10-10 13:34:00 golhr           "Vatreni u Osijeku o~
-#&gt;  7 1447494179618050050 2021-10-11 09:28:00 golhr           "Vatreni odradili po~
-#&gt;  8 1447567727648980996 2021-10-11 14:20:15 golhr           "Kramarićev negativn~
-#&gt;  9 1447266680640577542 2021-10-10 18:24:00 golhr           "U reprezentaciju st~
-#&gt; 10 1447599649414651908 2021-10-11 16:27:06 lokalnahrvatska "#Vrgorac : Obavijes~
+#&gt;  1 1447633430708113408 2021-10-11 18:41:20 TheReal_gwarner "84-77-7 YTD, add #S~
+#&gt;  2 1447632951689334787 2021-10-11 18:39:26 JanJasenka      "Tak pome na to! #cr~
+#&gt;  3 1447606181682454534 2021-10-11 16:53:03 JanJasenka      "Dnes má byť Laci Al~
+#&gt;  4 1447617614990168066 2021-10-11 17:38:29 JanJasenka      "Hnusné počasie, ose~
+#&gt;  5 1447632671132340232 2021-10-11 18:38:19 stadiongebod    "The exquisite Stadi~
+#&gt;  6 1447587426361303043 2021-10-11 15:38:31 stadiongebod    "The exquisite Stadi~
+#&gt;  7 1447631076244049921 2021-10-11 18:31:58 SabineValentic  "SRETNO! \U0001f60e\~
+#&gt;  8 1447630275400318979 2021-10-11 18:28:47 Boriskn1        "SRETNO! \U0001f60e\~
+#&gt;  9 1447624262475567105 2021-10-11 18:04:54 eu_balkan       "Još traje istraga p~
+#&gt; 10 1447623060069175306 2021-10-11 18:00:07 Adriana_hr95    "Modrić upozorava da~
 ```
 
 ---
@@ -700,16 +700,16 @@ top_20_freqs
 
 ```
 #&gt; hashtag_word
-#&gt;           hrvatska           croatian            vijesti            croatia 
-#&gt;                170                 68                 66                 58 
-#&gt;           business          marketing           racunalo         smartphone 
-#&gt;                 26                 26                 26                 26 
-#&gt;         technology            vatreni  croatiafulloflife              golhr 
-#&gt;                 26                 14                 10                  9 
-#&gt;            nogomet             snijeg              lovas             osijek 
-#&gt;                  9                  6                  5                  5 
-#&gt;             srbija            covid19 međimurskažupanija           migranti 
-#&gt;                  5                  4                  4                  4
+#&gt;          hrvatska          croatian           vijesti           croatia 
+#&gt;               175                66                64                55 
+#&gt;          business         marketing          racunalo        smartphone 
+#&gt;                25                25                25                25 
+#&gt;        technology           vatreni           nogomet             golhr 
+#&gt;                25                17                11                10 
+#&gt;          slovačka croatiafulloflife            crosvk          slovakia 
+#&gt;                 9                 8                 6                 6 
+#&gt;             lovas       budiponosan           covid19      dinamizagreb 
+#&gt;                 5                 4                 4                 4
 ```
 
 ---
