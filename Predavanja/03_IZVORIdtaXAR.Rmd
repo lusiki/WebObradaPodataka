@@ -171,10 +171,10 @@ tidy_table <- function(x, terms, highlight_row = 1, highlight_color = "black", h
 - Obvezni kolegij I. godine dvopredmetnog diplomskog studija sociologije
 <br>
 <br>
-- 15 upisanih studenata
+- 15 upisanih studenata sa različitih smjerova i obrazovne pozadine
 <br>
 <br>
-- Kolegij dostupan na [poveznici](https://lusiki.github.io/WebObradaPodataka/index.html)
+- Stranica kolegija dostupna na [poveznici](https://lusiki.github.io/WebObradaPodataka/index.html)
 <br>
 <br>
 - *OpenSource* repozitorij na [GitHub](https://github.com/lusiki/WebObradaPodataka)-u 
@@ -208,13 +208,29 @@ tidy_table <- function(x, terms, highlight_row = 1, highlight_color = "black", h
 <br>
 <br>
 
-- Klasični izvori podataka 
-- Moderni izvori podataka (BigData)
+.pull-left[
+
+#### **Klasični izvori podataka**
+
+- Eksperiment 
+- Ispitivanje 
+- Intervju
+- Senzori  
+- Strukturirane baze podataka
+
+]
+
+.pull-right[
+
+#### **Moderni izvori podataka (BigData)***
+
 - Web 
 - Društvene mreže 
 - Aplikacije
 - Senzori  
 - Upravljanje modernim podatcima
+
+]
 
 
 .footnote[[*]Strojni dohvat (suvremenih) izvora podataka!]
@@ -250,30 +266,35 @@ layout: true
 <br>
 <br>
 
+
+.pull-left[
+
 ### Eksperiment
 
 * Visok stupanj kontrole
 * Planirani dizajn
 * Longitudinalni i studije slučaja
 * Problem generalizacije rezultata
+]
 
----
-<br>
-<br>
-<br>
-
+.pull-right[
 ### Ispitivanje
 
 * Ciljana populacija
 * Veći uzorak
-* Pogodno za analizu ponašanja,osjećaja,iskustava,stavova
+* Analiza ponašanja,osjećaja,iskustava
 * Problem reprezentativnosti uzorka 
 * Potreban prilagođeni dizajn
+]
+
 
 ---
 <br>
 <br>
 <br>
+
+.pull-left[
+
 ### Intervju
 
 * Profilirani uzorak
@@ -281,23 +302,25 @@ layout: true
 * Pogodno za dubinsku analizu
 * Ovisan o istraživaču
 * Poteškoće sa reproduciranjem rezultata
+]
 
----
-<br>
-<br>
-<br>
-### Strukturirane baze podataka
+
+.pull-right[
+
+### Strukturirane baze 
 
 * Omogućuju kvanitativnu analizu
 * Makro i mezzo razina analize
-* Potrebno prilagoditi podatke prije modeliranja
+* Potrebno prilagoditi podatke 
 * Institucionalni i uređeni podatci
 * Strojno preuzimanje podataka
+]
+
 
 ---
 class: inverse, middle
 layout: false
-# Moderni izvori podataka (BigData)
+# Suvremeni izvori podataka (BigData)
 <br>
 <br>
 <br>
@@ -322,7 +345,7 @@ layout:true
 <br>
 <br>
 
-**Karakteristike**:
+* **Karakteristike**:
 
 1. Veliki
 2. Brzi
@@ -341,13 +364,13 @@ layout:true
 
 ### NOVA ISTRAŽIVAČKA PARADIGMA 
 
-* Analiza počinje od podataka (ne od teorije)
+* Analiza počinje od podataka (teorija je sekundarna)
 * Potrebne tehničke vještine
 * Složena i memorijski (RAM) zahtjevna analitika
 * Noviteti u prezentaciji i komunikaciji rezultata
 * Poslovne primjene prednjače
 * Primjena u društvenim istraživanjima je u povojima (*computational social science*)
-* Potrebno definirati novu arhitekturu (ekosistem)
+* Potrebno definirati novu istraživačku arhitekturu (ekosistem)
 
 .footnote[[*] [Khunova revolucija!?](https://journals.sagepub.com/doi/10.1177/2053951714528481)]
 
@@ -364,7 +387,7 @@ layout:true
 <br>
 <br>
 <br>
-**Izvrstan izvor podataka za:**
+**Izvor podataka za:**
 1. objašnjenje
 <br>
 <br>
@@ -381,13 +404,13 @@ layout:true
 <br>
 <br>
 <br>
-**Prikupljanje podataka**
+**Prikupljanje podataka:**
 <br>
 <br>
 1. [Web-Scraping](https://www.datacamp.com/community/tutorials/r-web-scraping-rvest) 
 <br>
 <br>
-2. API
+2. API (*application programming interface*)
 
 ---
 
@@ -468,7 +491,7 @@ country <- c('HR')
 time <- paste("2018-01-01", Sys.Date())
 #kanali
 channel <- 'web'
-# funkcija
+# funkcija iz paketa
 trends <- gtrends(keywords, gprop = channel,geo = country, time = time )
 #samo 'interes kroz vrijeme'
 time_trend <- trends$interest_over_time
@@ -481,6 +504,7 @@ time_trend <- trends$interest_over_time
  <br>
  
 ```{r echo = TRUE}
+# paket
 library(tidyverse)
 # pregledaj podatke
 tail(sample_n(time_trend,7),7)
@@ -494,7 +518,7 @@ tail(sample_n(time_trend,7),7)
 ```{r echo=TRUE, fig.width=5, fig.height=3}
 library(lubridate)
 # Vizualizacija
-plot <- ggplot(data = time_trend,
+google_pretraga <- ggplot(data = time_trend,
                aes(x = date, y = hits, group = keyword, col = keyword)) +
                geom_line() +
                xlab('Vrijeme') + 
@@ -513,7 +537,7 @@ plot <- ggplot(data = time_trend,
 
 ```{r  echo=TRUE, fig.width=5, fig.height=4}
 # prikaži
-plot
+google_pretraga
 ```
 
 ---
@@ -521,7 +545,7 @@ plot
 ### API - Google trendovi
 
 ```{r echo=TRUE, fig.width=5, fig.height=3}
-# sve u jednom redu koda :-)
+# sve u jednom redu koda + "mjere"   :-) 
 plot(gtrendsR::gtrends(keyword = c("zavjera", "cjepljenje", "prosvjedi","mjere"),
                        geo = "HR",
                        time = time))
@@ -529,7 +553,7 @@ plot(gtrendsR::gtrends(keyword = c("zavjera", "cjepljenje", "prosvjedi","mjere")
 
 ---
 
-### Istraživanja na osnovi google trendova
+### Primjeri istraživanja na osnovi google trendova:
 
 1. [Analiza prodaje kuća](https://rpubs.com/tonytusharjr/newhomes)
 <br>
@@ -561,11 +585,12 @@ plot(gtrendsR::gtrends(keyword = c("zavjera", "cjepljenje", "prosvjedi","mjere")
 ### API - COVID19 podatci
 
 ```{r ,fig.width=6, fig.height=3}
+# učitaj pakete
 library(tidycovid19)
 library(zoo)
-
+# preuzmi podatke
 df <- download_merged_data(cached = TRUE, silent = TRUE)
-
+# uredi podatke i napravi grafikon
 covid <- df %>%
   filter(iso3c == "HRV") %>%
   mutate(
@@ -577,7 +602,8 @@ covid <- df %>%
   geom_line(aes(y = ave_new_cases), color ="red") +
   theme_minimal() +
   xlab("Novi slučajevi") + 
-  ylab("Datum")
+  ylab("Datum") +
+  ggtitle("COVID19 incidencija u Hrvatskoj")
 ```
 
 
@@ -587,9 +613,8 @@ covid <- df %>%
 
 
 ```{r, fig.width=6, fig.height=4}
-
+# Prikaži podatke
 covid
-
 ```
 
 
@@ -605,7 +630,7 @@ layout:true
 
 ---
 <br>
-**Popularne društvene mreže**
+**Popularne društvene mreže:**
 <br>
 <br>
 1. [Facebook](https://www.kaggle.com/chrisbow/an-introduction-to-facebook-ad-analysis-using-r) [(Vidi takodjer!)](https://www.residualthoughts.com/2018/02/12/analyzing-facebook-messages-in-r/)
@@ -616,27 +641,36 @@ layout:true
 <br>
 4. [Instagram](https://github.com/JonasSchroeder/InstaCrawlR)
 <br>
-5. Google+
+5. TikTok
 <br>
-6. Tumblr
+6. Google+
 <br>
-7. Flickr
-
+7. Tumblr
+<br>
+8. Flickr
 
 .footnote[[*] [Kolegij!](https://lusiki.github.io/Learning-Social-Media-Analytics/])
 
 ---
 
 ### Najvažniji trendovi
-
+<br>
+<br>
+<br>
+<br>
 - API-kalipsa (Cambridge Analytica)
+<br>
 - [Social Dilemma](https://www.thesocialdilemma.com/)
-- poslovni vs. istraživački sektor 
+<br>
+- Poslovni vs. istraživački sektor 
+
+
+.footnote[[*] [Dokumentarni film Social Dilemma](https://www.thesocialdilemma.com/)
 
 ---
-<br>
-### Twitter
 
+### Twitter
+<br>
 * Najpoznatiji mikroblogging servis
 <br>
 <br>
@@ -671,7 +705,8 @@ app <- "izprobavanje"
 ```
 
 ```{r echo = TRUE}
-library (rtweet) # paket
+# paket
+library (rtweet) 
 # stvori token
 twitter_token <- create_token(
   app = app,
@@ -692,7 +727,6 @@ post_tweet("Look, i'm tweeting from R!")
 # prikupi rezultate
 tweets <- search_tweets(q = c("#Hrvatska"),
                                n = 200)
-# geolokacija                               
 ```
 
 ---
@@ -706,20 +740,28 @@ head(tweets[,2:5], n = 10)
 
 ---
 
-### Twitter 
- <br>
- <br>
-```{r echo = TRUE}
+<br>
+<br>
 
-hashtag_pat <- "#[a-zA-Z0-9_-ー\\.]+" # regex za tweet-ove
-hashtag <- str_extract_all(tweets$text, hashtag_pat) # izvuci tweetove
+### Twitter 
+
+```{r echo = TRUE}
+# regex za tweet-ove
+hashtag_pat <- "#[a-zA-Z0-9_-ー\\.]+" 
+# izvuci tweetove
+hashtag <- str_extract_all(tweets$text, hashtag_pat) 
 # uredi podatke
 hashtag_word <- unlist(hashtag)
-hashtag_word <- tolower(hashtag_word) # mala slova
-hashtag_word <- gsub("[[:punct:]ー]", "", hashtag_word) # makni inerpunkciju
-hashtag_count <- table(hashtag_word) # tabulliraj
-top_20_freqs <- sort(hashtag_count, decreasing = TRUE)[1:20] # sortiraj
-top_20_hashtags <- as.character(as.data.frame(top_20_freqs)[,1]) # napravi stringove
+# mala slova
+hashtag_word <- tolower(hashtag_word) 
+# makni inerpunkciju
+hashtag_word <- gsub("[[:punct:]ー]", "", hashtag_word) 
+# tabulliraj
+hashtag_count <- table(hashtag_word) 
+# sortiraj
+top_20_freqs <- sort(hashtag_count, decreasing = TRUE)[1:20] 
+# napravi stringove
+top_20_hashtags <- as.character(as.data.frame(top_20_freqs)[,1]) 
 ```
 
 ---
@@ -755,7 +797,7 @@ layout:true
 
 ---
 
-### Analiza korištenja vlastitih mobilnih aplikacija 
+### Primjer analize korištenja vlastitih mobilnih aplikacija 
 
 ```{r}
 # Učitaj pakete
@@ -862,7 +904,6 @@ layout:true
 # SENZORNI UREĐAJI
 ---
 
-**Prikupljanje podataka**
 <br>
 <br>
 <br>
@@ -975,25 +1016,26 @@ layout:true
 
 ---
 layout:true
-# PREGLED PREDAVANJA
+# PREGLED PREDAVANJA I KLJUČNI POJMOVI
 
 ---
 <br>
 <br>
+*Pregled predavanja:*
+
+- klasični izvori podataka u društvenim znanostima
+
+- BigData kao nova istraživačka paradigma
+
+- suvremeni izvori podataka: Web, SocMedia, App i dr.
+
+- DataScience alati za upravljanje suvremenim podatcima
+
 <br>
-
-1. Klasični izvori podataka u društvenim znanostima
-
-2. BigData kao nova istraživačka paradigma
-
-3. Suvremeni izvori podataka: Web, SocMedia, App i dr.
-
-4. DataScience alati za upravljanje suvremenim podatcima
-
 <br>
 <br>
-<br>
-*Ključni pojmovi: veliki podatci, računalne društvene znanosti, podatkovne znanosti, nova istraživačka paradigma*
+*Ključni pojmovi:*
+veliki podatci, računalne društvene znanosti, podatkovne znanosti, nova istraživačka paradigma*
 
 ---
 class: inverse, middle
