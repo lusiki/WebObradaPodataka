@@ -171,7 +171,7 @@ tidy_table <- function(x, terms, highlight_row = 1, highlight_color = "black", h
 - Obvezni kolegij I. godine dvopredmetnog diplomskog studija sociologije
 <br>
 <br>
-- 15 upisanih studenata sa različitih smjerova i obrazovne pozadine
+- 15 upisanih studenata sa različitih smjerova i obrazovnom pozadinom
 <br>
 <br>
 - Stranica kolegija dostupna na [poveznici](https://lusiki.github.io/WebObradaPodataka/index.html)
@@ -665,7 +665,7 @@ layout:true
 <br>
 <br>
 
-.footnote[[*] [Dokumentarni film Social Dilemma](https://www.thesocialdilemma.com/)
+.footnote[[*] [Dokumentarni film Social Dilemma](https://www.thesocialdilemma.com/)]
 
 ---
 
