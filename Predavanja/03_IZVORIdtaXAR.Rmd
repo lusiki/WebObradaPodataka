@@ -616,14 +616,14 @@ layout:true
 <br>
 - FB podatci dostupni samo za javne profile
 <br>
-- primjer tehnoloških brandova: *Xiaomi, Samsung, Vivo, Huawei* 
+- tehnološki brandovi: *Xiaomi, Samsung, Vivo, Huawei* 
 <br>
-- razoblje od mjesec dana
+- razoblje od mjesec dana 
  
 ---
 
 #### Hrvatski influenceri na Facebook-u (*impresije*)
-<br>
+
 ```{r importFacebook, echo=FALSE, message=FALSE, warning=FALSE}
 
 library(readxl)
@@ -687,14 +687,14 @@ fbDta %>%
   select(author, impressions, engagements, likes, text, Activity,  url, Date) %>%
   kable(format.args = list(decimal.mark = ',', big.mark = ".")) %>%
     kable_styling() %>%
-    scroll_box(width = "750px", height = "500px")
+    scroll_box(width = "750px", height = "550px")
 ```
 
 
 ---
 
 #### Hrvatski influenceri na Facebook-u (*like*)
-<br>
+
 ```{r,  echo=FALSE, message=FALSE, warning=FALSE}
 
 fbDta %>%
@@ -704,7 +704,7 @@ fbDta %>%
   select(text, Activity, author, url, impressions, engagements, likes, Date) %>%
   kable(format.args = list(decimal.mark = ',', big.mark = ".")) %>%
     kable_styling() %>%
-    scroll_box(width = "750px", height = "500px")
+    scroll_box(width = "750px", height = "550px")
 
 ```
 
