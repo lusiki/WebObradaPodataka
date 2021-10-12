@@ -458,13 +458,13 @@ tail(sample_n(time_trend,7),7)
 
 ```
 ##         date hits    keyword geo                  time gprop category
-## 1 2018-01-28    0 cjepljenje  HR 2018-01-01 2021-10-12   web        0
-## 2 2021-03-28   13  prosvjedi  HR 2018-01-01 2021-10-12   web        0
-## 3 2019-04-07    7    zavjera  HR 2018-01-01 2021-10-12   web        0
-## 4 2018-03-18    7 cjepljenje  HR 2018-01-01 2021-10-12   web        0
-## 5 2018-12-16    0 cjepljenje  HR 2018-01-01 2021-10-12   web        0
-## 6 2020-01-26   12  prosvjedi  HR 2018-01-01 2021-10-12   web        0
-## 7 2019-08-25    0  prosvjedi  HR 2018-01-01 2021-10-12   web        0
+## 1 2019-07-07    0    zavjera  HR 2018-01-01 2021-10-12   web        0
+## 2 2019-10-20    6 cjepljenje  HR 2018-01-01 2021-10-12   web        0
+## 3 2018-01-14    0  prosvjedi  HR 2018-01-01 2021-10-12   web        0
+## 4 2020-06-21    0    zavjera  HR 2018-01-01 2021-10-12   web        0
+## 5 2019-08-25    0    zavjera  HR 2018-01-01 2021-10-12   web        0
+## 6 2018-08-19    0 cjepljenje  HR 2018-01-01 2021-10-12   web        0
+## 7 2020-08-16    0  prosvjedi  HR 2018-01-01 2021-10-12   web        0
 ```
 
 ---
@@ -636,7 +636,7 @@ layout:true
 .footnote[[*] [Dokumentarni film Social Dilemma](https://www.thesocialdilemma.com/)]
 
 ---
-&lt;br&gt;
+
 ### Twitter
 * Najpoznatiji mikroblogging servis
 &lt;br&gt;
@@ -705,18 +705,18 @@ head(tweets[,2:5], n = 10)
 
 ```
 ## # A tibble: 10 x 4
-##    status_id           created_at          screen_name     text                 
-##    &lt;chr&gt;               &lt;dttm&gt;              &lt;chr&gt;           &lt;chr&gt;                
-##  1 1447846295318712320 2021-10-12 08:47:11 lokalnahrvatska #Zabok : Program Dan~
-##  2 1447846289996124160 2021-10-12 08:47:09 lokalnahrvatska #Zagrebačkažupanija ~
-##  3 1447845025124175877 2021-10-12 08:42:08 lokalnahrvatska #Trogir : Gradsko vi~
-##  4 1447524183924215813 2021-10-11 11:27:13 lokalnahrvatska #Pula : Mjesec hrvat~
-##  5 1447570712298930178 2021-10-11 14:32:07 lokalnahrvatska #Split : Gradonačeln~
-##  6 1447569449826070538 2021-10-11 14:27:06 lokalnahrvatska #Pula : »Pred Pulom ~
-##  7 1447841247243251712 2021-10-12 08:27:07 lokalnahrvatska #Požega : Raspored o~
-##  8 1447510311221841921 2021-10-11 10:32:06 lokalnahrvatska #Sinj : PRIOPĆENJE S~
-##  9 1447831211162750976 2021-10-12 07:47:14 lokalnahrvatska #Zabok : VENOM 2    ~
-## 10 1447831206570209280 2021-10-12 07:47:13 lokalnahrvatska #Dubrovačkoneretvans~
+##    status_id           created_at          screen_name  text                    
+##    &lt;chr&gt;               &lt;dttm&gt;              &lt;chr&gt;        &lt;chr&gt;                   
+##  1 1447859140810919950 2021-10-12 09:38:13 aa_balkans   "#Hrvatska: Zabilježeno~
+##  2 1447531037551173634 2021-10-11 11:54:27 aa_balkans   "#Hrvatska: Mjesec hrva~
+##  3 1447555403823386634 2021-10-11 13:31:17 aa_balkans   "#Njemačka o postupanji~
+##  4 1447500861538766855 2021-10-11 09:54:33 aa_balkans   "#Hrvatska: Zabilježeno~
+##  5 1447836539451490306 2021-10-12 08:08:25 aa_balkans   "#Hrvatska: Cijene gori~
+##  6 1447565904259260421 2021-10-11 14:13:00 aa_balkans   "#Hrvatska: Službeno 50~
+##  7 1447858914658111489 2021-10-12 09:37:19 theBirdyMan  "Return of soldiers fro~
+##  8 1447858612248920068 2021-10-12 09:36:07 Adriana_hr95 "Izbornik Dalić ništa n~
+##  9 1447623060069175306 2021-10-11 18:00:07 Adriana_hr95 "Modrić upozorava da Va~
+## 10 1447858077672165376 2021-10-12 09:34:00 golhr        "Izbornik Dalić ništa n~
 ```
 
 ---
@@ -756,15 +756,21 @@ top_20_freqs
 ```
 ## hashtag_word
 ##          hrvatska          croatian           vijesti           croatia 
-##               186                71                70                49 
+##               200                81                80                47 
 ##           vatreni          business         marketing          racunalo 
-##                18                17                17                17 
-##        smartphone        technology croatiafulloflife           nogomet 
-##                17                17                11                11 
-##          slovakia             golhr            crosvk          slovačka 
-##                11                10                 9                 9 
-##               wcq             zabok      dinamizagreb            požega 
-##                 6                 6                 5                 5
+##                20                17                17                17 
+##        smartphone        technology           nogomet             golhr 
+##                17                17                13                12 
+##          slovakia croatiafulloflife            crosvk          slovačka 
+##                11                 9                 9                 9 
+##            požega              pula               wcq             zabok 
+##                 6                 6                 6                 6 
+##      dinamizagreb           beproud       budiponosan           covid19 
+##                 5                 4                 4                 4 
+##        crostagram           dugirat       gospindolac      groundhopper 
+##                 4                 4                 4                 4 
+##     groundhopping              hvar 
+##                 4                 4
 ```
 
 ---
@@ -775,7 +781,7 @@ top_20_freqs
 ```r
 # vizualizacija 
 library(wordcloud) # paket
-pal = brewer.pal(9,"BuGn") #estetika
+pal = brewer.pal(9,"BrBG") #estetika
 wordcloud(top_20_hashtags, top_20_freqs, scale=c(3.5,1.5), # oblak riječi
           random.order=FALSE, rot.per=.25,colors = rev(pal))
 ```
@@ -881,19 +887,10 @@ android %&gt;%
 ```
 
 
-```
-## `summarise()` has grouped output by 'month'. You can override using the `.groups` argument.
-```
 
 ---
 
 ### Primjer analize korištenja vlastitih mobilnih aplikacija
-
-
-```r
-# prikaži grafički
-najAplikacije7 / najAplikacije10
-```
 
 &lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-28-1.png" style="display: block; margin: auto;" /&gt;
 
@@ -1027,7 +1024,6 @@ layout:true
 # PREGLED PREDAVANJA I KLJUČNI POJMOVI
 
 ---
-&lt;br&gt;
 *Pregled predavanja:*
 
 - klasični izvori podataka u društvenim znanostima
@@ -1038,7 +1034,7 @@ layout:true
 
 - DataScience alati za upravljanje suvremenim podatcima
 
-&lt;br&gt;
+
 
 *Ključni pojmovi:*
 
