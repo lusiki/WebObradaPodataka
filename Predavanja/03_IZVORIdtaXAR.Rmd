@@ -356,7 +356,7 @@ layout:true
 
 - Preuzimanje [podataka](https://www.dzs.hr/Hrv/censuses/census2011/results/htm/H01_06_01/H01_06_01.html) o stanovništvu u najvećim hrvatskim gradovima 
 
-```{r}
+```{r warning=FALSE}
 # paket
 library(rvest) 
 url <- "https://www.dzs.hr/Hrv/censuses/census2011/results/htm/H01_06_01/H01_06_01.html" # www
@@ -408,7 +408,7 @@ gradovi <- ggplot(data = cSize[1:10,],
 ### Web scraping 
 
 ```{r echo = TRUE, fig.width=6, fig.height=3}
-# pregled grafikona
+# grafički prikaz
 gradovi
 ```
 
@@ -473,8 +473,8 @@ google_pretraga <- ggplot(data = time_trend,
 
 ### API - Google trendovi
 
-```{r  echo=TRUE, fig.width=5, fig.height=4}
-# prikaži 
+```{r  echo=TRUE, fig.width=5, fig.height=3}
+# grafički prikaz
 google_pretraga
 ```
 
@@ -482,7 +482,7 @@ google_pretraga
 
 ### API - Google trendovi
 
-```{r echo=TRUE, fig.width=5, fig.height=3}
+```{r echo=TRUE, fig.width=5, fig.height=2}
 # sve u jednom redu koda + "mjere"   :-) 
 plot(gtrendsR::gtrends(keyword = c("zavjera", "cjepljenje", "prosvjedi","mjere"),
                        geo = "HR",
@@ -522,7 +522,7 @@ plot(gtrendsR::gtrends(keyword = c("zavjera", "cjepljenje", "prosvjedi","mjere")
 
 ### API - COVID19 podatci
 
-```{r ,fig.width=6, fig.height=3}
+```{r ,fig.width=6, fig.height=3, warning=FALSE}
 # učitaj pakete
 library(tidycovid19)
 library(zoo)
@@ -550,8 +550,8 @@ covid <- df %>%
 ### API - COVID19 podatci
 
 
-```{r, fig.width=6, fig.height=4}
-# Prikaži podatke
+```{r, fig.width=6, fig.height=3}
+# grafički prikaz
 covid
 ```
 
@@ -590,25 +590,24 @@ layout:true
 .footnote[[*] [Kolegij!](https://lusiki.github.io/Learning-Social-Media-Analytics/])
 
 ---
+<br>
+<br>
+<br>
+#### Najvažniji trendovi
 
-### Najvažniji trendovi
-<br>
-<br>
-<br>
 <br>
 - API-kalipsa i *Cambridge Analytica* slučaj
 <br>
 - Poslovne primjene prednjače
 <br>
-<br>
+- Perspektivno istraživačko polje u politologiji, komunikologiji, ekonomici
 <br>
 
 .footnote[[*] [Dokumentarni film Social Dilemma](https://www.thesocialdilemma.com/)]
 
 ---
-
-### Twitter
 <br>
+### Twitter
 * Najpoznatiji mikroblogging servis
 <br>
 <br>
@@ -642,7 +641,7 @@ tSecret <- "rvC0kOcmLR2K3cVYCisoU98gjv5sQsSrm5sueppKxBn2v"
 app <- "izprobavanje"
 ```
 
-```{r echo = TRUE}
+```{r echo = TRUE, warning=FALSE}
 # paket
 library (rtweet) 
 # stvori token
@@ -679,7 +678,6 @@ head(tweets[,2:5], n = 10)
 ---
 
 ### Twitter 
-<br>
 
 ```{r echo = TRUE}
 # regex za tweet-ove
@@ -695,7 +693,7 @@ hashtag_word <- gsub("[[:punct:]ー]", "", hashtag_word)
 # tabulliraj
 hashtag_count <- table(hashtag_word) 
 # sortiraj
-top_20_freqs <- sort(hashtag_count, decreasing = TRUE)[1:20] 
+top_20_freqs <- sort(hashtag_count, decreasing = TRUE)[1:30] 
 # napravi stringove
 top_20_hashtags <- as.character(as.data.frame(top_20_freqs)[,1]) 
 ```
@@ -713,11 +711,12 @@ top_20_freqs
 
 ### Twitter 
 
-```{r echo = TRUE, fig.width=7, fig.height=4 }
+```{r echo = TRUE, fig.width=7, fig.height=3, warning=FALSE }
 # vizualizacija 
 library(wordcloud) # paket
+pal = brewer.pal(9,"BuGn") #estetika
 wordcloud(top_20_hashtags, top_20_freqs, scale=c(3.5,1.5), # oblak riječi
-          random.order=FALSE, rot.per=.25)
+          random.order=FALSE, rot.per=.25,colors = rev(pal))
 ```
 
 
@@ -735,7 +734,7 @@ layout:true
 
 ### Primjer analize korištenja vlastitih mobilnih aplikacija 
 
-```{r}
+```{r warning=FALSE}
 # Učitaj pakete
 library(jsonlite)
 library(tidyverse)
@@ -782,7 +781,7 @@ najAplikacije
 
 ### Primjer analize korištenja vlastitih mobilnih aplikacija
 
-```{r warning= FALSE}
+```{r warning= FALSE, message=FALSE}
 android %>% 
   filter(month %in% '7') %>% # ponovi i za listopad/nije prikazano zbog prostora
   group_by(month, header) %>% 
@@ -821,7 +820,7 @@ android %>%
 
 ### Primjer analize korištenja vlastitih mobilnih aplikacija
 
-```{r  fig.width=7, fig.height=5}
+```{r  fig.width=7, fig.height=3}
 # prikaži grafički
 najAplikacije7 / najAplikacije10
 ```
@@ -857,7 +856,7 @@ layout:true
 
 ### Google mobilnost
 
-```{r ,fig.width=6, fig.height=3}
+```{r ,fig.width=6, fig.height=2}
 
 df %>% # podatci iz paketa 
   filter(iso3c == "HRV", date >= "2020-02-21") %>%
@@ -953,7 +952,6 @@ layout:true
 # PREGLED PREDAVANJA I KLJUČNI POJMOVI
 
 ---
-<br>
 *Pregled predavanja:*
 
 - klasični izvori podataka u društvenim znanostima
@@ -964,9 +962,8 @@ layout:true
 
 - DataScience alati za upravljanje suvremenim podatcima
 
-<br>
-<br>
-<br>
+
+
 *Ključni pojmovi:*
 
 - veliki podatci

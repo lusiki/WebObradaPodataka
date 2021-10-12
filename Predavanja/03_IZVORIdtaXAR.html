@@ -347,20 +347,6 @@ layout:true
 ```r
 # paket
 library(rvest) 
-```
-
-```
-## 
-## Attaching package: 'rvest'
-```
-
-```
-## The following object is masked from 'package:readr':
-## 
-##     guess_encoding
-```
-
-```r
 url &lt;- "https://www.dzs.hr/Hrv/censuses/census2011/results/htm/H01_06_01/H01_06_01.html" # www
 # preuzmi tablicu sa www
 citySize &lt;- url %&gt;%
@@ -427,7 +413,7 @@ gradovi &lt;- ggplot(data = cSize[1:10,],
 
 
 ```r
-# pregled grafikona
+# grafički prikaz
 gradovi
 ```
 
@@ -509,7 +495,7 @@ google_pretraga &lt;- ggplot(data = time_trend,
 
 
 ```r
-# prikaži 
+# grafički prikaz
 google_pretraga
 ```
 
@@ -567,20 +553,6 @@ plot(gtrendsR::gtrends(keyword = c("zavjera", "cjepljenje", "prosvjedi","mjere")
 # učitaj pakete
 library(tidycovid19)
 library(zoo)
-```
-
-```
-## 
-## Attaching package: 'zoo'
-```
-
-```
-## The following objects are masked from 'package:base':
-## 
-##     as.Date, as.Date.numeric
-```
-
-```r
 # preuzmi podatke
 df &lt;- download_merged_data(cached = TRUE, silent = TRUE)
 # uredi podatke i napravi grafikon
@@ -607,7 +579,7 @@ covid &lt;- df %&gt;%
 
 
 ```r
-# Prikaži podatke
+# grafički prikaz
 covid
 ```
 
@@ -648,25 +620,24 @@ layout:true
 .footnote[[*] [Kolegij!](https://lusiki.github.io/Learning-Social-Media-Analytics/])
 
 ---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+#### Najvažniji trendovi
 
-### Najvažniji trendovi
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
 &lt;br&gt;
 - API-kalipsa i *Cambridge Analytica* slučaj
 &lt;br&gt;
 - Poslovne primjene prednjače
 &lt;br&gt;
-&lt;br&gt;
+- Perspektivno istraživačko polje u politologiji, komunikologiji, ekonomici
 &lt;br&gt;
 
 .footnote[[*] [Dokumentarni film Social Dilemma](https://www.thesocialdilemma.com/)]
 
 ---
-
-### Twitter
 &lt;br&gt;
+### Twitter
 * Najpoznatiji mikroblogging servis
 &lt;br&gt;
 &lt;br&gt;
@@ -698,20 +669,6 @@ layout:true
 ```r
 # paket
 library (rtweet) 
-```
-
-```
-## 
-## Attaching package: 'rtweet'
-```
-
-```
-## The following object is masked from 'package:purrr':
-## 
-##     flatten
-```
-
-```r
 # stvori token
 twitter_token &lt;- create_token(
   app = app,
@@ -765,7 +722,6 @@ head(tweets[,2:5], n = 10)
 ---
 
 ### Twitter 
-&lt;br&gt;
 
 
 ```r
@@ -782,7 +738,7 @@ hashtag_word &lt;- gsub("[[:punct:]ー]", "", hashtag_word)
 # tabulliraj
 hashtag_count &lt;- table(hashtag_word) 
 # sortiraj
-top_20_freqs &lt;- sort(hashtag_count, decreasing = TRUE)[1:20] 
+top_20_freqs &lt;- sort(hashtag_count, decreasing = TRUE)[1:30] 
 # napravi stringove
 top_20_hashtags &lt;- as.character(as.data.frame(top_20_freqs)[,1]) 
 ```
@@ -819,15 +775,9 @@ top_20_freqs
 ```r
 # vizualizacija 
 library(wordcloud) # paket
-```
-
-```
-## Loading required package: RColorBrewer
-```
-
-```r
+pal = brewer.pal(9,"BuGn") #estetika
 wordcloud(top_20_hashtags, top_20_freqs, scale=c(3.5,1.5), # oblak riječi
-          random.order=FALSE, rot.per=.25)
+          random.order=FALSE, rot.per=.25,colors = rev(pal))
 ```
 
 &lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-22-1.png" style="display: block; margin: auto;" /&gt;
@@ -851,26 +801,6 @@ layout:true
 ```r
 # Učitaj pakete
 library(jsonlite)
-```
-
-```
-## 
-## Attaching package: 'jsonlite'
-```
-
-```
-## The following object is masked from 'package:rtweet':
-## 
-##     flatten
-```
-
-```
-## The following object is masked from 'package:purrr':
-## 
-##     flatten
-```
-
-```r
 library(tidyverse)
 library(patchwork)
 # Učitaj podatke
@@ -948,10 +878,6 @@ android %&gt;%
   labs(title = "Najkorištenije aplikacije u srpnju",
        subtitle = "Korištenje vlastitog Android mobilnog uredaja",
        caption = "Podatci:Google Takeout") -&gt; najAplikacije7
-```
-
-```
-## `summarise()` has grouped output by 'month'. You can override using the `.groups` argument.
 ```
 
 
@@ -1113,8 +1039,7 @@ layout:true
 - DataScience alati za upravljanje suvremenim podatcima
 
 &lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
+
 *Ključni pojmovi:*
 
 - veliki podatci
