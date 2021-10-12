@@ -4,10 +4,10 @@
     <title>OBRADA PODATAKA</title>
     <meta charset="utf-8" />
     <meta name="author" content="Luka Sikic, PhD" />
-    <script src="libs/header-attrs-2.10/header-attrs.js"></script>
-    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
-    <link href="libs/remark-css-0.0.1/metropolis.css" rel="stylesheet" />
-    <link href="libs/remark-css-0.0.1/metropolis-fonts.css" rel="stylesheet" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis-fonts.css" rel="stylesheet" />
   </head>
   <body>
     <textarea id="source">
@@ -19,6 +19,8 @@ class: center, middle, inverse, title-slide
 ### Fakultet hrvatskih studija | <a href="https://lusiki.github.io/WebObradaPodataka/index.html">OP</a>
 
 ---
+
+
 
 
 
@@ -53,18 +55,18 @@ class: center, middle, inverse, title-slide
 
 ##### Obvezna
 
-1. Blazquez-Soriano, A.,Domenech, J., 2017. Big Data sources and methods for social and economic analyses. [članak na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/BDSources.pdf) 
+1. Blazquez-Soriano, A.and  Domenech, J., (2017). Big Data sources and methods for social and economic analyses. [članak na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/BDSources.pdf) 
 
-2. Shu-Heng, C. (Ed.), 2018. Big Data in Computational Social Science and Humanities. [poglavlje knjige na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/Shu-Heng%20Chen%20-%20Big%20Data%20in%20Computational%20Social%20Science%20and%20Humanities-Springer.pdf)
+2. Shu-Heng, C. (Ed.), (2018). Big Data in Computational Social Science and Humanities. [poglavlje knjige na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/Shu-Heng%20Chen%20-%20Big%20Data%20in%20Computational%20Social%20Science%20and%20Humanities-Springer.pdf)
 
 
 ##### Dodatna
 
-3. Mcfarland, D, Lewis, K. and Goldberg, A., 2016. Sociology in the Era of Big Data: The Ascent of Forensic Social Science. [članak na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/Sociology%20in%20the%20Era%20of%20Big%20Data.pdf)
+3. Mcfarland, D, Lewis, K. and Goldberg, A., (2016). Sociology in the Era of Big Data: The Ascent of Forensic Social Science. [članak na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/Sociology%20in%20the%20Era%20of%20Big%20Data.pdf)
 
-4. Maštruko, N., 2020. Kristalna kugla jedinica i nula. [diplomski rad na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/Msc_mastruko_Kristalna%20kugla.pdf)
+4. Maštruko, N., (2020). Kristalna kugla jedinica i nula. [diplomski rad na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/Msc_mastruko_Kristalna%20kugla.pdf)
  
-5. Novi statistički kurikul, 2021. [blog post na poveznici](http://croecon.contentio.biz/post/2021-03-16-nova-statistika/)
+5. Novi statistički kurikul, (2021). [blog post na poveznici](http://croecon.contentio.biz/post/2021-03-16-nova-statistika/)
 
 
 ---
@@ -183,6 +185,62 @@ layout: true
 * Strojno preuzimanje podataka
 ]
 
+---
+
+### Primjer korištenja strukturirane baze podataka ([gapminder](https://www.gapminder.org/))
+
+
+
+```r
+# učitaj paket
+library(gapminder)
+# pregledaj podatke
+head(gapminder,8)
+```
+
+```
+## # A tibble: 8 x 6
+##   country     continent  year lifeExp      pop gdpPercap
+##   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
+## 1 Afghanistan Asia       1952    28.8  8425333      779.
+## 2 Afghanistan Asia       1957    30.3  9240934      821.
+## 3 Afghanistan Asia       1962    32.0 10267083      853.
+## 4 Afghanistan Asia       1967    34.0 11537966      836.
+## 5 Afghanistan Asia       1972    36.1 13079460      740.
+## 6 Afghanistan Asia       1977    38.4 14880372      786.
+## 7 Afghanistan Asia       1982    39.9 12881816      978.
+## 8 Afghanistan Asia       1987    40.8 13867957      852.
+```
+
+---
+
+
+### Primjer korištenja strukturirane baze podataka ([gapminder](https://www.gapminder.org/))
+
+
+```r
+# učitaj pakete
+library(gganimate)
+library(gifski)
+library(ggplot2)
+# Izradi animiranu vizualizaciju
+anim &lt;- ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, colour = country)) +
+  geom_point(alpha = 0.7, show.legend = FALSE) +
+  scale_colour_manual(values = country_colors) +
+  scale_size(range = c(2, 12)) +
+  scale_x_log10() +
+  facet_wrap(~continent) +
+  # neki detalji iz paketa gganimate
+  labs(title = 'Godina: {frame_time}', x = 'GDP per capita', y = 'Očekivana životna dob') +
+  transition_time(year) +
+  ease_aes('linear')
+```
+
+---
+
+### Primjer korištenja strukturirane baze podataka ([gapminder](https://www.gapminder.org/))
+
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/ggamin2-1.gif" style="display: block; margin: auto;" /&gt;
 
 ---
 class: inverse, middle
@@ -289,6 +347,20 @@ layout:true
 ```r
 # paket
 library(rvest) 
+```
+
+```
+## 
+## Attaching package: 'rvest'
+```
+
+```
+## The following object is masked from 'package:readr':
+## 
+##     guess_encoding
+```
+
+```r
 url &lt;- "https://www.dzs.hr/Hrv/censuses/census2011/results/htm/H01_06_01/H01_06_01.html" # www
 # preuzmi tablicu sa www
 citySize &lt;- url %&gt;%
@@ -316,19 +388,19 @@ head(cSize, 10)
 ```
 
 ```
-#&gt; # A tibble: 10 x 2
-#&gt;    Grad           Stanovnici
-#&gt;    &lt;chr&gt;               &lt;dbl&gt;
-#&gt;  1 ZAGREB              790. 
-#&gt;  2 SPLIT               178. 
-#&gt;  3 RIJEKA              129. 
-#&gt;  4 OSIJEK              108. 
-#&gt;  5 ZADAR                75.1
-#&gt;  6 VELIKA GORICA        63.5
-#&gt;  7 SLAVONSKI BROD       59.1
-#&gt;  8 PULA - POLA          57.5
-#&gt;  9 KARLOVAC             55.7
-#&gt; 10 SISAK                47.8
+## # A tibble: 10 x 2
+##    Grad           Stanovnici
+##    &lt;chr&gt;               &lt;dbl&gt;
+##  1 ZAGREB              790. 
+##  2 SPLIT               178. 
+##  3 RIJEKA              129. 
+##  4 OSIJEK              108. 
+##  5 ZADAR                75.1
+##  6 VELIKA GORICA        63.5
+##  7 SLAVONSKI BROD       59.1
+##  8 PULA - POLA          57.5
+##  9 KARLOVAC             55.7
+## 10 SISAK                47.8
 ```
 
 ---
@@ -359,7 +431,7 @@ gradovi &lt;- ggplot(data = cSize[1:10,],
 gradovi
 ```
 
-&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-5-1.svg" style="display: block; margin: auto;" /&gt;
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -399,14 +471,14 @@ tail(sample_n(time_trend,7),7)
 ```
 
 ```
-#&gt;         date hits    keyword geo                  time gprop category
-#&gt; 1 2018-08-19    0 cjepljenje  HR 2018-01-01 2021-10-11   web        0
-#&gt; 2 2018-05-20    0    zavjera  HR 2018-01-01 2021-10-11   web        0
-#&gt; 3 2018-06-03    0  prosvjedi  HR 2018-01-01 2021-10-11   web        0
-#&gt; 4 2018-11-18    0  prosvjedi  HR 2018-01-01 2021-10-11   web        0
-#&gt; 5 2019-03-24    0 cjepljenje  HR 2018-01-01 2021-10-11   web        0
-#&gt; 6 2021-05-30    5  prosvjedi  HR 2018-01-01 2021-10-11   web        0
-#&gt; 7 2018-02-04    0    zavjera  HR 2018-01-01 2021-10-11   web        0
+##         date hits    keyword geo                  time gprop category
+## 1 2018-01-28    0 cjepljenje  HR 2018-01-01 2021-10-12   web        0
+## 2 2021-03-28   13  prosvjedi  HR 2018-01-01 2021-10-12   web        0
+## 3 2019-04-07    7    zavjera  HR 2018-01-01 2021-10-12   web        0
+## 4 2018-03-18    7 cjepljenje  HR 2018-01-01 2021-10-12   web        0
+## 5 2018-12-16    0 cjepljenje  HR 2018-01-01 2021-10-12   web        0
+## 6 2020-01-26   12  prosvjedi  HR 2018-01-01 2021-10-12   web        0
+## 7 2019-08-25    0  prosvjedi  HR 2018-01-01 2021-10-12   web        0
 ```
 
 ---
@@ -441,7 +513,7 @@ google_pretraga &lt;- ggplot(data = time_trend,
 google_pretraga
 ```
 
-&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-9-1.svg" style="display: block; margin: auto;" /&gt;
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -455,7 +527,7 @@ plot(gtrendsR::gtrends(keyword = c("zavjera", "cjepljenje", "prosvjedi","mjere")
                        time = time))
 ```
 
-&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-10-1.svg" style="display: block; margin: auto;" /&gt;
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -495,6 +567,20 @@ plot(gtrendsR::gtrends(keyword = c("zavjera", "cjepljenje", "prosvjedi","mjere")
 # učitaj pakete
 library(tidycovid19)
 library(zoo)
+```
+
+```
+## 
+## Attaching package: 'zoo'
+```
+
+```
+## The following objects are masked from 'package:base':
+## 
+##     as.Date, as.Date.numeric
+```
+
+```r
 # preuzmi podatke
 df &lt;- download_merged_data(cached = TRUE, silent = TRUE)
 # uredi podatke i napravi grafikon
@@ -525,7 +611,7 @@ covid &lt;- df %&gt;%
 covid
 ```
 
-&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-12-1.svg" style="display: block; margin: auto;" /&gt;
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-14-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -612,6 +698,20 @@ layout:true
 ```r
 # paket
 library (rtweet) 
+```
+
+```
+## 
+## Attaching package: 'rtweet'
+```
+
+```
+## The following object is masked from 'package:purrr':
+## 
+##     flatten
+```
+
+```r
 # stvori token
 twitter_token &lt;- create_token(
   app = app,
@@ -647,19 +747,19 @@ head(tweets[,2:5], n = 10)
 ```
 
 ```
-#&gt; # A tibble: 10 x 4
-#&gt;    status_id           created_at          screen_name text                     
-#&gt;    &lt;chr&gt;               &lt;dttm&gt;              &lt;chr&gt;       &lt;chr&gt;                    
-#&gt;  1 1447638124625076225 2021-10-11 18:59:59 ICTracunalo "\U0001f449 Xiaomi Mijia~
-#&gt;  2 1447246113380184064 2021-10-10 17:02:16 ICTracunalo "\U0001f449 Kako snimiti~
-#&gt;  3 1447195594192261123 2021-10-10 13:41:31 ICTracunalo "\U0001f449 Deontay Wild~
-#&gt;  4 1447607725198880769 2021-10-11 16:59:11 ICTracunalo "\U0001f449 Ulovite jeft~
-#&gt;  5 1447186139815809024 2021-10-10 13:03:57 ICTracunalo "\U0001f449 Lopovi koris~
-#&gt;  6 1447457252521254918 2021-10-11 07:01:16 ICTracunalo "\U0001f449 OnePlus 9 RT~
-#&gt;  7 1447552228135522309 2021-10-11 13:18:40 ICTracunalo "\U0001f449 Hall of Game~
-#&gt;  8 1447276062866612230 2021-10-10 19:01:17 ICTracunalo "\U0001f449 Redmi K50 Pr~
-#&gt;  9 1447427546228854788 2021-10-11 05:03:13 ICTracunalo "\U0001f449 Sony SRS-NS7~
-#&gt; 10 1447155718969298944 2021-10-10 11:03:04 ICTracunalo "\U0001f449 UŽIVO Španjo~
+## # A tibble: 10 x 4
+##    status_id           created_at          screen_name     text                 
+##    &lt;chr&gt;               &lt;dttm&gt;              &lt;chr&gt;           &lt;chr&gt;                
+##  1 1447846295318712320 2021-10-12 08:47:11 lokalnahrvatska #Zabok : Program Dan~
+##  2 1447846289996124160 2021-10-12 08:47:09 lokalnahrvatska #Zagrebačkažupanija ~
+##  3 1447845025124175877 2021-10-12 08:42:08 lokalnahrvatska #Trogir : Gradsko vi~
+##  4 1447524183924215813 2021-10-11 11:27:13 lokalnahrvatska #Pula : Mjesec hrvat~
+##  5 1447570712298930178 2021-10-11 14:32:07 lokalnahrvatska #Split : Gradonačeln~
+##  6 1447569449826070538 2021-10-11 14:27:06 lokalnahrvatska #Pula : »Pred Pulom ~
+##  7 1447841247243251712 2021-10-12 08:27:07 lokalnahrvatska #Požega : Raspored o~
+##  8 1447510311221841921 2021-10-11 10:32:06 lokalnahrvatska #Sinj : PRIOPĆENJE S~
+##  9 1447831211162750976 2021-10-12 07:47:14 lokalnahrvatska #Zabok : VENOM 2    ~
+## 10 1447831206570209280 2021-10-12 07:47:13 lokalnahrvatska #Dubrovačkoneretvans~
 ```
 
 ---
@@ -698,17 +798,17 @@ top_20_freqs
 ```
 
 ```
-#&gt; hashtag_word
-#&gt;          hrvatska          croatian           vijesti           croatia 
-#&gt;               174                65                63                54 
-#&gt;          business         marketing          racunalo        smartphone 
-#&gt;                24                24                24                24 
-#&gt;        technology           vatreni           nogomet             golhr 
-#&gt;                24                17                11                10 
-#&gt;          slovačka croatiafulloflife            crosvk          slovakia 
-#&gt;                 9                 8                 6                 6 
-#&gt;      dinamizagreb             lovas       budiponosan           covid19 
-#&gt;                 5                 5                 4                 4
+## hashtag_word
+##          hrvatska          croatian           vijesti           croatia 
+##               186                71                70                49 
+##           vatreni          business         marketing          racunalo 
+##                18                17                17                17 
+##        smartphone        technology croatiafulloflife           nogomet 
+##                17                17                11                11 
+##          slovakia             golhr            crosvk          slovačka 
+##                11                10                 9                 9 
+##               wcq             zabok      dinamizagreb            požega 
+##                 6                 6                 5                 5
 ```
 
 ---
@@ -719,11 +819,18 @@ top_20_freqs
 ```r
 # vizualizacija 
 library(wordcloud) # paket
+```
+
+```
+## Loading required package: RColorBrewer
+```
+
+```r
 wordcloud(top_20_hashtags, top_20_freqs, scale=c(3.5,1.5), # oblak riječi
           random.order=FALSE, rot.per=.25)
 ```
 
-&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-20-1.svg" style="display: block; margin: auto;" /&gt;
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-22-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -744,6 +851,26 @@ layout:true
 ```r
 # Učitaj pakete
 library(jsonlite)
+```
+
+```
+## 
+## Attaching package: 'jsonlite'
+```
+
+```
+## The following object is masked from 'package:rtweet':
+## 
+##     flatten
+```
+
+```
+## The following object is masked from 'package:purrr':
+## 
+##     flatten
+```
+
+```r
 library(tidyverse)
 library(patchwork)
 # Učitaj podatke
@@ -753,13 +880,13 @@ glimpse(android)
 ```
 
 ```
-#&gt; Rows: 7,603
-#&gt; Columns: 5
-#&gt; $ header   &lt;chr&gt; "Novine Hrvatska", "Slack", "OnePlus Launcher", "Google", "Go~
-#&gt; $ title    &lt;chr&gt; "Used Novine Hrvatska", "Used Slack", "Used OnePlus Launcher"~
-#&gt; $ titleUrl &lt;chr&gt; "https://play.google.com/store/apps/details?id=org.enovine.cr~
-#&gt; $ time     &lt;chr&gt; "2021-10-06T17:25:56.919Z", "2021-10-06T17:25:29.410Z", "2021~
-#&gt; $ products &lt;list&gt; "Android", "Android", "Android", "Android", "Android", "Andr~
+## Rows: 7,603
+## Columns: 5
+## $ header   &lt;chr&gt; "Novine Hrvatska", "Slack", "OnePlus Launcher", "Google", "Go~
+## $ title    &lt;chr&gt; "Used Novine Hrvatska", "Used Slack", "Used OnePlus Launcher"~
+## $ titleUrl &lt;chr&gt; "https://play.google.com/store/apps/details?id=org.enovine.cr~
+## $ time     &lt;chr&gt; "2021-10-06T17:25:56.919Z", "2021-10-06T17:25:29.410Z", "2021~
+## $ products &lt;list&gt; "Android", "Android", "Android", "Android", "Android", "Andr~
 ```
 
 ```r
@@ -799,7 +926,7 @@ najAplikacije &lt;- android %&gt;%
 najAplikacije
 ```
 
-&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-23-1.svg" style="display: block; margin: auto;" /&gt;
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-25-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -823,7 +950,14 @@ android %&gt;%
        caption = "Podatci:Google Takeout") -&gt; najAplikacije7
 ```
 
+```
+## `summarise()` has grouped output by 'month'. You can override using the `.groups` argument.
+```
 
+
+```
+## `summarise()` has grouped output by 'month'. You can override using the `.groups` argument.
+```
 
 ---
 
@@ -835,7 +969,7 @@ android %&gt;%
 najAplikacije7 / najAplikacije10
 ```
 
-&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-26-1.svg" style="display: block; margin: auto;" /&gt;
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-28-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -899,7 +1033,7 @@ mobilnost &lt;- ggplot(dta, aes(x = date, y = value, group = Mjere, color = Mjer
 mobilnost
 ```
 
-&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-28-1.svg" style="display: block; margin: auto;" /&gt;
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-30-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---

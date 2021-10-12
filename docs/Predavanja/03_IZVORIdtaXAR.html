@@ -16,7 +16,7 @@ class: center, middle, inverse, title-slide
 # OBRADA PODATAKA
 ## Predavanje 3: Suvremeni izvori podataka u društvenim istraživanjima
 ### Luka Sikic, PhD
-### Fakultet hrvatskih studija | <a href="https://github.com/BrbanMiro/Obrada-podataka">OP</a>
+### Fakultet hrvatskih studija | <a href="https://lusiki.github.io/WebObradaPodataka/index.html">OP</a>
 
 ---
 
@@ -25,7 +25,49 @@ class: center, middle, inverse, title-slide
 
 
 
+# UVODNO
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+- Nastupno predavanje za izbor u znanstveno-nastavno zvanje docenta
+&lt;br&gt;
+&lt;br&gt;
+- Kolegij **Obrada podataka** (30 sati/2 ECTS)
+&lt;br&gt;
+&lt;br&gt;
+- Obvezni kolegij I. godine dvopredmetnog diplomskog studija sociologije
+&lt;br&gt;
+&lt;br&gt;
+- 15 upisanih studenata sa različitih smjerova i obrazovnom pozadinom
+&lt;br&gt;
+&lt;br&gt;
+- Stranica kolegija dostupna na [poveznici](https://lusiki.github.io/WebObradaPodataka/index.html)
+&lt;br&gt;
+&lt;br&gt;
+- *OpenSource* repozitorij na [GitHub](https://github.com/lusiki/WebObradaPodataka)-u 
+&lt;br&gt;
 
+---
+
+# Literatura 
+
+##### Obvezna
+
+1. Blazquez-Soriano, A.,Domenech, J., 2017. Big Data sources and methods for social and economic analyses. [članak na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/BDSources.pdf) 
+
+2. Shu-Heng, C. (Ed.), 2018. Big Data in Computational Social Science and Humanities. [poglavlje knjige na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/Shu-Heng%20Chen%20-%20Big%20Data%20in%20Computational%20Social%20Science%20and%20Humanities-Springer.pdf)
+
+
+##### Dodatna
+
+3. Mcfarland, D, Lewis, K. and Goldberg, A., 2016. Sociology in the Era of Big Data: The Ascent of Forensic Social Science. [članak na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/Sociology%20in%20the%20Era%20of%20Big%20Data.pdf)
+
+4. Maštruko, N., 2020. Kristalna kugla jedinica i nula. [diplomski rad na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/Msc_mastruko_Kristalna%20kugla.pdf)
+ 
+5. Novi statistički kurikul, 2021. [blog post na poveznici](http://croecon.contentio.biz/post/2021-03-16-nova-statistika/)
+
+
+---
 
 # PREGLED PREDAVANJA
 
@@ -33,13 +75,29 @@ class: center, middle, inverse, title-slide
 &lt;br&gt;
 &lt;br&gt;
 
-- Klasični izvori podataka 
-- Moderni izvori podataka (BigData)
+.pull-left[
+
+#### **Klasični izvori podataka**
+
+- Eksperiment 
+- Ispitivanje 
+- Intervju
+- Senzori  
+- Strukturirane baze podataka
+
+]
+
+.pull-right[
+
+#### **Moderni izvori podataka (BigData)**
+
 - Web 
 - Društvene mreže 
 - Aplikacije
 - Senzori  
 - Upravljanje modernim podatcima
+
+]
 
 
 .footnote[[*]Strojni dohvat (suvremenih) izvora podataka!]
@@ -75,30 +133,35 @@ layout: true
 &lt;br&gt;
 &lt;br&gt;
 
+
+.pull-left[
+
 ### Eksperiment
 
 * Visok stupanj kontrole
 * Planirani dizajn
 * Longitudinalni i studije slučaja
 * Problem generalizacije rezultata
+]
 
----
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
-
+.pull-right[
 ### Ispitivanje
 
 * Ciljana populacija
 * Veći uzorak
-* Pogodno za analizu ponašanja,osjećaja,iskustava,stavova
+* Analiza ponašanja,osjećaja,iskustava
 * Problem reprezentativnosti uzorka 
 * Potreban prilagođeni dizajn
+]
+
 
 ---
 &lt;br&gt;
 &lt;br&gt;
 &lt;br&gt;
+
+.pull-left[
+
 ### Intervju
 
 * Profilirani uzorak
@@ -106,23 +169,25 @@ layout: true
 * Pogodno za dubinsku analizu
 * Ovisan o istraživaču
 * Poteškoće sa reproduciranjem rezultata
+]
 
----
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
-### Strukturirane baze podataka
+
+.pull-right[
+
+### Strukturirane baze 
 
 * Omogućuju kvanitativnu analizu
 * Makro i mezzo razina analize
-* Potrebno prilagoditi podatke prije modeliranja
+* Potrebno prilagoditi podatke 
 * Institucionalni i uređeni podatci
 * Strojno preuzimanje podataka
+]
+
 
 ---
 class: inverse, middle
 layout: false
-# Moderni izvori podataka (BigData)
+# Suvremeni izvori podataka (BigData)
 &lt;br&gt;
 &lt;br&gt;
 &lt;br&gt;
@@ -147,7 +212,7 @@ layout:true
 &lt;br&gt;
 &lt;br&gt;
 
-**Karakteristike**:
+* **Karakteristike**:
 
 1. Veliki
 2. Brzi
@@ -166,13 +231,13 @@ layout:true
 
 ### NOVA ISTRAŽIVAČKA PARADIGMA 
 
-* Analiza počinje od podataka (ne od teorije)
+* Analiza počinje od podataka (teorija je sekundarna)
 * Potrebne tehničke vještine
 * Složena i memorijski (RAM) zahtjevna analitika
 * Noviteti u prezentaciji i komunikaciji rezultata
 * Poslovne primjene prednjače
 * Primjena u društvenim istraživanjima je u povojima (*computational social science*)
-* Potrebno definirati novu arhitekturu (ekosistem)
+* Potrebno definirati novu istraživačku arhitekturu (ekosistem)
 
 .footnote[[*] [Khunova revolucija!?](https://journals.sagepub.com/doi/10.1177/2053951714528481)]
 
@@ -189,7 +254,7 @@ layout:true
 &lt;br&gt;
 &lt;br&gt;
 &lt;br&gt;
-**Izvrstan izvor podataka za:**
+**Izvor podataka za:**
 1. objašnjenje
 &lt;br&gt;
 &lt;br&gt;
@@ -206,13 +271,13 @@ layout:true
 &lt;br&gt;
 &lt;br&gt;
 &lt;br&gt;
-**Prikupljanje podataka**
+**Prikupljanje podataka:**
 &lt;br&gt;
 &lt;br&gt;
 1. [Web-Scraping](https://www.datacamp.com/community/tutorials/r-web-scraping-rvest) 
 &lt;br&gt;
 &lt;br&gt;
-2. API
+2. API (*application programming interface*)
 
 ---
 
@@ -222,7 +287,8 @@ layout:true
 
 
 ```r
-library(rvest) # paket
+# paket
+library(rvest) 
 url &lt;- "https://www.dzs.hr/Hrv/censuses/census2011/results/htm/H01_06_01/H01_06_01.html" # www
 # preuzmi tablicu sa www
 citySize &lt;- url %&gt;%
@@ -272,7 +338,7 @@ head(cSize, 10)
 
 ```r
 # vizualizacija
-plot &lt;- ggplot(data = cSize[1:10,],
+gradovi &lt;- ggplot(data = cSize[1:10,],
                aes(x = Grad, y = Stanovnici)) +
                geom_bar(stat = "identity") +
                xlab('Grad') + 
@@ -290,7 +356,7 @@ plot &lt;- ggplot(data = cSize[1:10,],
 
 ```r
 # pregled grafikona
-plot
+gradovi
 ```
 
 &lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-5-1.svg" style="display: block; margin: auto;" /&gt;
@@ -305,16 +371,15 @@ plot
 # paketi
 library (gtrendsR) 
 library(ggplot2)
-
 #kljucne rijeci
-keywords &lt;- c("virus", "korupcija", "ekonomija")
+keywords &lt;- c("zavjera", "cjepljenje", "prosvjedi")
 #GEO
 country &lt;- c('HR')
 #vremenski raspon
-time &lt;- ("2010-01-01 2021-10-04")
+time &lt;- paste("2018-01-01", Sys.Date())
 #kanali
 channel &lt;- 'web'
-# funkcija
+# funkcija iz paketa
 trends &lt;- gtrends(keywords, gprop = channel,geo = country, time = time )
 #samo 'interes kroz vrijeme'
 time_trend &lt;- trends$interest_over_time
@@ -327,17 +392,21 @@ time_trend &lt;- trends$interest_over_time
  
 
 ```r
+# paket
+library(tidyverse)
 # pregledaj podatke
-head(time_trend,5)
+tail(sample_n(time_trend,7),7)
 ```
 
 ```
-#&gt;         date hits keyword geo                  time gprop category
-#&gt; 1 2010-01-01    5   virus  HR 2010-01-01 2021-10-04   web        0
-#&gt; 2 2010-02-01    5   virus  HR 2010-01-01 2021-10-04   web        0
-#&gt; 3 2010-03-01    5   virus  HR 2010-01-01 2021-10-04   web        0
-#&gt; 4 2010-04-01    4   virus  HR 2010-01-01 2021-10-04   web        0
-#&gt; 5 2010-05-01    3   virus  HR 2010-01-01 2021-10-04   web        0
+#&gt;         date hits    keyword geo                  time gprop category
+#&gt; 1 2018-08-19    0 cjepljenje  HR 2018-01-01 2021-10-11   web        0
+#&gt; 2 2018-05-20    0    zavjera  HR 2018-01-01 2021-10-11   web        0
+#&gt; 3 2018-06-03    0  prosvjedi  HR 2018-01-01 2021-10-11   web        0
+#&gt; 4 2018-11-18    0  prosvjedi  HR 2018-01-01 2021-10-11   web        0
+#&gt; 5 2019-03-24    0 cjepljenje  HR 2018-01-01 2021-10-11   web        0
+#&gt; 6 2021-05-30    5  prosvjedi  HR 2018-01-01 2021-10-11   web        0
+#&gt; 7 2018-02-04    0    zavjera  HR 2018-01-01 2021-10-11   web        0
 ```
 
 ---
@@ -347,8 +416,10 @@ head(time_trend,5)
  
 
 ```r
-# Vizualizacija
-plot &lt;- ggplot(data = time_trend,
+# paket
+library(lubridate)
+# napravi grafikon 
+google_pretraga &lt;- ggplot(data = time_trend,
                aes(x = date, y = hits, group = keyword, col = keyword)) +
                geom_line() +
                xlab('Vrijeme') + 
@@ -366,8 +437,8 @@ plot &lt;- ggplot(data = time_trend,
 
 
 ```r
-# prikaži
-plot
+# prikaži 
+google_pretraga
 ```
 
 &lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-9-1.svg" style="display: block; margin: auto;" /&gt;
@@ -378,17 +449,17 @@ plot
 
 
 ```r
-# sve u jednom redu koda :-)
-plot(gtrendsR::gtrends(keyword = c("virus","korupcija","ekonomija"),
+# sve u jednom redu koda + "mjere"   :-) 
+plot(gtrendsR::gtrends(keyword = c("zavjera", "cjepljenje", "prosvjedi","mjere"),
                        geo = "HR",
-                       time = "2010-01-01 2021-10-04"))
+                       time = time))
 ```
 
 &lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-10-1.svg" style="display: block; margin: auto;" /&gt;
 
 ---
 
-### Istraživanja na osnovi google trendova
+### Primjeri istraživanja na osnovi google trendova:
 
 1. [Analiza prodaje kuća](https://rpubs.com/tonytusharjr/newhomes)
 &lt;br&gt;
@@ -413,6 +484,50 @@ plot(gtrendsR::gtrends(keyword = c("virus","korupcija","ekonomija"),
 &lt;br&gt;
 8. [Političkih stavova](https://journals.sagepub.com/doi/full/10.1177/2378023118760414)
 
+
+
+---
+
+### API - COVID19 podatci
+
+
+```r
+# učitaj pakete
+library(tidycovid19)
+library(zoo)
+# preuzmi podatke
+df &lt;- download_merged_data(cached = TRUE, silent = TRUE)
+# uredi podatke i napravi grafikon
+covid &lt;- df %&gt;%
+  filter(iso3c == "HRV") %&gt;%
+  mutate(
+    new_cases = confirmed - lag(confirmed),
+    ave_new_cases = rollmean(new_cases, 7, na.pad=TRUE, align="right")) %&gt;%
+  filter(!is.na(new_cases), !is.na(ave_new_cases)) %&gt;%
+  ggplot(aes(x = date)) +
+  geom_bar(aes(y = new_cases), stat = "identity", fill = "lightblue") +
+  geom_line(aes(y = ave_new_cases), color ="red") +
+  theme_minimal() +
+  xlab("Novi slučajevi") + 
+  ylab("Datum") +
+  ggtitle("COVID19 incidencija u Hrvatskoj")
+```
+
+
+---
+
+### API - COVID19 podatci
+
+
+
+```r
+# Prikaži podatke
+covid
+```
+
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-12-1.svg" style="display: block; margin: auto;" /&gt;
+
+
 ---
 class: inverse, middle
 layout:false
@@ -425,7 +540,7 @@ layout:true
 
 ---
 &lt;br&gt;
-**Popularne društvene mreže**
+**Popularne društvene mreže:**
 &lt;br&gt;
 &lt;br&gt;
 1. [Facebook](https://www.kaggle.com/chrisbow/an-introduction-to-facebook-ad-analysis-using-r) [(Vidi takodjer!)](https://www.residualthoughts.com/2018/02/12/analyzing-facebook-messages-in-r/)
@@ -436,24 +551,36 @@ layout:true
 &lt;br&gt;
 4. [Instagram](https://github.com/JonasSchroeder/InstaCrawlR)
 &lt;br&gt;
-5. Google+
+5. TikTok
 &lt;br&gt;
-6. Tumblr
+6. Google+
 &lt;br&gt;
-7. Flickr
-
+7. Tumblr
+&lt;br&gt;
+8. Flickr
 
 .footnote[[*] [Kolegij!](https://lusiki.github.io/Learning-Social-Media-Analytics/])
 
 ---
 
-### API-kalipsa
+### Najvažniji trendovi
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+- API-kalipsa i *Cambridge Analytica* slučaj
+&lt;br&gt;
+- Poslovne primjene prednjače
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 
+.footnote[[*] [Dokumentarni film Social Dilemma](https://www.thesocialdilemma.com/)]
 
 ---
-&lt;br&gt;
-### Twitter
 
+### Twitter
+&lt;br&gt;
 * Najpoznatiji mikroblogging servis
 &lt;br&gt;
 &lt;br&gt;
@@ -483,7 +610,8 @@ layout:true
 
 
 ```r
-library (rtweet) # paket
+# paket
+library (rtweet) 
 # stvori token
 twitter_token &lt;- create_token(
   app = app,
@@ -506,7 +634,6 @@ post_tweet("Look, i'm tweeting from R!")
 # prikupi rezultate
 tweets &lt;- search_tweets(q = c("#Hrvatska"),
                                n = 200)
-# geolokacija                               
 ```
 
 ---
@@ -521,36 +648,43 @@ head(tweets[,2:5], n = 10)
 
 ```
 #&gt; # A tibble: 10 x 4
-#&gt;    status_id           created_at          screen_name     text                 
-#&gt;    &lt;chr&gt;               &lt;dttm&gt;              &lt;chr&gt;           &lt;chr&gt;                
-#&gt;  1 1445310816736223233 2021-10-05 08:52:05 lokalnahrvatska #Međimurskažupanija ~
-#&gt;  2 1445309577868845056 2021-10-05 08:47:10 lokalnahrvatska #Zagrebačkažupanija ~
-#&gt;  3 1445309574450454531 2021-10-05 08:47:09 lokalnahrvatska #Zagrebačkažupanija ~
-#&gt;  4 1444978628601827328 2021-10-04 10:52:06 lokalnahrvatska #UdrugagradovaRH : T~
-#&gt;  5 1445305782371819520 2021-10-05 08:32:05 lokalnahrvatska #Samobor : Svjetski ~
-#&gt;  6 1445302011294097408 2021-10-05 08:17:06 lokalnahrvatska #Kutina : Čestitka g~
-#&gt;  7 1445300751572553730 2021-10-05 08:12:06 lokalnahrvatska #Ivanec : U GRADSKOM~
-#&gt;  8 1445022689383571456 2021-10-04 13:47:11 lokalnahrvatska #Dubrovačkoneretvans~
-#&gt;  9 1445022684526649348 2021-10-04 13:47:09 lokalnahrvatska #Dubrovačkoneretvans~
-#&gt; 10 1444917041882963970 2021-10-04 06:47:22 lokalnahrvatska #Vrlika : OTVORENA K~
+#&gt;    status_id           created_at          screen_name text                     
+#&gt;    &lt;chr&gt;               &lt;dttm&gt;              &lt;chr&gt;       &lt;chr&gt;                    
+#&gt;  1 1447638124625076225 2021-10-11 18:59:59 ICTracunalo "\U0001f449 Xiaomi Mijia~
+#&gt;  2 1447246113380184064 2021-10-10 17:02:16 ICTracunalo "\U0001f449 Kako snimiti~
+#&gt;  3 1447195594192261123 2021-10-10 13:41:31 ICTracunalo "\U0001f449 Deontay Wild~
+#&gt;  4 1447607725198880769 2021-10-11 16:59:11 ICTracunalo "\U0001f449 Ulovite jeft~
+#&gt;  5 1447186139815809024 2021-10-10 13:03:57 ICTracunalo "\U0001f449 Lopovi koris~
+#&gt;  6 1447457252521254918 2021-10-11 07:01:16 ICTracunalo "\U0001f449 OnePlus 9 RT~
+#&gt;  7 1447552228135522309 2021-10-11 13:18:40 ICTracunalo "\U0001f449 Hall of Game~
+#&gt;  8 1447276062866612230 2021-10-10 19:01:17 ICTracunalo "\U0001f449 Redmi K50 Pr~
+#&gt;  9 1447427546228854788 2021-10-11 05:03:13 ICTracunalo "\U0001f449 Sony SRS-NS7~
+#&gt; 10 1447155718969298944 2021-10-10 11:03:04 ICTracunalo "\U0001f449 UŽIVO Španjo~
 ```
 
 ---
 
 ### Twitter 
- &lt;br&gt;
- &lt;br&gt;
+&lt;br&gt;
+
 
 ```r
-hashtag_pat &lt;- "#[a-zA-Z0-9_-ー\\.]+" # regex za tweet-ove
-hashtag &lt;- str_extract_all(tweets$text, hashtag_pat) # izvuci tweetove
+# regex za tweet-ove
+hashtag_pat &lt;- "#[a-zA-Z0-9_-ー\\.]+" 
+# izvuci tweetove
+hashtag &lt;- str_extract_all(tweets$text, hashtag_pat) 
 # uredi podatke
 hashtag_word &lt;- unlist(hashtag)
-hashtag_word &lt;- tolower(hashtag_word) # mala slova
-hashtag_word &lt;- gsub("[[:punct:]ー]", "", hashtag_word) # makni inerpunkciju
-hashtag_count &lt;- table(hashtag_word) # tabulliraj
-top_20_freqs &lt;- sort(hashtag_count, decreasing = TRUE)[1:20] # sortiraj
-top_20_hashtags &lt;- as.character(as.data.frame(top_20_freqs)[,1]) # napravi stringove
+# mala slova
+hashtag_word &lt;- tolower(hashtag_word) 
+# makni inerpunkciju
+hashtag_word &lt;- gsub("[[:punct:]ー]", "", hashtag_word) 
+# tabulliraj
+hashtag_count &lt;- table(hashtag_word) 
+# sortiraj
+top_20_freqs &lt;- sort(hashtag_count, decreasing = TRUE)[1:20] 
+# napravi stringove
+top_20_hashtags &lt;- as.character(as.data.frame(top_20_freqs)[,1]) 
 ```
 
 ---
@@ -565,14 +699,16 @@ top_20_freqs
 
 ```
 #&gt; hashtag_word
-#&gt;    hrvatska     vijesti    croatian     croatia      travel      jadran 
-#&gt;         200          81          78          65          16          14 
-#&gt;    business   dalmacija   marketing    racunalo  smartphone  technology 
-#&gt;          13          13          13          13          13          13 
-#&gt;   vijestihr photography      zagreb      kutina       split      sunset 
-#&gt;          12          10           9           8           8           8 
-#&gt;      autumn    colorful 
-#&gt;           7           7
+#&gt;          hrvatska          croatian           vijesti           croatia 
+#&gt;               174                65                63                54 
+#&gt;          business         marketing          racunalo        smartphone 
+#&gt;                24                24                24                24 
+#&gt;        technology           vatreni           nogomet             golhr 
+#&gt;                24                17                11                10 
+#&gt;          slovačka croatiafulloflife            crosvk          slovakia 
+#&gt;                 9                 8                 6                 6 
+#&gt;      dinamizagreb             lovas       budiponosan           covid19 
+#&gt;                 5                 5                 4                 4
 ```
 
 ---
@@ -587,7 +723,7 @@ wordcloud(top_20_hashtags, top_20_freqs, scale=c(3.5,1.5), # oblak riječi
           random.order=FALSE, rot.per=.25)
 ```
 
-&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-18-1.svg" style="display: block; margin: auto;" /&gt;
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-20-1.svg" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -599,6 +735,107 @@ layout:false
 ---
 layout:true
 # APLIKACIJE
+
+---
+
+### Primjer analize korištenja vlastitih mobilnih aplikacija 
+
+
+```r
+# Učitaj pakete
+library(jsonlite)
+library(tidyverse)
+library(patchwork)
+# Učitaj podatke
+android &lt;- jsonlite::fromJSON("../Dta/MyActivity.json")
+# pregledaj podatke
+glimpse(android)
+```
+
+```
+#&gt; Rows: 7,603
+#&gt; Columns: 5
+#&gt; $ header   &lt;chr&gt; "Novine Hrvatska", "Slack", "OnePlus Launcher", "Google", "Go~
+#&gt; $ title    &lt;chr&gt; "Used Novine Hrvatska", "Used Slack", "Used OnePlus Launcher"~
+#&gt; $ titleUrl &lt;chr&gt; "https://play.google.com/store/apps/details?id=org.enovine.cr~
+#&gt; $ time     &lt;chr&gt; "2021-10-06T17:25:56.919Z", "2021-10-06T17:25:29.410Z", "2021~
+#&gt; $ products &lt;list&gt; "Android", "Android", "Android", "Android", "Android", "Andr~
+```
+
+```r
+# prilagodi datum
+android %&gt;% 
+  mutate(date = lubridate::date(time), month =lubridate::month(time))-&gt;android
+```
+
+---
+
+### Primjer analize korištenja vlastitih mobilnih aplikacija&lt;br&gt;
+&lt;br&gt;
+
+```r
+# napravi grafikon
+najAplikacije &lt;- android %&gt;% 
+  count(header, sort = TRUE)  %&gt;% 
+  head(20) %&gt;% 
+  mutate(header = fct_reorder(header, n)) %&gt;% 
+  ggplot() + geom_col(aes(y = header, x = n)) +
+  theme_minimal() +
+  ylab("") +
+  xlab("") +
+  labs(title = "Najkorištenije aplikacije",
+       subtitle = "Korištenje vlastitog Android mobilnog uredaja",
+       caption = "Podatci:Google Takeout")
+```
+
+---
+
+### Analiza korištenja vlastitih mobilnih aplikacija
+
+
+
+```r
+# prikaži grafički 
+najAplikacije
+```
+
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-23-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+### Primjer analize korištenja vlastitih mobilnih aplikacija
+
+
+```r
+android %&gt;% 
+  filter(month %in% '7') %&gt;% # ponovi i za listopad/nije prikazano zbog prostora
+  group_by(month, header) %&gt;% 
+  summarise(n = n()) %&gt;% 
+  arrange(desc(n)) %&gt;% 
+  head(10) %&gt;% #View()
+  mutate(header = fct_reorder(header, n)) %&gt;% 
+  ggplot() + geom_col(aes(y = header, x = n)) +
+  theme_minimal() +
+  ylab("") +
+  xlab("") +
+  labs(title = "Najkorištenije aplikacije u srpnju",
+       subtitle = "Korištenje vlastitog Android mobilnog uredaja",
+       caption = "Podatci:Google Takeout") -&gt; najAplikacije7
+```
+
+
+
+---
+
+### Primjer analize korištenja vlastitih mobilnih aplikacija
+
+
+```r
+# prikaži grafički
+najAplikacije7 / najAplikacije10
+```
+
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-26-1.svg" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -612,7 +849,6 @@ layout:true
 # SENZORNI UREĐAJI
 ---
 
-**Prikupljanje podataka**
 &lt;br&gt;
 &lt;br&gt;
 &lt;br&gt;
@@ -626,6 +862,45 @@ layout:true
  3. Kartične transakcije (predviđanje bankrota, marketing, ponašanje potrošača)
 
 .footnote[[*] Pravno osjetljivi podatci!]
+
+
+---
+
+### Google mobilnost
+
+
+```r
+df %&gt;% # podatci iz paketa 
+  filter(iso3c == "HRV", date &gt;= "2020-02-21") %&gt;%
+  mutate(gov_interventions = (soc_dist + mov_rest)/
+           max(soc_dist + mov_rest, na.rm = TRUE),
+         lockdown = lockdown == 1) %&gt;%
+  select(date, lockdown, gov_interventions, starts_with("gcmr_")) %&gt;%
+  pivot_longer(cols = c(5:9), names_to = "Mjere", values_to = "value") %&gt;%
+  na.omit() -&gt; dta
+
+mobilnost &lt;- ggplot(dta, aes(x = date, y = value, group = Mjere, color = Mjere)) + 
+  theme_minimal() +
+  annotate("rect", xmin = min(dta$date[dta$lockdown]), xmax = max(dta$date), 
+           ymin = -Inf, ymax = Inf, 
+           fill = "lightblue", color = NA, alpha = 0.2) +
+  geom_line() +
+  xlab("Vrijednost") +
+  ylab("Datum")
+```
+
+---
+
+### Google mobilnost
+
+
+```r
+# prikaži grafički
+mobilnost
+```
+
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-28-1.svg" style="display: block; margin: auto;" /&gt;
+
 
 ---
 class: inverse, middle
@@ -689,20 +964,32 @@ layout:true
 
 ---
 layout:true
-# PREGLED PREDAVANJA
+# PREGLED PREDAVANJA I KLJUČNI POJMOVI
 
 ---
 &lt;br&gt;
+*Pregled predavanja:*
+
+- klasični izvori podataka u društvenim znanostima
+
+- BigData kao nova istraživačka paradigma
+
+- suvremeni izvori podataka: Web, društveni mediji, aplikacije, senzori
+
+- DataScience alati za upravljanje suvremenim podatcima
+
 &lt;br&gt;
 &lt;br&gt;
+&lt;br&gt;
+*Ključni pojmovi:*
 
-1. Klasični izvori podataka u društvenim znanostima
+- veliki podatci
 
-2. BigData kao nova istraživačka paradigma
+- računalne društvene znanosti
 
-3. Suvremeni izvori podataka: Web, SocMedia, App i dr.
+- podatkovne znanosti
 
-4. DataScience za upravljanje suvremenim podatcima
+- nova istraživačka paradigma*
 
 ---
 class: inverse, middle

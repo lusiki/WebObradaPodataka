@@ -6,7 +6,7 @@ title: " "
 <br>
 <br>
 
-
+**14/10/2021** - Nastupno predavanje na temu [Suvremeni izvori podataka u društvenim istraživanjima](https://raw.githack.com/lusiki/WebObradaPodataka/main/Predavanja/03_IZVORIdtaXAR.html#1)
 
 **16/03/2021** - CroEcon blog post [Novi statistički kurikul](http://croecon.contentio.biz/post/2021-03-16-nova-statistika/)
 
