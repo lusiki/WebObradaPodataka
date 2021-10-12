@@ -424,7 +424,15 @@ gradovi
 
 ---
 
-### API - Google trendovi
+### Analiza predsjedničkih izbora (na [poveznici](http://croecon.contentio.biz/post/analiza-zatupljenosti-o-predsjedni-kih-kandidatima-na-doma-im-portalima/))
+&lt;br&gt;
+&lt;br&gt;
+
+&lt;iframe src="http://croecon.contentio.biz/post/analiza-zatupljenosti-o-predsjedni-kih-kandidatima-na-doma-im-portalima/" width="100%" height="400px" data-external="1"&gt;&lt;/iframe&gt;
+
+---
+
+### Internet - Google trendovi
 
 
 ```r
@@ -447,7 +455,7 @@ time_trend &lt;- trends$interest_over_time
 
 ---
 
-### API - Google trendovi
+### Internet - Google trendovi
  &lt;br&gt;
  
 
@@ -471,7 +479,7 @@ tail(sample_n(time_trend,7),7)
 
 ---
 
-### API - Google trendovi
+### Internet - Google trendovi
  &lt;br&gt;
  
 
@@ -493,7 +501,7 @@ google_pretraga &lt;- ggplot(data = time_trend,
 
 ---
 
-### API - Google trendovi
+### Internet - Google trendovi
 
 
 ```r
@@ -501,11 +509,11 @@ google_pretraga &lt;- ggplot(data = time_trend,
 google_pretraga
 ```
 
-&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
-### API - Google trendovi
+### Internet - Google trendovi
 
 
 ```r
@@ -515,7 +523,7 @@ plot(gtrendsR::gtrends(keyword = c("zavjera", "cjepljenje", "prosvjedi","mjere")
                        time = time))
 ```
 
-&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -585,7 +593,7 @@ covid &lt;- df %&gt;%
 covid
 ```
 
-&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-14-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-15-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -11409,16 +11417,16 @@ head(tweets[,2:5], n = 10)
 ## # A tibble: 10 x 4
 ##    status_id           created_at          screen_name text                     
 ##    &lt;chr&gt;               &lt;dttm&gt;              &lt;chr&gt;       &lt;chr&gt;                    
-##  1 1447878927754698761 2021-10-12 10:56:51 ICTracunalo "\U0001f449 Tuya WiFi M5~
-##  2 1447819852564078601 2021-10-12 07:02:06 ICTracunalo "\U0001f449 https://t.co~
-##  3 1447552228135522309 2021-10-11 13:18:40 ICTracunalo "\U0001f449 Hall of Game~
-##  4 1447670076421910532 2021-10-11 21:06:57 ICTracunalo "\U0001f449 TicWatch Pro~
-##  5 1447607725198880769 2021-10-11 16:59:11 ICTracunalo "\U0001f449 Ulovite jeft~
-##  6 1447457252521254918 2021-10-11 07:01:16 ICTracunalo "\U0001f449 OnePlus 9 RT~
+##  1 1447937646660136977 2021-10-12 14:50:11 ICTracunalo "\U0001f449 Xiaomi Mijia~
+##  2 1447517489211056132 2021-10-11 11:00:37 ICTracunalo "\U0001f449 Zeblaze Stra~
+##  3 1447670076421910532 2021-10-11 21:06:57 ICTracunalo "\U0001f449 TicWatch Pro~
+##  4 1447487630787153922 2021-10-11 09:01:58 ICTracunalo "\U0001f449 HiSense E31 ~
+##  5 1447910520292577280 2021-10-12 13:02:23 ICTracunalo "\U0001f449 UŽIVO Azerba~
+##  6 1447849968727990277 2021-10-12 09:01:46 ICTracunalo "\U0001f449 Vivo Y20T sl~
 ##  7 1447789491482243073 2021-10-12 05:01:28 ICTracunalo "\U0001f449 ZTE Blade A7~
-##  8 1447487630787153922 2021-10-11 09:01:58 ICTracunalo "\U0001f449 HiSense E31 ~
-##  9 1447578350625636353 2021-10-11 15:02:28 ICTracunalo "\U0001f449 UŽIVO Hrvats~
-## 10 1447638124625076225 2021-10-11 18:59:59 ICTracunalo "\U0001f449 Xiaomi Mijia~
+##  8 1447552228135522309 2021-10-11 13:18:40 ICTracunalo "\U0001f449 Hall of Game~
+##  9 1447638124625076225 2021-10-11 18:59:59 ICTracunalo "\U0001f449 Xiaomi Mijia~
+## 10 1447578350625636353 2021-10-11 15:02:28 ICTracunalo "\U0001f449 UŽIVO Hrvats~
 ```
 
 ---
@@ -11458,21 +11466,21 @@ top_20_freqs
 ```
 ## hashtag_word
 ##          hrvatska          croatian           vijesti           croatia 
-##               200                82                81                44 
-##           vatreni          business         marketing           nogomet 
-##                20                15                15                15 
-##          racunalo        smartphone        technology             golhr 
-##                15                15                15                14 
-##          slovakia croatiafulloflife            crosvk          slovačka 
-##                11                 9                 9                 9 
-##            požega              pula               wcq             zabok 
-##                 6                 6                 6                 6 
-##      dinamizagreb           beproud       budiponosan        crostagram 
-##                 5                 4                 4                 4 
-##           dugirat       gospindolac      groundhopper     groundhopping 
-##                 4                 4                 4                 4 
-##              hvar           imotski 
-##                 4                 4
+##               200                77                77                47 
+##           vatreni           nogomet             golhr          business 
+##                24                20                19                16 
+##         marketing          racunalo        smartphone        technology 
+##                16                16                16                16 
+##          slovakia croatiafulloflife          slovačka            crosvk 
+##                11                10                 9                 8 
+##            požega              pula               wcq           beproud 
+##                 7                 6                 6                 5 
+##        crostagram      dinamizagreb           dugirat       gospindolac 
+##                 5                 5                 5                 5 
+##      groundhopper     groundhopping              hvar           imotski 
+##                 5                 5                 5                 5 
+##         nkimotski           nkorkan 
+##                 5                 5
 ```
 
 ---
@@ -11488,7 +11496,13 @@ wordcloud(top_20_hashtags, top_20_freqs, scale=c(3.5,1.5), # oblak riječi
           random.order=FALSE, rot.per=.25,colors = rev(pal))
 ```
 
-&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-24-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-25-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+### YouTube u Hrvatskoj (analiza na [poveznici](https://www.netokracija.com/analiza-hrvatske-youtube-scene-od-1400-kanala-samo-njih-6-ima-preko-milijun-pretplatnika-180868))
+&lt;br&gt;
+&lt;iframe src="https://www.netokracija.com/analiza-hrvatske-youtube-scene-od-1400-kanala-samo-njih-6-ima-preko-milijun-pretplatnika-180868" width="100%" height="400px" data-external="1"&gt;&lt;/iframe&gt;
 
 
 ---
@@ -11564,7 +11578,7 @@ najAplikacije &lt;- android %&gt;%
 najAplikacije
 ```
 
-&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-27-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-29-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -11594,7 +11608,7 @@ android %&gt;%
 
 #### Primjer analize korištenja vlastitih mobilnih aplikacija 
 
-&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-30-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-32-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -11658,7 +11672,7 @@ mobilnost &lt;- ggplot(dta, aes(x = date, y = value, group = Mjere, color = Mjer
 mobilnost
 ```
 
-&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-32-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="03_IZVORIdtaXAR_files/figure-html/unnamed-chunk-34-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -11726,7 +11740,7 @@ layout:true
 # PREGLED PREDAVANJA I KLJUČNI POJMOVI
 
 ---
-*Pregled predavanja:*
+**Pregled predavanja:**
 
 - klasični izvori podataka u društvenim znanostima
 
@@ -11738,7 +11752,7 @@ layout:true
 
 
 
-*Ključni pojmovi:*
+**Ključni pojmovi:**
 
 - veliki podatci
 

@@ -415,7 +415,17 @@ gradovi
 
 ---
 
-### API - Google trendovi
+### Analiza predsjedničkih izbora (na [poveznici](http://croecon.contentio.biz/post/analiza-zatupljenosti-o-predsjedni-kih-kandidatima-na-doma-im-portalima/))
+<br>
+<br>
+
+```{r, echo=FALSE, fig.height=12}
+knitr::include_url("http://croecon.contentio.biz/post/analiza-zatupljenosti-o-predsjedni-kih-kandidatima-na-doma-im-portalima/")
+```
+
+---
+
+### Internet - Google trendovi
 
 ```{r echo=T}
 # paketi
@@ -437,7 +447,7 @@ time_trend <- trends$interest_over_time
 
 ---
 
-### API - Google trendovi
+### Internet - Google trendovi
  <br>
  
 ```{r echo = TRUE}
@@ -449,7 +459,7 @@ tail(sample_n(time_trend,7),7)
 
 ---
 
-### API - Google trendovi
+### Internet - Google trendovi
  <br>
  
 ```{r echo=TRUE, fig.width=5, fig.height=3}
@@ -471,7 +481,7 @@ google_pretraga <- ggplot(data = time_trend,
 
 ---
 
-### API - Google trendovi
+### Internet - Google trendovi
 
 ```{r  echo=TRUE, fig.width=4, fig.height=2}
 # grafički prikaz
@@ -480,7 +490,7 @@ google_pretraga
 
 ---
 
-### API - Google trendovi
+### Internet - Google trendovi
 
 ```{r echo=TRUE, fig.width=5, fig.height=2}
 # sve u jednom redu koda + "mjere"   :-) 
@@ -822,6 +832,14 @@ wordcloud(top_20_hashtags, top_20_freqs, scale=c(3.5,1.5), # oblak riječi
           random.order=FALSE, rot.per=.25,colors = rev(pal))
 ```
 
+---
+
+### YouTube u Hrvatskoj (analiza na [poveznici](https://www.netokracija.com/analiza-hrvatske-youtube-scene-od-1400-kanala-samo-njih-6-ima-preko-milijun-pretplatnika-180868))
+<br>
+```{r  echo=FALSE, fig.height=12}
+knitr::include_url("https://www.netokracija.com/analiza-hrvatske-youtube-scene-od-1400-kanala-samo-njih-6-ima-preko-milijun-pretplatnika-180868")
+```
+
 
 ---
 
@@ -1055,7 +1073,7 @@ layout:true
 # PREGLED PREDAVANJA I KLJUČNI POJMOVI
 
 ---
-*Pregled predavanja:*
+**Pregled predavanja:**
 
 - klasični izvori podataka u društvenim znanostima
 
@@ -1067,7 +1085,7 @@ layout:true
 
 
 
-*Ključni pojmovi:*
+**Ključni pojmovi:**
 
 - veliki podatci
 
