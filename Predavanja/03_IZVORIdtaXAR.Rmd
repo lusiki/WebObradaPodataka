@@ -593,7 +593,7 @@ layout:true
 <br>
 <br>
 <br>
-#### Najvažniji trendovi
+### Najvažniji trendovi
 
 <br>
 - API-kalipsa i *Cambridge Analytica* slučaj
@@ -606,13 +606,13 @@ layout:true
 .footnote[[*] [Dokumentarni film Social Dilemma](https://www.thesocialdilemma.com/)]
 
 ---
-
-### Hrvatski influenceri na Facebook-u
+<br>
+#### Hrvatski influenceri na Facebook-u
 <br>
 <br>
 - podatci preuzeti sa [Apify](https://apify.com/) servisa
 <br>
-- nedostupni podatci bez plaćanja
+- podatci uz plaćanje
 <br>
 - FB podatci dostupni samo za javne profile
 <br>
@@ -622,7 +622,7 @@ layout:true
  
 ---
 
-### Hrvatski influenceri na Facebook-u (*impresije*)
+#### Hrvatski influenceri na Facebook-u (*impresije*)
 <br>
 ```{r importFacebook, echo=FALSE, message=FALSE, warning=FALSE}
 
@@ -693,7 +693,7 @@ fbDta %>%
 
 ---
 
-### Hrvatski influenceri na Facebook-u (*like*)
+#### Hrvatski influenceri na Facebook-u (*like*)
 <br>
 ```{r,  echo=FALSE, message=FALSE, warning=FALSE}
 
@@ -707,9 +707,6 @@ fbDta %>%
     scroll_box(width = "750px", height = "500px")
 
 ```
-
-
-
 
 ---
 
