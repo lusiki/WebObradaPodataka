@@ -607,6 +607,112 @@ layout:true
 
 ---
 
+### Hrvatski influenceri na Facebook-u
+<br>
+<br>
+- podatci preuzeti sa [Apify](https://apify.com/) servisa
+<br>
+- nedostupni podatci bez plaćanja
+<br>
+- FB podatci dostupni samo za javne profile
+<br>
+- primjer tehnoloških brandova: *Xiaomi, Samsung, Vivo, Huawei* 
+<br>
+- razoblje od mjesec dana
+ 
+---
+
+### Hrvatski influenceri na Facebook-u (*impresije*)
+<br>
+```{r importFacebook, echo=FALSE, message=FALSE, warning=FALSE}
+
+library(readxl)
+library(janitor)
+
+
+site_data_columns <- read_excel("../Dta/09-21.xlsx",
+                               sheet = "Facebook")
+
+site_data_column_names <- colnames(site_data_columns)
+column_data_types <- c()
+for(i in 1 : length(site_data_column_names)){  
+
+    #where date is a column name
+    if(site_data_column_names[i] == "date"){
+         column_data_types[i] <- "date"
+
+         #where result is a column name
+         } else if (site_data_column_names[i] == "result") {
+                      column_data_types[i] <- "numeric"
+
+         } else{
+                column_data_types[i] <- "text"
+        }
+}
+column_data_types[5] <- "date"
+
+
+
+facebook <- readxl::read_excel("../dta/09-21.xlsx",
+                               sheet = "Facebook",
+                               col_types = column_data_types) %>% 
+  row_to_names(.,1) %>% 
+  clean_names() %>%
+  select(-indexed,-category,-image,-languages) %>%
+  rename(Date = na)
+
+
+
+```
+
+```{r,  echo=FALSE, message=FALSE, warning=FALSE}
+
+library(kableExtra)
+
+options(digits = 2, scipen = 999, big.mark = ".")
+
+facebook %>%
+  mutate(impressions = as.numeric(impressions),
+         comments = as.numeric(comments),
+         engagements = as.numeric(engagements),
+         likes = as.numeric(likes),
+         audience = as.numeric(audience)) %>%
+  rename(Activity = type) -> fbDta
+
+fbDta %>%
+  group_by(author) %>%
+  top_n(.,5, wt = "impressions") %>% 
+  arrange(desc(impressions)) %>%
+  filter(impressions > 500) %>%
+  select(author, impressions, engagements, likes, text, Activity,  url, Date) %>%
+  kable(format.args = list(decimal.mark = ',', big.mark = ".")) %>%
+    kable_styling() %>%
+    scroll_box(width = "750px", height = "500px")
+```
+
+
+---
+
+### Hrvatski influenceri na Facebook-u (*like*)
+<br>
+```{r,  echo=FALSE, message=FALSE, warning=FALSE}
+
+fbDta %>%
+  top_n(.,10, wt = "likes") %>% 
+  arrange(desc(likes)) %>%
+  filter(likes > 50) %>%
+  select(text, Activity, author, url, impressions, engagements, likes, Date) %>%
+  kable(format.args = list(decimal.mark = ',', big.mark = ".")) %>%
+    kable_styling() %>%
+    scroll_box(width = "750px", height = "500px")
+
+```
+
+
+
+
+---
+
 ### Twitter
 * Najpoznatiji mikroblogging servis
 <br>
