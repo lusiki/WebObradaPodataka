@@ -581,21 +581,21 @@ layout:true
 **Popularne društvene mreže:**
 <br>
 <br>
-1. [Facebook](https://www.kaggle.com/chrisbow/an-introduction-to-facebook-ad-analysis-using-r) [(Vidi takodjer!)](https://www.residualthoughts.com/2018/02/12/analyzing-facebook-messages-in-r/)
+- [Facebook](https://www.kaggle.com/chrisbow/an-introduction-to-facebook-ad-analysis-using-r) [(Vidi takodjer!)](https://www.residualthoughts.com/2018/02/12/analyzing-facebook-messages-in-r/)
 <br>
-2. [LinkedIn](https://github.com/mpiccirilli/Rlinkedin)
+- [LinkedIn](https://github.com/mpiccirilli/Rlinkedin)
 <br>
-3. [Youtube](https://rpubs.com/arafath/YouTubeVideos_Analysis)
+- [Youtube](https://rpubs.com/arafath/YouTubeVideos_Analysis)
 <br>
-4. [Instagram](https://github.com/JonasSchroeder/InstaCrawlR)
+- [Instagram](https://github.com/JonasSchroeder/InstaCrawlR)
 <br>
-5. TikTok
+- TikTok
 <br>
-6. Google+
+- Google+
 <br>
-7. Tumblr
+- Tumblr
 <br>
-8. Flickr
+- Flickr
 <br>
 <br>
 <br>
@@ -608,11 +608,13 @@ layout:true
 ### Najvažniji trendovi
 
 <br>
-- API-kalipsa i *Cambridge Analytica* slučaj; [Social Dilemma](https://www.thesocialdilemma.com/)
-<br>
 - Poslovne primjene prednjače
 <br>
 - Perspektivno istraživačko polje u politologiji, komunikologiji, ekonomici
+<br>
+- [API-kalipsa](https://snurb.info/files/2019/After%20the%20%27APIcalypse%27.pdf) i *Cambridge Analytica* slučaj; [Social Dilemma](https://www.thesocialdilemma.com/)
+<br>
+- Kako dalje!?
 <br>
 <br>
 <br>
