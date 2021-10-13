@@ -596,8 +596,10 @@ layout:true
 7. Tumblr
 <br>
 8. Flickr
-
-.footnote[[*] [Kolegij!](https://lusiki.github.io/Learning-Social-Media-Analytics/)
+<br>
+<br>
+<br>
+.footnote[[*] [Digital 2021:Croatia](https://datareportal.com/reports/digital-2021-croatia?rq=Croatia)]
 
 ---
 <br>
@@ -612,7 +614,9 @@ layout:true
 <br>
 - Perspektivno istraživačko polje u politologiji, komunikologiji, ekonomici
 <br>
-
+<br>
+<br>
+.footnote[[*] [Kolegij!](https://lusiki.github.io/Learning-Social-Media-Analytics/)]
 .footnote[[*] [Dokumentarni film Social Dilemma](https://www.thesocialdilemma.com/)]
 
 ---
