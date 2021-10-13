@@ -608,7 +608,7 @@ layout:true
 ### Najvažniji trendovi
 
 <br>
-- API-kalipsa i *Cambridge Analytica* slučaj
+- API-kalipsa i *Cambridge Analytica* slučaj; [Social Dilemma](https://www.thesocialdilemma.com/)
 <br>
 - Poslovne primjene prednjače
 <br>
@@ -616,8 +616,10 @@ layout:true
 <br>
 <br>
 <br>
+
 .footnote[[*] [Kolegij!](https://lusiki.github.io/Learning-Social-Media-Analytics/)]
-.footnote[[*] [Dokumentarni film Social Dilemma](https://www.thesocialdilemma.com/)]
+<br>
+
 
 ---
 <br>
