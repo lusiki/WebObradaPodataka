@@ -98,7 +98,6 @@ library(hrbrthemes)
 - Eksperiment 
 - Ispitivanje 
 - Intervju
-- Senzori  
 - Strukturirane baze podataka
 
 ]
@@ -389,7 +388,8 @@ head(cSize, 10)
 ---
 
 ### Web scraping 
-
+<br>
+<br>
 ```{r echo = TRUE}
 # vizualizacija
 gradovi <- ggplot(data = cSize[1:10,],
@@ -597,7 +597,7 @@ layout:true
 <br>
 8. Flickr
 
-.footnote[[*] [Kolegij!](https://lusiki.github.io/Learning-Social-Media-Analytics/])
+.footnote[[*] [Kolegij!](https://lusiki.github.io/Learning-Social-Media-Analytics/)
 
 ---
 <br>
@@ -1070,7 +1070,7 @@ layout:true
 
 ---
 layout:true
-# PREGLED PREDAVANJA I KLJUČNI POJMOVI
+# ZAKLJUČNO
 
 ---
 **Pregled predavanja:**
@@ -1098,7 +1098,7 @@ layout:true
 ---
 class: inverse, middle
 layout:false
-# HVALA NA PAŽNJI!
+# Hvala na pažnji!
 
 
 
