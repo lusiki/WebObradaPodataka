@@ -3,7 +3,7 @@ title: "OBRADA PODATAKA"
 # subtitle: "<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>"
 subtitle: "Predavanje 2: Vrste podataka"
 author: "Luka Sikic, PhD"
-date: "Fakultet hrvatskih studija | [OP](https://github.com/BrbanMiro/Obrada-podataka)" #"`r format(Sys.time(), '%d %B %Y')`"
+date: "Fakultet hrvatskih studija | [OP](https://lusiki.github.io/WebObradaPodataka/)" #"`r format(Sys.time(), '%d %B %Y')`"
 output:
   xaringan::moon_reader:
     css: [default, metropolis, metropolis-fonts] 
@@ -18,16 +18,23 @@ output:
 knitr::opts_chunk$set(echo = F)
 ```
 
-```{r paketi, include=FALSE}
+```{r paketi, include=TRUE, echo=FALSE,message=FALSE, warning=FALSE}
 
 library(tidyverse)
 library(reticulate)
 use_virtualenv("r-reticulate")
 library(kableExtra)
+library(ggplot2)
+library(dplyr)
+library(scales)
 ```
 
-## CILJEVI PREDAVANJA
 
+
+# CILJEVI PREDAVANJA
+<br>
+<br>
+<br>
 - Strukturirani i ne-strukturirani podatci
 <br>
 <br>
@@ -46,22 +53,73 @@ library(kableExtra)
 - Big Data u društvenim znanostima
 
 ---
-## STRUKTURIRANI I NESTRUKTURIRANI PODATCI
 
+layout: true
+# STRUKTURIRANI I NESTRUKTURIRANI PODATCI
+
+---
+
+### Karakteristike
+<br>
 .pull-left[
 1. **STRUKTURIRANI**
-- observacije sa karakteristikama, uglavnom organizirane u tablicu (redovi i kolone);
-- znanstveno prikupljeni podatci, telefonski imenik;
-- manji dio podataka;
+- observacije sa karakteristikama
+- uglavnom organizirane u tablicu (redovi i kolone)
+- znanstveno prikupljeni podatci (npr. telefonski imenik)
+- manji dio podataka
 ]
 
 .pull-right[
 2. **NESTRUKTURIRANI**
-- podatci bez standardne organizacijske hijerarhije 
-- Facebook objave, Twitter, logovi na server, genetska sekvenca nukleotida, tekstualni podatci;
-- vjerojatno više od 80% svih podataka;
-- zahtjevaju prilagodbu prije analize;
+- podatci bez (standardne) organizacijske hijerarhije 
+- Facebook objave, Twitter, logovi na server, genetska sekvenca nukleotida, tekstualni podatci
+- vjerojatno više od 80% svih podataka
+- zahtjevaju prilagodbu prije analize
 ]
+
+---
+
+### Primjer strukturiranih podataka
+
+```{r echo=TRUE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
+
+library(maddison)
+
+maddi <- maddison %>%
+  filter(iso2c %in% c("HR")) %>%
+  filter(year >= 1952) 
+
+head(maddi,6)
+
+```
+
+---
+
+### Primjer strukturiranih podataka
+
+```{r echo=TRUE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
+
+ltg <- ggplot(maddi,aes(x = year, y = rgdpnapc)) +
+  geom_line(color="red") +
+  geom_point() +          
+  scale_y_log10(labels = comma, breaks = pretty_breaks(6)) +
+  theme_bw() +
+  labs(
+       title = "Dugoročni BDP per capita u Hrvatskoj",
+    subtitle = "Godine: 1952-2016",
+    caption  = "Izvor: Maddison database; izrada autora") +
+  ylab("BDP per capita") +
+  xlab("Godina")
+```
+
+---
+
+### Primjer strukturiranih podataka
+```{r echo=TRUE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
+ltg
+```
+
+
 ---
 
 ## KVANTITATIVNI i KVALITATIVNI PODATCI

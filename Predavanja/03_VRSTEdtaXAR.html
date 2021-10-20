@@ -4,6 +4,7 @@
     <title>OBRADA PODATAKA</title>
     <meta charset="utf-8" />
     <meta name="author" content="Luka Sikic, PhD" />
+    <script src="libs/header-attrs-2.10/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/metropolis.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/metropolis-fonts.css" rel="stylesheet" />
@@ -17,7 +18,7 @@ class: center, middle, inverse, title-slide
 # OBRADA PODATAKA
 ## Predavanje 2: Vrste podataka
 ### Luka Sikic, PhD
-### Fakultet hrvatskih studija | <a href="https://github.com/BrbanMiro/Obrada-podataka">OP</a>
+### Fakultet hrvatskih studija | <a href="https://lusiki.github.io/WebObradaPodataka/">OP</a>
 
 ---
 
@@ -26,8 +27,12 @@ class: center, middle, inverse, title-slide
 
 
 
-## CILJEVI PREDAVANJA
 
+
+# CILJEVI PREDAVANJA
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 - Strukturirani i ne-strukturirani podatci
 &lt;br&gt;
 &lt;br&gt;
@@ -46,22 +51,88 @@ class: center, middle, inverse, title-slide
 - Big Data u društvenim znanostima
 
 ---
-## STRUKTURIRANI I NESTRUKTURIRANI PODATCI
 
+layout: true
+# STRUKTURIRANI I NESTRUKTURIRANI PODATCI
+
+---
+
+### Karakteristike
+&lt;br&gt;
 .pull-left[
 1. **STRUKTURIRANI**
-- observacije sa karakteristikama, uglavnom organizirane u tablicu (redovi i kolone);
-- znanstveno prikupljeni podatci, telefonski imenik;
-- manji dio podataka;
+- observacije sa karakteristikama
+- uglavnom organizirane u tablicu (redovi i kolone)
+- znanstveno prikupljeni podatci (npr. telefonski imenik)
+- manji dio podataka
 ]
 
 .pull-right[
 2. **NESTRUKTURIRANI**
-- podatci bez standardne organizacijske hijerarhije 
-- Facebook objave, Twitter, logovi na server, genetska sekvenca nukleotida, tekstualni podatci;
-- vjerojatno više od 80% svih podataka;
-- zahtjevaju prilagodbu prije analize;
+- podatci bez (standardne) organizacijske hijerarhije 
+- Facebook objave, Twitter, logovi na server, genetska sekvenca nukleotida, tekstualni podatci
+- vjerojatno više od 80% svih podataka
+- zahtjevaju prilagodbu prije analize
 ]
+
+---
+
+### Primjer strukturiranih podataka
+
+
+```r
+library(maddison)
+
+maddi &lt;- maddison %&gt;%
+  filter(iso2c %in% c("HR")) %&gt;%
+  filter(year &gt;= 1952) 
+
+head(maddi,6)
+```
+
+```
+## # A tibble: 6 x 12
+##   countrycode country  year cgdppc rgdpnapc   pop i_cig        i_bm  iso2c iso3c
+##   &lt;chr&gt;       &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+## 1 HRV         Croatia  1952   3141     3754  3882 Extrapolated &lt;NA&gt;  HR    HRV  
+## 2 HRV         Croatia  1953   3387     4048  3906 Extrapolated &lt;NA&gt;  HR    HRV  
+## 3 HRV         Croatia  1954   3663     4378  3930 Extrapolated &lt;NA&gt;  HR    HRV  
+## 4 HRV         Croatia  1955   4300     5140  3956 Extrapolated &lt;NA&gt;  HR    HRV  
+## 5 HRV         Croatia  1956   4089     4888  3973 Extrapolated &lt;NA&gt;  HR    HRV  
+## 6 HRV         Croatia  1957   4822     5764  3991 Extrapolated &lt;NA&gt;  HR    HRV  
+## # ... with 2 more variables: continent &lt;chr&gt;, region &lt;chr&gt;
+```
+
+---
+
+### Primjer strukturiranih podataka
+
+
+```r
+ltg &lt;- ggplot(maddi,aes(x = year, y = rgdpnapc)) +
+  geom_line(color="red") +
+  geom_point() +          
+  scale_y_log10(labels = comma, breaks = pretty_breaks(6)) +
+  theme_bw() +
+  labs(
+       title = "Dugoročni BDP per capita u Hrvatskoj",
+    subtitle = "Godine: 1952-2016",
+    caption  = "Izvor: Maddison database; izrada autora") +
+  ylab("BDP per capita") +
+  xlab("Godina")
+```
+
+---
+
+### Primjer strukturiranih podataka
+
+```r
+ltg
+```
+
+![](03_VRSTEdtaXAR_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+
+
 ---
 
 ## KVANTITATIVNI i KVALITATIVNI PODATCI
