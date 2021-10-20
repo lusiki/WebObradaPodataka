@@ -27,6 +27,9 @@ library(kableExtra)
 library(ggplot2)
 library(dplyr)
 library(scales)
+library(readr)
+library(readr)
+
 ```
 
 
@@ -62,7 +65,7 @@ layout: true
 ### Karakteristike
 <br>
 .pull-left[
-1. **STRUKTURIRANI**
+**STRUKTURIRANI**
 - observacije sa karakteristikama
 - uglavnom organizirane u tablicu (redovi i kolone)
 - znanstveno prikupljeni podatci (npr. telefonski imenik)
@@ -70,7 +73,7 @@ layout: true
 ]
 
 .pull-right[
-2. **NESTRUKTURIRANI**
+**NESTRUKTURIRANI**
 - podatci bez (standardne) organizacijske hijerarhije 
 - Facebook objave, Twitter, logovi na server, genetska sekvenca nukleotida, tekstualni podatci
 - vjerojatno više od 80% svih podataka
@@ -79,26 +82,25 @@ layout: true
 
 ---
 
-### Primjer strukturiranih podataka
+#### Primjer strukturiranih podataka
 
 ```{r echo=TRUE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
-
+# Učitaj paket
 library(maddison)
-
+# Uredi podatke
 maddi <- maddison %>%
   filter(iso2c %in% c("HR")) %>%
   filter(year >= 1952) 
 
 head(maddi,6)
-
 ```
 
 ---
 
-### Primjer strukturiranih podataka
+#### Primjer strukturiranih podataka
 
 ```{r echo=TRUE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
-
+# Vizualiziraj podatke
 ltg <- ggplot(maddi,aes(x = year, y = rgdpnapc)) +
   geom_line(color="red") +
   geom_point() +          
@@ -114,11 +116,92 @@ ltg <- ggplot(maddi,aes(x = year, y = rgdpnapc)) +
 
 ---
 
-### Primjer strukturiranih podataka
-```{r echo=TRUE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
+#### Primjer strukturiranih podataka
+```{r echo=FALSE,warning=FALSE,message=FALSE, fig.height=6, fig.width=9}
 ltg
 ```
 
+
+---
+
+#### Primjer nestrukturiranih podataka ([bilbord](https://www.billboard.com/charts/hot-100))
+
+```{r echo=TRUE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
+# Učitaj pakete
+library(rvest)
+library(dplyr)
+# Url
+hot100page <- "https://www.billboard.com/charts/hot-100"
+# Učitaj url
+hot100 <- read_html(hot100page)
+# Pogledaj objekt
+hot100
+```
+
+---
+
+#### Primjer nestrukturiranih podataka
+
+```{r echo=TRUE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
+# Pogledaj strukturu objekta
+str(hot100)
+# Preuzmi podatke od interesa
+body_nodes <- hot100 %>% 
+ html_node("body") %>% 
+ html_children()
+```
+
+---
+
+#### Primjer nestrukturiranih podataka
+
+```{r echo=TRUE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
+# Pregledaj podatke
+head(body_nodes,5)
+```
+
+---
+
+#### Primjer nestrukturiranih podataka
+
+```{r echo=TRUE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
+# Preuzmi rang
+rank <- hot100 %>% 
+  rvest::html_nodes('body') %>% 
+  xml2::xml_find_all("//span[contains(@class, 'chart-element__rank__number')]") %>% 
+  rvest::html_text()
+# Preuzmi pjevača
+artist <- hot100 %>% 
+  rvest::html_nodes('body') %>% 
+  xml2::xml_find_all("//span[contains(@class, 'chart-element__information__artist')]") %>% 
+  rvest::html_text()
+# Preuzmi naslov
+title <- hot100 %>% 
+  rvest::html_nodes('body') %>% 
+  xml2::xml_find_all("//span[contains(@class, 'chart-element__information__song')]") %>% 
+  rvest::html_text()
+  
+```
+
+---
+
+#### Primjer nestrukturiranih podataka
+
+```{r echo=TRUE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
+# Poveži podatke
+chart_df <- data.frame(rank, artist, title)
+# Pregledaj podatke
+head(chart_df,6)
+```
+
+---
+
+#### Primjer nestrukturiranih podataka
+
+```{r echo=TRUE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
+# Tablično prikaži
+knitr::kable(chart_df %>% head(8))
+```
 
 ---
 
