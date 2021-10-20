@@ -8,8 +8,6 @@
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/metropolis.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/metropolis-fonts.css" rel="stylesheet" />
-    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
-    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
   </head>
   <body>
     <textarea id="source">
@@ -303,130 +301,59 @@ knitr::kable(chart_df %&gt;% head(8))
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-
 ---
 
-## KVANTITATIVNI i KVALITATIVNI PODATCI
+layout: true
+# KVANTITATIVNI I KVALITATIVNI PODATCI
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 .pull-left[
-1. **KVANTITATIVNI**
+**KVANTITATIVNI**
 - brojevi, matematičke procedure, prosjek, vremenski trend, threshold efekti
 ]
 
 .pull-right[
-2. **KVALITATIVNI**
+**KVALITATIVNI**
 - "prirodne" kategorije, jezik
 - najčešća observacija, jedinstvene vrijednosti
 ]
 
 ---
-### PODATCI
 
+#### Učitaj podatke
+
+
+```python
+# Učitaj paket (Python)
+import pandas as pd
+# ucitaj CSV file sa URL
+drinks = pd.read_csv('https://raw.githubusercontent.com/sinanuozdemir/principles_of_data_science/master/data/chapter_2/drinks.csv')
+```
 
 
 ```r
 # prikazi podatke u tablici
 py$drinks %&gt;%
-  head(10) %&gt;%
-  kbl() %&gt;%
-  kableExtra::kable_material_dark()
+  select(1:4) %&gt;%
+  head(4) 
 ```
 
-&lt;table class=" lightable-material-dark" style='font-family: "Source Sans Pro", helvetica, sans-serif; margin-left: auto; margin-right: auto;'&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:left;"&gt; country &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; beer_servings &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; spirit_servings &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; wine_servings &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; total_litres_of_pure_alcohol &lt;/th&gt;
-   &lt;th style="text-align:left;"&gt; continent &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Afghanistan &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.0 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; AS &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Albania &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 89 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 132 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 54 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 4.9 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; EU &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Algeria &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 25 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 14 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.7 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; AF &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Andorra &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 245 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 138 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 312 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 12.4 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; EU &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Angola &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 217 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 57 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 45 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 5.9 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; AF &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Antigua &amp;amp; Barbuda &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 102 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 128 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 45 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 4.9 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; NaN &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Argentina &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 193 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 25 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 221 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 8.3 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; SA &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Armenia &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 179 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 11 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.8 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; EU &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Australia &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 261 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 72 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 212 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 10.4 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; OC &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Austria &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 279 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 75 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 191 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 9.7 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; EU &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
+```
+##       country beer_servings spirit_servings wine_servings
+## 1 Afghanistan             0               0             0
+## 2     Albania            89             132            54
+## 3     Algeria            25               0            14
+## 4     Andorra           245             138           312
+```
 ---
-### PREGLED PODATAKA
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+#### Pregled podataka
 .pull-left[
 
 ```python
@@ -460,23 +387,32 @@ drinks['beer_servings'].describe() # pregledaj kolonu 'continent'- KVANTITATIVNA
 ## Name: beer_servings, dtype: float64
 ```
 ]
----
 
-## DISKRETNI I KONTINUIRANI PODATCI
+---
+layout: true
+# DISKRETNI I KONTINUIRANI PODATCI
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 .pull-left[
-1. **DISKRETNI**
+**DISKRETNI**
 - prebrojivi
 - npr. igraća kocka
 ]
 .pull-right[
-1. **KONTINUIRANI**
+**KONTINUIRANI**
 - postoje na kontinuiranoj skali
 - npr. težina ili visina
 ]
 ---
-
-## ČETIRI RAZINE PODATAKA
-
+layout: true
+# ČETIRI RAZINE PODATAKA
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 1. **NOMINALNI**
 
 2. **ORDINALNI**
@@ -486,7 +422,11 @@ drinks['beer_servings'].describe() # pregledaj kolonu 'continent'- KVANTITATIVNA
 4. **OMJERNI**
 
 ---
-## NOMINALNA RAZINA
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+#### Nominalna razina
 
 - podatci opisani nazivom ili kategorijom (kategorički podatci)
 
@@ -497,8 +437,11 @@ drinks['beer_servings'].describe() # pregledaj kolonu 'continent'- KVANTITATIVNA
 - računanje prosjeka ili drugih st
 
 ---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 
-## ODINALNA RAZINA
+#### Ordinalna razina
 
 - kategorički podatci koji imaju hijerarhijsku strukturu
 
@@ -511,25 +454,23 @@ drinks['beer_servings'].describe() # pregledaj kolonu 'continent'- KVANTITATIVNA
 - moguće je koristiti medijan (ne i prosjek)
 
 ---
-### PRIMJER
+
+#### Primjer
 
 
 ```python
+# Učitaj paket
 import numpy
-
 # anketa o sreci na ljestvici 1-5
 results = [5, 4, 3, 4, 5, 3, 2, 5, 3, 2, 1, 4, 5, 3, 4, 4, 5, 4, 2, 1,
 4, 5, 4, 3, 2, 4, 4, 5, 4, 3, 2, 1]
-
 # sortiraj rezultate
 sorted_results = sorted(results)
-print(sorted_results)
-
-# pogledaj prosjek i medijan
+print("sortirani niz:",sorted_results)
 ```
 
 ```
-## [1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5]
+## sortirani niz: [1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5]
 ```
 
 ```python
@@ -542,7 +483,6 @@ print ("prosjek:",round(numpy.mean(results),2))
 
 ```python
 print ("medijan:",round(numpy.median(results),2))
-
 ```
 
 ```
@@ -550,19 +490,19 @@ print ("medijan:",round(numpy.median(results),2))
 ```
 
 ---
-## INTERVALNA RAZINA
+
+#### Intervalna razina
 
 - npr. temperatura
 - opravdane su matematičke operacije poput zbrajanja i oduzimanja
 - opravdano korištenje mjera centralne tendencije i varijabilnosti
 
-### PRIMJER
+#### Primjer
 
 
 ```python
 # temperatura frizidera u fahrenheitima mjerena svakih sat vremena
 temps = [31, 32, 32, 31, 28, 29, 31, 38, 32, 31, 30, 29, 30, 31, 26]
-
 # pogledaj prosjek i medijan
 print("prosjek:",round(numpy.mean(temps),2))
 ```
@@ -580,25 +520,23 @@ print("medijan:",round(numpy.median(temps),2))
 ```
 
 ---
-### PRIMJER
+
+#### Primjer
+
 
 ```python
 ## pogledaj mjere varijacije
-
 squared_differences = []
 # napravi praznu listu
 mean = numpy.mean(temps)
 # spremi prosjek u objekt
-
 for temperature in temps:
  difference = temperature - mean
- # definiraj funkciju za izracun udaljenosti (temperature) od prosjeka
- 
- squared_difference = difference**2
- # kvadriraj razliku
- squared_differences.append(squared_difference)
- # dodaj listi
-
+# definiraj funkciju za izracun udaljenosti (temperature) od prosjeka
+squared_difference = difference**2
+# kvadriraj razliku
+squared_differences.append(squared_difference)
+# dodaj listi
 average_squared_difference = numpy.mean(squared_differences)
 # izracunaj varijancu
 standard_deviation = numpy.sqrt(average_squared_difference)
@@ -607,30 +545,30 @@ print("stdev:",round(standard_deviation,2))
 ```
 
 ```
-## stdev: 2.52
+## stdev: 4.73
 ```
 
 ---
-## OMJERNA RAZINA
+
+#### Omjerna razina
 
 - opravdane matematičke operacije množenja i djeljenja
 - podatci na ovoj razni ne smiju biti negativni
 
-### PRIMJER
+#### Primjer
+
 
 ```python
 # temperatura frizidera u fahrenheitima mjerena svakih sat vremena
 temps = [31, 32, 32, 31, 28, 29, 31, 38, 32, 31, 30, 29, 30, 31, 26]
-
 # izracunaj geometrijsku sredinu
 num_items = len(temps)
-product = 1.
 
+product = 1.
 for temperature in temps:
  product *= temperature
 
 geometric_mean = product**(1./num_items)
-
 # prikazi rezultat
 print("geometrijska sredina:",geometric_mean)
 ```
@@ -639,130 +577,167 @@ print("geometrijska sredina:",geometric_mean)
 ## geometrijska sredina: 30.63473484374659
 ```
 ---
-
-## PODATCI U "PRAKSI"
-
+layout: true
+# PODATCI U "PRAKSI"
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 **Big Data**
+&lt;br&gt;
+&lt;br&gt;
 - zbog veličine se ne mogu pohraniti na standardne relacijske baze
+&lt;br&gt;
 - nestrukturirani, semi-srtukturirani i strukturirani podatci
+&lt;br&gt;
 - od terabayt-a do zettabayt-a veličine
+&lt;br&gt;
 - osnova za strojno učenje, AI, predviđanje budućnosti
 
 ---
-
-## PODATCI U "PRAKSI"
-
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 **Strukturirani, Ne-strukturirani i Kvazi-strukturirani podatci**
+&lt;br&gt;
+&lt;br&gt;
 - podatkovni "polymorphism" zbog uspona novih tehnologije (web,mobile, socialNet,IoT, programming)
+&lt;br&gt;
 - [MongoDB](https://www.mongodb.com/), RAVENDB,RETHINKDB, ORIENTDB, PostrgreSQL, ArangoDB cassandra
 
 ---
-## PODATCI U "PRAKSI"
-
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 **Vremenske serije**
+&lt;br&gt;
+&lt;br&gt;
 - svaka opservacija ima vremenski pečat(događaj ili procesuiranje)
+&lt;br&gt;
 - npr. bihevioralni podatci(web) koji se koriste za predviđanje akcijskih modela
+&lt;br&gt;
 - npr. financijsko trgovanje
 
 ---
-## PODATCI U "PRAKSI"
-
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 **Strojni podatci**
+&lt;br&gt;
+&lt;br&gt;
 - sistemski proizvedeni podatci
+&lt;br&gt;
 - npr. PC logovi, mobiteli, pametni automobili, aplikacije, API, cloud aplikacije, sensorni signali
+&lt;br&gt;
 - posebno korisna za identifikaciju prijetnji, kontrolu kvalitete procesa, predviđanje
 
 ---
-## PODATCI U "PRAKSI"
-
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 **Prostorno-temporalni podatci**
+&lt;br&gt;
+&lt;br&gt;
 - geografski i temporalni pečat
+&lt;br&gt;
 - prokazuju lokacijsku dinamiku u vremenu
+&lt;br&gt;
 - praćenje vozila, promjene u populaciji, otkrivanje anomalija u (npr. telekom) mreži 
 ---
-## PODATCI U "PRAKSI"
-
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 **Otvoreni podatci**
+&lt;br&gt;
+&lt;br&gt;
 - dostupni javnosti prema "pravilima za upotrebu"
+&lt;br&gt;
 - trenutno uglavno ograničeni na znanstvenu uporabu
 ---
-
-## PODATCI U "PRAKSI"
-
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 **Crni podatci**
+&lt;br&gt;
+&lt;br&gt;
 - neiskorišteni podatci
+&lt;br&gt;
 - uglavnom u institucionalnom vlasništvu(tvrtke instituti, think-tank, fakulteti)
+&lt;br&gt;
 ---
-## PODATCI U "PRAKSI"
-
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 **Podatci u realnom vremenu**
+&lt;br&gt;
 - visoka potražnja i "vrući trend"
+&lt;br&gt;
 - 5G
+&lt;br&gt;
 - medicina, promet, trgovina
+&lt;br&gt;
 - velik potencijal
 
 ---
-## PODATCI U "PRAKSI"
-
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 **Genomski podatci**
+&lt;br&gt;
+&lt;br&gt;
 - analiza DNA u cilju identifikacije efekata ljekova i tretiranja bolesti
+&lt;br&gt;
 - analitika je glavno ograničenje
+&lt;br&gt;
 - prikupljanje i procesuiranje podataka otežano
 ---
-## PODATCI U "PRAKSI"
-
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 **Operativni podatci**
+&lt;br&gt;
+&lt;br&gt;
 - uvidi u procese ponad analitičara i specijalista
+&lt;br&gt;
 - podatci o praksama
+&lt;br&gt;
 - korisni za obrnuti inžinjering
 ---
-## PODATCI U "PRAKSI"
-
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 **Visoko-dimenzionalni podatci**
+&lt;br&gt;
+&lt;br&gt;
 - popularizirani kroz IT podršku za prepoznavanje lica
+&lt;br&gt;
 - zbog složenosti transformacija zahtijevaju nove načine bilježenja i manipulacije
 
 ---
-## PODATCI U "PRAKSI"
-
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 **Ne-verificirani podatci**
+&lt;br&gt;
+&lt;br&gt;
 - prikupljeni podatci upitne relevantnosti
-
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 **Translitički podatci**
+&lt;br&gt;
+&lt;br&gt;
 - podatci dostupni u realnom vremenu
+&lt;br&gt;
 - memorijska zahtjevnost i brzi pristup informacijama
 
 ---
+class: inverse, middle
+layout:false
+# Hvala na pozornosti!
 
-## BIG DATA U DRUŠTVENIM ZNANOSTIMA
 
-- visoki volumen, opseg, brzina i raznolikost
-- geografski, tekstualni, i podatci sa društvenih medija
-- dostupnost u realnom vremenu, većem opsegu, novi pokazatelji i manje strukture 
-- u poslovnom sektoru i prirodnim znanostima je BD već postao standard
-- društvene znanosti i javne institucije (vlade) kasne u prihvaćanju BD 
-
----
-
-## BIG DATA U DRUŠTVENIM ZNANOSTIMA
-.pull-left[
-**POTENCIJAL BD ZA UNAPRIJEĐENJE DRUŠTVENIH (I HUMANISTIČKIH) ZNANOSTI**
-
-- novi uvidi u društvo, politiku i ekonomiju
-- nova istraživačka pitanja
-- preciznija predviđanja
-- bolje javne politike
-
-]
-
-.pull-left[
-**IZVAZOVI BD**
-
-- pristup podatcima
-- upravljanje podatcima i provedba analize (T.Khun!?)
-- postavljanje pravih pitanja
-]
----
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
