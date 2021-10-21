@@ -416,8 +416,7 @@ typeof(d)
 d[3] <- 17.6
 # Pregledaj
 d
-# Pregledaj
-typeof(d)
+
 ```
 
 ---
@@ -478,8 +477,6 @@ class(spol_vector)
 spol_vector
 # Pretvori u faktor
 spol_vector_factor <- factor(spol_vector)
-# Pregledaj
-class(spol_vector_factor)
 # Pregledaj
 spol_vector_factor
 ```
@@ -610,6 +607,8 @@ layout: true
 **Strukturirani, Ne-strukturirani i Kvazi-strukturirani podatci**
 <br>
 <br>
+- SQL, Excel
+<br>
 - podatkovni "polymorphism" zbog uspona novih tehnologije (web,mobile, socialNet,IoT, programming)
 <br>
 - [MongoDB](https://www.mongodb.com/), RAVENDB,RETHINKDB, ORIENTDB, PostrgreSQL, ArangoDB cassandra
@@ -730,16 +729,6 @@ layout: true
 <br>
 <br>
 - prikupljeni podatci upitne relevantnosti
----
-<br>
-<br>
-<br>
-**Translitički podatci**
-<br>
-<br>
-- podatci dostupni u realnom vremenu
-<br>
-- memorijska zahtjevnost i brzi pristup informacijama
 
 ---
 class: inverse, middle
