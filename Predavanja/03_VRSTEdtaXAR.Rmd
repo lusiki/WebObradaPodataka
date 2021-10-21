@@ -117,7 +117,7 @@ ltg <- ggplot(maddi,aes(x = year, y = rgdpnapc)) +
 ---
 
 #### Primjer strukturiranih podataka
-```{r echo=FALSE,warning=FALSE,message=FALSE, fig.height=6, fig.width=9}
+```{r echo=FALSE,warning=FALSE,message=FALSE, fig.height=6, fig.width=10}
 ltg
 ```
 
@@ -237,7 +237,7 @@ drinks = pd.read_csv('https://raw.githubusercontent.com/sinanuozdemir/principles
 ```{r, echo = T}
 # prikazi podatke u tablici
 py$drinks %>%
-  select(1:4) %>%
+  select(1:5) %>%
   head(4) 
 ```
 ---
@@ -268,12 +268,124 @@ layout: true
 **DISKRETNI**
 - prebrojivi
 - npr. igraća kocka
+- integer, logical, character, factor
 ]
 .pull-right[
 **KONTINUIRANI**
 - postoje na kontinuiranoj skali
 - npr. težina ili visina
 ]
+---
+
+#### Primjeri diskretnih podataka (numerička varijabla)
+
+```{r echo = TRUE}
+# Napravi integer varijablu sa dvanaest brojeva
+bubba <- integer(12)
+# Pregledaj
+bubba
+# Pregledaj prvi element
+bubba[1]
+# Promijeni 4. element u vrijednost 15
+bubba[4] <- 15
+# Pregledaj
+bubba
+```
+
+---
+
+#### Primjeri diskretnih podataka (numerička varijabla)
+
+
+```{r echo = TRUE}
+# Napravi sekvencu
+sekvenca <- seq(4,11,by=2)
+# Pregledaj
+sekvenca
+# Napravi varijablu koja nije kontinuirana
+a <- 1.2
+# Pregledaj
+typeof(a)
+# Pregledaj
+is.integer(a)
+```
+
+---
+
+#### Primjeri diskretnih podataka (logička varijabla)
+
+```{r echo = TRUE}
+# Napravi logičku varaijablu
+logickaVar <- logical(10)
+# Pregledaj
+logickaVar
+# Pregledaj
+typeof(logickaVar)
+# Prilagodi 3. element
+logickaVar[3] <- TRUE
+# Pregledaj
+logickaVar
+```
+
+---
+
+#### Primjeri diskretnih podataka (logička varijabla)
+
+```{r echo = TRUE}
+# Napravi logičku varaijablu
+l1 <- c(TRUE,FALSE)
+# Napravi logičku varaijablu
+l2 <- c(TRUE,TRUE)
+# Logički upit &
+l1&l1
+# Logički upit |
+l1|l2
+```
+
+---
+
+#### Primjeri diskretnih podataka (tekstualna (*chraracter*) varijabla)
+
+```{r echo = TRUE}
+# Napravi chr varaijablu
+rijec <- "hello"
+# Pregledaj
+rijec
+# Vrsta
+typeof(rijec)
+# Napravi chr varaijablu
+viseTeksta <- character(3)
+# Pregledaj
+viseTeksta
+```
+
+---
+
+#### Primjeri diskretnih podataka (tekstualna (*chraracter*) varijabla)
+
+```{r echo = TRUE}
+# Napravi chr element
+viseTeksta[2] <- "prvi element"
+viseTeksta[3] <- 'hej, treći!'
+viseTeksta[1] <- "prvi na prvom mjestu"
+# Pregledaj
+viseTeksta
+```
+
+---
+
+#### Primjeri diskretnih podataka (tekstualna (*chraracter*) varijabla)
+
+```{r echo = TRUE}
+# Napravi numerički element
+broj <- 3.0
+# Prgledaj
+typeof(broj)
+# Stvori chr iz numeričkog elementa
+rijec <- as.character("broj")
+# Prgledaj
+typeof(rijec)
+```
 ---
 layout: true
 # ČETIRI RAZINE PODATAKA

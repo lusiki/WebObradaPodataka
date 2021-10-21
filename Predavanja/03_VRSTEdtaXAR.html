@@ -338,7 +338,7 @@ drinks = pd.read_csv('https://raw.githubusercontent.com/sinanuozdemir/principles
 ```r
 # prikazi podatke u tablici
 py$drinks %&gt;%
-  select(1:4) %&gt;%
+  select(1:5) %&gt;%
   head(4) 
 ```
 
@@ -348,6 +348,11 @@ py$drinks %&gt;%
 ## 2     Albania            89             132            54
 ## 3     Algeria            25               0            14
 ## 4     Andorra           245             138           312
+##   total_litres_of_pure_alcohol
+## 1                          0.0
+## 2                          4.9
+## 3                          0.7
+## 4                         12.4
 ```
 ---
 &lt;br&gt;
@@ -399,12 +404,229 @@ layout: true
 **DISKRETNI**
 - prebrojivi
 - npr. igraća kocka
+- integer, logical, character, factor
 ]
 .pull-right[
 **KONTINUIRANI**
 - postoje na kontinuiranoj skali
 - npr. težina ili visina
 ]
+---
+
+#### Primjeri diskretnih podataka (numerička varijabla)
+
+
+```r
+# Napravi integer varijablu sa dvanaest brojeva
+bubba &lt;- integer(12)
+# Pregledaj
+bubba
+```
+
+```
+##  [1] 0 0 0 0 0 0 0 0 0 0 0 0
+```
+
+```r
+# Pregledaj prvi element
+bubba[1]
+```
+
+```
+## [1] 0
+```
+
+```r
+# Promijeni 4. element u vrijednost 15
+bubba[4] &lt;- 15
+# Pregledaj
+bubba
+```
+
+```
+##  [1]  0  0  0 15  0  0  0  0  0  0  0  0
+```
+
+---
+
+#### Primjeri diskretnih podataka (numerička varijabla)
+
+
+
+```r
+# Napravi sekvencu
+sekvenca &lt;- seq(4,11,by=2)
+# Pregledaj
+sekvenca
+```
+
+```
+## [1]  4  6  8 10
+```
+
+```r
+# Napravi varijablu koja nije kontinuirana
+a &lt;- 1.2
+# Pregledaj
+typeof(a)
+```
+
+```
+## [1] "double"
+```
+
+```r
+# Pregledaj
+is.integer(a)
+```
+
+```
+## [1] FALSE
+```
+
+---
+
+#### Primjeri diskretnih podataka (logička varijabla)
+
+
+```r
+# Napravi logičku varaijablu
+logickaVar &lt;- logical(10)
+# Pregledaj
+logickaVar
+```
+
+```
+##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+```
+
+```r
+# Pregledaj
+typeof(logickaVar)
+```
+
+```
+## [1] "logical"
+```
+
+```r
+# Prilagodi 3. element
+logickaVar[3] &lt;- TRUE
+# Pregledaj
+logickaVar
+```
+
+```
+##  [1] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+```
+
+---
+
+#### Primjeri diskretnih podataka (logička varijabla)
+
+
+```r
+# Napravi logičku varaijablu
+l1 &lt;- c(TRUE,FALSE)
+# Napravi logičku varaijablu
+l2 &lt;- c(TRUE,TRUE)
+# Logički upit &amp;
+l1&amp;l1
+```
+
+```
+## [1]  TRUE FALSE
+```
+
+```r
+# Logički upit |
+l1|l2
+```
+
+```
+## [1] TRUE TRUE
+```
+
+---
+
+#### Primjeri diskretnih podataka (tekstualna (*chraracter*) varijabla)
+
+
+```r
+# Napravi chr varaijablu
+rijec &lt;- "hello"
+# Pregledaj
+rijec
+```
+
+```
+## [1] "hello"
+```
+
+```r
+# Vrsta
+typeof(rijec)
+```
+
+```
+## [1] "character"
+```
+
+```r
+# Napravi chr varaijablu
+viseTeksta &lt;- character(3)
+# Pregledaj
+viseTeksta
+```
+
+```
+## [1] "" "" ""
+```
+
+---
+
+#### Primjeri diskretnih podataka (tekstualna (*chraracter*) varijabla)
+
+
+```r
+# Napravi chr element
+viseTeksta[2] &lt;- "prvi element"
+viseTeksta[3] &lt;- 'hej, treći!'
+viseTeksta[1] &lt;- "prvi na prvom mjestu"
+# Pregledaj
+viseTeksta
+```
+
+```
+## [1] "prvi na prvom mjestu" "prvi element"         "hej, treći!"
+```
+
+---
+
+#### Primjeri diskretnih podataka (tekstualna (*chraracter*) varijabla)
+
+
+```r
+# Napravi numerički element
+broj &lt;- 3.0
+# Prgledaj
+typeof(broj)
+```
+
+```
+## [1] "double"
+```
+
+```r
+# Stvori chr iz numeričkog elementa
+rijec &lt;- as.character("broj")
+# Prgledaj
+typeof(rijec)
+```
+
+```
+## [1] "character"
+```
 ---
 layout: true
 # ČETIRI RAZINE PODATAKA
