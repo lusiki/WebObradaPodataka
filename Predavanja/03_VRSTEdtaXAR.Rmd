@@ -296,7 +296,6 @@ bubba
 
 #### Primjeri diskretnih podataka (numerička varijabla)
 
-
 ```{r echo = TRUE}
 # Napravi sekvencu
 sekvenca <- seq(4,11,by=2)
@@ -379,13 +378,63 @@ viseTeksta
 ```{r echo = TRUE}
 # Napravi numerički element
 broj <- 3.0
-# Prgledaj
+# Pregledaj
 typeof(broj)
 # Stvori chr iz numeričkog elementa
 rijec <- as.character("broj")
 # Prgledaj
 typeof(rijec)
 ```
+
+---
+
+#### Primjeri diskretnih podataka (factor varijabla)
+
+```{r echo = TRUE}
+# Napravi factor varijablu
+faktor <- factor(x=c("one","two","three","one", "one", "one", "two"))
+# Pregledaj
+faktor
+# Faktorske razine
+levels(faktor)
+# Sortiraj
+sort(faktor)
+```
+
+---
+
+#### Primjeri kontinuiranih podataka 
+
+```{r echo = TRUE}
+# Napravi kontinuiranu varijablu
+d <- double(8)
+# Pregledaj
+d
+# Pregledaj
+typeof(d)
+# Promijeni element
+d[3] <- 17.6
+# Pregledaj
+d
+# Pregledaj
+typeof(d)
+```
+
+---
+
+#### Primjeri specijalnih podataka 
+
+```{r echo = TRUE}
+# Stvori varijablu
+n <- c(NA,2,3,NA,5)
+# Pregledaj
+n
+# Primjena
+is.na(n)
+# Primjena
+n[!is.na(n)]
+```
+
 ---
 layout: true
 # ČETIRI RAZINE PODATAKA
@@ -415,7 +464,6 @@ layout: true
 
 - ne mogu se obavljati matematičke operacije poput zbrajanja ili djeljenja
 
-- računanje prosjeka ili drugih st
 
 ---
 <br>

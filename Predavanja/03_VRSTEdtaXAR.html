@@ -452,7 +452,6 @@ bubba
 #### Primjeri diskretnih podataka (numerička varijabla)
 
 
-
 ```r
 # Napravi sekvencu
 sekvenca &lt;- seq(4,11,by=2)
@@ -609,7 +608,7 @@ viseTeksta
 ```r
 # Napravi numerički element
 broj &lt;- 3.0
-# Prgledaj
+# Pregledaj
 typeof(broj)
 ```
 
@@ -627,6 +626,122 @@ typeof(rijec)
 ```
 ## [1] "character"
 ```
+
+---
+
+#### Primjeri diskretnih podataka (factor varijabla)
+
+
+```r
+# Napravi factor varijablu
+faktor &lt;- factor(x=c("one","two","three","one", "one", "one", "two"))
+# Pregledaj
+faktor
+```
+
+```
+## [1] one   two   three one   one   one   two  
+## Levels: one three two
+```
+
+```r
+# Faktorske razine
+levels(faktor)
+```
+
+```
+## [1] "one"   "three" "two"
+```
+
+```r
+# Sortiraj
+sort(faktor)
+```
+
+```
+## [1] one   one   one   one   three two   two  
+## Levels: one three two
+```
+
+---
+
+#### Primjeri kontinuiranih podataka 
+
+
+```r
+# Napravi kontinuiranu varijablu
+d &lt;- double(8)
+# Pregledaj
+d
+```
+
+```
+## [1] 0 0 0 0 0 0 0 0
+```
+
+```r
+# Pregledaj
+typeof(d)
+```
+
+```
+## [1] "double"
+```
+
+```r
+# Promijeni element
+d[3] &lt;- 17.6
+# Pregledaj
+d
+```
+
+```
+## [1]  0.0  0.0 17.6  0.0  0.0  0.0  0.0  0.0
+```
+
+```r
+# Pregledaj
+typeof(d)
+```
+
+```
+## [1] "double"
+```
+
+---
+
+#### Primjeri specijalnih podataka 
+
+
+```r
+# Stvori varijablu
+n &lt;- c(NA,2,3,NA,5)
+# Pregledaj
+n
+```
+
+```
+## [1] NA  2  3 NA  5
+```
+
+```r
+# Primjena
+is.na(n)
+```
+
+```
+## [1]  TRUE FALSE FALSE  TRUE FALSE
+```
+
+```r
+# Primjena
+n[!is.na(n)]
+```
+
+```
+## [1] 2 3 5
+```
+
 ---
 layout: true
 # ČETIRI RAZINE PODATAKA
@@ -656,7 +771,6 @@ layout: true
 
 - ne mogu se obavljati matematičke operacije poput zbrajanja ili djeljenja
 
-- računanje prosjeka ili drugih st
 
 ---
 &lt;br&gt;
