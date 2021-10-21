@@ -771,6 +771,53 @@ layout: true
 
 - ne mogu se obavljati matematičke operacije poput zbrajanja ili djeljenja
 
+---
+
+#### Primjer podataka nominalne razine
+
+
+
+```r
+# Napravi podatke
+spol_vector &lt;- c("Muški", "Ženski", "Ženski", "Muški", "Muški")
+# Pregledaj
+class(spol_vector)
+```
+
+```
+## [1] "character"
+```
+
+```r
+# Pregledaj
+spol_vector
+```
+
+```
+## [1] "Muški"  "Ženski" "Ženski" "Muški"  "Muški"
+```
+
+```r
+# Pretvori u faktor
+spol_vector_factor &lt;- factor(spol_vector)
+# Pregledaj
+class(spol_vector_factor)
+```
+
+```
+## [1] "factor"
+```
+
+```r
+# Pregledaj
+spol_vector_factor
+```
+
+```
+## [1] Muški  Ženski Ženski Muški  Muški 
+## Levels: Muški Ženski
+```
+
 
 ---
 &lt;br&gt;
@@ -791,38 +838,21 @@ layout: true
 
 ---
 
-#### Primjer
+#### Primjer podataka ordinalne razine
 
 
-```python
-# Učitaj paket
-import numpy
-# anketa o sreci na ljestvici 1-5
-results = [5, 4, 3, 4, 5, 3, 2, 5, 3, 2, 1, 4, 5, 3, 4, 4, 5, 4, 2, 1,
-4, 5, 4, 3, 2, 4, 4, 5, 4, 3, 2, 1]
-# sortiraj rezultate
-sorted_results = sorted(results)
-print("sortirani niz:",sorted_results)
+```r
+# Napravi chr varijablu
+dan_vector &lt;- c('jutro', 'zora', 'popodne', 'podne', 'ponoc', 'predvecer')
+# Pretvori u ordinalnu varijablu
+factor_dan &lt;- factor(dan_vector, order = TRUE, levels =c('zora', 'jutro', 'podne', 'popodne', 'predvecer', 'ponoc'))
+# Pregledaj
+factor_dan
 ```
 
 ```
-## sortirani niz: [1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5]
-```
-
-```python
-print ("prosjek:",round(numpy.mean(results),2))
-```
-
-```
-## prosjek: 3.44
-```
-
-```python
-print ("medijan:",round(numpy.median(results),2))
-```
-
-```
-## medijan: 4.0
+## [1] jutro     zora      popodne   podne     ponoc     predvecer
+## Levels: zora &lt; jutro &lt; podne &lt; popodne &lt; predvecer &lt; ponoc
 ```
 
 ---
@@ -830,6 +860,7 @@ print ("medijan:",round(numpy.median(results),2))
 #### Intervalna razina
 
 - npr. temperatura
+- kvantitativni podatci
 - opravdane su matematičke operacije poput zbrajanja i oduzimanja
 - opravdano korištenje mjera centralne tendencije i varijabilnosti
 
@@ -837,6 +868,7 @@ print ("medijan:",round(numpy.median(results),2))
 
 
 ```python
+import numpy
 # temperatura frizidera u fahrenheitima mjerena svakih sat vremena
 temps = [31, 32, 32, 31, 28, 29, 31, 38, 32, 31, 30, 29, 30, 31, 26]
 # pogledaj prosjek i medijan
@@ -888,6 +920,8 @@ print("stdev:",round(standard_deviation,2))
 
 #### Omjerna razina
 
+
+- kvantitativni podatci
 - opravdane matematičke operacije množenja i djeljenja
 - podatci na ovoj razni ne smiju biti negativni
 
@@ -912,6 +946,7 @@ print("geometrijska sredina:",geometric_mean)
 ```
 ## geometrijska sredina: 30.63473484374659
 ```
+
 ---
 layout: true
 # PODATCI U "PRAKSI"

@@ -464,6 +464,26 @@ layout: true
 
 - ne mogu se obavljati matematičke operacije poput zbrajanja ili djeljenja
 
+---
+
+#### Primjer podataka nominalne razine
+
+
+```{r echo = TRUE}
+# Napravi podatke
+spol_vector <- c("Muški", "Ženski", "Ženski", "Muški", "Muški")
+# Pregledaj
+class(spol_vector)
+# Pregledaj
+spol_vector
+# Pretvori u faktor
+spol_vector_factor <- factor(spol_vector)
+# Pregledaj
+class(spol_vector_factor)
+# Pregledaj
+spol_vector_factor
+```
+
 
 ---
 <br>
@@ -484,19 +504,15 @@ layout: true
 
 ---
 
-#### Primjer
+#### Primjer podataka ordinalne razine
 
-```{python, echo = T}
-# Učitaj paket
-import numpy
-# anketa o sreci na ljestvici 1-5
-results = [5, 4, 3, 4, 5, 3, 2, 5, 3, 2, 1, 4, 5, 3, 4, 4, 5, 4, 2, 1,
-4, 5, 4, 3, 2, 4, 4, 5, 4, 3, 2, 1]
-# sortiraj rezultate
-sorted_results = sorted(results)
-print("sortirani niz:",sorted_results)
-print ("prosjek:",round(numpy.mean(results),2))
-print ("medijan:",round(numpy.median(results),2))
+```{r, echo = T}
+# Napravi chr varijablu
+dan_vector <- c('jutro', 'zora', 'popodne', 'podne', 'ponoc', 'predvecer')
+# Pretvori u ordinalnu varijablu
+factor_dan <- factor(dan_vector, order = TRUE, levels =c('zora', 'jutro', 'podne', 'popodne', 'predvecer', 'ponoc'))
+# Pregledaj
+factor_dan
 ```
 
 ---
@@ -504,12 +520,14 @@ print ("medijan:",round(numpy.median(results),2))
 #### Intervalna razina
 
 - npr. temperatura
+- kvantitativni podatci
 - opravdane su matematičke operacije poput zbrajanja i oduzimanja
 - opravdano korištenje mjera centralne tendencije i varijabilnosti
 
 #### Primjer
 
 ```{python, echo = T}
+import numpy
 # temperatura frizidera u fahrenheitima mjerena svakih sat vremena
 temps = [31, 32, 32, 31, 28, 29, 31, 38, 32, 31, 30, 29, 30, 31, 26]
 # pogledaj prosjek i medijan
@@ -545,6 +563,8 @@ print("stdev:",round(standard_deviation,2))
 
 #### Omjerna razina
 
+
+- kvantitativni podatci
 - opravdane matematičke operacije množenja i djeljenja
 - podatci na ovoj razni ne smiju biti negativni
 
@@ -564,6 +584,7 @@ geometric_mean = product**(1./num_items)
 # prikazi rezultat
 print("geometrijska sredina:",geometric_mean)
 ```
+
 ---
 layout: true
 # PODATCI U "PRAKSI"
