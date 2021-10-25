@@ -1048,7 +1048,8 @@ name: cleaning
 ---
 
 # Izbacivanje objekata (i paketa)
-
+<br>
+<br>
 Koristite `rm()` da biste maknuli objekt iz radnog prostora.
 ```{r}
 a <- "hello"
@@ -1056,18 +1057,19 @@ b <- "world"
 rm(a, b)
 ```
 
-Također je moguće koristiti `rm(list = ls())` da bi se maknuli svi objekti iz radnog prostora (osim paketa). Ova funkcionalnst nije bez  [kritika](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/)! 
+Također je moguće koristiti `rm(list = ls())` da bi se maknuli svi objekti iz radnog prostora (osim paketa). Ova funkcionalnost nije bez  [kritika](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/)! 
 - Vjerojatno je bolje pokrenuti novu sesiju!
 
 --
 
-Izbacivanje paketa iz radnog prostora je problematično jer postoji mnoštvo cross-dependency-a  (i.e. pojedinačni paketi zavise i ponekad mogu automatski učitati druge). Ipak, probajte, e.g. `detach(package:dplyr)`
+Izbacivanje paketa iz radnog prostora je problematično jer postoji mnoštvo cross-dependency-a  (i.e. pojedinačni paketi su međuzavisni i ponekad mogu automatski učitati druge). Ipak, probajte, e.g. `detach(package:dplyr)`
 - Vjerojatno je bolje pokrenuti novu sesiju!
   
 ---
 
 # Izbacivanje grafika
-
+<br>
+<br>
 Moguće je koristiti `dev.off()` za izbacivanje bilo koje (i.e. svih) grafikona u tekućoj sesiji. Probajte u R conzoli:
 ```{r, eval=F}
 plot(1:10)

@@ -1096,7 +1096,6 @@ Moguće je koristiti `::` za rješavanje konfliktnih slučajeva.
 dplyr::starwars ## Prikaži starwars data frame iz dplyr paketa
 scales::comma(c(1000, 1000000)) ## Koristi comma funkciju, iz scales paketa
 ```
-
 --
 
 `::` sintaksa znači da možete koristiti funkciju bez učitavanja paketa.
@@ -1148,7 +1147,7 @@ Već smo vidjeli primjer indeksiranja u outputu konzole. Primjerice:
 ## [1] 3
 ```
 
-`[1]` označava prvi (i, uovom slučaju, jedini) element našeg outputa.&lt;sup&gt;1&lt;/sup&gt; U ovom slučaju vektor duljine tri, ima vrijednost "3".
+`[1]` označava prvi (i, u ovom slučaju, jedini) element našeg outputa.
 
 --
 
@@ -1168,7 +1167,7 @@ rnorm(n = 100, mean = 0, sd = 1)
 # Opcija 1: [] (dalje)
 
 
-Još važnije, sintaksu `[]` je koguće koristiti za indeksiranje objekata u R.
+Još važnije, sintaksu `[]` je moguće koristiti za indeksiranje objekata u R.
 
 ```r
 a &lt;- 1:10
@@ -1214,7 +1213,7 @@ Nismo ih do sada puno spominjali ali **liste** su kompleksnije vrste array objek
 
 --
 
-Indeksiranje lilsti zahtjeva dvostruke zagrade `[[]]` za indeksiranje "parent" elemenata list-e i jednostruke zagrade`[]` za indeksiranje unutar tog "parent" elementa. Primjerice:
+Indeksiranje listi zahtjeva dvostruke zagrade `[[]]` za indeksiranje "parent" elemenata list-e i jednostruke zagrade`[]` za indeksiranje unutar tog "parent" elementa. Primjerice:
 
 ```r
 my_list &lt;- list(a = "hello", b = c(1,2,3), c = data.frame(x = 1:5, y = 6:10))
@@ -1297,7 +1296,8 @@ my_list
 ---
 
 # Opcija 2: $ (dalje)
-
+&lt;br&gt;
+&lt;br&gt;
 Moguće je indeksirati te objekte pomoću dolarskog znaka, e.g.
 
 ```r
@@ -1327,7 +1327,8 @@ my_list$c$x ## Vrati kolonu "x" iz objekta "c"
 ---
 
 # Opcija 2: $ (dalje)
-
+&lt;br&gt;
+&lt;br&gt;
 `$` indeksiranje funkcionira i za druge objekte u R. 
 
 U nekim slučajevima je moguće kombinirati obje opcije indeksiranja.
@@ -1348,7 +1349,8 @@ Primjetite neke razlike između prethodnog i `starwars[1, 1]` primjera. Koje su 
 ---
 
 # Opcija 2: $ (dalje)
-
+&lt;br&gt;
+&lt;br&gt;
 Zadnje što je potrebno naglasiti vezano uz indeksiranje putem `$` je da ćemo tako izbjeći problem koji se javio kod neuspješnog pozivanja varijabli u primjeru regresije.
 
 
@@ -1386,7 +1388,8 @@ name: cleaning
 ---
 
 # Izbacivanje objekata (i paketa)
-
+&lt;br&gt;
+&lt;br&gt;
 Koristite `rm()` da biste maknuli objekt iz radnog prostora.
 
 ```r
@@ -1395,18 +1398,19 @@ b &lt;- "world"
 rm(a, b)
 ```
 
-Također je moguće koristiti `rm(list = ls())` da bi se maknuli svi objekti iz radnog prostora (osim paketa). Ova funkcionalnst nije bez  [kritika](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/)! 
+Također je moguće koristiti `rm(list = ls())` da bi se maknuli svi objekti iz radnog prostora (osim paketa). Ova funkcionalnost nije bez  [kritika](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/)! 
 - Vjerojatno je bolje pokrenuti novu sesiju!
 
 --
 
-Izbacivanje paketa iz radnog prostora je problematično jer postoji mnoštvo cross-dependency-a  (i.e. pojedinačni paketi zavise i ponekad mogu automatski učitati druge). Ipak, probajte, e.g. `detach(package:dplyr)`
+Izbacivanje paketa iz radnog prostora je problematično jer postoji mnoštvo cross-dependency-a  (i.e. pojedinačni paketi su međuzavisni i ponekad mogu automatski učitati druge). Ipak, probajte, e.g. `detach(package:dplyr)`
 - Vjerojatno je bolje pokrenuti novu sesiju!
   
 ---
 
 # Izbacivanje grafika
-
+&lt;br&gt;
+&lt;br&gt;
 Moguće je koristiti `dev.off()` za izbacivanje bilo koje (i.e. svih) grafikona u tekućoj sesiji. Probajte u R conzoli:
 
 ```r
