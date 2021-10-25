@@ -626,6 +626,15 @@ layout: true
 <br>
 - npr. financijsko trgovanje
 
+```{r include = FALSE,eval = FALSE,echo=FALSE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
+library(Quandl)
+source("../Secret/Passkey.R")
+bitcoin <- Quandl("BITFINEX/LUNAF0USTF0", start_date='2019-10-20', end_date='2021-10-20')
+ggplot(bitcoin, aes(x = Date, y = Last)) + geom_line() + labs(x = "BitCoin (BTC)")
+```
+
+
+
 ---
 <br>
 <br>
