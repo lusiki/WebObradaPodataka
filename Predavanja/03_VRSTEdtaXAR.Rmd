@@ -631,6 +631,66 @@ library(Quandl)
 source("../Secret/Passkey.R")
 bitcoin <- Quandl("BITFINEX/LUNAF0USTF0", start_date='2019-10-20', end_date='2021-10-20')
 ggplot(bitcoin, aes(x = Date, y = Last)) + geom_line() + labs(x = "BitCoin (BTC)")
+
+library(ggplot2)
+library(dplyr)
+library(maddison)
+library(tidyr)
+oil <-  Quandl("FRED/DCOILBRENTEU", start_date='1987-5-01', end_date='2021-10-20')
+
+ggplot(oil, aes(x = Date, y = Value)) + geom_line() + labs(x = "Brent")
+
+oil2 <-  Quandl("BP/CRUDE_OIL_PRICES", start_date='1862-01-01', end_date='2021-10-20') %>%
+  rename(Price2020USD = "Price in 2020 Dollars",
+         PriceContUSD = "Price in Contemporary Dollars")
+
+
+ggplot(oil2, aes(x = Date, y = PriceContUSD)) + geom_line() + labs(x = "Brent")
+
+OPEC <- c("Algeria", "Angola", "Ecuador", "Iran", "Iraq", "Kuwait", "Libya",
+"Nigeria", "Qatar", "Saudi Arabia", "United Arab Emirates", "Venezuela")
+
+IMPORT <- c("Brazil", "China","India", "Malaysia", "Philippines", "Thailand", "Turkey", "South Africa")
+
+OPECmad <- maddison %>%
+  filter(country %in% OPEC) %>%
+  filter(year >= 1901) %>%
+  mutate(class = "OPEC") %>%
+  select(year,country,rgdpnapc,pop, class)
+
+IMPORTmad <- maddison %>%
+  filter(country %in% IMPORT) %>%
+  filter(year >= 1901) %>%
+  mutate(class = "IMPORT") %>%
+  select(year,country,rgdpnapc,pop, class)
+
+OIL <- oil2 %>%
+  mutate(year = format(Date, format = "%Y")) %>%
+  filter(year > 1900 & year < 2017) %>%
+  select(year,PriceContUSD,Price2020USD)
+
+GDP <- rbind.data.frame( OPECmad,IMPORTmad)
+
+GDPspread <- GDP %>%
+  select(year,country, rgdpnapc) %>%
+  spread(country, rgdpnapc) 
+
+OilGdp <- cbind.data.frame(GDPspread, OIL) 
+
+OilGdp <- OilGdp[,-1] %>% 
+  select(year,everything())
+
+write.csv2(OilGdp,"C:/Users/Lukas/OneDrive/Desktop/OilGdp.csv")
+
+OilGdp <- merge(GDP, OIL, by= "year", all = TRUE) %>%
+  spread(country, rgdpnapc)
+
+
+
+
+
+range(OPECmad$year)
+range(IMPORTmad$year)
 ```
 
 
