@@ -226,7 +226,7 @@ Ovo su glavni paketi za **čišćenje i manipulaciju** podatcima. Zbog toga će 
 # Dodatak o pipe-ovima: %&gt;%
 
 
-`%&gt;%` se u R naziva pipe operator i automatski se učita sa `tidyverse`-om.
+`%&gt;%` se u R naziva **pipe operator** i automatski se učita sa `tidyverse`-om.
   
 Pipe operatori su sjani i njihovo korištenje znatno poboljšava iskustvo kodiranja. Usporedite:
 
@@ -246,14 +246,14 @@ summarise(group_by(filter(mpg, manufacturer=="audi"), model), hwy_mean = mean(hw
 Prva linija koda se čita s ijeva na desno, baš kao što nalaže intuicija. 
 - Uzmi objekt (`mpg`), napravi ovo (`filter`), nakon toga napravi (`group_by`), etc.
 
-Druga linija koda ima obrnutu intuiciju:zadnja operacija je logički na prvom mjestu! 
+Druga linija koda ima obrnutu intuiciju : zadnja operacija je logički na prvom mjestu! 
 - Tko želi čitati stvari iznutra -&gt; van!?
 
 ---
 
 # Dodatak o pipe-ovima: %&gt;%
-
-Pipe verzija koda je još čitljivija ako se napiše kroz nekoliko redova:
+&lt;br&gt;
+*Pipe verzija koda* je još čitljivija jer/kada se napiše kroz nekoliko redova:
 
 ```r
 mpg %&gt;% 
@@ -271,11 +271,11 @@ mpg %&gt;%
 ## 3 a6 quattro     24
 ```
 
-Zapamtite: Korištenje prostora ne košta ništa, a doprinosi čitljivosti koda.
+**Hint**: Korištenje prostora ne košta ništa, a doprinosi čitljivosti koda.
 
 --
 
-PS — Pipe orginalno potječe iz [**magrittr**](https://magrittr.tidyverse.org/) paketa ([geddit?](https://en.wikipedia.org/wiki/The_Treachery_of_Images)) i omogućava mnoštvo sjajnih stvari ako želite dodatno istražiti...
+PS — Pipe orginalno potječe iz [**magrittr**](https://magrittr.tidyverse.org/) paketa ([geddit?](https://en.wikipedia.org/wiki/The_Treachery_of_Images)) i omogućava mnoštvo sjajnih stvari koje želite dodatno istražiti...
 
 
 ---
@@ -285,14 +285,13 @@ name: dplyr
 # dplyr
 
 &lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=796px&gt;&lt;/html&gt;
-(Workhorse!)
+(Ghost busters!)
 ---
 
-
 # Dodatno: dplyr 1.0.0 verzija
-
-Neke od **dplyr** svojstava koja ćemo obraditi danas dolaze iz [verzije 1.0.0](https://www.tidyverse.org/blog/2020/06/dplyr-1-0-0/) paketa.
-- Verzija 1.0.0 je bitna jer donosi stabilnu verziju paketa. Utrenutku pisanja ovih, aktualna verzija je 1.0.2. 
+&lt;br&gt;
+Neke od `dplyr` svojstava koja ćemo obraditi danas dolaze iz [verzije 1.0.0](https://www.tidyverse.org/blog/2020/06/dplyr-1-0-0/) paketa.
+- Verzija 1.0.0 je bitna jer donosi stabilnu verziju paketa. U trenutku pisanja, aktualna verzija je 1.0.7. 
 - Provjerite da li imate barem **dplyr** 1.0.0.
 
 
@@ -318,14 +317,14 @@ options(dplyr.summarise.inform = FALSE) ## dodaj .Rprofile za trajno isključenj
 ---
 
 # Ključne dplyr funkcije
-
+&lt;br&gt;
 Postoji pet osnovnih dplyr funkcija koje je jako korisno naučiti.
 
-1. `filter`: Filtriranje (i.e. subset) redova prema vrijednostima.
+1. `filter`: Filtriranje (i.e. *subset*) redova prema vrijednostima.
 
-2. `arrange`: Uređivanje (i.e. reorder) redova prema vrijednostima.
+2. `arrange`: Uređivanje (i.e. *reorder*) redova prema vrijednostima.
 
-3. `select`: Izaberi (i.e. subset) kolone prema nazivima: 
+3. `select`: Izaberi (i.e. *subset*) kolone prema nazivima: 
 
 4. `mutate`: Stvori nove kolone.
 
@@ -339,13 +338,15 @@ Postoji pet osnovnih dplyr funkcija koje je jako korisno naučiti.
 
 &lt;/br&gt;
 
-Za pregled dplyr funkcionalnosti ćemo koristiti `starwars` podatkovni skup koji dolazi sa dplyr paketom. 
+Za pregled `dplyr` funkcionalnosti ćemo koristiti `starwars` podatkovni skup koji dolazi unutar `dplyr` paketa. Pregledajte `starwars` podatke sami.
 
 ---
 
-# 1) dplyr::filter
-
+# 1) dplyr :: filter
+&lt;br&gt;
 Moguće je koristiti više filter naredbi sa pipe (`%&gt;%`) operatorom ili ih odvojiti unutar zagrade zarezom.
+&lt;br&gt;
+
 
 ```r
 starwars %&gt;% 
@@ -369,10 +370,11 @@ starwars %&gt;%
 
 ---
 
-# 1) dplyr::filter (*dalje*)
-
-Regularni izrazi također funkcioniraju.
-
+# 1) dplyr :: filter (*dalje*)
+&lt;br&gt;
+[Regex](https://en.wikipedia.org/wiki/Regular_expression) izrazi također funkcioniraju.
+&lt;br&gt;
+&lt;br&gt;
 
 ```r
 starwars %&gt;% 
@@ -392,10 +394,9 @@ starwars %&gt;%
 
 ---
 
-
-# 1) dplyr::filter (*dalje*)
-
-`Filter` se često koristi za identifikaciju (ili midanje) nedostajećih opservacija. 
+# 1) dplyr :: filter (*dalje*)
+&lt;br&gt;
+`Filter` se često koristi za (npr.) identifikaciju (ili uklanjanje) NA opservacija. 
 
 ```r
 starwars %&gt;% 
@@ -420,12 +421,12 @@ starwars %&gt;%
 
 &lt;/br&gt;
 
-Za micanje nedostajećih opservacija je moguće koristiti negaciju: `filter(!is.na(height))`. Isprobajte!
+Za uklanjanje NA opservacija je moguće koristiti negaciju: `filter(!is.na(height))`. Isprobajte!
 
 ---
 
-# 2) dplyr::arrange
-
+# 2) dplyr :: arrange
+&lt;br&gt;
 
 ```r
 starwars %&gt;% 
@@ -456,10 +457,9 @@ starwars %&gt;%
 
 ---
 
+# 2) dplyr :: arrange (*dalje*)
 
-# 2) dplyr::arrange (*dalje*)
-
-Moguće je i uređivanje po pdajućem redosljedu `arrange(desc())`.
+Moguće je i uređivanje po padajućem redosljedu `arrange(desc())`.
 
 ```r
 starwars %&gt;% 
@@ -486,9 +486,9 @@ starwars %&gt;%
 
 ---
 
-# 3) dplyr::select
+# 3) dplyr :: select
 
-Zarezi se mogu koristiti za izbor više kolona df-a.(Dozvoljena je i sintaksa "first:last" za sukcesivne kolone). Makni kolonu sa `-`.
+Zarezi se mogu koristiti za izbor više kolona df-a. (Dozvoljena je i sintaksa `first : last` za sukcesivne kolone). Makni kolonu sa `-`.
 
 ```r
 starwars %&gt;% 
@@ -514,7 +514,7 @@ starwars %&gt;%
 
 ---
 
-# 3) dplyr::select (*dalje*)
+# 3) dplyr :: select (*dalje*)
 
 Moguće je promijeniti naziv jedne ili više kolona.
 
@@ -547,8 +547,8 @@ Promjena naziva kolone bez subseting-a je moguće sa `rename` funkcijom. Probajt
 ---
 
 
-# 3) dplyr::select (*dalje*)
-
+# 3) dplyr :: select (*dalje*)
+&lt;br&gt;
 `select(contains(PATTERN))` opcija je jako korisna u nekim slučajevima.
 
 ```r
@@ -575,9 +575,9 @@ starwars %&gt;%
 
 ---
 
-# 3) dplyr::select (*dalje*)
+# 3) dplyr :: select (*dalje*)
 
-`select(..., everything())` opcija je također korisna ukoliko želite sortirati nazive kolona (i.e. staviti neke na prvo mjesto).
+`select(..., everything())` opcija je također korisna za sortiranje naziva kolona (i.e. stavi određenu kolonu na prvo mjesto).
 
 
 ```r
@@ -602,11 +602,11 @@ starwars %&gt;%
 --
 
 &lt;/br&gt;
-*Note:* Nova `relocate` funkcija je dostupna u dplyr 1.0.0 i nudi još funkcionalnosti kod uređivanja redosljeda kolona. [Pogledaj detaljnije!](https://www.tidyverse.org/blog/2020/03/dplyr-1-0-0-select-rename-relocate/).
+*Note:* Nova `relocate` funkcija nudi još funkcionalnosti kod uređivanja redosljeda kolona. [Pogledaj detaljnije!](https://www.tidyverse.org/blog/2020/03/dplyr-1-0-0-select-rename-relocate/)
 
 ---
 
-# 4) dplyr::mutate
+# 4) dplyr :: mutate
 
 Nove kolone možete stvoriti ni iz čega ili (češće) kao transformaciju postojećih kolona.
 
@@ -637,7 +637,7 @@ starwars %&gt;%
 ---
 
 
-# 4) dplyr::mutate (*dalje*)
+# 4) dplyr :: mutate (*dalje*)
 
 *Note:* `mutate` funkcija uvažava redosljed. Moguće je napraviti više lančanih funkcija u jednom pozivu.
 
@@ -669,7 +669,7 @@ starwars %&gt;%
 
 ---
 
-# 4) dplyr::mutate (*dalje*)
+# 4) dplyr :: mutate (*dalje*)
 
 Boolean, logički i kondicionalni operatori se mogu dobro kombinirati sa `mutate`:
 
@@ -691,7 +691,7 @@ starwars %&gt;%
 
 ---
 
-# 4) dplyr::mutate (*dalje*)
+# 4) dplyr :: mutate (*dalje*)
 
 Kombiniranje `mutate` sa novom `across` funkcijom u dplyr 1.0.0+ omogućava jednostavan rad na selekciji varijabli. Primjerice:
 
@@ -721,7 +721,7 @@ starwars %&gt;%
 
 ---
 
-# 5) dplyr::summarise
+# 5) dplyr :: summarise
 
 Posebno korisno u kombinaciji sa `group_by` funkcijom.
 
@@ -755,7 +755,7 @@ starwars %&gt;%
 
 ---
 
-# 5) dplyr::summarise (*dalje*)
+# 5) dplyr :: summarise (*dalje*)
 
 Uključite funkcijski argument **na.rm = TRUE*** (ili **na.rm = T**) kod `summarise` funkcija. U suprotnom će nedostajeće vrijednosti biti uključene u output :-/
 
@@ -787,7 +787,7 @@ starwars %&gt;%
 
 ---
 
-# 5) dplyr::summarise (*dalje*)
+# 5) dplyr :: summarise (*dalje*)
 
  `across` pristup koji smo vidjeli sa `mutate` maloprije također funkcionira sa `summarise` funkcijom. Primjerice:
 
@@ -1046,9 +1046,9 @@ stocks
 ```
 
 ```
-##         time         X         Y        Z
-## 1 2009-01-01 0.1557671  2.102866 2.856705
-## 2 2009-01-02 0.6381450 -2.078261 3.642015
+##         time         X          Y        Z
+## 1 2009-01-01 -1.064030 -0.3705538 2.411109
+## 2 2009-01-02 -1.953833 -0.8793380 3.858318
 ```
 
 ```r
@@ -1059,12 +1059,12 @@ stocks %&gt;% pivot_longer(-time, names_to="stock", values_to="price")
 ## # A tibble: 6 x 3
 ##   time       stock  price
 ##   &lt;date&gt;     &lt;chr&gt;  &lt;dbl&gt;
-## 1 2009-01-01 X      0.156
-## 2 2009-01-01 Y      2.10 
-## 3 2009-01-01 Z      2.86 
-## 4 2009-01-02 X      0.638
-## 5 2009-01-02 Y     -2.08 
-## 6 2009-01-02 Z      3.64
+## 1 2009-01-01 X     -1.06 
+## 2 2009-01-01 Y     -0.371
+## 3 2009-01-01 Z      2.41 
+## 4 2009-01-02 X     -1.95 
+## 5 2009-01-02 Y     -0.879
+## 6 2009-01-02 Z      3.86
 ```
 
 ---
@@ -1092,10 +1092,10 @@ tidy_stocks %&gt;% pivot_wider(names_from=stock, values_from=price)
 
 ```
 ## # A tibble: 2 x 4
-##   time           X     Y     Z
-##   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 2009-01-01 0.156  2.10  2.86
-## 2 2009-01-02 0.638 -2.08  3.64
+##   time           X      Y     Z
+##   &lt;date&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1 2009-01-01 -1.06 -0.371  2.41
+## 2 2009-01-02 -1.95 -0.879  3.86
 ```
 
 ```r
@@ -1106,9 +1106,9 @@ tidy_stocks %&gt;% pivot_wider(names_from=time, values_from=price)
 ## # A tibble: 3 x 3
 ##   stock `2009-01-01` `2009-01-02`
 ##   &lt;chr&gt;        &lt;dbl&gt;        &lt;dbl&gt;
-## 1 X            0.156        0.638
-## 2 Y            2.10        -2.08 
-## 3 Z            2.86         3.64
+## 1 X           -1.06        -1.95 
+## 2 Y           -0.371       -0.879
+## 3 Z            2.41         3.86
 ```
 
 --
@@ -1210,10 +1210,10 @@ gdp
 
 ```
 ##     yr mnth dy       gdp
-## 1 2016    1  1  98.68364
-## 2 2016    1  2 102.14614
-## 3 2016    1  3  97.06894
-## 4 2016    1  4  99.03176
+## 1 2016    1  1 100.75345
+## 2 2016    1  2 102.76841
+## 3 2016    1  3 100.41879
+## 4 2016    1  4  99.68149
 ```
 
 ```r
@@ -1223,10 +1223,10 @@ gdp %&gt;% unite(date, c("yr", "mnth", "dy"), sep = "-")
 
 ```
 ##       date       gdp
-## 1 2016-1-1  98.68364
-## 2 2016-1-2 102.14614
-## 3 2016-1-3  97.06894
-## 4 2016-1-4  99.03176
+## 1 2016-1-1 100.75345
+## 2 2016-1-2 102.76841
+## 3 2016-1-3 100.41879
+## 4 2016-1-4  99.68149
 ```
 
 ---
@@ -1244,10 +1244,10 @@ gdp_u
 ## # A tibble: 4 x 2
 ##   date       gdp
 ##   &lt;chr&gt;    &lt;dbl&gt;
-## 1 2016-1-1  98.7
-## 2 2016-1-2 102. 
-## 3 2016-1-3  97.1
-## 4 2016-1-4  99.0
+## 1 2016-1-1 101. 
+## 2 2016-1-2 103. 
+## 3 2016-1-3 100. 
+## 4 2016-1-4  99.7
 ```
 
 --
@@ -1269,10 +1269,10 @@ gdp_u %&gt;% mutate(date = ymd(date))
 ## # A tibble: 4 x 2
 ##   date         gdp
 ##   &lt;date&gt;     &lt;dbl&gt;
-## 1 2016-01-01  98.7
-## 2 2016-01-02 102. 
-## 3 2016-01-03  97.1
-## 4 2016-01-04  99.0
+## 1 2016-01-01 101. 
+## 2 2016-01-02 103. 
+## 3 2016-01-03 100. 
+## 4 2016-01-04  99.7
 ```
 
 ---

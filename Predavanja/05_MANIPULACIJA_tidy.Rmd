@@ -198,7 +198,7 @@ Ovo su glavni paketi za **čišćenje i manipulaciju** podatcima. Zbog toga će 
 # Dodatak o pipe-ovima: %>%
 
 
-`%>%` se u R naziva pipe operator i automatski se učita sa `tidyverse`-om.
+`%>%` se u R naziva **pipe operator** i automatski se učita sa `tidyverse`-om.
   
 Pipe operatori su sjani i njihovo korištenje znatno poboljšava iskustvo kodiranja. Usporedite:
 
@@ -217,14 +217,14 @@ summarise(group_by(filter(mpg, manufacturer=="audi"), model), hwy_mean = mean(hw
 Prva linija koda se čita s ijeva na desno, baš kao što nalaže intuicija. 
 - Uzmi objekt (`mpg`), napravi ovo (`filter`), nakon toga napravi (`group_by`), etc.
 
-Druga linija koda ima obrnutu intuiciju:zadnja operacija je logički na prvom mjestu! 
+Druga linija koda ima obrnutu intuiciju : zadnja operacija je logički na prvom mjestu! 
 - Tko želi čitati stvari iznutra -> van!?
 
 ---
 
 # Dodatak o pipe-ovima: %>%
-
-Pipe verzija koda je još čitljivija ako se napiše kroz nekoliko redova:
+<br>
+*Pipe verzija koda* je još čitljivija jer/kada se napiše kroz nekoliko redova:
 ```{r pipe}
 mpg %>% 
   filter(manufacturer=="audi") %>% 
@@ -232,11 +232,11 @@ mpg %>%
   summarise(hwy_mean = mean(hwy))
 ```
 
-Zapamtite: Korištenje prostora ne košta ništa, a doprinosi čitljivosti koda.
+**Hint**: Korištenje prostora ne košta ništa, a doprinosi čitljivosti koda.
 
 --
 
-PS — Pipe orginalno potječe iz [**magrittr**](https://magrittr.tidyverse.org/) paketa ([geddit?](https://en.wikipedia.org/wiki/The_Treachery_of_Images)) i omogućava mnoštvo sjajnih stvari ako želite dodatno istražiti...
+PS — Pipe orginalno potječe iz [**magrittr**](https://magrittr.tidyverse.org/) paketa ([geddit?](https://en.wikipedia.org/wiki/The_Treachery_of_Images)) i omogućava mnoštvo sjajnih stvari koje želite dodatno istražiti...
 
 
 ---
@@ -246,14 +246,13 @@ name: dplyr
 # dplyr
 
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>
-(Workhorse!)
+(Ghost busters!)
 ---
 
-
 # Dodatno: dplyr 1.0.0 verzija
-
-Neke od **dplyr** svojstava koja ćemo obraditi danas dolaze iz [verzije 1.0.0](https://www.tidyverse.org/blog/2020/06/dplyr-1-0-0/) paketa.
-- Verzija 1.0.0 je bitna jer donosi stabilnu verziju paketa. Utrenutku pisanja ovih, aktualna verzija je 1.0.2. 
+<br>
+Neke od `dplyr` svojstava koja ćemo obraditi danas dolaze iz [verzije 1.0.0](https://www.tidyverse.org/blog/2020/06/dplyr-1-0-0/) paketa.
+- Verzija 1.0.0 je bitna jer donosi stabilnu verziju paketa. U trenutku pisanja, aktualna verzija je 1.0.7. 
 - Provjerite da li imate barem **dplyr** 1.0.0.
 
 ```{r dplyr_vers, cache=FALSE}
@@ -271,14 +270,14 @@ options(dplyr.summarise.inform = FALSE) ## dodaj .Rprofile za trajno isključenj
 ---
 
 # Ključne dplyr funkcije
-
+<br>
 Postoji pet osnovnih dplyr funkcija koje je jako korisno naučiti.
 
-1. `filter`: Filtriranje (i.e. subset) redova prema vrijednostima.
+1. `filter`: Filtriranje (i.e. *subset*) redova prema vrijednostima.
 
-2. `arrange`: Uređivanje (i.e. reorder) redova prema vrijednostima.
+2. `arrange`: Uređivanje (i.e. *reorder*) redova prema vrijednostima.
 
-3. `select`: Izaberi (i.e. subset) kolone prema nazivima: 
+3. `select`: Izaberi (i.e. *subset*) kolone prema nazivima: 
 
 4. `mutate`: Stvori nove kolone.
 
@@ -292,13 +291,15 @@ Postoji pet osnovnih dplyr funkcija koje je jako korisno naučiti.
 
 </br>
 
-Za pregled dplyr funkcionalnosti ćemo koristiti `starwars` podatkovni skup koji dolazi sa dplyr paketom. 
+Za pregled `dplyr` funkcionalnosti ćemo koristiti `starwars` podatkovni skup koji dolazi unutar `dplyr` paketa. Pregledajte `starwars` podatke sami.
 
 ---
 
-# 1) dplyr::filter
-
+# 1) dplyr :: filter
+<br>
 Moguće je koristiti više filter naredbi sa pipe (`%>%`) operatorom ili ih odvojiti unutar zagrade zarezom.
+<br>
+
 ```{r filter1}
 starwars %>% 
   filter( 
@@ -309,10 +310,11 @@ starwars %>%
 
 ---
 
-# 1) dplyr::filter (*dalje*)
-
-Regularni izrazi također funkcioniraju.
-
+# 1) dplyr :: filter (*dalje*)
+<br>
+[Regex](https://en.wikipedia.org/wiki/Regular_expression) izrazi također funkcioniraju.
+<br>
+<br>
 ```{r filter2}
 starwars %>% 
   filter(grepl("Skywalker", name))
@@ -320,10 +322,9 @@ starwars %>%
 
 ---
 
-
-# 1) dplyr::filter (*dalje*)
-
-`Filter` se često koristi za identifikaciju (ili midanje) nedostajećih opservacija. 
+# 1) dplyr :: filter (*dalje*)
+<br>
+`Filter` se često koristi za (npr.) identifikaciju (ili uklanjanje) NA opservacija. 
 ```{r filter3}
 starwars %>% 
   filter(is.na(height))
@@ -333,12 +334,12 @@ starwars %>%
 
 </br>
 
-Za micanje nedostajećih opservacija je moguće koristiti negaciju: `filter(!is.na(height))`. Isprobajte!
+Za uklanjanje NA opservacija je moguće koristiti negaciju: `filter(!is.na(height))`. Isprobajte!
 
 ---
 
-# 2) dplyr::arrange
-
+# 2) dplyr :: arrange
+<br>
 ```{r arrange1}
 starwars %>% 
   arrange(birth_year)
@@ -350,10 +351,9 @@ starwars %>%
 
 ---
 
+# 2) dplyr :: arrange (*dalje*)
 
-# 2) dplyr::arrange (*dalje*)
-
-Moguće je i uređivanje po pdajućem redosljedu `arrange(desc())`.
+Moguće je i uređivanje po padajućem redosljedu `arrange(desc())`.
 ```{r arrange2}
 starwars %>% 
   arrange(desc(birth_year))
@@ -361,9 +361,9 @@ starwars %>%
 
 ---
 
-# 3) dplyr::select
+# 3) dplyr :: select
 
-Zarezi se mogu koristiti za izbor više kolona df-a.(Dozvoljena je i sintaksa "first:last" za sukcesivne kolone). Makni kolonu sa `-`.
+Zarezi se mogu koristiti za izbor više kolona df-a. (Dozvoljena je i sintaksa `first : last` za sukcesivne kolone). Makni kolonu sa `-`.
 ```{r select1}
 starwars %>% 
   select(name:skin_color, species, -height)
@@ -371,7 +371,7 @@ starwars %>%
 
 ---
 
-# 3) dplyr::select (*dalje*)
+# 3) dplyr :: select (*dalje*)
 
 Moguće je promijeniti naziv jedne ili više kolona.
 ```{r select2}
@@ -386,8 +386,8 @@ Promjena naziva kolone bez subseting-a je moguće sa `rename` funkcijom. Probajt
 ---
 
 
-# 3) dplyr::select (*dalje*)
-
+# 3) dplyr :: select (*dalje*)
+<br>
 `select(contains(PATTERN))` opcija je jako korisna u nekim slučajevima.
 ```{r select3}
 starwars %>% 
@@ -396,9 +396,9 @@ starwars %>%
 
 ---
 
-# 3) dplyr::select (*dalje*)
+# 3) dplyr :: select (*dalje*)
 
-`select(..., everything())` opcija je također korisna ukoliko želite sortirati nazive kolona (i.e. staviti neke na prvo mjesto).
+`select(..., everything())` opcija je također korisna za sortiranje naziva kolona (i.e. stavi određenu kolonu na prvo mjesto).
 
 ```{r select4}
 starwars %>% 
@@ -409,11 +409,11 @@ starwars %>%
 --
 
 </br>
-*Note:* Nova `relocate` funkcija je dostupna u dplyr 1.0.0 i nudi još funkcionalnosti kod uređivanja redosljeda kolona. [Pogledaj detaljnije!](https://www.tidyverse.org/blog/2020/03/dplyr-1-0-0-select-rename-relocate/).
+*Note:* Nova `relocate` funkcija nudi još funkcionalnosti kod uređivanja redosljeda kolona. [Pogledaj detaljnije!](https://www.tidyverse.org/blog/2020/03/dplyr-1-0-0-select-rename-relocate/)
 
 ---
 
-# 4) dplyr::mutate
+# 4) dplyr :: mutate
 
 Nove kolone možete stvoriti ni iz čega ili (češće) kao transformaciju postojećih kolona.
 ```{r mutate1}
@@ -426,7 +426,7 @@ starwars %>%
 ---
 
 
-# 4) dplyr::mutate (*dalje*)
+# 4) dplyr :: mutate (*dalje*)
 
 *Note:* `mutate` funkcija uvažava redosljed. Moguće je napraviti više lančanih funkcija u jednom pozivu.
 ```{r mutate2}
@@ -440,7 +440,7 @@ starwars %>%
 
 ---
 
-# 4) dplyr::mutate (*dalje*)
+# 4) dplyr :: mutate (*dalje*)
 
 Boolean, logički i kondicionalni operatori se mogu dobro kombinirati sa `mutate`:
 ```{r mutate3}
@@ -453,7 +453,7 @@ starwars %>%
 
 ---
 
-# 4) dplyr::mutate (*dalje*)
+# 4) dplyr :: mutate (*dalje*)
 
 Kombiniranje `mutate` sa novom `across` funkcijom u dplyr 1.0.0+ omogućava jednostavan rad na selekciji varijabli. Primjerice:
 
@@ -471,7 +471,7 @@ starwars %>%
 
 ---
 
-# 5) dplyr::summarise
+# 5) dplyr :: summarise
 
 Posebno korisno u kombinaciji sa `group_by` funkcijom.
 ```{r summ1}
@@ -482,7 +482,7 @@ starwars %>%
 
 ---
 
-# 5) dplyr::summarise (*dalje*)
+# 5) dplyr :: summarise (*dalje*)
 
 Uključite funkcijski argument **na.rm = TRUE*** (ili **na.rm = T**) kod `summarise` funkcija. U suprotnom će nedostajeće vrijednosti biti uključene u output :-/
 ```{r summ2}
@@ -496,7 +496,7 @@ starwars %>%
 
 ---
 
-# 5) dplyr::summarise (*dalje*)
+# 5) dplyr :: summarise (*dalje*)
 
  `across` pristup koji smo vidjeli sa `mutate` maloprije također funkcionira sa `summarise` funkcijom. Primjerice:
 
