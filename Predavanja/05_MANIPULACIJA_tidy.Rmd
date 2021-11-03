@@ -3,7 +3,7 @@ title: "OBRADA PODATAKA"
 # subtitle: "<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>"
 subtitle: "Predavanje 5: Manipulacija i prilagodba podataka (tidyverse)"
 author: "Luka Sikic, PhD"
-date: "Fakultet hrvatskih studija | [OP](https://github.com/BrbanMiro/Obrada-podataka)" #"`r format(Sys.time(), '%d %B %Y')`"
+date: "Fakultet hrvatskih studija | [OP](https://lusiki.github.io/WebObradaPodataka/)" #"`r format(Sys.time(), '%d %B %Y')`"
 output:
   xaringan::moon_reader:
     css: [default, metropolis, metropolis-fonts] 
@@ -27,15 +27,18 @@ opts_chunk$set(
 ```
 
 # Pregled predavanja
-
+<br>
+<br>
+<br>
+<br>
 
 1. [Set-up](#prologue)
 
 2. [Tidyverse osnove](#basics)
 
-3. [Manipulacija podatcima sa dplyr](#dplyr)
+3. [Manipulacija podatcima sa dplyr paketom](#dplyr)
 
-4. [Manipulacija podatcima sa tidyr](#tidyr)
+4. [Manipulacija podatcima sa tidyr paketom](#tidyr)
 
 5. [Pregled](#summary)
 
@@ -51,9 +54,12 @@ name: prologue
 ---
 
 # Što su "tidy" podatci?
-
+<br>
+<br>
 Resursi:
+
 - [Vignette](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) (iz **tidyr** paketa)
+<br>
 - [Članak](https://vita.had.co.nz/papers/tidy-data.pdf) (Hadley Wickham, 2014 JSS)
 
 --
@@ -74,10 +80,14 @@ Ključni elementi:
 ---
 
 # Checklist
-
+<br>
+<br>
+<br>
+<br>
+<br>
 ☑ Instaliran [**tidyverse**](https://www.tidyverse.org/) paket.
-
-
+<br>
+<br>
 ☑ Potrebno instalirati [**nycflights13**](hhttps://github.com/hadley/nycflights13) paket.
 - Izvršite naredbu: `install.packages('nycflights13', repos = 'https://cran.rstudio.com')`
 
@@ -93,34 +103,34 @@ name: basics
 
 # Tidyverse vs. base R
 
-Debata na temu "tidyverse vs. base R" u R zajednici.
+Debata na temu *tidyverse vs. base R* u R zajednici.
 
 --
 
-Nećemo ulaziti dublje u ovu raspravu jer je odgovor [očit](http://varianceexplained.org/r/teach-tidyverse/): Bilo bi najbolje naučiti tidyverse na početku (ili barem rano).
+Nećemo ulaziti dublje u ovu raspravu jer je odgovor [očit](http://varianceexplained.org/r/teach-tidyverse/) : Bilo bi najbolje naučiti `tidyverse` na početku (što ranije).
 - Dokumentacija i podrška su izvrsni.
-- Konzistentna filozofija i sintaksa što olakšava učenje.
-- Tidyverse omogućava praktičan"front-end" za neke važne big-data alate.
-- Za čišćenje, manipulaciju i vizualizaciju...tidyverse je relativno jednostavan.<sup>1</sup>
+- Konzistentna filozofija i sintaksa olakšava učenje.
+- `Tidyverse` omogućava praktičan"front-end" za neke važne big-data alate.
+- Za čišćenje, manipulaciju i vizualizaciju ... `tidyverse` je relativno jednostavan.<sup>1</sup>
 
 .footnote[
 <sup>1</sup>Altertnativni pristup je [**data.table**](http://r-datatable.com/).]
 
 --
 
-Ovo sve ne znači da treba preskočiti učenje base R.
+Ovo sve ne znači da treba preskočiti učenje `base R`.
 - Base R je ekstremno fleksibilan i moćan, posebno u kombinaciji sa drugim paketima.
-- Neke stvari se nemogu napraviti u tidyverse-u.
-- Kombinacija tidyverse i base R je često rješenje.
+- Neke stvari se ne mogu napraviti u tidyverse-u.
+- Kombinacija `tidyverse` i `base R` je često rješenje.
 
 ---
 
 
 # Tidyverse vs. base R (dalje)
 
-Često postoje ekvivalenti izmedju base R i tidyverse. 
+Često postoje ekvivalenti između `base R` i `tidyverse`-a. 
 
-Ovo se generalno odražava u pravili `tidyverse::snake_case`  vs  `base::period.case`.  E.g. Usporedi:
+Ovo se generalno odražava u sintaksi `tidyverse::snake_case`  vs  `base::period.case`.  E.g. Usporedi:
 
 | tidyverse  |  base |
 |---|---|
@@ -129,22 +139,22 @@ Ovo se generalno odražava u pravili `tidyverse::snake_case`  vs  `base::period.
 |  `?tibble::tibble` |  `?base::data.frame` |
 Etc...
   
-Tidyverse alternative često nude neka poboljšanja ili druge korisne opcije (ponekad i restrikcije) u odnosu na base R. 
-- Zapamtite: Uvijek postoji mnoštvo načina da se nešto izvede u R.
+`Tidyverse` alternative uglavnom nude neka poboljšanja ili druge korisne opcije (ponekad i restrikcije) u odnosu na` base R`. 
+- **Hint**: Uvijek postoji mnoštvo načina da se nešto izvede u R.
 
 ---
-
+<br>
 # Tidyverse paketi
 
-Učitajte tidyverse meta-package i provjerite output.
+Učitajte `tidyverse` meta-paket i pogledajte output.
 ```{r tverse, cache = FALSE}
 library(tidyverse)
 ```
 
 --
 
-Primjetite da smo učitali mnoštvo paketa (što je moguće napraviti i pojedinačno): **ggplot2**, **tibble**, **dplyr**, etc.
-- Vidljive su i informacije o vezrijama paketa i [namespace konfliktima](https://raw.githack.com/uo-ec607/lectures/master/04-rlang/04-rlang.html#59).
+Primjetite da smo učitali mnoštvo paketa (što je moguće napraviti i pojedinačno) : **ggplot2**, **tibble**, **dplyr**, etc.
+- Vidljive su i informacije o verzijama paketa i [namespace konfliktima](https://raw.githack.com/uo-ec607/lectures/master/04-rlang/04-rlang.html#59).
 
 ---
 
@@ -152,57 +162,63 @@ Primjetite da smo učitali mnoštvo paketa (što je moguće napraviti i pojedina
 
 # Tidyverse paketi (dalje)
 
-Ttidyverse se zapravo sastoji od sa više paketa nego što se automatski učitava.<sup>1</sup>
+`Ttidyverse` se zapravo sastoji od više paketa nego što se automatski učitava.<sup>1</sup>
 ```{r tverse_pkgs}
 tidyverse_packages()
 ```
 
-Neke od tih dodatnih paketa ćemo koristiti u okviru kolegija.
+Neke od ovih dodatnih paketa ćemo koristiti u okviru kolegija.
 
-— Npr. **Lubridate** paket za raad sa datumima i **rvest** paket za webscraping.
+— Na primjer, **lubridate** paket za raad sa datumima i **rvest** paket za webscraping.
 - Ipak, ti se paketi moraju učitati zasebno.
 
 
 .footnote[
-<sup>1</sup> Tidyverse uključuje *puno* zavisnosti pri instalaciji. Ovo je tema uz koju se vežu određene [kontroverze](http://www.tinyverse.org/).
+<sup>1</sup> `Tidyverse` uključuje *puno* zavisnosti pri instalaciji. Ovo je tema uz koju se vežu određene [kontroverze](http://www.tinyverse.org/).
 ].
 
 ---
 
 # Tidyverse paketi (dalje)
-
-Cilj je izložiti većinu tidyverse paketa kroz ovaj kolegij.
+<br>
+<br>
+<br>
+Cilj je upoznati većinu `tidyverse` paketa kroz ovaj kolegij.
 
 Naglasak današnjeg predavanja je na dva paketa: 
 1. [**dplyr**](https://dplyr.tidyverse.org/)
 2. [**tidyr**](https://tidyr.tidyverse.org/)
 
-Ovo su glavni paketi za čišćenje i manipulaciju podatcima. Zbog toga će se jako često koristiti (uz **ggplot2**).
+Ovo su glavni paketi za **čišćenje i manipulaciju** podatcima. Zbog toga će se jako često koristiti (naravno, uz **ggplot2**).
+<br>
 - Na čišćenje i manipulaciju podatcima odlazi jako puno vremena u radu sa podatcima.
-
 
 ---
 
-
 # Dodatak o pipe-ovima: %>%
 
-U R-u, pipe operator se označava `%>%` i automatski se učitava sa tidyverse-om.
+
+`%>%` se u R naziva pipe operator i automatski se učita sa `tidyverse`-om.
   
 Pipe operatori su sjani i njihovo korištenje znatno poboljšava iskustvo kodiranja. Usporedite:
 
 ```{r, eval = F}
-## Ovaj kod postiže isti cilj.
-mpg %>% filter(manufacturer=="audi") %>% group_by(model) %>% summarise(hwy_mean = mean(hwy))
+## Ovaj kod postiže isti cilj...
+mpg %>%
+  filter(manufacturer=="audi") %>%
+  group_by(model) %>%
+  summarise(hwy_mean = mean(hwy))
+## kao ovaj:
 summarise(group_by(filter(mpg, manufacturer=="audi"), model), hwy_mean = mean(hwy))
 ```
 
 --
 
 Prva linija koda se čita s ijeva na desno, baš kao što nalaže intuicija. 
-- Uzmi objekt (mpg), napravi ovo (filter), nakon toga ovo (group by), etc.
+- Uzmi objekt (`mpg`), napravi ovo (`filter`), nakon toga napravi (`group_by`), etc.
 
-Druga linija koda ima inverznu intuiciju (zadnja operacija dolazi prva!) 
-- Tko želi čitati stvari iznutra-van?
+Druga linija koda ima obrnutu intuiciju:zadnja operacija je logički na prvom mjestu! 
+- Tko želi čitati stvari iznutra -> van!?
 
 ---
 

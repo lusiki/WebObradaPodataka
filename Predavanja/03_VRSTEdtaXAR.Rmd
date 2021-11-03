@@ -636,9 +636,9 @@ library(ggplot2)
 library(dplyr)
 library(maddison)
 library(tidyr)
-oil <-  Quandl("FRED/DCOILBRENTEU", start_date='1987-5-01', end_date='2021-10-20')
-
-ggplot(oil, aes(x = Date, y = Value)) + geom_line() + labs(x = "Brent")
+# oil <-  Quandl("FRED/DCOILBRENTEU", start_date='1987-5-01', end_date='2021-10-20')
+# 
+# ggplot(oil, aes(x = Date, y = Value)) + geom_line() + labs(x = "Brent")
 
 oil2 <-  Quandl("BP/CRUDE_OIL_PRICES", start_date='1862-01-01', end_date='2021-10-20') %>%
   rename(Price2020USD = "Price in 2020 Dollars",
@@ -656,13 +656,19 @@ OPECmad <- maddison %>%
   filter(country %in% OPEC) %>%
   filter(year >= 1901) %>%
   mutate(class = "OPEC") %>%
-  select(year,country,rgdpnapc,pop, class)
+  select(year,country,rgdpnapc,pop, class) %>%
+  group_by(year, country) %>%
+  mutate(rgdp = rgdpnapc*pop) %>%
+  ungroup()
 
 IMPORTmad <- maddison %>%
   filter(country %in% IMPORT) %>%
   filter(year >= 1901) %>%
   mutate(class = "IMPORT") %>%
-  select(year,country,rgdpnapc,pop, class)
+  select(year,country,rgdpnapc,pop, class) %>%
+  group_by(year, country) %>%
+  mutate(rgdp = rgdpnapc*pop) %>%
+  ungroup()
 
 OIL <- oil2 %>%
   mutate(year = format(Date, format = "%Y")) %>%

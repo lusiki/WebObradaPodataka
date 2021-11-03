@@ -4,6 +4,7 @@
     <title>OBRADA PODATAKA</title>
     <meta charset="utf-8" />
     <meta name="author" content="Luka Sikic, PhD" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
     <link href="libs/remark-css/metropolis-fonts.css" rel="stylesheet" />
@@ -15,7 +16,7 @@ class: center, middle, inverse, title-slide
 # OBRADA PODATAKA
 ## Predavanje 5: Manipulacija i prilagodba podataka (tidyverse)
 ### Luka Sikic, PhD
-### Fakultet hrvatskih studija | <a href="https://github.com/BrbanMiro/Obrada-podataka">OP</a>
+### Fakultet hrvatskih studija | <a href="https://lusiki.github.io/WebObradaPodataka/">OP</a>
 
 ---
 
@@ -24,15 +25,18 @@ name: toc
 
 
 # Pregled predavanja
-
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 
 1. [Set-up](#prologue)
 
 2. [Tidyverse osnove](#basics)
 
-3. [Manipulacija podatcima sa dplyr](#dplyr)
+3. [Manipulacija podatcima sa dplyr paketom](#dplyr)
 
-4. [Manipulacija podatcima sa tidyr](#tidyr)
+4. [Manipulacija podatcima sa tidyr paketom](#tidyr)
 
 5. [Pregled](#summary)
 
@@ -48,9 +52,12 @@ name: prologue
 ---
 
 # Što su "tidy" podatci?
-
+&lt;br&gt;
+&lt;br&gt;
 Resursi:
+
 - [Vignette](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) (iz **tidyr** paketa)
+&lt;br&gt;
 - [Članak](https://vita.had.co.nz/papers/tidy-data.pdf) (Hadley Wickham, 2014 JSS)
 
 --
@@ -71,10 +78,14 @@ Ključni elementi:
 ---
 
 # Checklist
-
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 ☑ Instaliran [**tidyverse**](https://www.tidyverse.org/) paket.
-
-
+&lt;br&gt;
+&lt;br&gt;
 ☑ Potrebno instalirati [**nycflights13**](hhttps://github.com/hadley/nycflights13) paket.
 - Izvršite naredbu: `install.packages('nycflights13', repos = 'https://cran.rstudio.com')`
 
@@ -90,34 +101,34 @@ name: basics
 
 # Tidyverse vs. base R
 
-Debata na temu "tidyverse vs. base R" u R zajednici.
+Debata na temu *tidyverse vs. base R* u R zajednici.
 
 --
 
-Nećemo ulaziti dublje u ovu raspravu jer je odgovor [očit](http://varianceexplained.org/r/teach-tidyverse/): Bilo bi najbolje naučiti tidyverse na početku (ili barem rano).
+Nećemo ulaziti dublje u ovu raspravu jer je odgovor [očit](http://varianceexplained.org/r/teach-tidyverse/) : Bilo bi najbolje naučiti `tidyverse` na početku (što ranije).
 - Dokumentacija i podrška su izvrsni.
-- Konzistentna filozofija i sintaksa što olakšava učenje.
-- Tidyverse omogućava praktičan"front-end" za neke važne big-data alate.
-- Za čišćenje, manipulaciju i vizualizaciju...tidyverse je relativno jednostavan.&lt;sup&gt;1&lt;/sup&gt;
+- Konzistentna filozofija i sintaksa olakšava učenje.
+- `Tidyverse` omogućava praktičan"front-end" za neke važne big-data alate.
+- Za čišćenje, manipulaciju i vizualizaciju ... `tidyverse` je relativno jednostavan.&lt;sup&gt;1&lt;/sup&gt;
 
 .footnote[
 &lt;sup&gt;1&lt;/sup&gt;Altertnativni pristup je [**data.table**](http://r-datatable.com/).]
 
 --
 
-Ovo sve ne znači da treba preskočiti učenje base R.
+Ovo sve ne znači da treba preskočiti učenje `base R`.
 - Base R je ekstremno fleksibilan i moćan, posebno u kombinaciji sa drugim paketima.
-- Neke stvari se nemogu napraviti u tidyverse-u.
-- Kombinacija tidyverse i base R je često rješenje.
+- Neke stvari se ne mogu napraviti u tidyverse-u.
+- Kombinacija `tidyverse` i `base R` je često rješenje.
 
 ---
 
 
 # Tidyverse vs. base R (dalje)
 
-Često postoje ekvivalenti izmedju base R i tidyverse. 
+Često postoje ekvivalenti između `base R` i `tidyverse`-a. 
 
-Ovo se generalno odražava u pravili `tidyverse::snake_case`  vs  `base::period.case`.  E.g. Usporedi:
+Ovo se generalno odražava u sintaksi `tidyverse::snake_case`  vs  `base::period.case`.  E.g. Usporedi:
 
 | tidyverse  |  base |
 |---|---|
@@ -126,40 +137,40 @@ Ovo se generalno odražava u pravili `tidyverse::snake_case`  vs  `base::period.
 |  `?tibble::tibble` |  `?base::data.frame` |
 Etc...
   
-Tidyverse alternative često nude neka poboljšanja ili druge korisne opcije (ponekad i restrikcije) u odnosu na base R. 
-- Zapamtite: Uvijek postoji mnoštvo načina da se nešto izvede u R.
+`Tidyverse` alternative uglavnom nude neka poboljšanja ili druge korisne opcije (ponekad i restrikcije) u odnosu na` base R`. 
+- **Hint**: Uvijek postoji mnoštvo načina da se nešto izvede u R.
 
 ---
-
+&lt;br&gt;
 # Tidyverse paketi
 
-Učitajte tidyverse meta-package i provjerite output.
+Učitajte `tidyverse` meta-paket i pogledajte output.
 
 ```r
 library(tidyverse)
 ```
 
 ```
-## -- Attaching packages ---------------------------------------------- tidyverse 1.3.0 --
+## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
 ```
 
 ```
-## &lt;U+221A&gt; ggplot2 3.3.2     &lt;U+221A&gt; purrr   0.3.4
-## &lt;U+221A&gt; tibble  3.0.3     &lt;U+221A&gt; dplyr   1.0.2
-## &lt;U+221A&gt; tidyr   1.1.2     &lt;U+221A&gt; stringr 1.4.0
-## &lt;U+221A&gt; readr   1.3.1     &lt;U+221A&gt; forcats 0.5.0
+## v ggplot2 3.3.5     v purrr   0.3.4
+## v tibble  3.1.3     v dplyr   1.0.7
+## v tidyr   1.1.3     v stringr 1.4.0
+## v readr   2.0.1     v forcats 0.5.1
 ```
 
 ```
-## -- Conflicts ------------------------------------------------- tidyverse_conflicts() --
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()
 ```
 
 --
 
-Primjetite da smo učitali mnoštvo paketa (što je moguće napraviti i pojedinačno): **ggplot2**, **tibble**, **dplyr**, etc.
-- Vidljive su i informacije o vezrijama paketa i [namespace konfliktima](https://raw.githack.com/uo-ec607/lectures/master/04-rlang/04-rlang.html#59).
+Primjetite da smo učitali mnoštvo paketa (što je moguće napraviti i pojedinačno) : **ggplot2**, **tibble**, **dplyr**, etc.
+- Vidljive su i informacije o verzijama paketa i [namespace konfliktima](https://raw.githack.com/uo-ec607/lectures/master/04-rlang/04-rlang.html#59).
 
 ---
 
@@ -167,68 +178,76 @@ Primjetite da smo učitali mnoštvo paketa (što je moguće napraviti i pojedina
 
 # Tidyverse paketi (dalje)
 
-Ttidyverse se zapravo sastoji od sa više paketa nego što se automatski učitava.&lt;sup&gt;1&lt;/sup&gt;
+`Ttidyverse` se zapravo sastoji od više paketa nego što se automatski učitava.&lt;sup&gt;1&lt;/sup&gt;
 
 ```r
 tidyverse_packages()
 ```
 
 ```
-##  [1] "broom"      "cli"        "crayon"     "dbplyr"     "dplyr"     
-##  [6] "forcats"    "ggplot2"    "haven"      "hms"        "httr"      
-## [11] "jsonlite"   "lubridate"  "magrittr"   "modelr"     "pillar"    
-## [16] "purrr"      "readr"      "readxl"     "reprex"     "rlang"     
-## [21] "rstudioapi" "rvest"      "stringr"    "tibble"     "tidyr"     
-## [26] "xml2"       "tidyverse"
+##  [1] "broom"         "cli"           "crayon"        "dbplyr"       
+##  [5] "dplyr"         "dtplyr"        "forcats"       "googledrive"  
+##  [9] "googlesheets4" "ggplot2"       "haven"         "hms"          
+## [13] "httr"          "jsonlite"      "lubridate"     "magrittr"     
+## [17] "modelr"        "pillar"        "purrr"         "readr"        
+## [21] "readxl"        "reprex"        "rlang"         "rstudioapi"   
+## [25] "rvest"         "stringr"       "tibble"        "tidyr"        
+## [29] "xml2"          "tidyverse"
 ```
 
-Neke od tih dodatnih paketa ćemo koristiti u okviru kolegija.
+Neke od ovih dodatnih paketa ćemo koristiti u okviru kolegija.
 
-— Npr. **Lubridate** paket za raad sa datumima i **rvest** paket za webscraping.
+— Na primjer, **lubridate** paket za raad sa datumima i **rvest** paket za webscraping.
 - Ipak, ti se paketi moraju učitati zasebno.
 
 
 .footnote[
-&lt;sup&gt;1&lt;/sup&gt; Tidyverse uključuje *puno* zavisnosti pri instalaciji. Ovo je tema uz koju se vežu određene [kontroverze](http://www.tinyverse.org/).
+&lt;sup&gt;1&lt;/sup&gt; `Tidyverse` uključuje *puno* zavisnosti pri instalaciji. Ovo je tema uz koju se vežu određene [kontroverze](http://www.tinyverse.org/).
 ].
 
 ---
 
 # Tidyverse paketi (dalje)
-
-Cilj je izložiti većinu tidyverse paketa kroz ovaj kolegij.
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+Cilj je upoznati većinu `tidyverse` paketa kroz ovaj kolegij.
 
 Naglasak današnjeg predavanja je na dva paketa: 
 1. [**dplyr**](https://dplyr.tidyverse.org/)
 2. [**tidyr**](https://tidyr.tidyverse.org/)
 
-Ovo su glavni paketi za čišćenje i manipulaciju podatcima. Zbog toga će se jako često koristiti (uz **ggplot2**).
+Ovo su glavni paketi za **čišćenje i manipulaciju** podatcima. Zbog toga će se jako često koristiti (naravno, uz **ggplot2**).
+&lt;br&gt;
 - Na čišćenje i manipulaciju podatcima odlazi jako puno vremena u radu sa podatcima.
-
 
 ---
 
-
 # Dodatak o pipe-ovima: %&gt;%
 
-U R-u, pipe operator se označava `%&gt;%` i automatski se učitava sa tidyverse-om.
+
+`%&gt;%` se u R naziva pipe operator i automatski se učita sa `tidyverse`-om.
   
 Pipe operatori su sjani i njihovo korištenje znatno poboljšava iskustvo kodiranja. Usporedite:
 
 
 ```r
-## Ovaj kod postiže isti cilj.
-mpg %&gt;% filter(manufacturer=="audi") %&gt;% group_by(model) %&gt;% summarise(hwy_mean = mean(hwy))
+## Ovaj kod postiže isti cilj...
+mpg %&gt;%
+  filter(manufacturer=="audi") %&gt;%
+  group_by(model) %&gt;%
+  summarise(hwy_mean = mean(hwy))
+## kao ovaj:
 summarise(group_by(filter(mpg, manufacturer=="audi"), model), hwy_mean = mean(hwy))
 ```
 
 --
 
 Prva linija koda se čita s ijeva na desno, baš kao što nalaže intuicija. 
-- Uzmi objekt (mpg), napravi ovo (filter), nakon toga ovo (group by), etc.
+- Uzmi objekt (`mpg`), napravi ovo (`filter`), nakon toga napravi (`group_by`), etc.
 
-Druga linija koda ima inverznu intuiciju (zadnja operacija dolazi prva!) 
-- Tko želi čitati stvari iznutra-van?
+Druga linija koda ima obrnutu intuiciju:zadnja operacija je logički na prvom mjestu! 
+- Tko želi čitati stvari iznutra -&gt; van!?
 
 ---
 
@@ -241,10 +260,6 @@ mpg %&gt;%
   filter(manufacturer=="audi") %&gt;% 
   group_by(model) %&gt;% 
   summarise(hwy_mean = mean(hwy))
-```
-
-```
-## `summarise()` ungrouping output (override with `.groups` argument)
 ```
 
 ```
@@ -286,7 +301,7 @@ packageVersion('dplyr')
 ```
 
 ```
-## [1] '1.0.2'
+## [1] '1.0.7'
 ```
 
 ```r
@@ -342,12 +357,12 @@ starwars %&gt;%
 
 ```
 ## # A tibble: 4 x 14
-##   name  height  mass hair_color skin_color eye_color birth_year sex   gender
-##   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-## 1 Dart~    202   136 none       white      yellow          41.9 male  mascu~
-## 2 Qui-~    193    89 brown      fair       blue            92   male  mascu~
-## 3 Dooku    193    80 white      fair       brown          102   male  mascu~
-## 4 Bail~    191    NA black      tan        brown           67   male  mascu~
+##   name      height  mass hair_color skin_color eye_color birth_year sex   gender
+##   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+## 1 Darth Va~    202   136 none       white      yellow          41.9 male  mascu~
+## 2 Qui-Gon ~    193    89 brown      fair       blue            92   male  mascu~
+## 3 Dooku        193    80 white      fair       brown          102   male  mascu~
+## 4 Bail Pre~    191    NA black      tan        brown           67   male  mascu~
 ## # ... with 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 ## #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -366,11 +381,11 @@ starwars %&gt;%
 
 ```
 ## # A tibble: 3 x 14
-##   name  height  mass hair_color skin_color eye_color birth_year sex   gender
-##   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-## 1 Luke~    172    77 blond      fair       blue            19   male  mascu~
-## 2 Anak~    188    84 blond      fair       blue            41.9 male  mascu~
-## 3 Shmi~    163    NA black      fair       brown           72   fema~ femin~
+##   name     height  mass hair_color skin_color eye_color birth_year sex    gender
+##   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; 
+## 1 Luke Sk~    172    77 blond      fair       blue            19   male   mascu~
+## 2 Anakin ~    188    84 blond      fair       blue            41.9 male   mascu~
+## 3 Shmi Sk~    163    NA black      fair       brown           72   female femin~
 ## # ... with 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 ## #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -389,14 +404,14 @@ starwars %&gt;%
 
 ```
 ## # A tibble: 6 x 14
-##   name  height  mass hair_color skin_color eye_color birth_year sex   gender
-##   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-## 1 Arve~     NA    NA brown      fair       brown             NA male  mascu~
-## 2 Finn      NA    NA black      dark       dark              NA male  mascu~
-## 3 Rey       NA    NA brown      light      hazel             NA fema~ femin~
-## 4 Poe ~     NA    NA brown      light      brown             NA male  mascu~
-## 5 BB8       NA    NA none       none       black             NA none  mascu~
-## 6 Capt~     NA    NA unknown    unknown    unknown           NA &lt;NA&gt;  &lt;NA&gt;  
+##   name     height  mass hair_color skin_color eye_color birth_year sex    gender
+##   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; 
+## 1 Arvel C~     NA    NA brown      fair       brown             NA male   mascu~
+## 2 Finn         NA    NA black      dark       dark              NA male   mascu~
+## 3 Rey          NA    NA brown      light      hazel             NA female femin~
+## 4 Poe Dam~     NA    NA brown      light      brown             NA male   mascu~
+## 5 BB8          NA    NA none       none       black             NA none   mascu~
+## 6 Captain~     NA    NA unknown    unknown    unknown           NA &lt;NA&gt;   &lt;NA&gt;  
 ## # ... with 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 ## #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -419,18 +434,18 @@ starwars %&gt;%
 
 ```
 ## # A tibble: 87 x 14
-##    name  height  mass hair_color skin_color eye_color birth_year sex   gender
-##    &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-##  1 Wick~     88  20   brown      brown      brown            8   male  mascu~
-##  2 IG-88    200 140   none       metal      red             15   none  mascu~
-##  3 Luke~    172  77   blond      fair       blue            19   male  mascu~
-##  4 Leia~    150  49   brown      light      brown           19   fema~ femin~
-##  5 Wedg~    170  77   brown      fair       hazel           21   male  mascu~
-##  6 Plo ~    188  80   none       orange     black           22   male  mascu~
-##  7 Bigg~    183  84   black      light      brown           24   male  mascu~
-##  8 Han ~    180  80   brown      fair       brown           29   male  mascu~
-##  9 Land~    177  79   black      dark       brown           31   male  mascu~
-## 10 Boba~    183  78.2 black      fair       brown           31.5 male  mascu~
+##    name     height  mass hair_color skin_color eye_color birth_year sex   gender
+##    &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+##  1 Wicket ~     88  20   brown      brown      brown            8   male  mascu~
+##  2 IG-88       200 140   none       metal      red             15   none  mascu~
+##  3 Luke Sk~    172  77   blond      fair       blue            19   male  mascu~
+##  4 Leia Or~    150  49   brown      light      brown           19   fema~ femin~
+##  5 Wedge A~    170  77   brown      fair       hazel           21   male  mascu~
+##  6 Plo Koon    188  80   none       orange     black           22   male  mascu~
+##  7 Biggs D~    183  84   black      light      brown           24   male  mascu~
+##  8 Han Solo    180  80   brown      fair       brown           29   male  mascu~
+##  9 Lando C~    177  79   black      dark       brown           31   male  mascu~
+## 10 Boba Fe~    183  78.2 black      fair       brown           31.5 male  mascu~
 ## # ... with 77 more rows, and 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;,
 ## #   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -453,18 +468,18 @@ starwars %&gt;%
 
 ```
 ## # A tibble: 87 x 14
-##    name  height  mass hair_color skin_color eye_color birth_year sex   gender
-##    &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-##  1 Yoda      66    17 white      green      brown            896 male  mascu~
-##  2 Jabb~    175  1358 &lt;NA&gt;       green-tan~ orange           600 herm~ mascu~
-##  3 Chew~    228   112 brown      unknown    blue             200 male  mascu~
-##  4 C-3PO    167    75 &lt;NA&gt;       gold       yellow           112 none  mascu~
-##  5 Dooku    193    80 white      fair       brown            102 male  mascu~
-##  6 Qui-~    193    89 brown      fair       blue              92 male  mascu~
-##  7 Ki-A~    198    82 white      pale       yellow            92 male  mascu~
-##  8 Fini~    170    NA blond      fair       blue              91 male  mascu~
-##  9 Palp~    170    75 grey       pale       yellow            82 male  mascu~
-## 10 Clie~    183    NA brown      fair       blue              82 male  mascu~
+##    name    height  mass hair_color skin_color  eye_color birth_year sex   gender
+##    &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+##  1 Yoda        66    17 white      green       brown            896 male  mascu~
+##  2 Jabba ~    175  1358 &lt;NA&gt;       green-tan,~ orange           600 herm~ mascu~
+##  3 Chewba~    228   112 brown      unknown     blue             200 male  mascu~
+##  4 C-3PO      167    75 &lt;NA&gt;       gold        yellow           112 none  mascu~
+##  5 Dooku      193    80 white      fair        brown            102 male  mascu~
+##  6 Qui-Go~    193    89 brown      fair        blue              92 male  mascu~
+##  7 Ki-Adi~    198    82 white      pale        yellow            92 male  mascu~
+##  8 Finis ~    170    NA blond      fair        blue              91 male  mascu~
+##  9 Palpat~    170    75 grey       pale        yellow            82 male  mascu~
+## 10 Cliegg~    183    NA brown      fair        blue              82 male  mascu~
 ## # ... with 77 more rows, and 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;,
 ## #   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -573,13 +588,13 @@ starwars %&gt;%
 
 ```
 ## # A tibble: 5 x 14
-##   species homeworld name  height  mass hair_color skin_color eye_color
-##   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;    
-## 1 Human   Tatooine  Luke~    172    77 blond      fair       blue     
-## 2 Droid   Tatooine  C-3PO    167    75 &lt;NA&gt;       gold       yellow   
-## 3 Droid   Naboo     R2-D2     96    32 &lt;NA&gt;       white, bl~ red      
-## 4 Human   Tatooine  Dart~    202   136 none       white      yellow   
-## 5 Human   Alderaan  Leia~    150    49 brown      light      brown    
+##   species homeworld name           height  mass hair_color skin_color  eye_color
+##   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;           &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;    
+## 1 Human   Tatooine  Luke Skywalker    172    77 blond      fair        blue     
+## 2 Droid   Tatooine  C-3PO             167    75 &lt;NA&gt;       gold        yellow   
+## 3 Droid   Naboo     R2-D2              96    32 &lt;NA&gt;       white, blue red      
+## 4 Human   Tatooine  Darth Vader       202   136 none       white       yellow   
+## 5 Human   Alderaan  Leia Organa       150    49 brown      light       brown    
 ## # ... with 6 more variables: birth_year &lt;dbl&gt;, sex &lt;chr&gt;, gender &lt;chr&gt;,
 ## #   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -717,7 +732,7 @@ starwars %&gt;%
 ```
 
 ```
-## `summarise()` regrouping output by 'species' (override with `.groups` argument)
+## `summarise()` has grouped output by 'species'. You can override using the `.groups` argument.
 ```
 
 ```
@@ -782,10 +797,6 @@ starwars %&gt;%
   group_by(species) %&gt;% 
 * summarise(across(where(is.numeric), mean, na.rm=T)) %&gt;%
   head(5)
-```
-
-```
-## `summarise()` ungrouping output (override with `.groups` argument)
 ```
 
 ```
@@ -865,9 +876,6 @@ Za sljedeće primjere su nam potrebni podatci iz [**nycflights13**](http://githu
 - Učitajte paket i pregledajte podatke.
 
 
-```
-## Warning: package 'nycflights13' was built under R version 4.0.3
-```
 
 ```r
 library(nycflights13)
@@ -951,11 +959,11 @@ left_join(
 
 ```
 ## # A tibble: 3 x 11
-##    year month   day dep_time arr_time carrier flight tailnum year_built type 
-##   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;    &lt;int&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;        &lt;int&gt; &lt;chr&gt;
-## 1  2013     1     1      517      830 UA        1545 N14228        1999 Fixe~
-## 2  2013     1     1      533      850 UA        1714 N24211        1998 Fixe~
-## 3  2013     1     1      542      923 AA        1141 N619AA        1990 Fixe~
+##    year month   day dep_time arr_time carrier flight tailnum year_built type    
+##   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;    &lt;int&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;        &lt;int&gt; &lt;chr&gt;   
+## 1  2013     1     1      517      830 UA        1545 N14228        1999 Fixed w~
+## 2  2013     1     1      533      850 UA        1714 N24211        1998 Fixed w~
+## 3  2013     1     1      542      923 AA        1141 N619AA        1990 Fixed w~
 ## # ... with 1 more variable: model &lt;chr&gt;
 ```
 
@@ -1038,9 +1046,9 @@ stocks
 ```
 
 ```
-##         time          X         Y         Z
-## 1 2009-01-01  0.4589863 0.3873062 -1.488758
-## 2 2009-01-02 -1.0788836 0.9977688 -5.923353
+##         time         X         Y        Z
+## 1 2009-01-01 0.1557671  2.102866 2.856705
+## 2 2009-01-02 0.6381450 -2.078261 3.642015
 ```
 
 ```r
@@ -1051,12 +1059,12 @@ stocks %&gt;% pivot_longer(-time, names_to="stock", values_to="price")
 ## # A tibble: 6 x 3
 ##   time       stock  price
 ##   &lt;date&gt;     &lt;chr&gt;  &lt;dbl&gt;
-## 1 2009-01-01 X      0.459
-## 2 2009-01-01 Y      0.387
-## 3 2009-01-01 Z     -1.49 
-## 4 2009-01-02 X     -1.08 
-## 5 2009-01-02 Y      0.998
-## 6 2009-01-02 Z     -5.92
+## 1 2009-01-01 X      0.156
+## 2 2009-01-01 Y      2.10 
+## 3 2009-01-01 Z      2.86 
+## 4 2009-01-02 X      0.638
+## 5 2009-01-02 Y     -2.08 
+## 6 2009-01-02 Z      3.64
 ```
 
 ---
@@ -1084,10 +1092,10 @@ tidy_stocks %&gt;% pivot_wider(names_from=stock, values_from=price)
 
 ```
 ## # A tibble: 2 x 4
-##   time            X     Y     Z
-##   &lt;date&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 2009-01-01  0.459 0.387 -1.49
-## 2 2009-01-02 -1.08  0.998 -5.92
+##   time           X     Y     Z
+##   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 2009-01-01 0.156  2.10  2.86
+## 2 2009-01-02 0.638 -2.08  3.64
 ```
 
 ```r
@@ -1098,9 +1106,9 @@ tidy_stocks %&gt;% pivot_wider(names_from=time, values_from=price)
 ## # A tibble: 3 x 3
 ##   stock `2009-01-01` `2009-01-02`
 ##   &lt;chr&gt;        &lt;dbl&gt;        &lt;dbl&gt;
-## 1 X            0.459       -1.08 
-## 2 Y            0.387        0.998
-## 3 Z           -1.49        -5.92
+## 1 X            0.156        0.638
+## 2 Y            2.10        -2.08 
+## 3 Z            2.86         3.64
 ```
 
 --
@@ -1202,10 +1210,10 @@ gdp
 
 ```
 ##     yr mnth dy       gdp
-## 1 2016    1  1  99.45964
-## 2 2016    1  2  98.82410
-## 3 2016    1  3 102.29727
-## 4 2016    1  4 101.60354
+## 1 2016    1  1  98.68364
+## 2 2016    1  2 102.14614
+## 3 2016    1  3  97.06894
+## 4 2016    1  4  99.03176
 ```
 
 ```r
@@ -1215,10 +1223,10 @@ gdp %&gt;% unite(date, c("yr", "mnth", "dy"), sep = "-")
 
 ```
 ##       date       gdp
-## 1 2016-1-1  99.45964
-## 2 2016-1-2  98.82410
-## 3 2016-1-3 102.29727
-## 4 2016-1-4 101.60354
+## 1 2016-1-1  98.68364
+## 2 2016-1-2 102.14614
+## 3 2016-1-3  97.06894
+## 4 2016-1-4  99.03176
 ```
 
 ---
@@ -1236,10 +1244,10 @@ gdp_u
 ## # A tibble: 4 x 2
 ##   date       gdp
 ##   &lt;chr&gt;    &lt;dbl&gt;
-## 1 2016-1-1  99.5
-## 2 2016-1-2  98.8
-## 3 2016-1-3 102. 
-## 4 2016-1-4 102.
+## 1 2016-1-1  98.7
+## 2 2016-1-2 102. 
+## 3 2016-1-3  97.1
+## 4 2016-1-4  99.0
 ```
 
 --
@@ -1261,10 +1269,10 @@ gdp_u %&gt;% mutate(date = ymd(date))
 ## # A tibble: 4 x 2
 ##   date         gdp
 ##   &lt;date&gt;     &lt;dbl&gt;
-## 1 2016-01-01  99.5
-## 2 2016-01-02  98.8
-## 3 2016-01-03 102. 
-## 4 2016-01-04 102.
+## 1 2016-01-01  98.7
+## 2 2016-01-02 102. 
+## 3 2016-01-03  97.1
+## 4 2016-01-04  99.0
 ```
 
 ---
@@ -1331,6 +1339,17 @@ class: inverse, center, middle
 # Sljedeće predavanje: Web Scraping
 &lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=796px&gt;&lt;/html&gt;
 (Prije toga također pogledajte **data.table**)
+
+
+
+
+
+
+
+
+
+
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
