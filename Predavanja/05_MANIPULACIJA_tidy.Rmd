@@ -441,8 +441,9 @@ starwars %>%
 ---
 
 # 4) dplyr :: mutate (*dalje*)
-
-Boolean, logički i kondicionalni operatori se mogu dobro kombinirati sa `mutate`:
+<br>
+<br>
+Boolean, logički i kondicionalni operatori se mogu dobro kombinirati sa funkcijom `mutate`:
 ```{r mutate3}
 starwars %>% 
   select(name, height) %>%
@@ -455,7 +456,7 @@ starwars %>%
 
 # 4) dplyr :: mutate (*dalje*)
 
-Kombiniranje `mutate` sa novom `across` funkcijom u dplyr 1.0.0+ omogućava jednostavan rad na selekciji varijabli. Primjerice:
+Kombiniranje `mutate` sa `across` funkcijom omogućava jednostavan rad na selekciji varijabli. Primjerice:
 
 ```{r, mutate4}
 starwars %>% 
@@ -467,7 +468,7 @@ starwars %>%
 --
 
 </br>
-*Note:* Ovaj workflow (i.e. kombinacija `mutate` i `across`) nadrasta stare "scoped" verzije `mutate` koje ste možda koristili prije. Za više detalja pogledajte [ovdje](https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-colwise/) i [ovdje](https://dplyr.tidyverse.org/dev/articles/colwise.html).
+*Note:* Ovaj workflow (i.e. kombinacija `mutate` i `across`) nadrasta stare verzije `mutate` koje ste možda koristili prije. Za više detalja pogledajte [ovdje](https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-colwise/) i [ovdje](https://dplyr.tidyverse.org/dev/articles/colwise.html).
 
 ---
 
@@ -484,7 +485,7 @@ starwars %>%
 
 # 5) dplyr :: summarise (*dalje*)
 
-Uključite funkcijski argument **na.rm = TRUE*** (ili **na.rm = T**) kod `summarise` funkcija. U suprotnom će nedostajeće vrijednosti biti uključene u output :-/
+Uključite funkcijski argument **na.rm = TRUE*** (ili **na.rm = T**) kod `summarise` funkcije. U suprotnom će NA vrijednosti biti uključene u output :-/
 ```{r summ2}
 ## Vjerojatno nepoželjno
 starwars %>% 
@@ -498,7 +499,7 @@ starwars %>%
 
 # 5) dplyr :: summarise (*dalje*)
 
- `across` pristup koji smo vidjeli sa `mutate` maloprije također funkcionira sa `summarise` funkcijom. Primjerice:
+Kombinacija `across` sa `mutate` također funkcionira sa `summarise` funkcijom. Primjerice:
 
 ```{r, summ4}
 starwars %>% 
@@ -510,12 +511,12 @@ starwars %>%
 --
 
 </br>
-*Note:* Ova funkcionalnost nadrasta stare "scoped" verzije `summarise` funkcije koje prethode dplyr 1.0.0. Za detalje vidi [ovdje](https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-colwise/) i [ovdje](https://dplyr.tidyverse.org/dev/articles/colwise.html).
+*Note:* Ova funkcionalnost nadrasta stare verzije `summarise` funkcije. Za detalje vidi [ovdje](https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-colwise/) i [ovdje](https://dplyr.tidyverse.org/dev/articles/colwise.html).
 
 ---
 
 # Ostale dplyr funkcionalnosti
-
+<br>
 `group_by` i `ungroup`: Za (un)grouping.
 - Posebno korisno sa `summarise` i `mutate` naredbama,kao što smo već vidjeli.
 
@@ -535,11 +536,12 @@ starwars %>%
 - E.g. `starwars %>% count(species)`, ili `starwars %>% distinct(species)`
 - Također moguće koristiti kombinaciju `mutate`, `group_by`, i `n()`, e.g. `starwars %>% group_by(species) %>% mutate(num = n())`.
 
-
 ---
 
 # Ostale dplyr funkcionalnosti (dalje)
-
+<br>
+<br>
+<br>
 Postoji još i klasa [window funkcija](https://cran.r-project.org/web/packages/dplyr/vignettes/window-functions.html) za stvaranje lead-ova i lag-ova, rengiranje, stvaranje kumulativnih agregata, etc.
 - Vidi `vignette("window-functions")`.
 
@@ -548,7 +550,7 @@ Postoji još i klasa [window funkcija](https://cran.r-project.org/web/packages/d
 </br>
 
 Zadnja skupina dodatnih dplyr funkcionalnosti je familija `join` funkcija. Riječ je o jako bitnim funkcijama pa ćemo pogledati njihove mogućnosti...
-- Ove funkcije ćemo sretati često do kraja kolegija.
+- Ove funkcije ćemo sretati često na kolegiju.
 
 
 ---
@@ -557,7 +559,7 @@ Zadnja skupina dodatnih dplyr funkcionalnosti je familija `join` funkcija. Rije�
 
 # Joining operacije 
 
-Jedna od glavnih funkcionalnosti dplyr-a je mogućnost spajanja podataka [(join operacija)](https://cran.r-project.org/web/packages/dplyr/vignettes/two-table.html).
+Jedna od glavnih funkcionalnosti `dplyr`-a je mogućnost spajanja podataka [join](https://cran.r-project.org/web/packages/dplyr/vignettes/two-table.html).
 - `inner_join(df1, df2)`
 - `left_join(df1, df2)`
 - `right_join(df1, df2)`
@@ -598,21 +600,21 @@ left_join(flights, planes) %>%
 ---
 
 # Joining operacije (dalje)
-
-
-dplyr je napravio razumnu pretpostavku na kojim kolonama će izvršiti spajanje (i.e. kolone sa istim nazivom). Također smo dobili obavjest: 
+<br>
+`dplyr` je napravio razumnu pretpostavku na kojim kolonama će izvršiti spajanje (i.e. kolone sa istim nazivom). Također smo dobili obavjest: 
 
 ```
 *## Joining, by = c("year", "tailnum")
 ```
 
-Ipak, ovdje se javlja očiti problem: varijabla `year` nema konzitentno značenje u skupovima podataka koje spajamo!
+Ipak, ovdje se javlja očiti problem: varijabla `year` nema konzistentno značenje u skupovima podataka koje spajamo!
 - U jednom se odnosi na *year of flight*, a u drugom na *year of construction*.
 
 --
 
 Postoji jednostavan način izbjegavanja ovog problema. 
-- Probajte razmisliti sami!
+- Probajte razmisliti koji!?
+<br>
 - Isprobajte `?dplyr::join`.
 
 ---
@@ -635,7 +637,7 @@ left_join(
 ---
 
 # Joining operacije (dalje)
-
+<br>
 Što ako specificiramo kolonu `by` argmentom bez prethodne promjene naziva kolone.
 ```{r join3}
 left_join(
@@ -649,7 +651,7 @@ left_join(
 
 --
 
-Provjerite što su "year.x" i "year.y".  Eksplicitnost pomaže!
+Provjerite što su `year.x` i `year.y`.  Eksplicitnost pomaže!
 
 ---
 
@@ -683,11 +685,11 @@ name: tidyr
 </br>
 
 Praktični primjeri...
-- Pitanje: Koja funkcija `pivot_longer` ili `pivot_wider` stvara "tidy" podatke?
+- Pitanje: Koja funkcija `pivot_longer` ili `pivot_wider` stvara *tidy* podatke?
   
 ---
 
-# 1) tidyr::pivot_longer
+# 1) tidyr :: pivot_longer
 
 ```{r pivot_longer1}
 stocks <- data.frame( ## Možete koristiti i "tibble" umjesto "data.frame" 
@@ -702,9 +704,12 @@ stocks %>% pivot_longer(-time, names_to="stock", values_to="price")
 
 ---
 
-# 1) tidyr::pivot_longe  (*dalje*)
-
-Spremi "tidy" (i.e. long) stocks podatkovni okvir za sljedeći slide. 
+# 1) tidyr :: pivot_longe  (*dalje*)
+<br>
+<br>
+<br>
+<br>
+Spremi `tidy stocks` podatkovni okvir u *long* formatu za sljedeći slide. 
 
 ```{r pivot_longer2}
 ## Specificirajte nazive argumenata: i.e. "names_to=" i "values_to="
@@ -715,7 +720,7 @@ tidy_stocks <-
 
 ---
 
-# 2) tidyr::pivot_wider
+# 2) tidyr :: pivot_wider
 
 ```{r pivot_wider1, dependson=tidy_stocks}
 tidy_stocks %>% pivot_wider(names_from=stock, values_from=price)
@@ -731,14 +736,17 @@ Drugi primjer &mdash; koji je iskombinirao različite pivoting argumente &mdash;
 ---
 
 # Dodatno: Zapamtite pivot_* sintaksu
-
-Za one koji se (još) uvijek sijećaju Stata-ine "reshape" naredbe...([Exhibit A](https://twitter.com/scottimberman/status/1036801308785864704).)
+<br>
+<br>
+<br>
+<br>
+Za one koji se (još) uvijek sjećaju *Stata*-ine "reshape" naredbe...([Exhibit A](https://twitter.com/scottimberman/status/1036801308785864704).)
 
 Ista situacija je lako zamisliva i sa `pivot_*` funkcijama. Prijedlog je zapamtiti redosljed funkcijskih argumenata: prvo *"names"*, potom *"values"*.
 
 ---
 
-# 3) tidyr::separate
+# 3) tidyr :: separate
 
 ```{r sep1}
 economists <- data.frame(name = c("Adam.Smith", "Paul.Samuelson", "Milton.Friedman"))
@@ -756,7 +764,7 @@ Ovo je "pametna" funkcija. Da bi se izbjegla dvosmislenost, definirajte separato
 
 # 3) tidyr::separate (*dalje*)
 
-Povezana funkcija je`separate_rows`, za razdvajanje ćelija koje sadrže više opservacija (frustrirajuća stvar kod npr. "survey" podataka).
+Povezana funkcija je`separate_rows`i služi za razdvajanje ćelija koje sadrže više opservacija (frustrirajuća stvar kod npr. "survey" podataka).
 ```{r sep2}
 jobs <- data.frame(
   name = c("Jack", "Jill"),
@@ -768,7 +776,7 @@ jobs %>% separate_rows(occupation)
 ```
 ---
 
-# 4) tidyr::unite
+# 4) tidyr :: unite
 
 ```{r unite1}
 gdp <- data.frame(
@@ -785,8 +793,9 @@ gdp %>% unite(date, c("yr", "mnth", "dy"), sep = "-")
 ---
 
 # 4) tidyr::unite (*dalje*)
-
-`unite` će automatski stvoriti karakternu varijablu. To jasnije dolazi do izražaja ako pretvorimo u tibble. 
+<br>
+<br>
+`unite` funkcija će automatski stvoriti karakternu varijablu. To jasnije dolazi do izražaja ako pretvorimo u objekt `tibble.` 
 ```{r unite2}
 gdp_u <- gdp %>% unite(date, c("yr", "mnth", "dy"), sep = "-") %>% as_tibble()
 gdp_u
@@ -799,7 +808,9 @@ Za modifikaciju u nešto drugo (e.g. date ili numeric) je moguće koristiti `mut
 ---
 
 # 4) tidyr::unite (*dalje*)
-
+<br>
+<br>
+<br>
 
 ```{r unite3, message=F}
 library(lubridate)
@@ -822,7 +833,7 @@ crossing(side=c("left", "right"), height=c("top", "bottom"))
 
 --
 
-Pogledajte `?expand` i `?complete` za specijalizirane funkcije koje omogućuju (imlicitno) rad sa nedostajućim podatcima ili kombiniranjem varijabli u podatkovnim okvirima.
+Pogledajte `?expand` i `?complete` za specijalizirane funkcije koje omogućuju (implicitno) rad sa nedostajućim podatcima ili kombiniranjem varijabli u podatkovnim okvirima.
 - Prije ili kasnije možete očekivati ovu potrebu za ovom funkcijom!
 
 ---
@@ -856,9 +867,9 @@ Drugi bitni elementi: pipe-ovi (`%>%`), grupiranje (`group_by`),funkcije za spaj
 ---
 class: inverse, center, middle
 
-# Sljedeće predavanje: Web Scraping
+# Hvala na pozornosti!
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>
-(Prije toga također pogledajte **data.table**)
+(Sljedeće predavanje: **data.table**)
 
 
 
