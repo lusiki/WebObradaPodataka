@@ -63,8 +63,8 @@ library(hrbrthemes)
 
 #### **Alati**
 
-- Data Science (obrada podataka, API, cloud, command prompt)
-- Programski jezici (python, R, SQL, Julia, HTML) 
+- Podatkovne znanosti 
+- Programski jezici 
 - Izvještaji, suradnja i razmjena (markdown, Git/github, open source, aplikacije)
 
 
@@ -213,12 +213,58 @@ layout: false
 # Alati digitalnoj sociologiji
 ---
 layout: true
-# Aktualni trendovi
+# Podatkovne znanosti
 
 ---
+<br>
+<br>
+<br>
+- obrada podataka
+<br>
+<br>
+- API i WebScraping
+<br>
+<br>
+-cloud
+<br>
+<br>
+- command prompt
+<br>
+<br>
+- smanjenje jaza u vještinama
+---
+layout: true
+# Programski jezici
 
+---
+<br>
+<br>
+<br>
+- python i R
+<br>
+<br>
+- SQL
+<br>
+- HTML, XML, Java 
 
+---
+layout: true
+# Izvještaji, suradnja i razmjena
 
+---
+<br>
+<br>
+<br>
+- markdown
+<br>
+<br>
+- Git/github
+<br>
+<br>
+- open source i reproducibilnost
+<br>
+<br>
+- aplikacije
 
 
 ---
