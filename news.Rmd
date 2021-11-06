@@ -6,6 +6,9 @@ title: " "
 <br>
 <br>
 
+
+**08/11/2021** - Predavanje na temu [Metode, alati i izvori podataka za digitalnu sociologiju]()
+
 **14/10/2021** - Nastupno predavanje na temu [Suvremeni izvori podataka u društvenim istraživanjima](https://raw.githack.com/lusiki/WebObradaPodataka/main/Predavanja/03_IZVORIdtaXAR.html#1)
 
 **16/03/2021** - CroEcon blog post [Novi statistički kurikul](http://croecon.contentio.biz/post/2021-03-16-nova-statistika/)
