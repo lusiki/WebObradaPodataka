@@ -4,6 +4,7 @@
     <title>OBRADA PODATAKA</title>
     <meta charset="utf-8" />
     <meta name="author" content="Luka Sikic, PhD" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
     <link href="libs/remark-css/metropolis-fonts.css" rel="stylesheet" />
@@ -15,7 +16,7 @@ class: center, middle, inverse, title-slide
 # OBRADA PODATAKA
 ## Predavanje 4: Osnove programskog jezika R
 ### Luka Sikic, PhD
-### Fakultet hrvatskih studija | <a href="https://github.com/BrbanMiro/Obrada-podataka">OP</a>
+### Fakultet hrvatskih studija | <a href="https://lusiki.github.io/WebObradaPodataka/index.html">OP</a>
 
 ---
 
@@ -24,7 +25,8 @@ name: toc
 
 
 # Pregled predavanja
-
+&lt;br&gt;
+&lt;br&gt;
 
 1. [Instalacija](#instalacija)
 
@@ -55,7 +57,10 @@ name: instalacija
 ---
 
 # Instalacija software-a i registracija
-
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 1. Preuzmite [R](https://www.r-project.org/).
 
 2. Preuzmite [RStudio](https://www.rstudio.com/products/rstudio/download/preview/).
@@ -65,27 +70,35 @@ name: instalacija
 4. Napravite račun na [GitHub](https://github.com/) 
 
 --
-
-- U slučaju problema sa instalacijom Git-a pogledajte http://happygitwithr.com.
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+.footer[[*] U slučaju problema sa instalacijom Git-a pogledajte http://happygitwithr.com ] 
 
 ---
 
 # Detalji
 &lt;br&gt;
 &lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 Za bolje snalaženje:
 &lt;br&gt;
 
 - **Windows:** Instalirajte [Rtools](https://cran.r-project.org/bin/windows/Rtools/). Također korisno [Chocolately](https://chocolatey.org/).
-&lt;br&gt;
+&lt;br&gt;&lt;br&gt;
 - **Mac:** Instalirajte [Homebrew](https://brew.sh/). Potrebno konfigurirati C++ toolchain (pogledaj [ovdje](https://github.com/stan-dev/rstan/wiki/Installing-RStan-from-source-on-a-Mac#prerequisite--c-toolchain-and-configuration).)
-&lt;br&gt;
+&lt;br&gt;&lt;br&gt;
 - **Linux:** Već znate što radite!
 
 ---
 
 # Checklist
-
+&lt;br&gt;
+&lt;br&gt;
 ☑ Da li imate najnoviju verziju R?
   
   ```r
@@ -93,7 +106,7 @@ Za bolje snalaženje:
   ```
   
   ```
-  ## [1] "R version 4.0.2 (2020-06-22)"
+  ## [1] "R version 4.1.1 (2021-08-10)"
   ```
 
 
@@ -113,6 +126,9 @@ Za bolje snalaženje:
 ---
 
 # Checklist (dalje)
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 
 Otvorite [shell](http://happygitwithr.com/shell.html#shell). Ako ste već instalirali [Git for Windows](https://gitforwindows.org), sve je u redu!
 
@@ -174,7 +190,9 @@ name: zakaj
 ---
 
 # R osnove
-
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 1. Sve je objekt.
 
 2. Sve ima naziv.
@@ -236,7 +254,7 @@ abline(fit, col = "red")
 
 ---
 
-# ggplot2 (micro primjer)
+# ggplot2 (*appetizer*)
 
 
 ```r
@@ -261,7 +279,7 @@ name: osnove
 
 # Osnovna aritmetika
 
-R je moćan kalkulator i prepoznaje sve standardne aritmetičke operatore:
+R je moćan kalkulator i prepoznaje sve standardne aritmetičke operacije:
 
 
 ```r
@@ -307,7 +325,8 @@ R je moćan kalkulator i prepoznaje sve standardne aritmetičke operatore:
 ---
 
 # Osnovna aritmetika (dalje)
-
+&lt;br&gt;
+&lt;br&gt;
 Modulo operator se koristi za dijeljenje (i ostatak). 
 - Koristan za rad sa (npr.) vremenom.
 
@@ -375,7 +394,7 @@ Više o logičkim operatorima pročitajte na &lt;a href="https://stat.ethz.ch/R-
 
 # Logički operatori (dalje)
 
-### Hijerarshijski redosljed
+### Hijerarhijski redosljed
 
 Kao i u standardnoj matematici, logičke tvrdnje imaju jasan hijerarhijski redosljed. Logički operatori (`&gt;`, `==`, etc) se izvršavaju prije boleanskih operatora (`&amp;` i `|`).
 
@@ -413,7 +432,8 @@ R vrednuje dvije odvojene "logičke" tvrdnje:
 # Logički operatori (dalje)
 
 ### Negacija: `!`
-
+&lt;br&gt;
+&lt;br&gt;
  `!` se koristi za negaciju. Ovo je posebno korisno kod filtriranja podataka, primjerice za non-NA opservacije.
 
 
@@ -481,7 +501,8 @@ Ne posoji ekvivalentna "not in" naredba, ali možemo ju stvoriti sami!
 # Logički operatori (dalje)
 
 ### Evaluacija
-
+&lt;br&gt;
+&lt;br&gt;
 Dva znaka jednakosti se koriste za logičku evaluaciju.
 
 
@@ -637,7 +658,8 @@ Još jednostavnije, koristite "?":
 ---
 
 # Pomoć (dalje)
-
+&lt;br&gt;
+&lt;br&gt;
 Za većinu paketa možete koristiti `vignette()` funkciju, koja će prikazati uvodne detalje i funkcionalnosti paketa
 - Izvršite `vignette("dplyr")` naredbu u konzoli.
 
@@ -666,7 +688,9 @@ name: oop
 ---
 
 # Motivacija
-
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 R pristup koristi [objektno orjentirano programiranje](https://en.wikipedia.org/wiki/Object-oriented_programming) (OOP), koje se može sažeti kao:
 
 &gt; **"Sve je objekt i sve ima naziv."**
@@ -683,13 +707,15 @@ Izbjegavanje konfuzije je relativno jednostavno ako razumijemo pozadinu.
 ---
 
 # Disclaimer
-
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 
 Očito, postoji _više_ OOP sustava u R.
 - **S3**, **S4**, **R6**...
 - Hadley Wickham-ov "Advanced R" sadržava [vrlo detaljan pregled](https://adv-r.hadley.nz/oo.html) glavnih OOP sustava u R.
 
-Vjerojatno je najskorisnije razmišljati u terminima (a) zajedničkim karakteristikama ovih sistema i (b) generalnih implikacija OOP u R.
+Vjerojatno je najskorisnije razmišljati u terminima (a) zajedničkih karakteristika ovih sistema i (b) generalnih implikacija OOP u R.
 - Pogledajte Hadley-evu knjigu ako imate prilike. Uistinu je korisna (kao i ostale njegove knjige).
 
 ---
@@ -759,8 +785,9 @@ m
 ---
 
 # Klasa objekta, tipovi i struktura
+&lt;br&gt;
 
-Korsite `class`, `typeof`, i `str` nardbe za informacije o objektu.
+Koristie `class`, `typeof`, i `str` naredbe za informacije o objektu.
 
 
 ```r
@@ -797,7 +824,9 @@ PS — Zbunjujuće je što `typeof(df)` vaća "list"? Vidi za [objašnjenje](htt
 ---
 
 #  Klasa objekta, tipovi i struktura (dalje)
-
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 Naravno, moguće je dati naredbu inspect/print direktno u konzoli.
 - E.g. Unesite `df` i stisnite Enter.
 
@@ -845,6 +874,8 @@ lm(y ~ x) ##  "lm" označava linearni model
 ---
 
 # Globalni environment (dalje)
+&lt;br&gt;
+&lt;br&gt;
 
 Error poruka daje odgovor:
 
@@ -860,12 +891,14 @@ R ne može naći varijable u [global-nom environment-u](https://www.datamentor.i
 
 --
 
-Drgačije rečeno: Pošto varijable "x" i "y" postoje kao odvojene varijable u global environment-u, potrebno je naznačiti R-u da se odnose na objekt `df`.
+Drgačije rečeno: Pošto varijable "x" i "y" postoje kao odvojene varijable u global environment-u, potrebno je R-u naznačiti da se one odnose na objekt `df`.
 - Kako biste to napravili?
 
 ---
 
 # Globalni environment (dalje)
+&lt;br&gt;
+&lt;br&gt;
 
 Nekoliko je načina za to. Najednostavniji je specifikacija argumenta `data`:
 
@@ -922,10 +955,10 @@ name: ename
 # Rezervirani nazivi
 
 Već smo vidjeli da različitim objektima možemo dati različite nazive. Postoji nekoliko rezerviranih riječi u R.
-- To su fundamentalni nazivi, operatori i relacije u base R tkoje nije moguće pripisati objektu, čak niti kada bismo to htjeli.
+- To su fundamentalni nazivi, operatori i relacije u base R-u koje nije moguće pripisati objektu, čak niti kada bismo to htjeli.
 - Slične primjere smo imali sa logičkim operatorima.
 
-[Vidi](http://stat.ethz.ch/R-manual/R-devel/library/base/html/Reserved.html) za punu listut, uključujući:
+[Vidi](http://stat.ethz.ch/R-manual/R-devel/library/base/html/Reserved.html) za puni popis, uključujući najbitnije:
 
 ```R
 if 
@@ -946,9 +979,9 @@ NA
 # Kvazi-rezervirane riječi
 
 Uz rezervirane riječi, postoji klasa riječi i stringova koje ćemo nazvati kvazi-rezervirane naredbe.
-- To su funkcijski nazivi i vrijednosti (e.g. `pi`) koje je moguće pripisati...iako imaju značenje u base R.
+- To su funkcijski nazivi i vrijednosti (e.g. `pi`) koje je moguće pripisati...iako imaju značenje u base R-u.
 
-Najvažniji kvazi-rezervirani naziv funkcije `c()`, koji koristimo za spajanje; i.e. stvaranje vektora i povezivanje objekata.
+Najvažniji kvazi-rezervirani naziv funkcije `c()`, koji koristimo za spajanje elemenata; i.e. stvaranje vektora i povezivanje objekata.
 
 
 ```r
@@ -968,11 +1001,6 @@ my_vector
 c &lt;- 4
 c(1, 2 ,5)
 ```
-
----
-
-Vektori su izrazito bitni u R. R je jezik optimiziran za rad s vektorima. Kasnije ćemo reći nešto više o "vektorizaciji" funkcija.
-
 
 ---
 
@@ -1005,6 +1033,8 @@ pi
 ---
 
 # Namespace konflikti
+&lt;br&gt;
+&lt;br&gt;
 
 Slična situacija nastaje kada učitamo dva paketa koji imaju funkcije sa istim nazivima.E.g. Pogledajte što se dogodi kada učitamo `dplyr` paket.
 
@@ -1020,6 +1050,8 @@ Pouke da su neki objekti *masked from 'package:X'* predstavljaju upozorenja koja
 ---
 
 # Namespace konflikti (dalje)
+&lt;br&gt;
+&lt;br&gt;
 
 *Namespace koflikti* nastaju zbog OOP pristupa.&lt;sup&gt;1&lt;/sup&gt;
 - Oni također reflektiraju open-source prirodu R i korištenja eksternih paketa. Korisnicima je ostavljen izbor oko naziva funkcija, pa se poneka preklapanja uvijek mogu očekivati.
@@ -1040,7 +1072,7 @@ Kada god se pojavi namespace konflikt, zadnji učitani paket ima prednost. Tako 
 
 # Rješenje namespace konflikata
 
-### 1. Koristi `package::function()`
+##### 1. Koristi `package::function()`
 
 Moguće je eksplicitno pozvati funkciju iz paketa kroz sintaksu `package::function()`. Primjerice:
 
@@ -1057,15 +1089,13 @@ stats::filter(1:10, rep(1, 2))
 ```
 
 --
-
 Moguće je koristiti `::` za rješavanje konfliktnih slučajeva. 
-- E.g. Eksplicitnost oko funkcije (ili podataka) pridonose jasnoći koda. Probajte ove naredbe u R konzoli!
+- E.g. Eksplicitnost oko funkcije (ili podataka) pridonosi jasnoći koda. Probajte ove naredbe u R konzoli!
 
 ```R
 dplyr::starwars ## Prikaži starwars data frame iz dplyr paketa
 scales::comma(c(1000, 1000000)) ## Koristi comma funkciju, iz scales paketa
 ```
-
 --
 
 `::` sintaksa znači da možete koristiti funkciju bez učitavanja paketa.
@@ -1075,7 +1105,7 @@ E.g. Dokle god je `dplyr` instaliran u sustavu `dplyr::filter(iris, Species=="vi
 
 # Rješenje namespace konflikata (dalje)
 
-### 2. Pripiši `function &lt;- package::function`
+##### 2. Pripiši `function &lt;- package::function`
   
 Trajnije rješenje je pripisati funkciju konfliktnog naziva objektue. To će biti validno do kraja R sesije, ili dok to ne promijenite. E.g.
 
@@ -1117,7 +1147,7 @@ Već smo vidjeli primjer indeksiranja u outputu konzole. Primjerice:
 ## [1] 3
 ```
 
-`[1]` označava prvi (i, uovom slučaju, jedini) element našeg outputa.&lt;sup&gt;1&lt;/sup&gt; U ovom slučaju vektor duljine tri, ima vrijednost "3".
+`[1]` označava prvi (i, u ovom slučaju, jedini) element našeg outputa.
 
 --
 
@@ -1137,7 +1167,7 @@ rnorm(n = 100, mean = 0, sd = 1)
 # Opcija 1: [] (dalje)
 
 
-Još važnije, sintaksu `[]` je koguće koristiti za indeksiranje objekata u R.
+Još važnije, sintaksu `[]` je moguće koristiti za indeksiranje objekata u R.
 
 ```r
 a &lt;- 1:10
@@ -1183,7 +1213,7 @@ Nismo ih do sada puno spominjali ali **liste** su kompleksnije vrste array objek
 
 --
 
-Indeksiranje lilsti zahtjeva dvostruke zagrade `[[]]` za indeksiranje "parent" elemenata list-e i jednostruke zagrade`[]` za indeksiranje unutar tog "parent" elementa. Primjerice:
+Indeksiranje listi zahtjeva dvostruke zagrade `[[]]` za indeksiranje "parent" elemenata list-e i jednostruke zagrade`[]` za indeksiranje unutar tog "parent" elementa. Primjerice:
 
 ```r
 my_list &lt;- list(a = "hello", b = c(1,2,3), c = data.frame(x = 1:5, y = 6:10))
@@ -1266,7 +1296,8 @@ my_list
 ---
 
 # Opcija 2: $ (dalje)
-
+&lt;br&gt;
+&lt;br&gt;
 Moguće je indeksirati te objekte pomoću dolarskog znaka, e.g.
 
 ```r
@@ -1296,7 +1327,8 @@ my_list$c$x ## Vrati kolonu "x" iz objekta "c"
 ---
 
 # Opcija 2: $ (dalje)
-
+&lt;br&gt;
+&lt;br&gt;
 `$` indeksiranje funkcionira i za druge objekte u R. 
 
 U nekim slučajevima je moguće kombinirati obje opcije indeksiranja.
@@ -1317,7 +1349,8 @@ Primjetite neke razlike između prethodnog i `starwars[1, 1]` primjera. Koje su 
 ---
 
 # Opcija 2: $ (dalje)
-
+&lt;br&gt;
+&lt;br&gt;
 Zadnje što je potrebno naglasiti vezano uz indeksiranje putem `$` je da ćemo tako izbjeći problem koji se javio kod neuspješnog pozivanja varijabli u primjeru regresije.
 
 
@@ -1355,7 +1388,8 @@ name: cleaning
 ---
 
 # Izbacivanje objekata (i paketa)
-
+&lt;br&gt;
+&lt;br&gt;
 Koristite `rm()` da biste maknuli objekt iz radnog prostora.
 
 ```r
@@ -1364,18 +1398,19 @@ b &lt;- "world"
 rm(a, b)
 ```
 
-Također je moguće koristiti `rm(list = ls())` da bi se maknuli svi objekti iz radnog prostora (osim paketa). Ova funkcionalnst nije bez  [kritika](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/)! 
+Također je moguće koristiti `rm(list = ls())` da bi se maknuli svi objekti iz radnog prostora (osim paketa). Ova funkcionalnost nije bez  [kritika](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/)! 
 - Vjerojatno je bolje pokrenuti novu sesiju!
 
 --
 
-Izbacivanje paketa iz radnog prostora je problematično jer postoji mnoštvo cross-dependency-a  (i.e. pojedinačni paketi zavise i ponekad mogu automatski učitati druge). Ipak, probajte, e.g. `detach(package:dplyr)`
+Izbacivanje paketa iz radnog prostora je problematično jer postoji mnoštvo cross-dependency-a  (i.e. pojedinačni paketi su međuzavisni i ponekad mogu automatski učitati druge). Ipak, probajte, e.g. `detach(package:dplyr)`
 - Vjerojatno je bolje pokrenuti novu sesiju!
   
 ---
 
 # Izbacivanje grafika
-
+&lt;br&gt;
+&lt;br&gt;
 Moguće je koristiti `dev.off()` za izbacivanje bilo koje (i.e. svih) grafikona u tekućoj sesiji. Probajte u R conzoli:
 
 ```r

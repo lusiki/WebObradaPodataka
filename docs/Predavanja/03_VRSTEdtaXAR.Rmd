@@ -3,7 +3,7 @@ title: "OBRADA PODATAKA"
 # subtitle: "<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>"
 subtitle: "Predavanje 2: Vrste podataka"
 author: "Luka Sikic, PhD"
-date: "Fakultet hrvatskih studija | [OP](https://github.com/BrbanMiro/Obrada-podataka)" #"`r format(Sys.time(), '%d %B %Y')`"
+date: "Fakultet hrvatskih studija | [OP](https://lusiki.github.io/WebObradaPodataka/)" #"`r format(Sys.time(), '%d %B %Y')`"
 output:
   xaringan::moon_reader:
     css: [default, metropolis, metropolis-fonts] 
@@ -18,16 +18,26 @@ output:
 knitr::opts_chunk$set(echo = F)
 ```
 
-```{r paketi, include=FALSE}
+```{r paketi, include=TRUE, echo=FALSE,message=FALSE, warning=FALSE}
 
 library(tidyverse)
 library(reticulate)
 use_virtualenv("r-reticulate")
 library(kableExtra)
+library(ggplot2)
+library(dplyr)
+library(scales)
+library(readr)
+library(readr)
+
 ```
 
-## CILJEVI PREDAVANJA
 
+
+# CILJEVI PREDAVANJA
+<br>
+<br>
+<br>
 - Strukturirani i ne-strukturirani podatci
 <br>
 <br>
@@ -46,41 +56,180 @@ library(kableExtra)
 - Big Data u društvenim znanostima
 
 ---
-## STRUKTURIRANI I NESTRUKTURIRANI PODATCI
 
+layout: true
+# STRUKTURIRANI I NESTRUKTURIRANI PODATCI
+
+---
+
+### Karakteristike
+<br>
 .pull-left[
-1. **STRUKTURIRANI**
-- observacije sa karakteristikama, uglavnom organizirane u tablicu (redovi i kolone);
-- znanstveno prikupljeni podatci, telefonski imenik;
-- manji dio podataka;
+**STRUKTURIRANI**
+- observacije sa karakteristikama
+- uglavnom organizirane u tablicu (redovi i kolone)
+- znanstveno prikupljeni podatci (npr. telefonski imenik)
+- manji dio podataka
 ]
 
 .pull-right[
-2. **NESTRUKTURIRANI**
-- podatci bez standardne organizacijske hijerarhije 
-- Facebook objave, Twitter, logovi na server, genetska sekvenca nukleotida, tekstualni podatci;
-- vjerojatno više od 80% svih podataka;
-- zahtjevaju prilagodbu prije analize;
+**NESTRUKTURIRANI**
+- podatci bez (standardne) organizacijske hijerarhije 
+- Facebook objave, Twitter, logovi na server, genetska sekvenca nukleotida, tekstualni podatci
+- vjerojatno više od 80% svih podataka
+- zahtjevaju prilagodbu prije analize
 ]
+
 ---
 
-## KVANTITATIVNI i KVALITATIVNI PODATCI
+#### Primjer strukturiranih podataka
+
+```{r echo=TRUE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
+# Učitaj paket
+library(maddison)
+# Uredi podatke
+maddi <- maddison %>%
+  filter(iso2c %in% c("HR")) %>%
+  filter(year >= 1952) 
+
+head(maddi,6)
+```
+
+---
+
+#### Primjer strukturiranih podataka
+
+```{r echo=TRUE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
+# Vizualiziraj podatke
+ltg <- ggplot(maddi,aes(x = year, y = rgdpnapc)) +
+  geom_line(color="red") +
+  geom_point() +          
+  scale_y_log10(labels = comma, breaks = pretty_breaks(6)) +
+  theme_bw() +
+  labs(
+       title = "Dugoročni BDP per capita u Hrvatskoj",
+    subtitle = "Godine: 1952-2016",
+    caption  = "Izvor: Maddison database; izrada autora") +
+  ylab("BDP per capita") +
+  xlab("Godina")
+```
+
+---
+
+#### Primjer strukturiranih podataka
+```{r echo=FALSE,warning=FALSE,message=FALSE, fig.height=6, fig.width=10}
+ltg
+```
+
+
+---
+
+#### Primjer nestrukturiranih podataka ([bilbord](https://www.billboard.com/charts/hot-100))
+
+```{r echo=TRUE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
+# Učitaj pakete
+library(rvest)
+library(dplyr)
+# Url
+hot100page <- "https://www.billboard.com/charts/hot-100"
+# Učitaj url
+hot100 <- read_html(hot100page)
+# Pogledaj objekt
+hot100
+```
+
+---
+
+#### Primjer nestrukturiranih podataka
+
+```{r echo=TRUE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
+# Pogledaj strukturu objekta
+str(hot100)
+# Preuzmi podatke od interesa
+body_nodes <- hot100 %>% 
+ html_node("body") %>% 
+ html_children()
+```
+
+---
+
+#### Primjer nestrukturiranih podataka
+
+```{r echo=TRUE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
+# Pregledaj podatke
+head(body_nodes,5)
+```
+
+---
+
+#### Primjer nestrukturiranih podataka
+
+```{r echo=TRUE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
+# Preuzmi rang
+rank <- hot100 %>% 
+  rvest::html_nodes('body') %>% 
+  xml2::xml_find_all("//span[contains(@class, 'chart-element__rank__number')]") %>% 
+  rvest::html_text()
+# Preuzmi pjevača
+artist <- hot100 %>% 
+  rvest::html_nodes('body') %>% 
+  xml2::xml_find_all("//span[contains(@class, 'chart-element__information__artist')]") %>% 
+  rvest::html_text()
+# Preuzmi naslov
+title <- hot100 %>% 
+  rvest::html_nodes('body') %>% 
+  xml2::xml_find_all("//span[contains(@class, 'chart-element__information__song')]") %>% 
+  rvest::html_text()
+  
+```
+
+---
+
+#### Primjer nestrukturiranih podataka
+
+```{r echo=TRUE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
+# Poveži podatke
+chart_df <- data.frame(rank, artist, title)
+# Pregledaj podatke
+head(chart_df,6)
+```
+
+---
+
+#### Primjer nestrukturiranih podataka
+
+```{r echo=TRUE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
+# Tablično prikaži
+knitr::kable(chart_df %>% head(8))
+```
+---
+
+layout: true
+# KVANTITATIVNI I KVALITATIVNI PODATCI
+
+---
+<br>
+<br>
+<br>
+<br>
 .pull-left[
-1. **KVANTITATIVNI**
+**KVANTITATIVNI**
 - brojevi, matematičke procedure, prosjek, vremenski trend, threshold efekti
 ]
 
 .pull-right[
-2. **KVALITATIVNI**
+**KVALITATIVNI**
 - "prirodne" kategorije, jezik
 - najčešća observacija, jedinstvene vrijednosti
 ]
 
 ---
-### PODATCI
-```{python, echo = F}
-import pandas as pd
 
+#### Učitaj podatke
+
+```{python, echo = TRUE}
+# Učitaj paket (Python)
+import pandas as pd
 # ucitaj CSV file sa URL
 drinks = pd.read_csv('https://raw.githubusercontent.com/sinanuozdemir/principles_of_data_science/master/data/chapter_2/drinks.csv')
 ```
@@ -88,12 +237,14 @@ drinks = pd.read_csv('https://raw.githubusercontent.com/sinanuozdemir/principles
 ```{r, echo = T}
 # prikazi podatke u tablici
 py$drinks %>%
-  head(10) %>%
-  kbl() %>%
-  kableExtra::kable_material_dark()
+  select(1:5) %>%
+  head(4) 
 ```
 ---
-### PREGLED PODATAKA
+<br>
+<br>
+<br>
+#### Pregled podataka
 .pull-left[
 ```{python, echo = T}
 drinks['continent'].describe() # pregledaj kolonu 'continent'- KVALITATTIVNA
@@ -103,26 +254,194 @@ drinks['continent'].describe() # pregledaj kolonu 'continent'- KVALITATTIVNA
 .pull-right[
 ```{python,echo = T}
 drinks['beer_servings'].describe() # pregledaj kolonu 'continent'- KVANTITATIVNA
-
 ```
 ]
----
 
-## DISKRETNI I KONTINUIRANI PODATCI
+---
+layout: true
+# DISKRETNI I KONTINUIRANI PODATCI
+---
+<br>
+<br>
+<br>
 .pull-left[
-1. **DISKRETNI**
+**DISKRETNI**
 - prebrojivi
 - npr. igraća kocka
+- integer, logical, character, factor
 ]
 .pull-right[
-1. **KONTINUIRANI**
+**KONTINUIRANI**
 - postoje na kontinuiranoj skali
 - npr. težina ili visina
 ]
 ---
 
-## ČETIRI RAZINE PODATAKA
+#### Primjeri diskretnih podataka (numerička varijabla)
 
+```{r echo = TRUE}
+# Napravi integer varijablu sa dvanaest brojeva
+bubba <- integer(12)
+# Pregledaj
+bubba
+# Pregledaj prvi element
+bubba[1]
+# Promijeni 4. element u vrijednost 15
+bubba[4] <- 15
+# Pregledaj
+bubba
+```
+
+---
+
+#### Primjeri diskretnih podataka (numerička varijabla)
+
+```{r echo = TRUE}
+# Napravi sekvencu
+sekvenca <- seq(4,11,by=2)
+# Pregledaj
+sekvenca
+# Napravi varijablu koja nije kontinuirana
+a <- 1.2
+# Pregledaj
+typeof(a)
+# Pregledaj
+is.integer(a)
+```
+
+---
+
+#### Primjeri diskretnih podataka (logička varijabla)
+
+```{r echo = TRUE}
+# Napravi logičku varaijablu
+logickaVar <- logical(10)
+# Pregledaj
+logickaVar
+# Pregledaj
+typeof(logickaVar)
+# Prilagodi 3. element
+logickaVar[3] <- TRUE
+# Pregledaj
+logickaVar
+```
+
+---
+
+#### Primjeri diskretnih podataka (logička varijabla)
+
+```{r echo = TRUE}
+# Napravi logičku varaijablu
+l1 <- c(TRUE,FALSE)
+# Napravi logičku varaijablu
+l2 <- c(TRUE,TRUE)
+# Logički upit &
+l1&l1
+# Logički upit |
+l1|l2
+```
+
+---
+
+#### Primjeri diskretnih podataka (tekstualna (*chraracter*) varijabla)
+
+```{r echo = TRUE}
+# Napravi chr varaijablu
+rijec <- "hello"
+# Pregledaj
+rijec
+# Vrsta
+typeof(rijec)
+# Napravi chr varaijablu
+viseTeksta <- character(3)
+# Pregledaj
+viseTeksta
+```
+
+---
+
+#### Primjeri diskretnih podataka (tekstualna (*chraracter*) varijabla)
+
+```{r echo = TRUE}
+# Napravi chr element
+viseTeksta[2] <- "prvi element"
+viseTeksta[3] <- 'hej, treći!'
+viseTeksta[1] <- "prvi na prvom mjestu"
+# Pregledaj
+viseTeksta
+```
+
+---
+
+#### Primjeri diskretnih podataka (tekstualna (*chraracter*) varijabla)
+
+```{r echo = TRUE}
+# Napravi numerički element
+broj <- 3.0
+# Pregledaj
+typeof(broj)
+# Stvori chr iz numeričkog elementa
+rijec <- as.character("broj")
+# Prgledaj
+typeof(rijec)
+```
+
+---
+
+#### Primjeri diskretnih podataka (factor varijabla)
+
+```{r echo = TRUE}
+# Napravi factor varijablu
+faktor <- factor(x=c("one","two","three","one", "one", "one", "two"))
+# Pregledaj
+faktor
+# Faktorske razine
+levels(faktor)
+# Sortiraj
+sort(faktor)
+```
+
+---
+
+#### Primjeri kontinuiranih podataka 
+
+```{r echo = TRUE}
+# Napravi kontinuiranu varijablu
+d <- double(8)
+# Pregledaj
+d
+# Pregledaj
+typeof(d)
+# Promijeni element
+d[3] <- 17.6
+# Pregledaj
+d
+
+```
+
+---
+
+#### Primjeri specijalnih podataka 
+
+```{r echo = TRUE}
+# Stvori varijablu
+n <- c(NA,2,3,NA,5)
+# Pregledaj
+n
+# Primjena
+is.na(n)
+# Primjena
+n[!is.na(n)]
+```
+
+---
+layout: true
+# ČETIRI RAZINE PODATAKA
+---
+<br>
+<br>
+<br>
+<br>
 1. **NOMINALNI**
 
 2. **ORDINALNI**
@@ -132,7 +451,11 @@ drinks['beer_servings'].describe() # pregledaj kolonu 'continent'- KVANTITATIVNA
 4. **OMJERNI**
 
 ---
-## NOMINALNA RAZINA
+<br>
+<br>
+<br>
+
+#### Nominalna razina
 
 - podatci opisani nazivom ili kategorijom (kategorički podatci)
 
@@ -140,11 +463,31 @@ drinks['beer_servings'].describe() # pregledaj kolonu 'continent'- KVANTITATIVNA
 
 - ne mogu se obavljati matematičke operacije poput zbrajanja ili djeljenja
 
-- računanje prosjeka ili drugih st
-
 ---
 
-## ODINALNA RAZINA
+#### Primjer podataka nominalne razine
+
+
+```{r echo = TRUE}
+# Napravi podatke
+spol_vector <- c("Muški", "Ženski", "Ženski", "Muški", "Muški")
+# Pregledaj
+class(spol_vector)
+# Pregledaj
+spol_vector
+# Pretvori u faktor
+spol_vector_factor <- factor(spol_vector)
+# Pregledaj
+spol_vector_factor
+```
+
+
+---
+<br>
+<br>
+<br>
+
+#### Ordinalna razina
 
 - kategorički podatci koji imaju hijerarhijsku strukturu
 
@@ -157,217 +500,314 @@ drinks['beer_servings'].describe() # pregledaj kolonu 'continent'- KVANTITATIVNA
 - moguće je koristiti medijan (ne i prosjek)
 
 ---
-### PRIMJER
 
-```{python, echo = T}
-import numpy
+#### Primjer podataka ordinalne razine
 
-# anketa o sreci na ljestvici 1-5
-results = [5, 4, 3, 4, 5, 3, 2, 5, 3, 2, 1, 4, 5, 3, 4, 4, 5, 4, 2, 1,
-4, 5, 4, 3, 2, 4, 4, 5, 4, 3, 2, 1]
-
-# sortiraj rezultate
-sorted_results = sorted(results)
-print(sorted_results)
-
-# pogledaj prosjek i medijan
-print ("prosjek:",round(numpy.mean(results),2))
-print ("medijan:",round(numpy.median(results),2))
-
-
+```{r, echo = T}
+# Napravi chr varijablu
+dan_vector <- c('jutro', 'zora', 'popodne', 'podne', 'ponoc', 'predvecer')
+# Pretvori u ordinalnu varijablu
+factor_dan <- factor(dan_vector, order = TRUE, levels =c('zora', 'jutro', 'podne', 'popodne', 'predvecer', 'ponoc'))
+# Pregledaj
+factor_dan
 ```
 
 ---
-## INTERVALNA RAZINA
+
+#### Intervalna razina
 
 - npr. temperatura
+- kvantitativni podatci
 - opravdane su matematičke operacije poput zbrajanja i oduzimanja
 - opravdano korištenje mjera centralne tendencije i varijabilnosti
 
-### PRIMJER
+#### Primjer
 
 ```{python, echo = T}
+import numpy
 # temperatura frizidera u fahrenheitima mjerena svakih sat vremena
 temps = [31, 32, 32, 31, 28, 29, 31, 38, 32, 31, 30, 29, 30, 31, 26]
-
 # pogledaj prosjek i medijan
 print("prosjek:",round(numpy.mean(temps),2))
 print("medijan:",round(numpy.median(temps),2))
 ```
 
 ---
-### PRIMJER
+
+#### Primjer
+
 ```{python, echo = T}
 ## pogledaj mjere varijacije
-
 squared_differences = []
 # napravi praznu listu
 mean = numpy.mean(temps)
 # spremi prosjek u objekt
-
 for temperature in temps:
  difference = temperature - mean
- # definiraj funkciju za izracun udaljenosti (temperature) od prosjeka
- 
- squared_difference = difference**2
- # kvadriraj razliku
- squared_differences.append(squared_difference)
- # dodaj listi
-
+# definiraj funkciju za izracun udaljenosti (temperature) od prosjeka
+squared_difference = difference**2
+# kvadriraj razliku
+squared_differences.append(squared_difference)
+# dodaj listi
 average_squared_difference = numpy.mean(squared_differences)
 # izracunaj varijancu
 standard_deviation = numpy.sqrt(average_squared_difference)
 # izracunaj standardnu devijaciju
 print("stdev:",round(standard_deviation,2)) 
-
 ```
 
 ---
-## OMJERNA RAZINA
 
+#### Omjerna razina
+
+
+- kvantitativni podatci
 - opravdane matematičke operacije množenja i djeljenja
 - podatci na ovoj razni ne smiju biti negativni
 
-### PRIMJER
+#### Primjer
+
 ```{python, echo = T}
 # temperatura frizidera u fahrenheitima mjerena svakih sat vremena
 temps = [31, 32, 32, 31, 28, 29, 31, 38, 32, 31, 30, 29, 30, 31, 26]
-
 # izracunaj geometrijsku sredinu
 num_items = len(temps)
-product = 1.
 
+product = 1.
 for temperature in temps:
  product *= temperature
 
 geometric_mean = product**(1./num_items)
-
 # prikazi rezultat
 print("geometrijska sredina:",geometric_mean)
-
 ```
+
 ---
-
-## PODATCI U "PRAKSI"
-
+layout: true
+# PODATCI U "PRAKSI"
+---
+<br>
+<br>
+<br>
 **Big Data**
+<br>
+<br>
 - zbog veličine se ne mogu pohraniti na standardne relacijske baze
+<br>
 - nestrukturirani, semi-srtukturirani i strukturirani podatci
+<br>
 - od terabayt-a do zettabayt-a veličine
+<br>
 - osnova za strojno učenje, AI, predviđanje budućnosti
 
 ---
-
-## PODATCI U "PRAKSI"
-
+<br>
+<br>
+<br>
 **Strukturirani, Ne-strukturirani i Kvazi-strukturirani podatci**
+<br>
+<br>
+- SQL, Excel
+<br>
 - podatkovni "polymorphism" zbog uspona novih tehnologije (web,mobile, socialNet,IoT, programming)
+<br>
 - [MongoDB](https://www.mongodb.com/), RAVENDB,RETHINKDB, ORIENTDB, PostrgreSQL, ArangoDB cassandra
 
 ---
-## PODATCI U "PRAKSI"
-
+<br>
+<br>
+<br>
 **Vremenske serije**
+<br>
+<br>
 - svaka opservacija ima vremenski pečat(događaj ili procesuiranje)
+<br>
 - npr. bihevioralni podatci(web) koji se koriste za predviđanje akcijskih modela
+<br>
 - npr. financijsko trgovanje
 
----
-## PODATCI U "PRAKSI"
+```{r include = FALSE,eval = FALSE,echo=FALSE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
+library(Quandl)
+source("../Secret/Passkey.R")
+bitcoin <- Quandl("BITFINEX/LUNAF0USTF0", start_date='2019-10-20', end_date='2021-10-20')
+ggplot(bitcoin, aes(x = Date, y = Last)) + geom_line() + labs(x = "BitCoin (BTC)")
 
+library(ggplot2)
+library(dplyr)
+library(maddison)
+library(tidyr)
+# oil <-  Quandl("FRED/DCOILBRENTEU", start_date='1987-5-01', end_date='2021-10-20')
+# 
+# ggplot(oil, aes(x = Date, y = Value)) + geom_line() + labs(x = "Brent")
+
+oil2 <-  Quandl("BP/CRUDE_OIL_PRICES", start_date='1862-01-01', end_date='2021-10-20') %>%
+  rename(Price2020USD = "Price in 2020 Dollars",
+         PriceContUSD = "Price in Contemporary Dollars")
+
+
+ggplot(oil2, aes(x = Date, y = PriceContUSD)) + geom_line() + labs(x = "Brent")
+
+OPEC <- c("Algeria", "Angola", "Ecuador", "Iran", "Iraq", "Kuwait", "Libya",
+"Nigeria", "Qatar", "Saudi Arabia", "United Arab Emirates", "Venezuela")
+
+IMPORT <- c("Brazil", "China","India", "Malaysia", "Philippines", "Thailand", "Turkey", "South Africa")
+
+OPECmad <- maddison %>%
+  filter(country %in% OPEC) %>%
+  filter(year >= 1901) %>%
+  mutate(class = "OPEC") %>%
+  select(year,country,rgdpnapc,pop, class) %>%
+  group_by(year, country) %>%
+  mutate(rgdp = rgdpnapc*pop) %>%
+  ungroup()
+
+IMPORTmad <- maddison %>%
+  filter(country %in% IMPORT) %>%
+  filter(year >= 1901) %>%
+  mutate(class = "IMPORT") %>%
+  select(year,country,rgdpnapc,pop, class) %>%
+  group_by(year, country) %>%
+  mutate(rgdp = rgdpnapc*pop) %>%
+  ungroup()
+
+OIL <- oil2 %>%
+  mutate(year = format(Date, format = "%Y")) %>%
+  filter(year > 1900 & year < 2017) %>%
+  select(year,PriceContUSD,Price2020USD)
+
+GDP <- rbind.data.frame( OPECmad,IMPORTmad)
+
+GDPspread <- GDP %>%
+  select(year,country, rgdpnapc) %>%
+  spread(country, rgdpnapc) 
+
+OilGdp <- cbind.data.frame(GDPspread, OIL) 
+
+OilGdp <- OilGdp[,-1] %>% 
+  select(year,everything())
+
+write.csv2(OilGdp,"C:/Users/Lukas/OneDrive/Desktop/OilGdp.csv")
+
+OilGdp <- merge(GDP, OIL, by= "year", all = TRUE) %>%
+  spread(country, rgdpnapc)
+
+
+
+
+
+range(OPECmad$year)
+range(IMPORTmad$year)
+```
+
+
+
+---
+<br>
+<br>
+<br>
 **Strojni podatci**
+<br>
+<br>
 - sistemski proizvedeni podatci
+<br>
 - npr. PC logovi, mobiteli, pametni automobili, aplikacije, API, cloud aplikacije, sensorni signali
+<br>
 - posebno korisna za identifikaciju prijetnji, kontrolu kvalitete procesa, predviđanje
 
 ---
-## PODATCI U "PRAKSI"
-
+<br>
+<br>
+<br>
 **Prostorno-temporalni podatci**
+<br>
+<br>
 - geografski i temporalni pečat
+<br>
 - prokazuju lokacijsku dinamiku u vremenu
+<br>
 - praćenje vozila, promjene u populaciji, otkrivanje anomalija u (npr. telekom) mreži 
 ---
-## PODATCI U "PRAKSI"
-
+<br>
+<br>
+<br>
 **Otvoreni podatci**
+<br>
+<br>
 - dostupni javnosti prema "pravilima za upotrebu"
+<br>
 - trenutno uglavno ograničeni na znanstvenu uporabu
 ---
-
-## PODATCI U "PRAKSI"
-
+<br>
+<br>
+<br>
 **Crni podatci**
+<br>
+<br>
 - neiskorišteni podatci
+<br>
 - uglavnom u institucionalnom vlasništvu(tvrtke instituti, think-tank, fakulteti)
+<br>
 ---
-## PODATCI U "PRAKSI"
-
+<br>
+<br>
+<br>
 **Podatci u realnom vremenu**
+<br>
 - visoka potražnja i "vrući trend"
+<br>
 - 5G
+<br>
 - medicina, promet, trgovina
+<br>
 - velik potencijal
 
 ---
-## PODATCI U "PRAKSI"
-
+<br>
+<br>
+<br>
 **Genomski podatci**
+<br>
+<br>
 - analiza DNA u cilju identifikacije efekata ljekova i tretiranja bolesti
+<br>
 - analitika je glavno ograničenje
+<br>
 - prikupljanje i procesuiranje podataka otežano
 ---
-## PODATCI U "PRAKSI"
-
+<br>
+<br>
+<br>
 **Operativni podatci**
+<br>
+<br>
 - uvidi u procese ponad analitičara i specijalista
+<br>
 - podatci o praksama
+<br>
 - korisni za obrnuti inžinjering
 ---
-## PODATCI U "PRAKSI"
-
+<br>
+<br>
+<br>
 **Visoko-dimenzionalni podatci**
+<br>
+<br>
 - popularizirani kroz IT podršku za prepoznavanje lica
+<br>
 - zbog složenosti transformacija zahtijevaju nove načine bilježenja i manipulacije
 
 ---
-## PODATCI U "PRAKSI"
-
+<br>
+<br>
+<br>
 **Ne-verificirani podatci**
+<br>
+<br>
 - prikupljeni podatci upitne relevantnosti
 
-**Translitički podatci**
-- podatci dostupni u realnom vremenu
-- memorijska zahtjevnost i brzi pristup informacijama
-
 ---
+class: inverse, middle
+layout:false
+# Hvala na pozornosti!
 
-## BIG DATA U DRUŠTVENIM ZNANOSTIMA
 
-- visoki volumen, opseg, brzina i raznolikost
-- geografski, tekstualni, i podatci sa društvenih medija
-- dostupnost u realnom vremenu, većem opsegu, novi pokazatelji i manje strukture 
-- u poslovnom sektoru i prirodnim znanostima je BD već postao standard
-- društvene znanosti i javne institucije (vlade) kasne u prihvaćanju BD 
-
----
-
-## BIG DATA U DRUŠTVENIM ZNANOSTIMA
-.pull-left[
-**POTENCIJAL BD ZA UNAPRIJEĐENJE DRUŠTVENIH (I HUMANISTIČKIH) ZNANOSTI**
-
-- novi uvidi u društvo, politiku i ekonomiju
-- nova istraživačka pitanja
-- preciznija predviđanja
-- bolje javne politike
-
-]
-
-.pull-left[
-**IZVAZOVI BD**
-
-- pristup podatcima
-- upravljanje podatcima i provedba analize (T.Khun!?)
-- postavljanje pravih pitanja
-]
----

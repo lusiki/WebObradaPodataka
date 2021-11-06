@@ -14,140 +14,23 @@ output:
       countIncrementalSlides: false
 ---
 
+
+
 ```{R, setup, include = F}
-# devtools::install_github("dill/emoGG")
-library(pacman)
-p_load(
-  broom, tidyverse,
-  latex2exp, ggplot2, ggthemes, ggforce, viridis, extrafont, gridExtra,
-  kableExtra, snakecase, janitor,
-  data.table, dplyr, estimatr,
-  lubridate, knitr, parallel,
-  lfe,
-  here, magrittr
-)
-# Define pink color
-red_pink <- "#e64173"
-turquoise <- "#20B2AA"
-orange <- "#FFA500"
-red <- "#fb6107"
-blue <- "#2b59c3"
-green <- "#8bb174"
-grey_light <- "grey70"
-grey_mid <- "grey50"
-grey_dark <- "grey20"
-purple <- "#6A5ACD"
-slate <- "#314f4f"
-# Dark slate grey: #314f4f
-# Knitr options
+options(htmltools.dir.version = FALSE)
+library(knitr)
 opts_chunk$set(
-  comment = "#>",
-  fig.align = "center",
-  fig.height = 7,
-  fig.width = 10.5,
-  warning = F,
-  message = F
-)
-opts_chunk$set(dev = "svg")
-options(device = function(file, width, height) {
-  svg(tempfile(), width = width, height = height)
-})
-options(crayon.enabled = F)
-options(knitr.table.format = "html")
-# A blank theme for ggplot
-theme_empty <- theme_bw() + theme(
-  line = element_blank(),
-  rect = element_blank(),
-  strip.text = element_blank(),
-  axis.text = element_blank(),
-  plot.title = element_blank(),
-  axis.title = element_blank(),
-  plot.margin = structure(c(0, 0, -0.5, -1), unit = "lines", valid.unit = 3L, class = "unit"),
-  legend.position = "none"
-)
-theme_simple <- theme_bw() + theme(
-  line = element_blank(),
-  panel.grid = element_blank(),
-  rect = element_blank(),
-  strip.text = element_blank(),
-  axis.text.x = element_text(size = 18, family = "STIXGeneral"),
-  axis.text.y = element_blank(),
-  axis.ticks = element_blank(),
-  plot.title = element_blank(),
-  axis.title = element_blank(),
-  # plot.margin = structure(c(0, 0, -1, -1), unit = "lines", valid.unit = 3L, class = "unit"),
-  legend.position = "none"
-)
-theme_axes_math <- theme_void() + theme(
-  text = element_text(family = "MathJax_Math"),
-  axis.title = element_text(size = 22),
-  axis.title.x = element_text(hjust = .95, margin = margin(0.15, 0, 0, 0, unit = "lines")),
-  axis.title.y = element_text(vjust = .95, margin = margin(0, 0.15, 0, 0, unit = "lines")),
-  axis.line = element_line(
-    color = "grey70",
-    size = 0.25,
-    arrow = arrow(angle = 30, length = unit(0.15, "inches")
-  )),
-  plot.margin = structure(c(1, 0, 1, 0), unit = "lines", valid.unit = 3L, class = "unit"),
-  legend.position = "none"
-)
-theme_axes_serif <- theme_void() + theme(
-  text = element_text(family = "MathJax_Main"),
-  axis.title = element_text(size = 22),
-  axis.title.x = element_text(hjust = .95, margin = margin(0.15, 0, 0, 0, unit = "lines")),
-  axis.title.y = element_text(vjust = .95, margin = margin(0, 0.15, 0, 0, unit = "lines")),
-  axis.line = element_line(
-    color = "grey70",
-    size = 0.25,
-    arrow = arrow(angle = 30, length = unit(0.15, "inches")
-  )),
-  plot.margin = structure(c(1, 0, 1, 0), unit = "lines", valid.unit = 3L, class = "unit"),
-  legend.position = "none"
-)
-theme_axes <- theme_void() + theme(
-  text = element_text(family = "Fira Sans Book"),
-  axis.title = element_text(size = 18),
-  axis.title.x = element_text(hjust = .95, margin = margin(0.15, 0, 0, 0, unit = "lines")),
-  axis.title.y = element_text(vjust = .95, margin = margin(0, 0.15, 0, 0, unit = "lines")),
-  axis.line = element_line(
-    color = grey_light,
-    size = 0.25,
-    arrow = arrow(angle = 30, length = unit(0.15, "inches")
-  )),
-  plot.margin = structure(c(1, 0, 1, 0), unit = "lines", valid.unit = 3L, class = "unit"),
-  legend.position = "none"
-)
-theme_set(theme_gray(base_size = 20))
-# Column names for regression results
-reg_columns <- c("Term", "Est.", "S.E.", "t stat.", "p-Value")
-# Function for formatting p values
-format_pvi <- function(pv) {
-  return(ifelse(
-    pv < 0.0001,
-    "<0.0001",
-    round(pv, 4) %>% format(scientific = F)
-  ))
-}
-format_pv <- function(pvs) lapply(X = pvs, FUN = format_pvi) %>% unlist()
-# Tidy regression results table
-tidy_table <- function(x, terms, highlight_row = 1, highlight_color = "black", highlight_bold = T, digits = c(NA, 3, 3, 2, 5), title = NULL) {
-  x %>%
-    tidy() %>%
-    select(1:5) %>%
-    mutate(
-      term = terms,
-      p.value = p.value %>% format_pv()
-    ) %>%
-    kable(
-      col.names = reg_columns,
-      escape = F,
-      digits = digits,
-      caption = title
-    ) %>%
-    kable_styling(font_size = 20) %>%
-    row_spec(1:nrow(tidy(x)), background = "white") %>%
-    row_spec(highlight_row, bold = highlight_bold, color = highlight_color)
-}
+  fig.align="center",  
+  fig.height=4, #fig.width=6,
+  # out.width="748px", #out.length="520.75px",
+  dpi=500, #fig.path='Figs/',
+  cache=T#, echo=F, warning=F, message=F
+  )
+library(tidyverse)
+library(hrbrthemes)
+#library(fontawesome)
+
+
 ```
 
 ```{css, echo = F, eval = F}
@@ -180,25 +63,6 @@ tidy_table <- function(x, terms, highlight_row = 1, highlight_color = "black", h
 - *OpenSource* repozitorij na [GitHub](https://github.com/lusiki/WebObradaPodataka)-u 
 <br>
 
----
-
-# Literatura 
-
-##### Obvezna
-
-1. Blazquez-Soriano, A.,Domenech, J., 2017. Big Data sources and methods for social and economic analyses. [članak na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/BDSources.pdf) 
-
-2. Shu-Heng, C. (Ed.), 2018. Big Data in Computational Social Science and Humanities. [poglavlje knjige na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/Shu-Heng%20Chen%20-%20Big%20Data%20in%20Computational%20Social%20Science%20and%20Humanities-Springer.pdf)
-
-
-##### Dodatna
-
-3. Mcfarland, D, Lewis, K. and Goldberg, A., 2016. Sociology in the Era of Big Data: The Ascent of Forensic Social Science. [članak na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/Sociology%20in%20the%20Era%20of%20Big%20Data.pdf)
-
-4. Maštruko, N., 2020. Kristalna kugla jedinica i nula. [diplomski rad na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/Msc_mastruko_Kristalna%20kugla.pdf)
- 
-5. Novi statistički kurikul, 2021. [blog post na poveznici](http://croecon.contentio.biz/post/2021-03-16-nova-statistika/)
-
 
 ---
 
@@ -215,7 +79,6 @@ tidy_table <- function(x, terms, highlight_row = 1, highlight_color = "black", h
 - Eksperiment 
 - Ispitivanje 
 - Intervju
-- Senzori  
 - Strukturirane baze podataka
 
 ]
@@ -316,6 +179,61 @@ layout: true
 * Strojno preuzimanje podataka
 ]
 
+---
+
+### Primjer korištenja strukturirane baze podataka ([gapminder](https://www.gapminder.org/))
+
+
+```{r}
+# učitaj paket
+library(gapminder)
+# pregledaj podatke
+head(gapminder,8)
+```
+
+---
+
+
+### Primjer korištenja strukturirane baze podataka ([gapminder](https://www.gapminder.org/))
+
+```{r eval=FALSE}
+# učitaj pakete
+library(gganimate)
+library(gifski)
+library(ggplot2)
+# Izradi animiranu vizualizaciju
+anim <- ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, colour = country)) +
+  geom_point(alpha = 0.7, show.legend = FALSE) +
+  scale_colour_manual(values = country_colors) +
+  scale_size(range = c(2, 12)) +
+  scale_x_log10() +
+  facet_wrap(~continent) +
+  # neki detalji iz paketa gganimate
+  labs(title = 'Godina: {frame_time}', x = 'GDP per capita', y = 'Očekivana životna dob') +
+  transition_time(year) +
+  ease_aes('linear')
+```
+
+---
+
+### Primjer korištenja strukturirane baze podataka ([gapminder](https://www.gapminder.org/))
+
+```{r ggamin2, echo=FALSE, warning=FALSE}
+library(gganimate)
+library(gifski)
+library(ggplot2)
+
+ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, colour = country)) +
+  geom_point(alpha = 0.7, show.legend = FALSE) +
+  scale_colour_manual(values = country_colors) +
+  scale_size(range = c(2, 12)) +
+  scale_x_log10(labels = scales::dollar) +
+  facet_wrap(~continent) + 
+  # neki detalji iz paketa gganimate
+  labs(title = 'Godina: {frame_time}', x = 'Log (GDP per capita)', y = 'Očekivana životna dob') +
+  transition_time(year) +
+  ease_aes('linear')
+```
 
 ---
 class: inverse, middle
@@ -418,7 +336,7 @@ layout:true
 
 - Preuzimanje [podataka](https://www.dzs.hr/Hrv/censuses/census2011/results/htm/H01_06_01/H01_06_01.html) o stanovništvu u najvećim hrvatskim gradovima 
 
-```{r}
+```{r warning=FALSE}
 # paket
 library(rvest) 
 url <- "https://www.dzs.hr/Hrv/censuses/census2011/results/htm/H01_06_01/H01_06_01.html" # www
@@ -451,7 +369,8 @@ head(cSize, 10)
 ---
 
 ### Web scraping 
-
+<br>
+<br>
 ```{r echo = TRUE}
 # vizualizacija
 gradovi <- ggplot(data = cSize[1:10,],
@@ -470,14 +389,24 @@ gradovi <- ggplot(data = cSize[1:10,],
 ### Web scraping 
 
 ```{r echo = TRUE, fig.width=6, fig.height=3}
-# pregled grafikona
+# grafički prikaz
 gradovi
 ```
 
 
 ---
 
-### API - Google trendovi
+### Analiza predsjedničkih izbora (na [poveznici](http://croecon.contentio.biz/post/analiza-zatupljenosti-o-predsjedni-kih-kandidatima-na-doma-im-portalima/))
+<br>
+<br>
+
+```{r, echo=FALSE, fig.height=12}
+knitr::include_url("http://croecon.contentio.biz/post/analiza-zatupljenosti-o-predsjedni-kih-kandidatima-na-doma-im-portalima/")
+```
+
+---
+
+### Internet - Google trendovi
 
 ```{r echo=T}
 # paketi
@@ -499,7 +428,7 @@ time_trend <- trends$interest_over_time
 
 ---
 
-### API - Google trendovi
+### Internet - Google trendovi
  <br>
  
 ```{r echo = TRUE}
@@ -511,7 +440,7 @@ tail(sample_n(time_trend,7),7)
 
 ---
 
-### API - Google trendovi
+### Internet - Google trendovi
  <br>
  
 ```{r echo=TRUE, fig.width=5, fig.height=3}
@@ -533,18 +462,18 @@ google_pretraga <- ggplot(data = time_trend,
 
 ---
 
-### API - Google trendovi
+### Internet - Google trendovi
 
-```{r  echo=TRUE, fig.width=5, fig.height=4}
-# prikaži 
+```{r  echo=TRUE, fig.width=4, fig.height=2}
+# grafički prikaz
 google_pretraga
 ```
 
 ---
 
-### API - Google trendovi
+### Internet - Google trendovi
 
-```{r echo=TRUE, fig.width=5, fig.height=3}
+```{r echo=TRUE, fig.width=5, fig.height=2}
 # sve u jednom redu koda + "mjere"   :-) 
 plot(gtrendsR::gtrends(keyword = c("zavjera", "cjepljenje", "prosvjedi","mjere"),
                        geo = "HR",
@@ -584,7 +513,7 @@ plot(gtrendsR::gtrends(keyword = c("zavjera", "cjepljenje", "prosvjedi","mjere")
 
 ### API - COVID19 podatci
 
-```{r ,fig.width=6, fig.height=3}
+```{r ,fig.width=6, fig.height=3, warning=FALSE}
 # učitaj pakete
 library(tidycovid19)
 library(zoo)
@@ -612,8 +541,8 @@ covid <- df %>%
 ### API - COVID19 podatci
 
 
-```{r, fig.width=6, fig.height=4}
-# Prikaži podatke
+```{r, fig.width=6, fig.height=3}
+# grafički prikaz
 covid
 ```
 
@@ -633,44 +562,154 @@ layout:true
 **Popularne društvene mreže:**
 <br>
 <br>
-1. [Facebook](https://www.kaggle.com/chrisbow/an-introduction-to-facebook-ad-analysis-using-r) [(Vidi takodjer!)](https://www.residualthoughts.com/2018/02/12/analyzing-facebook-messages-in-r/)
+- [Facebook](https://www.kaggle.com/chrisbow/an-introduction-to-facebook-ad-analysis-using-r) [(Vidi takodjer!)](https://www.residualthoughts.com/2018/02/12/analyzing-facebook-messages-in-r/)
 <br>
-2. [LinkedIn](https://github.com/mpiccirilli/Rlinkedin)
+- [LinkedIn](https://github.com/mpiccirilli/Rlinkedin)
 <br>
-3. [Youtube](https://rpubs.com/arafath/YouTubeVideos_Analysis)
+- [Youtube](https://rpubs.com/arafath/YouTubeVideos_Analysis)
 <br>
-4. [Instagram](https://github.com/JonasSchroeder/InstaCrawlR)
+- [Instagram](https://github.com/JonasSchroeder/InstaCrawlR)
 <br>
-5. TikTok
+- TikTok
 <br>
-6. Google+
+- Google+
 <br>
-7. Tumblr
+- Tumblr
 <br>
-8. Flickr
-
-.footnote[[*] [Kolegij!](https://lusiki.github.io/Learning-Social-Media-Analytics/])
+- Flickr
+<br>
+<br>
+<br>
+.footnote[[*] [Digital 2021:Croatia](https://datareportal.com/reports/digital-2021-croatia?rq=Croatia)]
 
 ---
-
+<br>
+<br>
+<br>
 ### Najvažniji trendovi
-<br>
-<br>
-<br>
-<br>
-- API-kalipsa i *Cambridge Analytica* slučaj
+
 <br>
 - Poslovne primjene prednjače
 <br>
+- Perspektivno istraživačko polje u politologiji, komunikologiji, ekonomici
+<br>
+- [API-kalipsa](https://snurb.info/files/2019/After%20the%20%27APIcalypse%27.pdf) i *Cambridge Analytica* slučaj; [Social Dilemma](https://www.thesocialdilemma.com/)
+<br>
+- Kako dalje!?
+<br>
 <br>
 <br>
 
-.footnote[[*] [Dokumentarni film Social Dilemma](https://www.thesocialdilemma.com/)]
+.footnote[[*] [Kolegij!](https://lusiki.github.io/Learning-Social-Media-Analytics/)]
+<br>
+
+
+---
+<br>
+#### Hrvatski influenceri na Facebook-u
+<br>
+<br>
+- podatci preuzeti sa [Apify](https://apify.com/) servisa
+<br>
+- podatci uz plaćanje
+<br>
+- FB podatci dostupni samo za javne profile
+<br>
+- tehnološki brandovi u Hrvatskoj
+<br>
+- razoblje od mjesec dana 
+ 
+---
+
+#### Hrvatski influenceri na Facebook-u (*impresije*)
+<br>
+```{r importFacebook, echo=FALSE, message=FALSE, warning=FALSE}
+
+library(readxl)
+library(janitor)
+
+
+site_data_columns <- read_excel("../Dta/09-21.xlsx",
+                               sheet = "Facebook")
+
+site_data_column_names <- colnames(site_data_columns)
+column_data_types <- c()
+for(i in 1 : length(site_data_column_names)){  
+
+    #where date is a column name
+    if(site_data_column_names[i] == "date"){
+         column_data_types[i] <- "date"
+
+         #where result is a column name
+         } else if (site_data_column_names[i] == "result") {
+                      column_data_types[i] <- "numeric"
+
+         } else{
+                column_data_types[i] <- "text"
+        }
+}
+column_data_types[5] <- "date"
+
+
+
+facebook <- readxl::read_excel("../dta/09-21.xlsx",
+                               sheet = "Facebook",
+                               col_types = column_data_types) %>% 
+  row_to_names(.,1) %>% 
+  clean_names() %>%
+  select(-indexed,-category,-image,-languages) %>%
+  rename(Date = na)
+
+
+
+```
+
+```{r,  echo=FALSE, message=FALSE, warning=FALSE}
+
+library(kableExtra)
+
+options(digits = 2, scipen = 999, big.mark = ".")
+
+facebook %>%
+  mutate(impressions = as.numeric(impressions),
+         comments = as.numeric(comments),
+         engagements = as.numeric(engagements),
+         likes = as.numeric(likes),
+         audience = as.numeric(audience)) %>%
+  rename(Activity = type) -> fbDta
+
+fbDta %>%
+  group_by(author) %>%
+  top_n(.,5, wt = "impressions") %>% 
+  arrange(desc(impressions)) %>%
+  filter(impressions > 500) %>%
+  select(author, impressions, engagements, likes, text, Activity,  url, Date) %>%
+  kable(format.args = list(decimal.mark = ',', big.mark = ".")) %>%
+    kable_styling() %>%
+    scroll_box(width = "770px", height = "450px")
+```
+
+
+---
+
+#### Hrvatski influenceri na Facebook-u (*like*)
+<br>
+```{r,  echo=FALSE, message=FALSE, warning=FALSE}
+
+fbDta %>%
+  top_n(.,10, wt = "likes") %>% 
+  arrange(desc(likes)) %>%
+  filter(likes > 50) %>%
+  select(text, Activity, author, url, impressions, engagements, likes, Date) %>%
+  kable(format.args = list(decimal.mark = ',', big.mark = ".")) %>%
+    kable_styling() %>%
+    scroll_box(width = "770px", height = "450px")
+
+```
 
 ---
 
 ### Twitter
-<br>
 * Najpoznatiji mikroblogging servis
 <br>
 <br>
@@ -690,7 +729,7 @@ layout:true
 <br>
 <br>
 
-.footnote[[*] [Podrška za analizu u R](https://towardsdatascience.com/a-guide-to-mining-and-analysing-tweets-with-r-2f56818fdd16)]
+.footnote[[*] [Podrška za analizu u R](https://towardsdatascience.com/a-guide-to-mining-and-analysing-tweets-with-r-2f56818fdd16); [InfoCoV](https://www.netokracija.com/infocov-istrazivanje-ana-mestrovic-covid-19-174006)]
 
 ---
 
@@ -704,7 +743,7 @@ tSecret <- "rvC0kOcmLR2K3cVYCisoU98gjv5sQsSrm5sueppKxBn2v"
 app <- "izprobavanje"
 ```
 
-```{r echo = TRUE}
+```{r echo = TRUE, warning=FALSE}
 # paket
 library (rtweet) 
 # stvori token
@@ -719,7 +758,7 @@ twitter_token <- create_token(
 
 ```{r echo=TRUE, eval=FALSE}
 # objavi iz R
-post_tweet("Look, i'm tweeting from R!")
+post_tweet("Dobar dan, ja sam homo bot iz zemlje R :-)")
 ```
 
 
@@ -741,7 +780,6 @@ head(tweets[,2:5], n = 10)
 ---
 
 ### Twitter 
-<br>
 
 ```{r echo = TRUE}
 # regex za tweet-ove
@@ -757,7 +795,7 @@ hashtag_word <- gsub("[[:punct:]ー]", "", hashtag_word)
 # tabulliraj
 hashtag_count <- table(hashtag_word) 
 # sortiraj
-top_20_freqs <- sort(hashtag_count, decreasing = TRUE)[1:20] 
+top_20_freqs <- sort(hashtag_count, decreasing = TRUE)[1:30] 
 # napravi stringove
 top_20_hashtags <- as.character(as.data.frame(top_20_freqs)[,1]) 
 ```
@@ -775,11 +813,20 @@ top_20_freqs
 
 ### Twitter 
 
-```{r echo = TRUE, fig.width=7, fig.height=4 }
+```{r echo = TRUE, fig.width=7, fig.height=3, warning=FALSE }
 # vizualizacija 
 library(wordcloud) # paket
+pal = brewer.pal(9,"BrBG") #estetika
 wordcloud(top_20_hashtags, top_20_freqs, scale=c(3.5,1.5), # oblak riječi
-          random.order=FALSE, rot.per=.25)
+          random.order=FALSE, rot.per=.25,colors = rev(pal))
+```
+
+---
+
+### YouTube u Hrvatskoj (analiza na [poveznici](https://www.netokracija.com/analiza-hrvatske-youtube-scene-od-1400-kanala-samo-njih-6-ima-preko-milijun-pretplatnika-180868))
+<br>
+```{r  echo=FALSE, fig.height=12}
+knitr::include_url("https://www.netokracija.com/analiza-hrvatske-youtube-scene-od-1400-kanala-samo-njih-6-ima-preko-milijun-pretplatnika-180868")
 ```
 
 
@@ -795,9 +842,9 @@ layout:true
 
 ---
 
-### Primjer analize korištenja vlastitih mobilnih aplikacija 
+#### Primjer analize korištenja vlastitih mobilnih aplikacija 
 
-```{r}
+```{r warning=FALSE}
 # Učitaj pakete
 library(jsonlite)
 library(tidyverse)
@@ -813,7 +860,7 @@ android %>%
 
 ---
 
-### Primjer analize korištenja vlastitih mobilnih aplikacija<br>
+#### Primjer analize korištenja vlastitih mobilnih aplikacija 
 <br>
 ```{r}
 # napravi grafikon
@@ -832,7 +879,7 @@ najAplikacije <- android %>%
 
 ---
 
-### Analiza korištenja vlastitih mobilnih aplikacija
+#### Primjer analize korištenja vlastitih mobilnih aplikacija 
 
 
 ```{r fig.width=7, fig.height=4}
@@ -842,9 +889,9 @@ najAplikacije
 
 ---
 
-### Primjer analize korištenja vlastitih mobilnih aplikacija
+#### Primjer analize korištenja vlastitih mobilnih aplikacija 
 
-```{r warning= FALSE}
+```{r warning= FALSE, message=FALSE}
 android %>% 
   filter(month %in% '7') %>% # ponovi i za listopad/nije prikazano zbog prostora
   group_by(month, header) %>% 
@@ -861,7 +908,7 @@ android %>%
        caption = "Podatci:Google Takeout") -> najAplikacije7
 ```
 
-```{r echo=FALSE}
+```{r echo=FALSE, warning= FALSE, message=FALSE}
 android %>% 
   filter(month %in% '10') %>% 
   group_by(month, header) %>% 
@@ -881,9 +928,9 @@ android %>%
 
 ---
 
-### Primjer analize korištenja vlastitih mobilnih aplikacija
+#### Primjer analize korištenja vlastitih mobilnih aplikacija 
 
-```{r  fig.width=7, fig.height=5}
+```{r  fig.width=7, fig.height=4, echo=FALSE}
 # prikaži grafički
 najAplikacije7 / najAplikacije10
 ```
@@ -919,7 +966,7 @@ layout:true
 
 ### Google mobilnost
 
-```{r ,fig.width=6, fig.height=3}
+```{r ,fig.width=6, fig.height=2}
 
 df %>% # podatci iz paketa 
   filter(iso3c == "HRV", date >= "2020-02-21") %>%
@@ -944,7 +991,7 @@ mobilnost <- ggplot(dta, aes(x = date, y = value, group = Mjere, color = Mjere))
 
 ### Google mobilnost
 
-```{r ,fig.width=7, fig.height=4}
+```{r ,fig.width=6, fig.height=3}
 # prikaži grafički
 mobilnost
 ```
@@ -978,7 +1025,7 @@ layout:true
 * Programski pristup
 * Standardizacija
 * Spajanje baza
-* NLP(txt.)
+
 <br>
 <br>
 ]
@@ -995,6 +1042,7 @@ layout:true
 * Duboko učenje
 * Ensemble metode
 * Bayes
+* NLP(txt.)
 <br>
 <br>
 ]
@@ -1012,11 +1060,10 @@ layout:true
 
 ---
 layout:true
-# PREGLED PREDAVANJA I KLJUČNI POJMOVI
+# ZAKLJUČNO
 
 ---
-<br>
-*Pregled predavanja:*
+**Pregled predavanja:**
 
 - klasični izvori podataka u društvenim znanostima
 
@@ -1026,10 +1073,9 @@ layout:true
 
 - DataScience alati za upravljanje suvremenim podatcima
 
-<br>
-<br>
-<br>
-*Ključni pojmovi:*
+
+
+**Ključni pojmovi:**
 
 - veliki podatci
 
@@ -1039,10 +1085,34 @@ layout:true
 
 - nova istraživačka paradigma*
 
+
+---
+layout:true
+# LITERATURA
+
+---
+
+##### Obvezna
+
+1. Blazquez-Soriano, A.and  Domenech, J., (2017). Big Data sources and methods for social and economic analyses. [članak na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/BDSources.pdf) 
+
+2. Shu-Heng, C. (Ed.), (2018). Big Data in Computational Social Science and Humanities. [poglavlje knjige na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/Shu-Heng%20Chen%20-%20Big%20Data%20in%20Computational%20Social%20Science%20and%20Humanities-Springer.pdf)
+
+
+##### Dodatna
+
+3. Mcfarland, D, Lewis, K. and Goldberg, A., (2016). Sociology in the Era of Big Data: The Ascent of Forensic Social Science. [članak na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/Sociology%20in%20the%20Era%20of%20Big%20Data.pdf)
+
+4. Maštruko, N., (2020). Kristalna kugla jedinica i nula. [diplomski rad na poveznici](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/Msc_mastruko_Kristalna%20kugla.pdf)
+ 
+5. Novi statistički kurikul, (2021). [blog post na poveznici](http://croecon.contentio.biz/post/2021-03-16-nova-statistika/)
+
+
+
 ---
 class: inverse, middle
 layout:false
-# HVALA NA PAŽNJI!
+# Hvala na pozornosti!
 
 
 

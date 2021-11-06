@@ -7,7 +7,7 @@ title: " "
 <br>
 
 
-**08/11/2021** - Predavanje na temu [Metode, alati i izvori podataka za digitalnu sociologiju]()
+**08/11/2021** - Predavanje na temu [Metode, alati i izvori podataka za digitalnu sociologiju](https://raw.githack.com/lusiki/WebObradaPodataka/main/XtraPredavanja/MAI.html#1)
 
 **14/10/2021** - Nastupno predavanje na temu [Suvremeni izvori podataka u društvenim istraživanjima](https://raw.githack.com/lusiki/WebObradaPodataka/main/Predavanja/03_IZVORIdtaXAR.html#1)
 
