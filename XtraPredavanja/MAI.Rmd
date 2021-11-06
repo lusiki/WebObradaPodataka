@@ -1,0 +1,268 @@
+---
+title: "DIGITALNA SOCIOLOGIJA"
+# subtitle: "<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>"
+subtitle: "Metode,alati i izvori podataka"
+author: "Luka Sikic, PhD"
+date: "Fakultet hrvatskih studija" #"`r format(Sys.time(), '%d %B %Y')`"
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts] 
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+
+
+```{R, setup, include = F}
+options(htmltools.dir.version = FALSE)
+library(knitr)
+opts_chunk$set(
+  fig.align="center",  
+  fig.height=4, #fig.width=6,
+  # out.width="748px", #out.length="520.75px",
+  dpi=500, #fig.path='Figs/',
+  cache=T#, echo=F, warning=F, message=F
+  )
+library(tidyverse)
+library(hrbrthemes)
+#library(fontawesome)
+
+
+```
+
+```{css, echo = F, eval = F}
+@media print {
+  .has-continuation {
+    display: block !important;
+  }
+}
+```
+
+
+# PREGLED PREDAVANJA
+
+
+
+#### **Izvori podataka**
+
+- Web 
+- Društvene mreže 
+- Aplikacije
+- Senzori  
+
+
+#### **Metode u digitalnoj sociologiji**
+
+- Statistika 
+- Strojno (i duboko) učenje 
+- Obrada prirodnog teksta
+
+
+#### **Alati**
+
+- Data Science (obrada podataka, API, cloud, command prompt)
+- Programski jezici (python, R, SQL, Julia, HTML) 
+- Izvještaji, suradnja i razmjena (markdown, Git/github, open source, aplikacije)
+
+
+
+
+---
+class: inverse, middle
+layout: false
+# Izvori podataka
+---
+layout: true
+# Izvori podataka
+
+---
+
+.pull-left[
+
+#### **Klasični izvori podataka**
+
+- Eksperiment 
+- Ispitivanje 
+- Intervju
+- Strukturirane baze podataka
+
+]
+
+.pull-right[
+
+#### **Moderni izvori podataka (BigData)**
+
+- Web 
+- Društvene mreže 
+- Aplikacije
+- Senzori  
+
+]
+
+---
+<br>
+<br>
+<br>
+- karakteristike BigData podataka
+<br>
+<br>
+- podatci kao društveno-tehnološki proces
+<br>
+<br>
+- pristup podatcima(APIkalipsa)
+<br>
+<br>
+- komodifikacija podataka
+<br>
+<br>
+- nova istraživačka paradigma
+
+
+.footnote[[*] [Khunova revolucija!?](https://journals.sagepub.com/doi/10.1177/2053951714528481)]
+
+
+---
+class: inverse, middle
+layout: false
+# Metode u digitalnoj sociologiji
+---
+layout: true
+# Aktualni trendovi
+
+---
+
+<br>
+<br>
+<br>
+- podatci -> metode 
+<br>
+<br>
+- rastuća interdisciplinarnost
+<br>
+<br>
+- prilagodba kurikuluma
+<br>
+<br>
+- intenziviranje jaza između društvene teorije i realnog svijeta
+<br>
+<br>
+---
+layout: true
+# Statistika
+
+---
+<br>
+<br>
+<br>
+- deskriptivni prikaz, vizualizacija i interaktivnost
+<br>
+<br>
+- proširenje stadarnih modela
+<br>
+<br>
+- naprednije i složenije metode
+<br>
+<br>
+- Bayes-ova statistika
+
+
+---
+layout: true
+# Strojno (i duboko) učenje
+
+---
+<br>
+<br>
+<br>
+- algoritamska analiza 
+<br>
+<br>
+- osnova za umjetnu inteligenciju
+<br>
+<br>
+- memorijski zahtjevno
+<br>
+<br>
+- tehnički kompleksno
+
+---
+layout: true
+# Obrada prirodnog teksta
+
+---
+<br>
+<br>
+<br>
+- tekst kao podatci
+<br>
+<br>
+- trenutno tehnološka granica
+<br>
+<br>
+- sve raširenije područje
+<br>
+<br>
+- široka primjena
+
+---
+class: inverse, middle
+layout: false
+# Alati digitalnoj sociologiji
+---
+layout: true
+# Aktualni trendovi
+
+---
+
+
+
+
+
+---
+layout:true
+# LITERATURA
+
+---
+
+##### Obvezna
+
+1. []() 
+
+2. []()
+
+
+##### Dodatna
+
+3. []()
+
+4. []()
+ 
+5. []()
+
+
+
+---
+class: inverse, middle
+layout:false
+# Hvala na pozornosti!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
