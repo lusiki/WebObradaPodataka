@@ -1,7 +1,7 @@
 ---
 title: "DIGITALNA SOCIOLOGIJA"
 # subtitle: "<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>"
-subtitle: "Metode,alati i izvori podataka"
+subtitle: "Metode, alati i izvori podataka"
 author: "Luka Sikic, PhD"
 date: "Fakultet hrvatskih studija" #"`r format(Sys.time(), '%d %B %Y')`"
 output:
@@ -57,7 +57,9 @@ library(hrbrthemes)
 #### **Metode u digitalnoj sociologiji**
 
 - Statistika 
-- Strojno (i duboko) učenje 
+- Analiza mreža
+- Geolokacijska analiza
+- Strojna analiza
 - Obrada prirodnog teksta
 
 
@@ -65,7 +67,7 @@ library(hrbrthemes)
 
 - Podatkovne znanosti 
 - Programski jezici 
-- Izvještaji, suradnja i razmjena (markdown, Git/github, open source, aplikacije)
+- Izvještaji, suradnja i razmjena 
 
 
 
@@ -79,7 +81,9 @@ layout: true
 # Izvori podataka
 
 ---
-
+<br>
+<br>
+<br>
 .pull-left[
 
 #### **Klasični izvori podataka**
@@ -112,7 +116,7 @@ layout: true
 - podatci kao društveno-tehnološki proces
 <br>
 <br>
-- pristup podatcima(APIkalipsa)
+- pristup podatcima (APIkalipsa)
 <br>
 <br>
 - komodifikacija podataka
@@ -171,7 +175,7 @@ layout: true
 
 ---
 layout: true
-# Strojno (i duboko) učenje
+# Strojna analiza
 
 ---
 <br>
@@ -266,27 +270,56 @@ layout: true
 <br>
 - aplikacije
 
+---
+class: inverse, middle
+layout: false
+# Zaključno
+---
+layout:true
+# Pitanja za diskusiju
+
+---
+
+- Sociologija digitalnog ili digitalne vještine?
+
+- Teorija u krizi?
+
+- Promjena paradigme?
+
+- Koliko su važne vještine? Perspektive na tržištu rada?
+
+
+
+
 
 ---
 layout:true
-# LITERATURA
+# Literatura
 
 ---
 
-##### Obvezna
+#### Knjige
 
-1. []() 
+1. [What is Digital Sociology? (2019), Neil Selwyn, Polity Press ](https://politybooks.com/bookdetail/?isbn=9781509527106&subject_id=1) 
 
-2. []()
+2. [Digital Methods for Social Science (2016), Palgrave McMilan](https://link.springer.com/book/10.1057/9781137453662)
 
+3. [Thick Big Data: Doing Digital Social Sciences (2020), Dariusz Jemielniak, Oxford University Press](https://oxford.universitypressscholarship.com/view/10.1093/oso/9780198839705.001.0001/oso-9780198839705)
 
-##### Dodatna
-
-3. []()
-
-4. []()
+4. [Sociological Theory in the Digital Age (2020), By Gabe Ignatow ](https://www.routledge.com/Sociological-Theory-in-the-Digital-Age/Ignatow/p/book/9780367263478)
  
 5. []()
+
+#### Časopisi
+
+1. [Big Data & Society]() 
+
+2. [Social Media + Society]()
+
+3. [New Media & Society]()
+
+4. [nformation, Communication & Society]()
+
 
 
 
