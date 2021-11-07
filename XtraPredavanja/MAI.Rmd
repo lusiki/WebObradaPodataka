@@ -44,15 +44,20 @@ library(hrbrthemes)
 
 # PREGLED PREDAVANJA
 
+<br>
+<br>
+<br>
+<br>
+#### **1. Izvori podataka**
+<br>
+<br>
 
-#### **Izvori podataka**
 
+#### **2. Metode u digitalnoj sociologiji**
+<br>
+<br>
 
-
-#### **Metode u digitalnoj sociologiji**
-
-
-#### **Alati**
+#### **3. Alati i vještine**
 
 
 ---
@@ -261,23 +266,7 @@ class: inverse, middle
 layout: false
 # Zaključno
 ---
-layout:true
-# Pitanja za diskusiju
 
----
-<br>
-<br>
-<br>
-
-- Promjena paradigme!?
-<br>
-- Sociologija digitalnog ili rad na digitalnim vještinama?
-<br>
-- Teorija u krizi ili rastuća vrijednost teorije uz nove vještine?
-<br>
-- Koliko su važne vještine? Perspektive na tržištu rada?
-
----
 layout:true
 # Knjige
 
@@ -337,7 +326,24 @@ layout:true
 <br>
 <br>
 .footnote[[*]Dobar [blog post](https://towardsdatascience.com/first-day-of-social-data-science-beedc2174232) o programu University of Copenhagen’s MSc of Social Data Science]
+---
+layout:true
+# Pitanja za diskusiju
 
+---
+<br>
+<br>
+<br>
+
+- Promjena paradigme!?
+<br><br>
+- Sociologija digitalnog ili rad na digitalnim vještinama?
+<br><br>
+- Teorija u krizi ili rastuća vrijednost teorije uz nove vještine?
+<br><br>
+- Koliko su važne vještine? Perspektive na tržištu rada?
+
+---
 ---
 class: inverse, middle
 layout:false
