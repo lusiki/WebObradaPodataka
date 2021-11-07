@@ -294,11 +294,11 @@ layout:true
 
 ---
 layout:true
-# Literatura
+# Resursi
 
 ---
 
-#### Knjige
+##### Knjige
 
 1. [What is Digital Sociology? (2019), Neil Selwyn, Polity Press ](https://politybooks.com/bookdetail/?isbn=9781509527106&subject_id=1) 
 
@@ -308,20 +308,26 @@ layout:true
 
 4. [Sociological Theory in the Digital Age (2020), By Gabe Ignatow ](https://www.routledge.com/Sociological-Theory-in-the-Digital-Age/Ignatow/p/book/9780367263478)
  
-5. []()
 
-#### Časopisi
+##### Časopisi
 
-1. [Big Data & Society]() 
+1. [Big Data & Society](https://journals.sagepub.com/home/bds) 
 
-2. [Social Media + Society]()
+2. [Social Media + Society](https://journals.sagepub.com/home/sms)
 
-3. [New Media & Society]()
+3. [New Media & Society](https://journals.sagepub.com/home/nms)
 
-4. [nformation, Communication & Society]()
+4. [Information, Communication & Society](https://www.tandfonline.com/toc/rics20/current)
 
+###### Programi
 
+1. [Københavns Universitet Copenhagen Center for Social Data Science](https://sodas.ku.dk/)
 
+2. [MSc in Social Data Science at Oxford Internet Institute](https://www.ox.ac.uk/admissions/graduate/courses/msc-social-data-science)
+
+3. [MSc Applied Social Data Science at LSE](https://www.lse.ac.uk/study-at-lse/Graduate/degree-programmes-2021/MSc-Applied-Social-Data-Science)
+
+4. [MSc Social Data Science at Uni Essex](https://www.essex.ac.uk/courses/pg01314/1/msc-social-data-science)
 
 ---
 class: inverse, middle
