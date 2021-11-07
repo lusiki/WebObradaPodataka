@@ -287,9 +287,12 @@ layout:true
 <br>
 1. [What is Digital Sociology? (2019), Neil Selwyn, Polity Press ](https://politybooks.com/bookdetail/?isbn=9781509527106&subject_id=1) 
 <br>
+<br>
 2. [Digital Methods for Social Science (2016), Palgrave McMilan](https://link.springer.com/book/10.1057/9781137453662)
 <br>
+<br>
 3. [Thick Big Data: Doing Digital Social Sciences (2020), Dariusz Jemielniak, Oxford University Press](https://oxford.universitypressscholarship.com/view/10.1093/oso/9780198839705.001.0001/oso-9780198839705)
+<br>
 <br>
 4. [Sociological Theory in the Digital Age (2020), By Gabe Ignatow ](https://www.routledge.com/Sociological-Theory-in-the-Digital-Age/Ignatow/p/book/9780367263478)
  
@@ -303,9 +306,12 @@ layout:true
 <br>
 1. [Big Data & Society](https://journals.sagepub.com/home/bds) 
 <br>
+<br>
 2. [Social Media + Society](https://journals.sagepub.com/home/sms)
 <br>
+<br>
 3. [New Media & Society](https://journals.sagepub.com/home/nms)
+<br>
 <br>
 4. [Information, Communication & Society](https://www.tandfonline.com/toc/rics20/current)
 
@@ -318,9 +324,12 @@ layout:true
 <br>
 1. [Københavns Universitet Copenhagen Center for Social Data Science](https://sodas.ku.dk/)
 <br>
+<br>
 2. [MSc in Social Data Science at Oxford Internet Institute](https://www.ox.ac.uk/admissions/graduate/courses/msc-social-data-science)
 <br>
+<br>
 3. [MSc Applied Social Data Science at LSE](https://www.lse.ac.uk/study-at-lse/Graduate/degree-programmes-2021/MSc-Applied-Social-Data-Science)
+<br>
 <br>
 4. [MSc Social Data Science at Uni Essex](https://www.essex.ac.uk/courses/pg01314/1/msc-social-data-science)
 <br>
