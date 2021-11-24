@@ -344,7 +344,6 @@ layout:true
 - Koliko su važne vještine? Perspektive na tržištu rada?
 
 ---
----
 class: inverse, middle
 layout:false
 # Hvala na pozornosti!
