@@ -452,7 +452,7 @@ iaaf <-
 
 ### Kombinirane tablice
 
-Povežimo odvojena razdoblja u jedan data.frame. Ponovno ćemo koristiti funkciju `dplyr:: bind_rows()` i zadržati samo zajedničke varijable. Također ćemo dodati varijablu (kolonu) koja se refeira na razdoblje za koje su zabilježeni rezultati. 
+Povežimo odvojena razdoblja u jedan data.frame. Ponovno ćemo koristiti funkciju `dplyr:: bind_rows()` i zadržati samo zajedničke varijable. Također ćemo dodati varijablu (kolonu) koja se refeira na razdoblje (naziv) za koje su zabilježeni rezultati: 
 
 
 ```r
@@ -482,7 +482,7 @@ wr100
 ## # ... with 89 more rows
 ```
 
-Vizualizaciju podataka...
+Vizualizaciju podataka konačno možemo napraviti na način:
 
 
 ```r
@@ -491,7 +491,7 @@ wr100 %>%
   geom_point(alpha = 0.7) +
   labs(
     title = "Evolucija svjetskog rekorda -- Sprint na 100m",
-    x = "Datum", y = "Postignuće (100m u sek)",
+    x = "Datum", y = "Postignuce (100m u sek)",
     caption = "Izvor: Wikipedia"
     ) +
   theme(legend.title = element_blank()) ## Makni legendu
@@ -502,26 +502,34 @@ wr100 %>%
 
 ## Sažetak
 
-- Web sadržaj je procesuiran na strani 1) servera ili 2) klijenta
-- Za preuzimanje sadržaja na strani servera, potrebno je identificirati CSS selektore
-- Selektore (CSS) možemo identificirati pomoću SelectorGadget-a ili korz *inspekciju* elemenata u browser-u
-- Koristi se `rvest` paket za učitavanje HTML dokumenta u R i parsanje nodova od interesa. 
-- tipični pristup rada uključuje:`read_html(URL) %>% html_nodes(CSS_SELECTORS) %>% html_table()`.
+- Web sadržaj je procesuiran na strani 1) servera ili 2) klijenta.
+<br>
+- Za preuzimanje sadržaja na strani servera, potrebno je identificirati CSS selektore.
+<br>
+- Selektore (CSS) možemo identificirati pomoću SelectorGadget-a ili korz *inspekciju* elemenata u browser-u.
+<br>
+- Koristi se `rvest` paket za učitavanje HTML dokumenta u R i parsanje nodova od interesa.
+<br>
+  - Tipični pristup rada uključuje:`read_html(URL) %>% html_nodes(CSS_SELECTORS) %>% html_table()`.
+<br>
   - Druge funkcije mogu biti potrebne ovisno o vrsti podataka koje preuzimamo (npr. `?html_text`).
-- Samo zato što *možete* scrapati neku stranicu, ne znači i da *trebate*  (i.e. etički i zakonski aspekti).
+<br>
+- Samo zato što *možete* preuzeti neku stranicu, ne znači i da *trebate*  (i.e. etički i zakonski aspekti).
+<br>
 - Webscraping je u jednakoj mjeri umjetnost kao i znanost. Budite spremni na dosta eksperimentiranja i  čišćenja podataka.
+<br>
 - Nastavak predavanja: Webscraping: (2) Client-strana i API.
 
 
-##Doddatni resursi i vježba
+## Doddatni resursi i vježba
 
-Probajte koristiti novo-stečene `rvest` vještine na nekom od (mnogih) online tutoriala. Dodatno valja istakunti:
+Probajte koristiti novo-stečene `rvest` vještine na nekom od (mnogih) online tutoriala. Pri tome ne zaboravite:
 
-### Web manire i bonton
+#### Web manire i bonton
 
 Smomenuli smo princip  "lijepog ponašanja" na web-u...ovdje vrijedi istaknuti **polite** paket ([link](https://github.com/dmi3kno/polite)). Paket omogućava korisne alate u maniri dobrog ponašanja na web-u poput provjere dopuštenja i opterećenja stranice sa koje preuzimamo sadržaj. Paket se također nadopunjuje sa **rvest** pristupom koji smo prikazali u predavanju. 
 
-### Modeliranje i predviđanje
+#### Modeliranje i predviđanje
 
 Preuzeti podatci predstavljaju dobru osnovu za statističku analizu pa ih je dobro promotriti u tom kontekstu. kako biste modelirali napredak u svjetskim sprint rekordima na 100m? Zamislite da želite predvidjeti današnji svjetski rekord u 2005. godini! Kako bi se predviđanje odnosilo na aktualni rekord iz 2009. godine (i.e. Usain Bolt, 9.58 sec)?  Kako biste to interpretirali?
 
