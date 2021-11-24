@@ -143,7 +143,7 @@ Na sreću, postoji i precizniji način određivanja točnog selektora, a odnosi 
 
 ![](../Foto/inspect100m.gif)
 
-Koristeći ovu metodu dobijemo selektor "#mw-content-text > div > table:nth-child(8)". Pogledajmo da li će ovaj put sve funkcionirati bez error-a. Ponovno ćemo koristiti `rvest::html_table(fill=TRUE)` funkciju za prebacivanje tablice u data.frame:
+Koristeći ovu metodu dobijemo CSS selektor "table.wikitable:nth-child(9) > tbody:nth-child(1)". Pogledajmo da li će ovaj put sve funkcionirati bez error-a. Ponovno ćemo koristiti `rvest::html_table(fill=TRUE)` funkciju za prebacivanje tablice u data.frame:
 
 
 ```r
