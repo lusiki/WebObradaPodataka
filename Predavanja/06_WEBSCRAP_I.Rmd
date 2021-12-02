@@ -151,7 +151,6 @@ Drugi primjer uključuje preuzimanje podataka sa [**FRED API**](https://research
 
 [FRED](https://fred.stlouisfed.org/) je ekonomska baza Federalne banke u St. Louis-u, podružnice Američke središnje banke. Stranica ima ugrađene alate za vizualizaciju podataka [poput ovog](https://fred.stlouisfed.org/series/GNPCA#0) za seriju BDP/per capita SAD-a od 1929. godine.
 
-<iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=mPCo&width=670&height=475" scrolling="no" frameborder="0"style="overflow:hidden; width:670px; height:525px;" allowTransparency="true"></iframe>
 
 
 </br>
@@ -492,14 +491,13 @@ rankings_history %>%
 
 New Zealand dominira u globalim rangiranjima što je posebno zanimljivo s obzirom na veličinu te zemlje. Radi se o [najboljem međunarodnom timu](https://www.dailytelegraph.com.au/sport/rugby/are-the-all-blacks-the-greatest-international-team-in-the-history-of-sport/news-story/f61ad2d65623a9586929bbfba386b157) u povijesti profesionalnog sporta.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Forbz3lizUk" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Sažetak
 
 - API predstavlja skup pravila i metoda koje omogućavaju komunikaciju kompjutera ili programa (npr. host server) sa drugim kompjuterom ili programom (npr. klijent ili browser).
 - Moguće je pristupiti informacijama drirektno kroz API ukoliko smo identificirali API izvor.
   - API izvor za najveći broj web aplikacija će biti URL sa JSON ili XML sadržajem.
-- Neki API-ji ne zahtijevaju ključ ili token no najveći broj traži takve podatke. Taj ključ se dodadje kao parametar u API izvor.
+- Neki API-ji ne zahtijevaju ključ ili token no najveći broj traži takve podatke. Taj ključ se dodaje kao parametar u API izvor.
 - Preuzimanje sadržaja sa API izvora na lokalno računalo (i.e. R environment) je moguće na više načina.
    - Npr.. `jsonlite::readJSON()` za direktno učitavanje JSON array-a, `httr::GET()` za preuzimanje čitavog odgovora, ili pak instalacija paketa koji sve radi automatski (ako postoji paket!).
 
