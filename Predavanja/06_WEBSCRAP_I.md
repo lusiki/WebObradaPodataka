@@ -24,11 +24,11 @@ output:
 
 ### Registracija
 
-U ovom dijelu predavanja ćemo preuzeti ekonomske podatke (između ostalog) sa FRED API-ja. To zatijeva [registraciju](https://research.stlouisfed.org/useraccount/apikey) i pohranu [API ključa](https://research.stlouisfed.org/useraccount/apikey).
+U ovom predavanju ćemo preuzeti ekonomske podatke (između ostalog) sa FRED API-ja. To zatijeva [registraciju](https://research.stlouisfed.org/useraccount/apikey) i pohranu [API ključa](https://research.stlouisfed.org/useraccount/apikey).
 
 ### *Eksterni* software
 
-Koristiti ćemo [JSONView](https://jsonview.com/) browser ekstenziju koja omogućava pregled JSON output-a u Chrome-u i Firefox-u. (Nije nužno ali preporučeno!)
+Koristiti ćemo [JSONView](https://jsonview.com/) browser ekstenziju koja omogućava pregled JSON output-a u Chrome-u i Firefox-u. (Nije nužno ali se  preporuča!)
 
 ### R paketi 
 
@@ -50,9 +50,9 @@ theme_set(hrbrthemes::theme_ipsum())
 
 ## Prisjetimo se...
 
-U prvom dijelu predavanja o preuzimanju sadržaja sa interneta smo vidjeli da web stranice i web aplikacije mogu biti: 1) na strani servera i 2) na strani klijenta. Već smo pokazali kako preuzeti podatke koji su procesuirani na strani servera koristeći **rvest** paket. Ta se tehnika fokusira na CSS selektore ([SelectorGadget](http://selectorgadget.com/)) i HTML tagove. Također smo vidjeli da webscraping nije egzaktna zanost već dijelom i umjetnost! Mnoštvo CSS opcija i fleksibilnost HTML-a čine preuzimanje podataka specifičnim za svaku pojedinu stranicu i trenutak. To ne znači da opći principi ne funkcioniraju!
+U prvom dijelu predavanja o preuzimanju sadržaja sa interneta smo vidjeli da *web* stranice i *web* aplikacije mogu biti: 1) na strani servera i 2) na strani klijenta. Već smo pokazali kako preuzeti podatke koji su procesuirani na strani servera koristeći **rvest** paket. Ta se tehnika fokusira na CSS selektore ([SelectorGadget](http://selectorgadget.com/)) i HTML tagove. Također smo vidjeli da *webscraping* nije egzaktna zanost nego uvelike i umjetnost! Mnoštvo CSS opcija i fleksibilnost HTML-a čine preuzimanje podataka specifičnim poslom za svaku pojedinu stranicu i trenutak. To ne znači da opći principi ne funkcioniraju!
 
-Fokus ovog dijela predavanja je preuzimanje podataka koji su procesuirani na strani klijenta (**client-side**). Ovaj je pristup u najvećem broju slučajeva jednostavniji način za preuzimanje podataka sa web-a. To ne znači da određena doza "umjetnosti" nije potrebna...! Još jednom valja naglasiti **etičke** i **zakonske** aspekte preuzimanja web sadržaja...pogledajte u prvom dijelu predavanja!
+Fokus ovog dijela predavanja je na preuzimanje podataka koji su procesuirani na strani klijenta (*client-side*). Ovaj je pristup u najvećem broju slučajeva jednostavniji način za preuzimanje podataka sa web-a. To ne znači da određena doza "umjetnosti" nije potrebna...! Još jednom valja naglasiti **etičke** i **zakonske** aspekte preuzimanja web sadržaja...koje smo spominjali u prvom dijelu predavanja!
 
 ## Strana klijenta (*Client-side*), API i API *izvori*
 
@@ -62,9 +62,9 @@ Webstranice i aplikacije koje su procesuirane na **strani klijenta**  zahtijevaj
 - Posjetite URL koji koristi predložak statičkog sadržaja (HTML tablice, CSS, itd). Taj predložak  sadržava podatke "u sebi".
 - U procesu otvaranja URL-a, browser šalje zahtijev (*request*) na (host) server.
 - Ukoliko je zahtjev ispravan (*valid*), server će vratiti odgovor (*response*) koji poziva tražene podatke i dinamički ih procesuira u browser-u.
-- Stranica koju vidite u browseru je stoga mješavina statičkog sadržaja (predloška) i dinamički generiranih informacija koje su procesuirane u browseru (i.e. *klijent*).
+- Stranica koju vidite u browseru je stoga mješavina statičkog sadržaja (predloška) i dinamički generiranih informacija koje su procesuirane u browseru (i.e. *klijentu*).
 
-Cijelokupni proces slanja zahtjeva, odgovora i procesuiranja se odvija kroz **API** (or **A**pplication **P**rogram **I**nterface) host aplikacije.
+Cijelokupni proces slanja zahtjeva, odgovora i procesuiranja se odvija kroz **API** (or **A**pplication **P**rogram **I**nterface) *host* aplikacije.
 
 ### API
 
@@ -118,28 +118,25 @@ nyc_trees
 
 ```
 ## # A tibble: 1,000 x 45
-##    tree_id block_id created_at tree_dbh stump_diam curb_loc status health
-##    <chr>   <chr>    <chr>      <chr>    <chr>      <chr>    <chr>  <chr> 
-##  1 180683  348711   2015-08-2~ 3        0          OnCurb   Alive  Fair  
-##  2 200540  315986   2015-09-0~ 21       0          OnCurb   Alive  Fair  
-##  3 204026  218365   2015-09-0~ 3        0          OnCurb   Alive  Good  
-##  4 204337  217969   2015-09-0~ 10       0          OnCurb   Alive  Good  
-##  5 189565  223043   2015-08-3~ 21       0          OnCurb   Alive  Good  
-##  6 190422  106099   2015-08-3~ 11       0          OnCurb   Alive  Good  
-##  7 190426  106099   2015-08-3~ 11       0          OnCurb   Alive  Good  
-##  8 208649  103940   2015-09-0~ 9        0          OnCurb   Alive  Good  
-##  9 209610  407443   2015-09-0~ 6        0          OnCurb   Alive  Good  
-## 10 192755  207508   2015-08-3~ 21       0          OffsetF~ Alive  Fair  
+##    tree_id block_id created_at      tree_dbh stump_diam curb_loc   status health
+##    <chr>   <chr>    <chr>           <chr>    <chr>      <chr>      <chr>  <chr> 
+##  1 180683  348711   2015-08-27T00:~ 3        0          OnCurb     Alive  Fair  
+##  2 200540  315986   2015-09-03T00:~ 21       0          OnCurb     Alive  Fair  
+##  3 204026  218365   2015-09-05T00:~ 3        0          OnCurb     Alive  Good  
+##  4 204337  217969   2015-09-05T00:~ 10       0          OnCurb     Alive  Good  
+##  5 189565  223043   2015-08-30T00:~ 21       0          OnCurb     Alive  Good  
+##  6 190422  106099   2015-08-30T00:~ 11       0          OnCurb     Alive  Good  
+##  7 190426  106099   2015-08-30T00:~ 11       0          OnCurb     Alive  Good  
+##  8 208649  103940   2015-09-07T00:~ 9        0          OnCurb     Alive  Good  
+##  9 209610  407443   2015-09-08T00:~ 6        0          OnCurb     Alive  Good  
+## 10 192755  207508   2015-08-31T00:~ 21       0          OffsetFro~ Alive  Fair  
 ## # ... with 990 more rows, and 37 more variables: spc_latin <chr>,
 ## #   spc_common <chr>, steward <chr>, guards <chr>, sidewalk <chr>,
 ## #   user_type <chr>, problems <chr>, root_stone <chr>, root_grate <chr>,
 ## #   root_other <chr>, trunk_wire <chr>, trnk_light <chr>, trnk_other <chr>,
 ## #   brch_light <chr>, brch_shoe <chr>, brch_other <chr>, address <chr>,
 ## #   zipcode <chr>, zip_city <chr>, cb_num <chr>, borocode <chr>,
-## #   boroname <chr>, cncldist <chr>, st_assem <chr>, st_senate <chr>, nta <chr>,
-## #   nta_name <chr>, boro_ct <chr>, state <chr>, latitude <chr>,
-## #   longitude <chr>, x_sp <chr>, y_sp <chr>, council_district <chr>,
-## #   census_tract <chr>, bin <chr>, bbl <chr>
+## #   boroname <chr>, cncldist <chr>, st_assem <chr>, st_senate <chr>, ...
 ```
 
 **Komentar:** Primjetite da puni podatkovni skup sadržava skoro 700.000 drveća. U ovom primjeru  preuzimamo samo mali dio tih podataka zbog *default* postavke API limita od 1000 redova. Ionako nije potrebno preuzeti sve podatke u ovom demonstrativnom primjeru! Važno je znati ([pročitajte API upute](https://dev.socrata.com/docs/queries/limit.html)) da ostatak podataka možete preuzeti tako da dodate `?$limit=LIMIT` u API izvor. Da biste učitali prvih pet redova:
@@ -244,14 +241,37 @@ Pogledajte`fred` objekt u konzoli. To što vidite je pravi API odgovor (i.e. res
 Da bismo uzeli sadržaj (i.e. podatke) iz ovog odgovora, koristiti ćemo `httr::content()` funkciju. Pošto već znamo da je riječ o JSON array-u, možemo koristiti `jsonlite::fromJSON()` kao u prethodnom slučaju. Možemo očekivati da će taj objekt u R biti učitan kao lista, a za provjeru objekta koristite`str()` funkciju. Ovdje je korisno ukazati na **listviewer**  [paket](https://github.com/timelyportfolio/listviewer) ::jsonedit()`koji omogućava interaktivni pregled podataka.^[Ugnježđene liste (*engl.nested lists*) su karakteristika JSON podataka. Ovo nije previše važno jer R ima podršku za procesuiranje takvih formata.]
 
 ```r
+library(tidyverse)
+```
+
+```
+## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
+```
+
+```
+## v ggplot2 3.3.5     v purrr   0.3.4
+## v tibble  3.1.3     v dplyr   1.0.7
+## v tidyr   1.1.3     v stringr 1.4.0
+## v readr   2.0.1     v forcats 0.5.1
+```
+
+```
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+```
+
+```r
 fred %>% 
   httr::content("text") %>%
   jsonlite::fromJSON() %>%
   listviewer::jsonedit(mode = "view")
 ```
 
-<!--html_preserve--><div id="htmlwidget-10722d5c533184ad8696" style="width:100%;height:10%;" class="jsonedit html-widget"></div>
-<script type="application/json" data-for="htmlwidget-10722d5c533184ad8696">{"x":{"data":{"realtime_start":"2020-11-12","realtime_end":"2020-11-12","observation_start":"1600-01-01","observation_end":"9999-12-31","units":"lin","output_type":1,"file_type":"json","order_by":"observation_date","sort_order":"asc","count":91,"offset":0,"limit":100000,"observations":{"realtime_start":["2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12"],"realtime_end":["2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12","2020-11-12"],"date":["1929-01-01","1930-01-01","1931-01-01","1932-01-01","1933-01-01","1934-01-01","1935-01-01","1936-01-01","1937-01-01","1938-01-01","1939-01-01","1940-01-01","1941-01-01","1942-01-01","1943-01-01","1944-01-01","1945-01-01","1946-01-01","1947-01-01","1948-01-01","1949-01-01","1950-01-01","1951-01-01","1952-01-01","1953-01-01","1954-01-01","1955-01-01","1956-01-01","1957-01-01","1958-01-01","1959-01-01","1960-01-01","1961-01-01","1962-01-01","1963-01-01","1964-01-01","1965-01-01","1966-01-01","1967-01-01","1968-01-01","1969-01-01","1970-01-01","1971-01-01","1972-01-01","1973-01-01","1974-01-01","1975-01-01","1976-01-01","1977-01-01","1978-01-01","1979-01-01","1980-01-01","1981-01-01","1982-01-01","1983-01-01","1984-01-01","1985-01-01","1986-01-01","1987-01-01","1988-01-01","1989-01-01","1990-01-01","1991-01-01","1992-01-01","1993-01-01","1994-01-01","1995-01-01","1996-01-01","1997-01-01","1998-01-01","1999-01-01","2000-01-01","2001-01-01","2002-01-01","2003-01-01","2004-01-01","2005-01-01","2006-01-01","2007-01-01","2008-01-01","2009-01-01","2010-01-01","2011-01-01","2012-01-01","2013-01-01","2014-01-01","2015-01-01","2016-01-01","2017-01-01","2018-01-01","2019-01-01"],"value":["1120.076","1025.091","958.378","834.291","823.156","911.019","992.537","1118.944","1177.572","1138.989","1230.22","1337.075","1574.74","1870.911","2187.818","2361.622","2337.63","2068.966","2048.293","2134.291","2121.201","2305.668","2493.148","2594.934","2715.067","2700.542","2893.97","2957.097","3020.083","2994.683","3201.683","3285.454","3371.35","3579.446","3736.061","3951.902","4208.08","4481.593","4604.613","4831.761","4980.667","4989.534","5156.41","5428.368","5746.389","5723.068","5697.677","6011.215","6293.525","6637.838","6868.092","6849.819","7011.223","6889.371","7199.441","7711.063","8007.532","8266.358","8549.125","8912.281","9239.186","9425.052","9406.669","9734.705","10000.831","10389.663","10672.832","11076.879","11556.745","12064.59","12647.632","13179.965","13327.458","13553.208","13953.961","14503.006","15006.043","15398.622","15748.3","15771.553","15359.37","15803.886","16081.66","16429.308","16722.335","17146.51","17647.607","17955.437","18421.034","18951.897","19338.371"]}},"options":{"mode":"view","modes":["code","form","text","tree","view"]}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
+```{=html}
+<div id="htmlwidget-4879b14675e5ee9abc03" style="width:100%;height:10%;" class="jsonedit html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4879b14675e5ee9abc03">{"x":{"data":{"realtime_start":"2021-12-02","realtime_end":"2021-12-02","observation_start":"1600-01-01","observation_end":"9999-12-31","units":"lin","output_type":1,"file_type":"json","order_by":"observation_date","sort_order":"asc","count":92,"offset":0,"limit":100000,"observations":{"realtime_start":["2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02"],"realtime_end":["2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02","2021-12-02"],"date":["1929-01-01","1930-01-01","1931-01-01","1932-01-01","1933-01-01","1934-01-01","1935-01-01","1936-01-01","1937-01-01","1938-01-01","1939-01-01","1940-01-01","1941-01-01","1942-01-01","1943-01-01","1944-01-01","1945-01-01","1946-01-01","1947-01-01","1948-01-01","1949-01-01","1950-01-01","1951-01-01","1952-01-01","1953-01-01","1954-01-01","1955-01-01","1956-01-01","1957-01-01","1958-01-01","1959-01-01","1960-01-01","1961-01-01","1962-01-01","1963-01-01","1964-01-01","1965-01-01","1966-01-01","1967-01-01","1968-01-01","1969-01-01","1970-01-01","1971-01-01","1972-01-01","1973-01-01","1974-01-01","1975-01-01","1976-01-01","1977-01-01","1978-01-01","1979-01-01","1980-01-01","1981-01-01","1982-01-01","1983-01-01","1984-01-01","1985-01-01","1986-01-01","1987-01-01","1988-01-01","1989-01-01","1990-01-01","1991-01-01","1992-01-01","1993-01-01","1994-01-01","1995-01-01","1996-01-01","1997-01-01","1998-01-01","1999-01-01","2000-01-01","2001-01-01","2002-01-01","2003-01-01","2004-01-01","2005-01-01","2006-01-01","2007-01-01","2008-01-01","2009-01-01","2010-01-01","2011-01-01","2012-01-01","2013-01-01","2014-01-01","2015-01-01","2016-01-01","2017-01-01","2018-01-01","2019-01-01","2020-01-01"],"value":["1120.718","1025.678","958.927","834.769","823.628","911.541","993.105","1119.585","1178.246","1139.642","1230.925","1337.841","1575.642","1871.983","2189.071","2362.975","2338.969","2070.151","2049.467","2135.513","2122.417","2306.989","2494.576","2596.421","2716.622","2702.089","2895.628","2958.791","3021.813","2996.399","3203.383","3287.198","3373.14","3581.347","3738.045","3954.0","4210.314","4483.972","4607.057","4834.326","4983.311","4992.183","5159.148","5431.25","5749.44","5726.106","5700.701","6014.406","6296.866","6641.362","6871.738","6853.455","7014.945","6893.027","7203.261","7715.155","8011.781","8270.745","8553.636","8916.983","9244.062","9430.025","9411.632","9739.841","10006.004","10395.034","10678.341","11082.604","11562.713","12070.819","12664.858","13188.215","13327.597","13546.065","13937.444","14491.356","14987.679","15368.242","15727.504","15796.274","15395.345","15863.425","16133.673","16486.727","16780.258","17159.215","17602.487","17901.894","18354.584","18874.582","19271.92","18582.295"]}},"options":{"mode":"view","modes":["code","form","text","tree","view"]}},"evals":[],"jsHooks":[]}</script>
+```
 
 Preuzeti objekt nije posebno složen. Ono što nas zanima je njegov `fred$observations` pod-element (*sub-element*). Sada ćemo izvršiti gornji kod i izvući željeni element. To je moguće napraviti na više načina ali ovdje ćemo koristiti `purrr::pluck()` funkciju.
 
@@ -269,20 +289,20 @@ fred
 ```
 
 ```
-## # A tibble: 91 x 4
+## # A tibble: 92 x 4
 ##    realtime_start realtime_end date       value   
 ##    <chr>          <chr>        <chr>      <chr>   
-##  1 2020-11-12     2020-11-12   1929-01-01 1120.076
-##  2 2020-11-12     2020-11-12   1930-01-01 1025.091
-##  3 2020-11-12     2020-11-12   1931-01-01 958.378 
-##  4 2020-11-12     2020-11-12   1932-01-01 834.291 
-##  5 2020-11-12     2020-11-12   1933-01-01 823.156 
-##  6 2020-11-12     2020-11-12   1934-01-01 911.019 
-##  7 2020-11-12     2020-11-12   1935-01-01 992.537 
-##  8 2020-11-12     2020-11-12   1936-01-01 1118.944
-##  9 2020-11-12     2020-11-12   1937-01-01 1177.572
-## 10 2020-11-12     2020-11-12   1938-01-01 1138.989
-## # ... with 81 more rows
+##  1 2021-12-02     2021-12-02   1929-01-01 1120.718
+##  2 2021-12-02     2021-12-02   1930-01-01 1025.678
+##  3 2021-12-02     2021-12-02   1931-01-01 958.927 
+##  4 2021-12-02     2021-12-02   1932-01-01 834.769 
+##  5 2021-12-02     2021-12-02   1933-01-01 823.628 
+##  6 2021-12-02     2021-12-02   1934-01-01 911.541 
+##  7 2021-12-02     2021-12-02   1935-01-01 993.105 
+##  8 2021-12-02     2021-12-02   1936-01-01 1119.585
+##  9 2021-12-02     2021-12-02   1937-01-01 1178.246
+## 10 2021-12-02     2021-12-02   1938-01-01 1139.642
+## # ... with 82 more rows
 ```
 
 
@@ -434,22 +454,22 @@ str(rugby)
 ```
 ## List of 3
 ##  $ label    : chr "Mens Rugby Union"
-##  $ entries  :'data.frame':	105 obs. of  6 variables:
-##   ..$ team       :'data.frame':	105 obs. of  5 variables:
-##   .. ..$ id          : int [1:105] 39 37 34 42 36 38 35 33 49 40 ...
-##   .. ..$ altId       : logi [1:105] NA NA NA NA NA NA ...
-##   .. ..$ name        : chr [1:105] "South Africa" "New Zealand" "England" "France" ...
-##   .. ..$ abbreviation: chr [1:105] "RSA" "NZL" "ENG" "FRA" ...
-##   .. ..$ annotations : logi [1:105] NA NA NA NA NA NA ...
-##   ..$ matches    : int [1:105] 212 224 209 205 201 231 196 218 174 186 ...
-##   ..$ pts        : num [1:105] 94.2 90.2 88.4 84.6 84.1 ...
-##   ..$ pos        : int [1:105] 1 2 3 4 5 6 7 8 9 10 ...
-##   ..$ previousPts: num [1:105] 94.2 91.8 88.4 84.6 84.1 ...
-##   ..$ previousPos: int [1:105] 1 2 3 4 5 6 7 8 9 10 ...
+##  $ entries  :'data.frame':	110 obs. of  6 variables:
+##   ..$ team       :'data.frame':	110 obs. of  5 variables:
+##   .. ..$ id          : int [1:110] 39 37 34 36 42 38 35 33 40 49 ...
+##   .. ..$ altId       : logi [1:110] NA NA NA NA NA NA ...
+##   .. ..$ name        : chr [1:110] "South Africa" "New Zealand" "England" "Ireland" ...
+##   .. ..$ abbreviation: chr [1:110] "RSA" "NZL" "ENG" "IRE" ...
+##   .. ..$ annotations : logi [1:110] NA NA NA NA NA NA ...
+##   ..$ matches    : int [1:110] 222 241 223 215 219 247 208 234 202 179 ...
+##   ..$ pts        : num [1:110] 90.6 88.7 87.8 86.5 85.5 ...
+##   ..$ pos        : int [1:110] 1 2 3 4 5 6 7 8 9 10 ...
+##   ..$ previousPts: num [1:110] 90.6 88.7 87.8 86.5 85.5 ...
+##   ..$ previousPos: int [1:110] 1 2 3 4 5 6 7 8 9 10 ...
 ##  $ effective:List of 3
-##   ..$ millis   : num 1.6e+12
+##   ..$ millis   : num 1.64e+12
 ##   ..$ gmtOffset: num 0
-##   ..$ label    : chr "2020-11-09"
+##   ..$ label    : chr "2021-11-29"
 ```
 
 Dobili smo (nested) list-u, a dio koji nas zanima, `$entries`, je također list-a.^[Iako R javlja da je `rugby$entries` data.frame, funkcijskim pozivom`str()` ipak vidimo da ima strukturu list-e. `rugby$entries$team` pod-element je data-frame.] Sada ćemo izvući `$entries` element i pogledati njegovu strukturu. Mogli bismo koristiti i `str()` funkciju, ali `listviewer::jsonedit()` je bolja opcija. 
@@ -460,8 +480,10 @@ Dobili smo (nested) list-u, a dio koji nas zanima, `$entries`, je također list-
 listviewer::jsonedit(rugby, mode = "view")
 ```
 
-<!--html_preserve--><div id="htmlwidget-708304cd8b4e0d69a7fc" style="width:100%;height:10%;" class="jsonedit html-widget"></div>
-<script type="application/json" data-for="htmlwidget-708304cd8b4e0d69a7fc">{"x":{"data":{"label":"Mens Rugby Union","entries":{"team":{"id":[39,37,34,42,36,38,35,33,49,40,46,720,47,41,45,51,43,68,52,756,44,725,50,58,64,703,699,770,708,721,736,735,711,753,57,777,714,1030,775,776,2537,681,1247,738,713,751,766,745,741,774,740,712,769,759,760,739,707,723,743,729,3223,734,737,726,710,784,732,700,1031,761,715,692,704,722,752,772,702,781,2476,709,698,701,750,727,696,1029,2382,2340,2861,2857,2397,2387,2585,748,749,771,697,768,762,2576,705,744,2529,780,3674],"altId":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"name":["South Africa","New Zealand","England","France","Ireland","Australia","Scotland","Wales","Japan","Argentina","Fiji","Georgia","Tonga","Italy","Samoa","USA","Spain","Uruguay","Romania","Russia","Portugal","Hong Kong","Canada","Namibia","Netherlands","Brazil","Belgium","Switzerland","Chile","Germany","Korea","Kenya","Colombia","Poland","Zimbabwe","Ukraine","Czechia","Malta","Tunisia","Uganda","Philippines","Cote D'Ivoire","Mexico","Lithuania","Croatia","Paraguay","Sri Lanka","Morocco","Malaysia","Trinidad & Tobago","Madagascar","Cook Islands","Sweden","Senegal","Singapore","Luxembourg","Cayman Islands","Guyana","Moldova","Israel","United Arab Emirates","Kazakhstan","Latvia","Hungary","Chinese Taipei","Zambia","Jamaica","Bermuda","Nigeria","Slovenia","Denmark","Andorra","Bulgaria","Guam","Peru","Thailand","Botswana","Venezuela","St Vincent and Grenadines","China","Barbados","Bosnia & Herzegovina","Papua New Guinea","India","Austria","Finland","Ghana","Serbia","Uzbekistan","Mauritius","Pakistan","Rwanda","Costa Rica","Niue Island","Norway","Tahiti","Bahamas","Swaziland","Solomon Islands","Indonesia","Cameroon","Monaco","Greece","Vanuatu","American Samoa"],"abbreviation":["RSA","NZL","ENG","FRA","IRE","AUS","SCO","WAL","JPN","ARG","FIJ","GEO","TGA","ITA","SAM","USA","ESP","URU","ROU","RUS","POR","HKG","CAN","NAM","NED","BRA","BEL","SUI","CHI","GER","KOR","KEN","COL","POL","ZIM","UKR","CZE","MLT","TUN","UGA","PHI","CIV","MEX","LTU","CRO","PAR","SRI","MAR","MAS","TTO","MAD","COK","SWE","SEN","SGP","LUX","CAY","GUY","MDA","ISR","UAE","KAZ","LAT","HUN","TPE","ZAM","JAM","BER","NGR","SLO","DEN","AND","BUL","GUM","PER","THA","BOT","VEN","VIN","CHN","BAR","BIH","PNG","IND","AUT","FIN","GHA","SRB","UZB","MRI","PAK","RWA","CRC","NIU","NOR","PYF","BAH","SWZ","SOL","INA","CMR","MON","GRE","VAN","ASA"],"annotations":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]},"matches":[212,224,209,205,201,231,196,218,174,186,119,167,108,196,119,131,131,140,164,154,143,108,139,107,92,99,100,76,90,111,71,100,60,87,78,90,91,77,58,81,33,52,33,78,76,65,57,50,52,36,49,27,82,48,49,70,38,38,83,70,28,57,75,74,48,48,28,38,26,71,78,68,59,24,49,50,39,49,14,38,38,58,33,37,74,59,16,66,7,23,15,14,11,21,70,19,27,18,23,5,25,12,17,16,13],"pts":[94.195526,90.17286,88.415955,84.58669,84.103294,83.85587,82.08079,80.21756,79.28815,78.306725,76.206474,72.861885,71.438095,71.084984,70.719154,68.09613,67.51223,67.01548,65.32507,62.11656,61.268044,61.231342,61.107006,61.038483,60.092175,58.88319,57.16768,54.12384,53.811684,53.133595,53.108067,52.552643,51.869125,51.127777,50.707024,50.346695,50.033516,49.12602,48.54903,47.853954,47.795654,47.62494,47.219975,47.15552,46.921276,46.87132,46.72597,46.33345,46.11886,45.509857,45.14458,45.106884,45.03536,44.88653,44.045013,43.406265,42.97033,42.862232,42.13647,41.675648,41.232292,40.8637,40.845963,40.67712,39.229748,39.042282,39.00289,38.911465,38.371357,37.564312,37.35562,36.974022,36.543625,36.378345,36.34963,36.276844,36.21395,35.872917,34.914616,34.91419,34.724777,33.78127,33.683735,33.39797,33.03452,33.01362,32.520187,32.345737,31.329367,30.5581,29.99046,29.783758,29.355816,28.626186,28.26697,27.788961,27.756924,26.041035,23.808434,21.948198,20.32657,17.171558,16.546452,15.453693,13.532106],"pos":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105],"previousPts":[94.195526,91.83748,88.415955,84.58669,84.103294,82.191246,82.08079,80.21756,79.28815,78.306725,76.206474,72.861885,71.438095,71.084984,70.719154,68.09613,68.449326,66.078384,65.32507,62.11656,61.268044,61.231342,61.107006,61.038483,60.092175,58.88319,57.16768,54.12384,53.811684,53.133595,53.108067,52.552643,51.869125,51.127777,50.707024,50.346695,50.033516,49.12602,48.54903,47.853954,47.795654,47.62494,47.219975,47.15552,46.921276,46.87132,46.72597,46.33345,46.11886,45.509857,45.14458,45.106884,45.03536,44.88653,44.045013,43.406265,42.97033,42.862232,42.13647,41.675648,41.232292,40.8637,40.845963,40.67712,39.229748,39.042282,39.00289,38.911465,38.371357,37.564312,37.35562,36.974022,36.543625,36.378345,36.34963,36.276844,36.21395,35.872917,34.914616,34.91419,34.724777,33.78127,33.683735,33.39797,33.03452,33.01362,32.520187,32.345737,31.329367,30.5581,29.99046,29.783758,29.355816,28.626186,28.26697,27.788961,27.756924,26.041035,23.808434,21.948198,20.32657,17.171558,16.546452,15.453693,13.532106],"previousPos":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,17,16,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105]},"effective":{"millis":1604880000000,"gmtOffset":0,"label":"2020-11-09"}},"options":{"mode":"view","modes":["code","form","text","tree","view"]}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
+```{=html}
+<div id="htmlwidget-42be578a9160ee306e98" style="width:100%;height:10%;" class="jsonedit html-widget"></div>
+<script type="application/json" data-for="htmlwidget-42be578a9160ee306e98">{"x":{"data":{"label":"Mens Rugby Union","entries":{"team":{"id":[39,37,34,36,42,38,35,33,40,49,46,720,45,41,52,47,51,68,44,43,50,725,708,58,756,64,699,753,703,721,736,711,57,735,770,714,777,1030,775,681,2537,1247,738,759,713,740,751,766,745,741,776,769,774,712,760,707,723,743,739,729,3223,734,737,726,710,732,700,784,1031,704,715,761,722,752,772,702,781,692,2476,709,698,701,750,727,2382,696,1029,2340,2861,3200,2389,2857,2744,1784,2397,2387,2585,748,771,697,749,2386,768,762,705,2576,744,2529,780,3674],"altId":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"name":["South Africa","New Zealand","England","Ireland","France","Australia","Scotland","Wales","Argentina","Japan","Fiji","Georgia","Samoa","Italy","Romania","Tonga","USA","Uruguay","Portugal","Spain","Canada","Hong Kong","Chile","Namibia","Russia","Netherlands","Belgium","Poland","Brazil","Germany","Korea","Colombia","Zimbabwe","Kenya","Switzerland","Czechia","Ukraine","Malta","Tunisia","Cote D'Ivoire","Philippines","Mexico","Lithuania","Senegal","Croatia","Madagascar","Paraguay","Sri Lanka","Morocco","Malaysia","Uganda","Sweden","Trinidad & Tobago","Cook Islands","Singapore","Cayman Islands","Guyana","Moldova","Luxembourg","Israel","United Arab Emirates","Kazakhstan","Latvia","Hungary","Chinese Taipei","Jamaica","Bermuda","Zambia","Nigeria","Bulgaria","Denmark","Slovenia","Guam","Peru","Thailand","Botswana","Venezuela","Andorra","St Vincent and Grenadines","China","Barbados","Bosnia & Herzegovina","Papua New Guinea","India","Ghana","Austria","Finland","Serbia","Uzbekistan","Algeria","Burkina Faso","Mauritius","Iran","Laos","Pakistan","Rwanda","Costa Rica","Niue Island","Tahiti","Bahamas","Norway","Burundi","Swaziland","Solomon Islands","Cameroon","Indonesia","Monaco","Greece","Vanuatu","American Samoa"],"abbreviation":["RSA","NZL","ENG","IRE","FRA","AUS","SCO","WAL","ARG","JPN","FIJ","GEO","SAM","ITA","ROU","TGA","USA","URU","POR","ESP","CAN","HKG","CHI","NAM","RUS","NED","BEL","POL","BRA","GER","KOR","COL","ZIM","KEN","SUI","CZE","UKR","MLT","TUN","CIV","PHI","MEX","LTU","SEN","CRO","MAD","PAR","SRI","MAR","MAS","UGA","SWE","TTO","COK","SGP","CAY","GUY","MDA","LUX","ISR","UAE","KAZ","LAT","HUN","TPE","JAM","BER","ZAM","NGR","BUL","DEN","SLO","GUM","PER","THA","BOT","VEN","AND","VIN","CHN","BAR","BIH","PNG","IND","GHA","AUT","FIN","SRB","UZB","ALG","BUR","MRI","IRI","LAO","PAK","RWA","CRC","NIU","PYF","BAH","NOR","BDI","SWZ","SOL","CMR","INA","MON","GRE","VAN","ASA"],"annotations":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]},"matches":[222,241,223,215,219,247,208,234,202,179,125,180,121,207,172,115,138,146,153,137,147,108,96,111,162,97,102,90,106,113,71,60,82,104,78,93,92,79,58,54,33,33,81,50,77,51,66,57,50,52,83,83,36,28,49,38,38,83,72,71,28,57,75,75,48,28,38,50,26,61,80,73,24,49,50,39,49,69,14,38,38,60,33,37,18,74,60,67,7,12,14,23,10,10,15,14,11,21,19,27,71,12,18,23,27,5,12,17,16,13],"pts":[90.60615,88.746704,87.83493,86.5296,85.527214,83.91666,83.054436,81.56064,80.58023,78.26147,76.62241,73.72173,73.58749,70.50806,67.90886,67.71855,66.53586,66.39896,65.835304,65.42047,61.80065,61.231342,59.87758,59.715965,58.601692,57.59537,54.861397,53.807545,53.312843,53.154247,53.108067,51.869125,51.81765,51.768555,51.533142,50.868584,50.227875,49.269848,48.54903,47.876904,47.795654,47.219975,47.16462,47.102108,46.921276,46.89262,46.87132,46.72597,46.33345,46.11886,45.853954,45.840992,45.509857,45.106884,44.045013,42.97033,42.862232,42.13647,41.765564,41.675648,41.232292,40.8637,40.845963,40.67712,39.229748,39.00289,38.911465,38.826706,38.371357,38.205917,38.16825,37.420483,36.378345,36.34963,36.276844,36.21395,35.872917,35.201183,34.914616,34.91419,34.724777,34.018463,33.683735,33.39797,33.26817,33.03452,32.747818,32.21909,31.329367,31.252018,31.05,30.5581,30,30,29.99046,29.783758,29.355816,28.626186,27.788961,27.756924,27.720137,26.156487,26.041035,23.808434,23.120085,21.948198,17.171558,16.546452,15.453693,13.532106],"pos":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,93,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110],"previousPts":[90.60615,88.746704,87.83493,86.5296,85.527214,83.91666,83.054436,81.56064,80.58023,78.26147,76.62241,73.72173,73.58749,70.50806,67.90886,67.71855,66.53586,66.39896,65.835304,65.42047,61.80065,61.231342,58.412064,59.715965,60.067204,57.59537,54.861397,53.807545,53.312843,53.154247,53.108067,51.869125,51.81765,51.768555,51.533142,50.033516,50.227875,49.269848,48.54903,47.876904,47.795654,47.219975,47.16462,47.102108,46.921276,46.89262,46.87132,46.72597,46.33345,46.11886,45.853954,45.840992,45.509857,45.106884,44.045013,42.97033,42.862232,42.13647,42.60063,41.675648,41.232292,40.8637,40.845963,40.67712,39.229748,39.00289,38.911465,38.826706,38.371357,38.205917,38.16825,37.420483,36.378345,36.34963,36.276844,36.21395,35.872917,35.201183,34.914616,34.91419,34.724777,34.018463,33.683735,33.39797,33.26817,33.03452,32.747818,32.21909,31.329367,31.252018,31.05,30.5581,30,30,29.99046,29.783758,29.355816,28.626186,27.788961,27.756924,27.720137,26.156487,26.041035,23.808434,23.120085,21.948198,17.171558,16.546452,15.453693,13.532106],"previousPos":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,25,24,23,26,27,28,29,30,31,32,33,34,35,37,36,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,59,58,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,93,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110]},"effective":{"millis":1638144000000,"gmtOffset":0,"label":"2021-11-29"}},"options":{"mode":"view","modes":["code","form","text","tree","view"]}},"evals":[],"jsHooks":[]}</script>
+```
 
 Pogledajmo također `rugby$entries$team` data frame kako bismo provjerili  informacije koje taj objekt sadržava. 
 
@@ -475,8 +497,8 @@ head(rugby$entries$team)
 ## 1 39    NA South Africa          RSA          NA
 ## 2 37    NA  New Zealand          NZL          NA
 ## 3 34    NA      England          ENG          NA
-## 4 42    NA       France          FRA          NA
-## 5 36    NA      Ireland          IRE          NA
+## 4 36    NA      Ireland          IRE          NA
+## 5 42    NA       France          FRA          NA
 ## 6 38    NA    Australia          AUS          NA
 ```
 
@@ -498,20 +520,20 @@ rankings
 ```
 
 ```
-## # A tibble: 105 x 7
+## # A tibble: 110 x 7
 ##      pos   pts name         abbreviation matches previous_pts previous_pos
 ##    <int> <dbl> <chr>        <chr>          <int>        <dbl>        <int>
-##  1     1  94.2 South Africa RSA              212         94.2            1
-##  2     2  90.2 New Zealand  NZL              224         91.8            2
-##  3     3  88.4 England      ENG              209         88.4            3
-##  4     4  84.6 France       FRA              205         84.6            4
-##  5     5  84.1 Ireland      IRE              201         84.1            5
-##  6     6  83.9 Australia    AUS              231         82.2            6
-##  7     7  82.1 Scotland     SCO              196         82.1            7
-##  8     8  80.2 Wales        WAL              218         80.2            8
-##  9     9  79.3 Japan        JPN              174         79.3            9
-## 10    10  78.3 Argentina    ARG              186         78.3           10
-## # ... with 95 more rows
+##  1     1  90.6 South Africa RSA              222         90.6            1
+##  2     2  88.7 New Zealand  NZL              241         88.7            2
+##  3     3  87.8 England      ENG              223         87.8            3
+##  4     4  86.5 Ireland      IRE              215         86.5            4
+##  5     5  85.5 France       FRA              219         85.5            5
+##  6     6  83.9 Australia    AUS              247         83.9            6
+##  7     7  83.1 Scotland     SCO              208         83.1            7
+##  8     8  81.6 Wales        WAL              234         81.6            8
+##  9     9  80.6 Argentina    ARG              202         80.6            9
+## 10    10  78.3 Japan        JPN              179         78.3           10
+## # ... with 100 more rows
 ```
 
 ### BONUS: Napravi grafikon i povijesni pregled rang ljestvice 
@@ -543,7 +565,7 @@ dates
 ##  [1] "2003-12-29" "2004-12-27" "2005-12-26" "2007-01-01" "2007-12-31"
 ##  [6] "2008-12-29" "2009-12-28" "2010-12-27" "2011-12-26" "2012-12-31"
 ## [11] "2013-12-30" "2014-12-29" "2015-12-28" "2016-12-26" "2018-01-01"
-## [16] "2018-12-31" "2019-12-30"
+## [16] "2018-12-31" "2019-12-30" "2020-12-28"
 ```
 
 Sada ćemo napisati funkciju sa nazivom `rugby_scrape`. Ova funkcija ima samo jedan argument, datum koji ćemo koristiti u konstrukciji novog API izvora u svakoj iteraciji. Osim toga, sve je gotovo identično kao u prošlom primjeru. Jedina razlika je što će svaki korak imati pauzu od tri sekunde (i.e. `Sys.sleep(3)`) kako ne bismo preopteretili server sa prečestim zahtjevima.
@@ -585,7 +607,7 @@ rankings_history
 ```
 
 ```
-## # A tibble: 1,674 x 8
+## # A tibble: 1,779 x 8
 ##    date         pos   pts name    abbreviation matches previous_pts previous_pos
 ##    <date>     <int> <dbl> <chr>   <chr>          <int>        <dbl>        <int>
 ##  1 2003-12-29     1  94.0 England ENG               17         92.1            1
@@ -598,7 +620,7 @@ rankings_history
 ##  8 2003-12-29     8  76.9 Wales   WAL               15         76.9            8
 ##  9 2003-12-29     9  76.4 Scotla~ SCO               15         76.4            9
 ## 10 2003-12-29    10  73.5 Samoa   SAM               14         73.5           10
-## # ... with 1,664 more rows
+## # ... with 1,769 more rows
 ```
 
 Pregled svih koraka:

@@ -26,11 +26,11 @@ knitr::opts_chunk$set(echo = TRUE, cache = TRUE, dpi=300)
 
 ### Registracija
 
-U ovom dijelu predavanja ćemo preuzeti ekonomske podatke (između ostalog) sa FRED API-ja. To zatijeva [registraciju](https://research.stlouisfed.org/useraccount/apikey) i pohranu [API ključa](https://research.stlouisfed.org/useraccount/apikey).
+U ovom predavanju ćemo preuzeti ekonomske podatke (između ostalog) sa FRED API-ja. To zatijeva [registraciju](https://research.stlouisfed.org/useraccount/apikey) i pohranu [API ključa](https://research.stlouisfed.org/useraccount/apikey).
 
 ### *Eksterni* software
 
-Koristiti ćemo [JSONView](https://jsonview.com/) browser ekstenziju koja omogućava pregled JSON output-a u Chrome-u i Firefox-u. (Nije nužno ali preporučeno!)
+Koristiti ćemo [JSONView](https://jsonview.com/) browser ekstenziju koja omogućava pregled JSON output-a u Chrome-u i Firefox-u. (Nije nužno ali se  preporuča!)
 
 ### R paketi 
 
@@ -38,7 +38,7 @@ Koristiti ćemo [JSONView](https://jsonview.com/) browser ekstenziju koja omogu�
 - Otprije korišteni: **tidyverse**, **lubridate**, **hrbrthemes**, **janitor**
 
 Prigodan način za instalaciju i učitavanje svih prethodno pobrojanih paketa (ukoliko to niste već napravili):
-```{r packages, cache=F, message=F,warning=F}
+```{r packages, cache=F, message=F,warning=F, eval = F}
 ## učitaj i instaliraj pakete
 if (!require("pacman")) install.packages("pacman")
 pacman::p_load(tidyverse, httr, lubridate, hrbrthemes, janitor, jsonlite, listviewer, usethis)
@@ -51,9 +51,9 @@ theme_set(hrbrthemes::theme_ipsum())
 
 ## Prisjetimo se...
 
-U prvom dijelu predavanja o preuzimanju sadržaja sa interneta smo vidjeli da web stranice i web aplikacije mogu biti: 1) na strani servera i 2) na strani klijenta. Već smo pokazali kako preuzeti podatke koji su procesuirani na strani servera koristeći **rvest** paket. Ta se tehnika fokusira na CSS selektore ([SelectorGadget](http://selectorgadget.com/)) i HTML tagove. Također smo vidjeli da webscraping nije egzaktna zanost već dijelom i umjetnost! Mnoštvo CSS opcija i fleksibilnost HTML-a čine preuzimanje podataka specifičnim za svaku pojedinu stranicu i trenutak. To ne znači da opći principi ne funkcioniraju!
+U prvom dijelu predavanja o preuzimanju sadržaja sa interneta smo vidjeli da *web* stranice i *web* aplikacije mogu biti: 1) na strani servera i 2) na strani klijenta. Već smo pokazali kako preuzeti podatke koji su procesuirani na strani servera koristeći **rvest** paket. Ta se tehnika fokusira na CSS selektore ([SelectorGadget](http://selectorgadget.com/)) i HTML tagove. Također smo vidjeli da *webscraping* nije egzaktna zanost nego uvelike i umjetnost! Mnoštvo CSS opcija i fleksibilnost HTML-a čine preuzimanje podataka specifičnim poslom za svaku pojedinu stranicu i trenutak. To ne znači da opći principi ne funkcioniraju!
 
-Fokus ovog dijela predavanja je preuzimanje podataka koji su procesuirani na strani klijenta (**client-side**). Ovaj je pristup u najvećem broju slučajeva jednostavniji način za preuzimanje podataka sa web-a. To ne znači da određena doza "umjetnosti" nije potrebna...! Još jednom valja naglasiti **etičke** i **zakonske** aspekte preuzimanja web sadržaja...pogledajte u prvom dijelu predavanja!
+Fokus ovog dijela predavanja je na preuzimanje podataka koji su procesuirani na strani klijenta (*client-side*). Ovaj je pristup u najvećem broju slučajeva jednostavniji način za preuzimanje podataka sa web-a. To ne znači da određena doza "umjetnosti" nije potrebna...! Još jednom valja naglasiti **etičke** i **zakonske** aspekte preuzimanja web sadržaja...koje smo spominjali u prvom dijelu predavanja!
 
 ## Strana klijenta (*Client-side*), API i API *izvori*
 
@@ -63,9 +63,9 @@ Webstranice i aplikacije koje su procesuirane na **strani klijenta**  zahtijevaj
 - Posjetite URL koji koristi predložak statičkog sadržaja (HTML tablice, CSS, itd). Taj predložak  sadržava podatke "u sebi".
 - U procesu otvaranja URL-a, browser šalje zahtijev (*request*) na (host) server.
 - Ukoliko je zahtjev ispravan (*valid*), server će vratiti odgovor (*response*) koji poziva tražene podatke i dinamički ih procesuira u browser-u.
-- Stranica koju vidite u browseru je stoga mješavina statičkog sadržaja (predloška) i dinamički generiranih informacija koje su procesuirane u browseru (i.e. *klijent*).
+- Stranica koju vidite u browseru je stoga mješavina statičkog sadržaja (predloška) i dinamički generiranih informacija koje su procesuirane u browseru (i.e. *klijentu*).
 
-Cijelokupni proces slanja zahtjeva, odgovora i procesuiranja se odvija kroz **API** (or **A**pplication **P**rogram **I**nterface) host aplikacije.
+Cijelokupni proces slanja zahtjeva, odgovora i procesuiranja se odvija kroz **API** (or **A**pplication **P**rogram **I**nterface) *host* aplikacije.
 
 ### API
 
@@ -218,6 +218,7 @@ Pogledajte`fred` objekt u konzoli. To što vidite je pravi API odgovor (i.e. res
 
 Da bismo uzeli sadržaj (i.e. podatke) iz ovog odgovora, koristiti ćemo `httr::content()` funkciju. Pošto već znamo da je riječ o JSON array-u, možemo koristiti `jsonlite::fromJSON()` kao u prethodnom slučaju. Možemo očekivati da će taj objekt u R biti učitan kao lista, a za provjeru objekta koristite`str()` funkciju. Ovdje je korisno ukazati na **listviewer**  [paket](https://github.com/timelyportfolio/listviewer) ::jsonedit()`koji omogućava interaktivni pregled podataka.^[Ugnježđene liste (*engl.nested lists*) su karakteristika JSON podataka. Ovo nije previše važno jer R ima podršku za procesuiranje takvih formata.]
 ```{r fred3, cache=F, out.width="100%", out.height="10%"}
+library(tidyverse)
 fred %>% 
   httr::content("text") %>%
   jsonlite::fromJSON() %>%
