@@ -2,7 +2,7 @@
 title: "Obrada podataka"
 author:
   name: Luka Sikic, PhD
-  affiliation: Fakultet hrvatskih studija | [OP](https://github.com/BrbanMiro/Obrada-podataka)
+  affiliation: Fakultet hrvatskih studija | [OP](https://lusiki.github.io/WebObradaPodataka/)
 subtitle: 'Predavanje 7: Rad sa bazama podataka'
 output:
   html_document:
@@ -310,7 +310,7 @@ billing_id <- Sys.getenv("GCE_DEFAULT_PROJECT_ID") ## zamijenite sa vašim ID
 > **!** Za interaktivnu komplilaciju (i.e. knit) *bigquery* koda u R Markdownu je potrebno specificirati ključ. Za detalje [vidi](https://stackoverflow.com/questions/62008509/authentication-for-bigquery-using-bigrquery-from-an-r-markdown-document).
 
 ```{r}
-bigrquery::bq_auth(path = "D:/LUKA/Academic/HS/NASTAVA/20-21/key.json")
+bigrquery::bq_auth(path = "D:/LUKA/Academic/HS/NASTAVA/20-21/Creds/key.json")
 
 ```
 
