@@ -2,7 +2,7 @@
 title: "Obrada podataka"
 author:
   name: Luka Sikic, PhD
-  affiliation: Fakultet hrvatskih studija | [OP](https://github.com/BrbanMiro/Obrada-podataka)
+  affiliation: Fakultet hrvatskih studija | [OP](https://lusiki.github.io/WebObradaPodataka/)
 subtitle: 'Predavanje 8: Statistička analiza'
 output:
   html_document:
@@ -32,7 +32,7 @@ Današnje predavanje se odnosi na regresijsku analizu, najpopularniji analitičk
 - Novi: **broom**, **estimatr**, **fixest**, **sandwich**, **lmtest**, **AER**, **lfe**, **mfx**, **margins**, **modelsummary**, **vtable**
 - Korišteni: **tidyverse**, **hrbrthemes**, **listviewer**
 
-Praktičan način za instalaciju i učitavanje svih paketa je izvršavanje donjeg koda. Za pakete **broom** i **modelsummary** ćemo koristiti razvojne pakete jer sadržavaju nekoliko funkcionalnosti koje nisu dostupne u trenutnim CRAN verzijama.
+Praktičan način za instalaciju i učitavanje svih potrebnih paketa je izvršavanje donjeg koda. Za pakete **broom** i **modelsummary** ćemo koristiti razvojne pakete jer sadržavaju nekoliko funkcionalnosti koje nisu dostupne u trenutnim CRAN verzijama.
 
 
 ```r
@@ -57,18 +57,18 @@ starwars
 
 ```
 ## # A tibble: 87 x 14
-##    name  height  mass hair_color skin_color eye_color birth_year sex   gender
-##    <chr>  <int> <dbl> <chr>      <chr>      <chr>          <dbl> <chr> <chr> 
-##  1 Luke~    172    77 blond      fair       blue            19   male  mascu~
-##  2 C-3PO    167    75 <NA>       gold       yellow         112   none  mascu~
-##  3 R2-D2     96    32 <NA>       white, bl~ red             33   none  mascu~
-##  4 Dart~    202   136 none       white      yellow          41.9 male  mascu~
-##  5 Leia~    150    49 brown      light      brown           19   fema~ femin~
-##  6 Owen~    178   120 brown, gr~ light      blue            52   male  mascu~
-##  7 Beru~    165    75 brown      light      blue            47   fema~ femin~
-##  8 R5-D4     97    32 <NA>       white, red red             NA   none  mascu~
-##  9 Bigg~    183    84 black      light      brown           24   male  mascu~
-## 10 Obi-~    182    77 auburn, w~ fair       blue-gray       57   male  mascu~
+##    name    height  mass hair_color  skin_color eye_color birth_year sex   gender
+##    <chr>    <int> <dbl> <chr>       <chr>      <chr>          <dbl> <chr> <chr> 
+##  1 Luke S~    172    77 blond       fair       blue            19   male  mascu~
+##  2 C-3PO      167    75 <NA>        gold       yellow         112   none  mascu~
+##  3 R2-D2       96    32 <NA>        white, bl~ red             33   none  mascu~
+##  4 Darth ~    202   136 none        white      yellow          41.9 male  mascu~
+##  5 Leia O~    150    49 brown       light      brown           19   fema~ femin~
+##  6 Owen L~    178   120 brown, grey light      blue            52   male  mascu~
+##  7 Beru W~    165    75 brown       light      blue            47   fema~ femin~
+##  8 R5-D4       97    32 <NA>        white, red red             NA   none  mascu~
+##  9 Biggs ~    183    84 black       light      brown           24   male  mascu~
+## 10 Obi-Wa~    182    77 auburn, wh~ fair       blue-gray       57   male  mascu~
 ## # ... with 77 more rows, and 5 more variables: homeworld <chr>, species <chr>,
 ## #   films <list>, vehicles <list>, starships <list>
 ```
@@ -115,10 +115,12 @@ Ovaj regresijski ispis je vrlo jednostavan i sažet zbog toga što se većina ko
 listviewer::jsonedit(ols1, mode="view") ## za R Markdown
 ```
 
-<!--html_preserve--><div id="htmlwidget-bfbb22aed5189f4a53a8" style="width:100%;height:10%;" class="jsonedit html-widget"></div>
-<script type="application/json" data-for="htmlwidget-bfbb22aed5189f4a53a8">{"x":{"data":{"coefficients":{"(Intercept)":-13.8103136287303,"height":0.638571004587035},"residuals":{"1":-19.0238991602397,"2":-17.8310441373046,"3":-15.4925028116251,"4":20.8189707021492,"5":-32.9753370593249,"6":20.1446748122381,"7":-16.5539021281305,"8":-16.1310738162121,"9":-19.0481802106971,"10":-25.4096092061101,"11":-22.2410352336323,"13":-19.7838754171137,"14":-21.132467196936,"15":-22.6624701648268,"16":1260.060387826,"17":-17.7467571510656,"18":8.86753280306401,"19":-11.335372674014,"20":-19.7467571510656,"21":-24.8481802106971,"22":26.0961127113233,"23":5.48182275719366,"24":-20.2167541831749,"25":-18.9396121740008,"26":-18.132467196936,"29":-22.3839347749288,"30":-20.3610471051953,"31":-20.4338902565674,"32":-18.1567482473934,"34":-45.3496032703285,"35":-47.2295913987655,"39":-17.7096388850176,"42":-17.9396121740008,"44":-44.8553251877619,"45":-1.21536080245101,"47":-25.2767601189564,"48":-22.2410352336323,"49":-30.6267452795026,"50":-24.3496032703285,"52":-53.6867512152841,"55":-26.2410352336323,"57":-19.3253222198712,"60":-23.0481802106971,"61":-38.5467571510656,"62":-42.1924731327175,"64":-29.4338902565674,"66":-24.0481802106971,"67":-38.4696151418916,"68":-10.6267452795026,"69":-44.4224464217007,"72":-21.6367957336455,"74":-61.4338902565674,"76":-42.8553251877619,"77":34.8789766379308,"78":0.384698555364138,"79":-27.2410352336323,"80":-51.8553251877619,"81":-37.7353133161989,"87":-46.5539021281305},"effects":{"(Intercept)":-747.466613505303,"height":172.783889465672,"3":-8.91507473191356,"4":21.4194000157428,"5":-29.4427951434848,"6":22.0983868653301,"7":-13.8671619244769,"8":-9.61003251731303,"9":-17.3764020616673,"10":-23.6814442762678,"11":-20.8511909886646,"12":-20.6495024046433,"13":-19.2915287054689,"14":-20.4268242076726,"15":1262.18326022153,"16":-15.3419508514742,"17":10.7084712945311,"18":-3.06634116992952,"19":-17.3419508514742,"20":-23.1764020616673,"21":26.8093155865418,"22":6.75889344053645,"23":-18.2066553492705,"24":-16.8167397784715,"25":-16.2915287054689,"26":-15.3554124487178,"27":-17.3923729974795,"28":-19.325979915662,"29":-16.936064344863,"30":-44.4108532718604,"31":-47.8696712630455,"32":-12.034399298305,"33":-15.8167397784715,"34":-42.9016131346699,"35":5.47484083888537,"36":-22.4772463536779,"37":-20.8511909886646,"38":-29.8007688426593,"39":-23.4108532718604,"40":-52.0713598470667,"41":-24.8511909886646,"42":-17.7663176324662,"43":-21.3764020616673,"44":-36.1419508514742,"45":-39.5621197098763,"46":-28.325979915662,"47":-22.3764020616673,"48":-35.9520352806753,"49":-9.80076884265929,"50":-45.3444601900428,"51":-14.1007923801226,"52":-60.325979915662,"53":-40.9016131346699,"54":34.6899910201503,"55":-0.819249117040137,"56":-25.8511909886646,"57":-49.9016131346699,"58":-37.360431125855,"59":-43.8671619244768},"rank":2,"fitted.values":{"1":96.0238991602397,"2":92.8310441373046,"3":47.4925028116251,"4":115.181029297851,"5":81.9753370593249,"6":99.8553251877619,"7":91.5539021281305,"8":48.1310738162121,"9":103.048180210697,"10":102.40960920611,"11":106.241035233632,"13":131.783875417114,"14":101.132467196936,"15":96.6624701648267,"16":97.939612174001,"17":94.7467571510657,"18":101.132467196936,"19":28.335372674014,"20":94.7467571510657,"21":103.048180210697,"22":113.903887288677,"23":107.518177242806,"24":99.2167541831749,"25":97.9396121740008,"26":101.132467196936,"29":42.3839347749288,"30":88.3610471051953,"31":109.433890256567,"32":108.156748247393,"34":111.349603270329,"35":129.229591398766,"39":57.7096388850176,"42":97.9396121740008,"44":99.8553251877619,"45":46.215360802451,"47":90.2767601189564,"48":106.241035233632,"49":112.626745279503,"50":111.349603270329,"52":103.686751215284,"55":106.241035233632,"57":104.325322219871,"60":103.048180210697,"61":94.7467571510656,"62":92.1924731327175,"64":109.433890256567,"66":103.048180210697,"67":93.4696151418916,"68":112.626745279503,"69":132.422446421701,"72":36.6367957336455,"74":109.433890256567,"76":99.8553251877619,"77":124.121023362069,"78":135.615301444636,"79":106.241035233632,"80":99.8553251877619,"81":117.735313316199,"87":91.5539021281305},"assign":[0,1],"qr":{"qr":[[-7.68114574786861,-1336.64954904012],[0.130188910980824,270.578977473948],[0.130188910980824,0.287474707506684],[0.130188910980824,-0.104277826225194],[0.130188910980824,0.0879026620206325],[0.130188910980824,-0.0155791393425051],[0.130188910980824,0.0324659827189516],[0.130188910980824,0.283778928886571],[0.130188910980824,-0.0340580324430654],[0.130188910980824,-0.0303622538229533],[0.130188910980824,-0.0525369255436257],[0.130188910980824,-0.200368070348108],[0.130188910980824,-0.0229706965827292],[0.130188910980824,0.00289975375805518],[0.130188910980824,-0.00449180348216893],[0.130188910980824,0.0139870896183913],[0.130188910980824,-0.0229706965827292],[0.130188910980824,0.398348066110045],[0.130188910980824,0.0139870896183913],[0.130188910980824,-0.0340580324430654],[0.130188910980824,-0.0968862689849704],[0.130188910980824,-0.0599284827838498],[0.130188910980824,-0.011883360722393],[0.130188910980824,-0.00449180348216893],[0.130188910980824,-0.0229706965827292],[0.130188910980824,0.31704093646758],[0.130188910980824,0.0509448758195119],[0.130188910980824,-0.0710158186441859],[0.130188910980824,-0.0636242614039618],[0.130188910980824,-0.0821031545045221],[0.130188910980824,-0.18558495586766],[0.130188910980824,0.228342249584891],[0.130188910980824,-0.00449180348216893],[0.130188910980824,-0.0155791393425051],[0.130188910980824,0.294866264746908],[0.130188910980824,0.0398575399591757],[0.130188910980824,-0.0525369255436257],[0.130188910980824,-0.0894947117447462],[0.130188910980824,-0.0821031545045221],[0.130188910980824,-0.0377538110631774],[0.130188910980824,-0.0525369255436257],[0.130188910980824,-0.0414495896832895],[0.130188910980824,-0.0340580324430654],[0.130188910980824,0.0139870896183913],[0.130188910980824,0.0287702040988396],[0.130188910980824,-0.0710158186441859],[0.130188910980824,-0.0340580324430654],[0.130188910980824,0.0213786468586155],[0.130188910980824,-0.0894947117447462],[0.130188910980824,-0.20406384896822],[0.130188910980824,0.350302944048588],[0.130188910980824,-0.0710158186441859],[0.130188910980824,-0.0155791393425051],[0.130188910980824,-0.156018726906763],[0.130188910980824,-0.22254274206878],[0.130188910980824,-0.0525369255436257],[0.130188910980824,-0.0155791393425051],[0.130188910980824,-0.119060940705643],[0.130188910980824,0.0324659827189516]],"qraux":[1.13018891098082,1.02507442547873],"pivot":[1,2],"tol":1e-07,"rank":2},"df.residual":57,"na.action":{},"xlevels":{},"call":{},"terms":{},"model":{"mass":[77,75,32,136,49,120,75,32,84,77,84,112,80,74,1358,77,110,17,75,78.2,140,113,79,79,83,20,68,89,90,66,82,40,80,55,45,65,84,82,87,50,80,85,80,56.2,50,80,79,55,102,88,15,48,57,159,136,79,48,80,45],"height":[172,167,96,202,150,178,165,97,183,182,188,228,180,173,175,170,180,66,170,183,200,190,177,175,180,88,160,193,191,196,224,112,175,178,94,163,188,198,196,184,188,185,183,170,166,193,183,168,198,229,79,193,178,216,234,188,178,206,165]}},"options":{"mode":"view","modes":["code","form","text","tree","view"]}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
+```{=html}
+<div id="htmlwidget-e1030149df1c6251cc34" style="width:100%;height:10%;" class="jsonedit html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e1030149df1c6251cc34">{"x":{"data":{"coefficients":{"(Intercept)":-13.8103136287303,"height":0.638571004587035},"residuals":{"1":-19.0238991602397,"2":-17.8310441373046,"3":-15.4925028116251,"4":20.8189707021492,"5":-32.9753370593249,"6":20.1446748122381,"7":-16.5539021281305,"8":-16.1310738162121,"9":-19.0481802106971,"10":-25.4096092061101,"11":-22.2410352336323,"13":-19.7838754171137,"14":-21.132467196936,"15":-22.6624701648268,"16":1260.060387826,"17":-17.7467571510656,"18":8.86753280306401,"19":-11.335372674014,"20":-19.7467571510656,"21":-24.8481802106971,"22":26.0961127113233,"23":5.48182275719366,"24":-20.2167541831749,"25":-18.9396121740008,"26":-18.132467196936,"29":-22.3839347749288,"30":-20.3610471051953,"31":-20.4338902565674,"32":-18.1567482473934,"34":-45.3496032703285,"35":-47.2295913987655,"39":-17.7096388850176,"42":-17.9396121740008,"44":-44.8553251877619,"45":-1.21536080245101,"47":-25.2767601189564,"48":-22.2410352336323,"49":-30.6267452795026,"50":-24.3496032703285,"52":-53.6867512152841,"55":-26.2410352336323,"57":-19.3253222198712,"60":-23.0481802106971,"61":-38.5467571510656,"62":-42.1924731327175,"64":-29.4338902565674,"66":-24.0481802106971,"67":-38.4696151418916,"68":-10.6267452795026,"69":-44.4224464217007,"72":-21.6367957336455,"74":-61.4338902565674,"76":-42.8553251877619,"77":34.8789766379308,"78":0.384698555364138,"79":-27.2410352336323,"80":-51.8553251877619,"81":-37.7353133161989,"87":-46.5539021281305},"effects":{"(Intercept)":-747.466613505303,"height":172.783889465672,"3":-8.91507473191356,"4":21.4194000157428,"5":-29.4427951434848,"6":22.0983868653301,"7":-13.8671619244769,"8":-9.61003251731303,"9":-17.3764020616673,"10":-23.6814442762678,"11":-20.8511909886646,"12":-20.6495024046433,"13":-19.2915287054689,"14":-20.4268242076726,"15":1262.18326022153,"16":-15.3419508514742,"17":10.7084712945311,"18":-3.06634116992952,"19":-17.3419508514742,"20":-23.1764020616673,"21":26.8093155865418,"22":6.75889344053645,"23":-18.2066553492705,"24":-16.8167397784715,"25":-16.2915287054689,"26":-15.3554124487178,"27":-17.3923729974795,"28":-19.325979915662,"29":-16.936064344863,"30":-44.4108532718604,"31":-47.8696712630455,"32":-12.034399298305,"33":-15.8167397784715,"34":-42.9016131346699,"35":5.47484083888537,"36":-22.4772463536779,"37":-20.8511909886646,"38":-29.8007688426593,"39":-23.4108532718604,"40":-52.0713598470667,"41":-24.8511909886646,"42":-17.7663176324662,"43":-21.3764020616673,"44":-36.1419508514742,"45":-39.5621197098763,"46":-28.325979915662,"47":-22.3764020616673,"48":-35.9520352806753,"49":-9.80076884265929,"50":-45.3444601900428,"51":-14.1007923801226,"52":-60.325979915662,"53":-40.9016131346699,"54":34.6899910201503,"55":-0.819249117040137,"56":-25.8511909886646,"57":-49.9016131346699,"58":-37.360431125855,"59":-43.8671619244768},"rank":2,"fitted.values":{"1":96.0238991602397,"2":92.8310441373046,"3":47.4925028116251,"4":115.181029297851,"5":81.9753370593249,"6":99.8553251877619,"7":91.5539021281305,"8":48.1310738162121,"9":103.048180210697,"10":102.40960920611,"11":106.241035233632,"13":131.783875417114,"14":101.132467196936,"15":96.6624701648267,"16":97.939612174001,"17":94.7467571510657,"18":101.132467196936,"19":28.335372674014,"20":94.7467571510657,"21":103.048180210697,"22":113.903887288677,"23":107.518177242806,"24":99.2167541831749,"25":97.9396121740008,"26":101.132467196936,"29":42.3839347749288,"30":88.3610471051953,"31":109.433890256567,"32":108.156748247393,"34":111.349603270329,"35":129.229591398766,"39":57.7096388850176,"42":97.9396121740008,"44":99.8553251877619,"45":46.215360802451,"47":90.2767601189564,"48":106.241035233632,"49":112.626745279503,"50":111.349603270329,"52":103.686751215284,"55":106.241035233632,"57":104.325322219871,"60":103.048180210697,"61":94.7467571510656,"62":92.1924731327175,"64":109.433890256567,"66":103.048180210697,"67":93.4696151418916,"68":112.626745279503,"69":132.422446421701,"72":36.6367957336455,"74":109.433890256567,"76":99.8553251877619,"77":124.121023362069,"78":135.615301444636,"79":106.241035233632,"80":99.8553251877619,"81":117.735313316199,"87":91.5539021281305},"assign":[0,1],"qr":{"qr":[[-7.68114574786861,-1336.64954904012],[0.130188910980824,270.578977473948],[0.130188910980824,0.287474707506684],[0.130188910980824,-0.104277826225194],[0.130188910980824,0.0879026620206325],[0.130188910980824,-0.0155791393425051],[0.130188910980824,0.0324659827189516],[0.130188910980824,0.283778928886571],[0.130188910980824,-0.0340580324430654],[0.130188910980824,-0.0303622538229533],[0.130188910980824,-0.0525369255436257],[0.130188910980824,-0.200368070348108],[0.130188910980824,-0.0229706965827292],[0.130188910980824,0.00289975375805518],[0.130188910980824,-0.00449180348216893],[0.130188910980824,0.0139870896183913],[0.130188910980824,-0.0229706965827292],[0.130188910980824,0.398348066110045],[0.130188910980824,0.0139870896183913],[0.130188910980824,-0.0340580324430654],[0.130188910980824,-0.0968862689849704],[0.130188910980824,-0.0599284827838498],[0.130188910980824,-0.011883360722393],[0.130188910980824,-0.00449180348216893],[0.130188910980824,-0.0229706965827292],[0.130188910980824,0.31704093646758],[0.130188910980824,0.0509448758195119],[0.130188910980824,-0.0710158186441859],[0.130188910980824,-0.0636242614039618],[0.130188910980824,-0.0821031545045221],[0.130188910980824,-0.18558495586766],[0.130188910980824,0.228342249584891],[0.130188910980824,-0.00449180348216893],[0.130188910980824,-0.0155791393425051],[0.130188910980824,0.294866264746908],[0.130188910980824,0.0398575399591757],[0.130188910980824,-0.0525369255436257],[0.130188910980824,-0.0894947117447462],[0.130188910980824,-0.0821031545045221],[0.130188910980824,-0.0377538110631774],[0.130188910980824,-0.0525369255436257],[0.130188910980824,-0.0414495896832895],[0.130188910980824,-0.0340580324430654],[0.130188910980824,0.0139870896183913],[0.130188910980824,0.0287702040988396],[0.130188910980824,-0.0710158186441859],[0.130188910980824,-0.0340580324430654],[0.130188910980824,0.0213786468586155],[0.130188910980824,-0.0894947117447462],[0.130188910980824,-0.20406384896822],[0.130188910980824,0.350302944048588],[0.130188910980824,-0.0710158186441859],[0.130188910980824,-0.0155791393425051],[0.130188910980824,-0.156018726906763],[0.130188910980824,-0.22254274206878],[0.130188910980824,-0.0525369255436257],[0.130188910980824,-0.0155791393425051],[0.130188910980824,-0.119060940705643],[0.130188910980824,0.0324659827189516]],"qraux":[1.13018891098082,1.02507442547873],"pivot":[1,2],"tol":1e-07,"rank":2},"df.residual":57,"na.action":{},"xlevels":{},"call":{},"terms":{},"model":{"mass":[77,75,32,136,49,120,75,32,84,77,84,112,80,74,1358,77,110,17,75,78.2,140,113,79,79,83,20,68,89,90,66,82,40,80,55,45,65,84,82,87,50,80,85,80,56.2,50,80,79,55,102,88,15,48,57,159,136,79,48,80,45],"height":[172,167,96,202,150,178,165,97,183,182,188,228,180,173,175,170,180,66,170,183,200,190,177,175,180,88,160,193,191,196,224,112,175,178,94,163,188,198,196,184,188,185,183,170,166,193,183,168,198,229,79,193,178,216,234,188,178,206,165]}},"options":{"mode":"view","modes":["code","form","text","tree","view"]}},"evals":[],"jsHooks":[]}</script>
+```
 
-Kao što je vidljivo `ols1` objekt sadržava mnoštvo slotova... koji sadržavaju regresijske koeficijente, vektor rezidualnih i *fitted* (i.e. predicted) vrijednosti, rangove matrice dizajna, imput podatke...itd. Za deskriptivni pregled najvažnijih vrijednosti se uobičajno koristi generička `summary()` funkcija: 
+Kao što je vidljivo `ols1` objekt sadržava mnoštvo slotova... koji sadržavaju regresijske koeficijente, vektor rezidualnih i *fitted* (i.e. predicted) vrijednosti, rangove matrice dizajna, input podatke...itd. Za deskriptivni pregled najvažnijih vrijednosti se uobičajno koristi generička `summary()` funkcija: 
 
 
 ```r
@@ -162,7 +164,7 @@ summary(ols1)$coefficients
 
 ### Korištenje "tidy" regresijskih koeficijenata iz `broom` paketa
 
-Iako je najjednostavniji način *vađenja* koeficijenata `summary()` funkcija, u praksi je **broom** ([paket](https://broom.tidyverse.org/)) bolji način. **broom** ima niz korisnih funkcioinalnosti koji regresijske (i druge statističke) objekte pretvaraju u "tidy" data frame-ove. To je praktično jer se regresijski output često koristi kao input u nekoj drugoj proceduri, npr. za vizualizaciju marginalnih efekata. Sada ćemo pogledati kako pomoću funkcije `broom::tidy(..., conf.int = TRUE)` možemo prebaciti `ols1` regresijski objekt u *tidy data frame* koeficijenata i drugih statistika:
+Iako je najjednostavniji način *vađenja* koeficijenata `summary()` funkcija, u praksi je **broom** ([paket](https://broom.tidyverse.org/)) bolji način. **broom** ima niz korisnih funkcioinalnosti koji regresijske (i druge statističke) objekte pretvaraju u "tidy" data.frame-ove. To je dosta praktično jer se regresijski output često koristi kao input u nekoj drugoj proceduri, npr. za vizualizaciju marginalnih efekata. Sada ćemo pogledati kako pomoću funkcije `broom::tidy(..., conf.int = TRUE)` možemo prebaciti `ols1` regresijski objekt u *tidy data.frame* koeficijenata i drugih statistika:
 
 
 ```r
@@ -180,7 +182,7 @@ tidy(ols1, conf.int = TRUE)
 
 Ove "očišćene" (tidy) koeficijente bismo sada mogli iskoristiti za **ggplot2** vizualizaciju, primjerice koristeći `geom_pointrange()` za prikaz *error bar*-ova.
 
-**broom** ima još nekoliko korisnih funkcionalnosti. Npr. `broom::glance()` daje prikaz modelskih meta podataka (R<sup>2</sup>, AIC, etc.) u data frame-u:
+**broom** ima još nekoliko korisnih funkcionalnosti. Npr. `broom::glance()` daje prikaz modelskih meta podataka (R<sup>2</sup>, AIC, etc.) u data.frame-u:
 
 
 ```r
@@ -204,12 +206,12 @@ Prethodno procijenjeni regresijski model i nije baš nešto... R<sup>2</sup> je 
 
 ![](08_STATS_files/figure-html/jabba-1.png)<!-- -->
 
-Čini se da bi imalo smisla maknuti ekstremnu vrijednost iz regresijskog modela!? To je moguće napraviti na dva načina: 1) napravi novi data frame i provedi regresiju i 2) *subset-aj* podatke (direktno) unutar `lm()` funkcije.
+Čini se da bi imalo smisla maknuti ekstremnu vrijednost iz regresijskog modela!? To je moguće napraviti na dva načina: 1) napravi novi data.frame i provedi regresiju i 2) *subset-aj* podatke (direktno) unutar `lm()` funkcije.
 
 
-#### 1) Napravi novi data frame
+#### 1) Napravi novi data.frame
 
-R dozvoljava mnoštvo objekata u radnom prostoru pa je moguće napraviti novi data frame objekt koji isključuje ekstremnu vrijednost *Jabba*. Za to je moguće koroistiti **dplyr** ([predavanje](https://raw.githack.com/BrbanMiro/Obrada-podataka/main/Predavanja/05_MANIPULACIJA_tidy.html#1)) ili  **data.table** ([predavanje](https://raw.githack.com/BrbanMiro/Obrada-podataka/main/Predavanja/05_MANIPULACIJA_dt.html#1)). U ovom slučaju ćemo koristiti **dplyr** jer je to trenutno kompatiblno sa `starwars` podatcima:
+R dozvoljava mnoštvo objekata u radnom prostoru pa je moguće napraviti novi data.frame objekt koji isključuje ekstremnu vrijednost *Jabba*. Za to je moguće koroistiti **dplyr** ([predavanje](https://raw.githack.com/BrbanMiro/Obrada-podataka/main/Predavanja/05_MANIPULACIJA_tidy.html#1)) ili  **data.table** ([predavanje](https://raw.githack.com/BrbanMiro/Obrada-podataka/main/Predavanja/05_MANIPULACIJA_dt.html#1)). U ovom slučaju ćemo koristiti **dplyr** jer je to trenutno kompatiblno sa `starwars` podatcima:
 
 
 ```r
@@ -303,7 +305,7 @@ ols1_robust
 ## height       0.8146273 57
 ```
 
-Ovaj paket koristi *Eicker-Huber-White* robusnu rezidualnu strukturu kao default, odnosno *"HC2" standard errors*. Default varijantu je moguće promijeniti sa `se_type = ` argumentom. ^[[Pogledaj za detalje!](https://declaredesign.org/r/estimatr/articles/mathematical-notes.html#lm_robust-notes)]. To je korisno ako dolazite iz Stata-e i želite replicirati rezultate. Replikacija rezultata nije uvijek elegantna stvar, a za raspravu na temu replikacije između Stata-e, R i Python-a pogledajte [ovdje](https://declaredesign.org/r/estimatr/articles/stata-wls-hat.html). 
+Ovaj paket koristi *Eicker-Huber-White* robusnu rezidualnu strukturu kao default, odnosno *"HC2" standard errors*. Default varijantu je moguće promijeniti sa `se_type = ` argumentom ^[[Pogledaj za detalje!](https://declaredesign.org/r/estimatr/articles/mathematical-notes.html#lm_robust-notes)]. To je korisno ako dolazite iz Stata-e i želite replicirati rezultate. Replikacija rezultata nije uvijek elegantna stvar, a za raspravu na temu replikacije između Stata-e, R i Python-a pogledajte [ovdje](https://declaredesign.org/r/estimatr/articles/stata-wls-hat.html). 
 
 
 ```r
@@ -337,7 +339,7 @@ sqrt(diag(NeweyWest(ols1))) ## prikaži HAC SEs
 ##  21.2694130   0.0774265
 ```
 
-Akopak želite koristiti HAC SE rezidualnu strukturu u modelu, preporuča se primjena `ols1` objekta u `lmtest::coeftest()`funkciji. Ova funkcija koristi **sandwich** paket i omogućava praktičan način testiranja hipoteza u modelu sa raznim specifikacijama. Osnovni primjer:
+Ako pak želite koristiti HAC SE rezidualnu strukturu u modelu, preporuča se primjena `ols1` objekta u `lmtest::coeftest()`funkciji. Ova funkcija koristi **sandwich** paket i omogućava praktičan način testiranja hipoteza u modelu sa raznim specifikacijama. Osnovni primjer:
 
 
 ```r
@@ -408,18 +410,18 @@ humans
 
 ```
 ## # A tibble: 35 x 15
-##    gender gender_factored name  height  mass hair_color skin_color eye_color
-##    <chr>  <fct>           <chr>  <int> <dbl> <chr>      <chr>      <chr>    
-##  1 mascu~ masculine       Luke~    172    77 blond      fair       blue     
-##  2 mascu~ masculine       Dart~    202   136 none       white      yellow   
-##  3 femin~ feminine        Leia~    150    49 brown      light      brown    
-##  4 mascu~ masculine       Owen~    178   120 brown, gr~ light      blue     
-##  5 femin~ feminine        Beru~    165    75 brown      light      blue     
-##  6 mascu~ masculine       Bigg~    183    84 black      light      brown    
-##  7 mascu~ masculine       Obi-~    182    77 auburn, w~ fair       blue-gray
-##  8 mascu~ masculine       Anak~    188    84 blond      fair       blue     
-##  9 mascu~ masculine       Wilh~    180    NA auburn, g~ fair       blue     
-## 10 mascu~ masculine       Han ~    180    80 brown      fair       brown    
+##    gender    gender_factored name   height  mass hair_color skin_color eye_color
+##    <chr>     <fct>           <chr>   <int> <dbl> <chr>      <chr>      <chr>    
+##  1 masculine masculine       Luke ~    172    77 blond      fair       blue     
+##  2 masculine masculine       Darth~    202   136 none       white      yellow   
+##  3 feminine  feminine        Leia ~    150    49 brown      light      brown    
+##  4 masculine masculine       Owen ~    178   120 brown, gr~ light      blue     
+##  5 feminine  feminine        Beru ~    165    75 brown      light      blue     
+##  6 masculine masculine       Biggs~    183    84 black      light      brown    
+##  7 masculine masculine       Obi-W~    182    77 auburn, w~ fair       blue-gray
+##  8 masculine masculine       Anaki~    188    84 blond      fair       blue     
+##  9 masculine masculine       Wilhu~    180    NA auburn, g~ fair       blue     
+## 10 masculine masculine       Han S~    180    80 brown      fair       brown    
 ## # ... with 25 more rows, and 7 more variables: birth_year <dbl>, sex <chr>,
 ## #   homeworld <chr>, species <chr>, films <list>, vehicles <list>,
 ## #   starships <list>
@@ -498,9 +500,9 @@ Kao i kod *dummie* varijabli, R ima praktičnu sintaksu za specifikaciju interak
 
 - `x1:x2` "križanje" varijabli (ekvivalentno uključivanju x1 × x2 interakcije)
 - `x1/x2` "ugnježđivanje" druge varijable u prvu (ekvivalentno `x1 + x1:x2`)
-- `x1*x2`uključuje sve glavne i interakcijske varijable (eekvivalentno `x1 + x2 + x1:x2`) 
+- `x1*x2`uključuje sve glavne i interakcijske varijable (ekvivalentno `x1 + x2 + x1:x2`) 
 
-Općenito je prporučljivo uključiti sve glavne (*parent*) odnose uz njihove interakcije pa je `*` default opcija. 
+Općenito je preporučljivo uključiti sve glavne (*parent*) odnose uz njihove interakcije pa je `*` default opcija. 
 
 Primjerice, može nas zanimati da li je odnos između težine i visine posredovan spolom osobe!? Tada bismo proveli regresiju u ovakvom obliku:
 
@@ -562,11 +564,11 @@ ols_fe
 ## Fixed-effects: species: 31
 ## Standard-errors: Clustered (species) 
 ##        Estimate Std. Error t value  Pr(>|t|)    
-## height 0.974876   0.044291   22.01 < 2.2e-16 ***
+## height 0.974876   0.044291 22.0105 < 2.2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## Log-likelihood: -214.02   Adj. R2: 0.99282 
-##                         R2-Within: 0.66249
+## RMSE: 9.69063     Adj. R2: 0.99282 
+##                 Within R2: 0.662493
 ```
 
 Modelski objekt je automatski klasterirao standardne pogreške po varijabli fiksnih efekata (i.e. species). Za obične (*vanilla*) reziduale je potrebno specificirati `se` argument u `summary.fixest()` funkciji na sljedeći način:
@@ -580,13 +582,13 @@ summary(ols_fe, se = 'standard')
 ## OLS estimation, Dep. Var.: mass
 ## Observations: 58 
 ## Fixed-effects: species: 31
-## Standard-errors: Standard 
-##        Estimate Std. Error t value Pr(>|t|)    
-## height 0.974876   0.136463  7.1439 1.38e-07 ***
+## Standard-errors: IID 
+##        Estimate Std. Error t value   Pr(>|t|)    
+## height 0.974876   0.136463  7.1439 1.3797e-07 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## Log-likelihood: -214.02   Adj. R2: 0.99282 
-##                         R2-Within: 0.66249
+## RMSE: 9.69063     Adj. R2: 0.99282 
+##                 Within R2: 0.662493
 ```
 
 Podatkovni skup sa koeficijentima ćemo pospremiti u zasebni objekt jer će nam trebati kasnije, a pri  tome koristimo *vanilla* reziduale. Usput primjetite na koji način`broom::tidy()` metoda za `fixest` objekte prihvaća `se` argument. Ova procedura je ujedno i jako praktična za provjeru više različitih modela:
@@ -614,11 +616,11 @@ ols_hdfe
 ## Fixed-effects: species: 30,  homeworld: 38
 ## Standard-errors: Clustered (species) 
 ##        Estimate Std. Error t value Pr(>|t|)    
-## height 0.755844   0.332888  2.2706  0.03078 *  
+## height 0.755844   0.332888 2.27057  0.03078 *  
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## Log-likelihood: -188.55   Adj. R2: 1.00768 
-##                         R2-Within: 0.48723
+## RMSE: 7.45791     Adj. R2: 1.00768 
+##                 Within R2: 0.487231
 ```
 
 Rezidualna struktura prethodnog modela je automatski klasterirana po vrsti (species), odnosno prvoj varijabli iza `|`. Ukoliko želimo klaster po "species" i "homeworld" varijablama^[Ovo je samo demonstrativni primjer.] možemo koristiti funkcijske argumente `se` ili `cluster` u `summary.fixest()` funkciji. Pripisati ćemo model `ols_hdfe` objektu:
@@ -635,13 +637,13 @@ ols_hdfe
 ## OLS estimation, Dep. Var.: mass
 ## Observations: 55 
 ## Fixed-effects: species: 30,  homeworld: 38
-## Standard-errors: Two-way (species & homeworld) 
-##        Estimate Std. Error t value Pr(>|t|)    
-## height 0.755844   0.116416  6.4926 4.16e-07 ***
+## Standard-errors: Clustered (species & homeworld) 
+##        Estimate Std. Error t value   Pr(>|t|)    
+## height 0.755844   0.116416 6.49263 4.1625e-07 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## Log-likelihood: -188.55   Adj. R2: 1.00768 
-##                         R2-Within: 0.48723
+## RMSE: 7.45791     Adj. R2: 1.00768 
+##                 Within R2: 0.487231
 ```
 
 #### Usporedba modelskih koeficijenata
@@ -671,13 +673,13 @@ bind_rows(
 
 ![](08_STATS_files/figure-html/fe_mods_compared-1.png)<!-- -->
 
-Normalno bismo očekivali veće standardne pogreške sa klasterskom rezidualnom strukturom, no ovdje je taj efekt poništen kroz povećanu preciznost koju daju fiksni efekti. Ipak ne treba zboraviti da je cjelokupni primjer zasnovan na imaginarnim podatcima pa nema smisla previše razmišljati o substantivnim implikacijama ovih rezultata. Bitna je sintaksa!
+Normalno bismo očekivali veće standardne pogreške sa klasterskom rezidualnom strukturom, no ovdje je taj efekt poništen kroz povećanu preciznost koju daju fiksni efekti. Ipak ne treba zboraviti da je cjelokupni primjer zasnovan na imaginarnim podatcima pa nema smisla previše razmišljati o substantivnim implikacijama ovih rezultata. Bitna je sintaksa ;-)
 
 #### Komentar o standardnim pogreškama
 
 
 
-Upravo smo vidjeli koje opcije ima **fixest** pri specifikaciji različitih rezidualnih struktura. Ukratko provedite model sa `se` ili `cluster` argumentima u  `summary.fixest()` (ili `broom::tidy()`) ako niste zaovoljni sa *default* varijantama. Tu postoje još dvije stvari na koje valja skrenutu pozornost!
+Upravo smo vidjeli koje opcije ima **fixest** pri specifikaciji različitih rezidualnih struktura. Ukratko provedite model sa `se` ili `cluster` argumentima u  `summary.fixest()` (ili `broom::tidy()`) ako niste zaovoljni sa *default* varijantama. Tu postoje još dvije stvari na koje valja skrenuti pozornost!
 
 Prvo, ako dolazite iz drugog statističkog jezika (Stata!?), prilagodba rezidualne strukture nakon što je proveden model može izgledati neobično...no taj način ima znatne prednosti. Primjerice, on nam omogućava analizu različitih specifikacija po *on-the-fly* principu bez da ponovno provodimo model. **fixest** je uistinu brz no vremenski gubitci zbog ponovnog provođenja modela kod većih modela mogu biti znatni.
 
@@ -713,22 +715,22 @@ cigs95
 
 ```
 ## # A tibble: 48 x 13
-##    state year    cpi population packs income   tax price  taxs rprice rincome
-##    <fct> <fct> <dbl>      <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl>  <dbl>   <dbl>
-##  1 AL    1995   1.52    4262731 101.  8.39e7  40.5  158.  41.9   104.    12.9
-##  2 AR    1995   1.52    2480121 111.  4.60e7  55.5  176.  63.9   115.    12.2
-##  3 AZ    1995   1.52    4306908  72.0 8.89e7  65.3  199.  74.8   130.    13.5
-##  4 CA    1995   1.52   31493524  56.9 7.71e8  61    211.  74.8   138.    16.1
-##  5 CO    1995   1.52    3738061  82.6 9.29e7  44    167.  44     110.    16.3
-##  6 CT    1995   1.52    3265293  79.5 1.04e8  74    218.  86.4   143.    21.0
-##  7 DE    1995   1.52     718265 124.  1.82e7  48    166.  48     109.    16.7
-##  8 FL    1995   1.52   14185403  93.1 3.34e8  57.9  188.  68.5   123.    15.4
-##  9 GA    1995   1.52    7188538  97.5 1.60e8  36    157.  37.4   103.    14.6
-## 10 IA    1995   1.52    2840860  92.4 6.02e7  60    191.  69.1   125.    13.9
+##    state year    cpi population packs    income   tax price  taxs rprice rincome
+##    <fct> <fct> <dbl>      <dbl> <dbl>     <dbl> <dbl> <dbl> <dbl>  <dbl>   <dbl>
+##  1 AL    1995   1.52    4262731 101.   83903280  40.5  158.  41.9   104.    12.9
+##  2 AR    1995   1.52    2480121 111.   45995496  55.5  176.  63.9   115.    12.2
+##  3 AZ    1995   1.52    4306908  72.0  88870496  65.3  199.  74.8   130.    13.5
+##  4 CA    1995   1.52   31493524  56.9 771470144  61    211.  74.8   138.    16.1
+##  5 CO    1995   1.52    3738061  82.6  92946544  44    167.  44     110.    16.3
+##  6 CT    1995   1.52    3265293  79.5 104315120  74    218.  86.4   143.    21.0
+##  7 DE    1995   1.52     718265 124.   18237436  48    166.  48     109.    16.7
+##  8 FL    1995   1.52   14185403  93.1 333525344  57.9  188.  68.5   123.    15.4
+##  9 GA    1995   1.52    7188538  97.5 159800448  36    157.  37.4   103.    14.6
+## 10 IA    1995   1.52    2840860  92.4  60170928  60    191.  69.1   125.    13.9
 ## # ... with 38 more rows, and 2 more variables: rtax <dbl>, tdiff <dbl>
 ```
 
-Pretpostavimo da nas zanima regresijski odnos broja (paketa) cigareta kozumiranih po glavi stanovnika i njihove cijene te osobnog dohotka. Empirijski problem se odnosi na to da je broj konzumiranih paketa endogen, odnosno simultano određen na srani ponude i potražnje. Zbog toga valja koristiti instrumentalnu varijablu koja se u ovom slučaju odnosi na porezne varijable. Ovo je regresijski model koji nas zanima:
+Pretpostavimo da nas zanima regresijski odnos broja (paketa) cigareta kozumiranih po glavi stanovnika i njihove cijene te osobnog dohotka. Empirijski problem se odnosi na to da je broj konzumiranih paketa endogen, odnosno simultano određen na srani ponude i potražnje. Zbog toga treba koristiti instrumentalnu varijablu koja se u ovom slučaju odnosi na porezne varijable. Ovo je regresijski model koji nas zanima:
 
 $$price_i = \pi_0 + \pi_1 tdiff_i + + \pi_2 rtax_i + v_i  \hspace{1cm} \text{(Prva razina)}$$
 $$packs_i = \beta_0 + \beta_2\widehat{price_i} + \beta_1 rincome_i + u_i \hspace{1cm} \text{(Druga razina)}$$
@@ -797,7 +799,7 @@ ivreg(
 
 ### Opcija 2: `estimatr::iv_robust()`
 
-Drugi način se ondosi na **estimatr** koji smo prethodno spomenuli. *Default* postavka u ovom pristupu je HC2 rezidualna struktura, a naravno da su dopuštene i druge opcije (i klasteri također). Sintaksa je skoro ista kao u prethodnom primjeru, a sve što treba promijeniti je funkcijski poziv iz `AER::ivreg()` u `estimatr::iv_robust()`.
+Drugi način se odnosi na **estimatr** koji smo prethodno spomenuli. *Default* postavka u ovom pristupu je HC2 rezidualna struktura, a naravno da su dopuštene i druge opcije (i klasteri također). Sintaksa je skoro ista kao u prethodnom primjeru, a sve što treba promijeniti je funkcijski poziv iz `AER::ivreg()` u `estimatr::iv_robust()`.
 
 
 ```r
@@ -832,7 +834,7 @@ summary(iv_reg_robust, diagnostics = TRUE)
 
 ### Opcija 3: `felm::lfe()`
 
-`felm()` funkcija iz **lfe** paketa je vjerojatno najelegantnija opcija u usporedbi sa pretthodne dvije jer ima najintuitivniju sintaksu.^[ **fixest** paket koji smo razmatrali maločas ne podržava IV regresiju. Sa druge strane, `lfe::felm()`funkcija ima skore svu funkcinalnost tog paketa, jednio što je malo sporija.] Njena sintaksa je jako slična statinom načinu specifikacije prve regresijske razine, gdje se navode samo endogene varijable i instrumenti. 
+`felm()` funkcija iz **lfe** paketa je vjerojatno najelegantnija opcija u usporedbi sa pretthodne dvije jer ima najintuitivniju sintaksu.^[ **fixest** paket koji smo razmatrali maločas ne podržava IV regresiju. Sa druge strane, `lfe::felm()`funkcija ima skore svu funkcinalnost tog paketa, jednio što je malo sporija.] Njena sintaksa je jako slična Stata-inom načinu specifikacije prve regresijske razine, gdje se navode samo endogene varijable i instrumenti. 
 
 
 ```r
@@ -872,7 +874,7 @@ summary(iv_felm)
 ## F-statistic(endog. vars):23.56 on 1 and 45 DF, p-value: 1.496e-05
 ```
 
-U gornjem primjeru smo unieli "0" na mjesto fiksnih efekata jer koristimo samo *subset* podataka. Sljedeći primjer se odnosi na IV regresiju sa `felm()`funkcijom pri čemu su uključeni svi podatci (i.e. puni panel) te "year" and "state" fiksni efekti za kontrolu panel strukture.
+U gornjem primjeru smo unijeli "0" na mjesto fiksnih efekata jer koristimo samo *subset* podataka. Sljedeći primjer se odnosi na IV regresiju sa `felm()`funkcijom pri čemu su uključeni svi podatci (i.e. puni panel) te "year" and "state" fiksni efekti za kontrolu panel strukture.
 
 
 ```r
@@ -959,7 +961,7 @@ tidy(glm_logitmfx, conf.int = TRUE)
 
 ### Bayes-ova regresija
 
-Bayes-ijanski pristup statistici je vrlo opširna tema,a ovo je jako kratki prikaz mogućnosti za provedu te vrste analize u R. Sučelja za provedbu bayes-ijanskih modela su implementirana kroz MCMC i Bayesian *software engines*: [Stan](https://mc-stan.org/users/interfaces/rstan), [JAGS](http://mcmc-jags.sourceforge.net/), TensorFlow (via [Greta](https://greta-stats.org/)), itd. Ovo je samo jedan jednostavni primjer bayes-ijanske analize sa **rstanarm** [paketom](http://mc-stan.org/rstanarm/). Primijetite da ovaj paket nismo instalirali na početku jer instalacija često zna izazvati svakakve probleme.^[Primjerice na ovom računalu je bilo potrebno instalirati `stan` i `rstanarm` pri čemu je R stalno *ispadao* kroz instalacijski proces koji je trebalo ponavljati više puta.]
+Bayes-ijanski pristup statistici je vrlo opširna tema, a ovo je jako kratki prikaz mogućnosti za provedu te vrste analize u R. Sučelja za provedbu bayes-ijanskih modela su implementirana kroz MCMC i Bayesian *software engines*: [Stan](https://mc-stan.org/users/interfaces/rstan), [JAGS](http://mcmc-jags.sourceforge.net/), TensorFlow (via [Greta](https://greta-stats.org/)), itd. Ovo je samo jedan jednostavni primjer bayes-ijanske analize sa **rstanarm** [paketom](http://mc-stan.org/rstanarm/). Primijetite da ovaj paket nismo instalirali na početku jer instalacija često zna izazvati svakakve probleme.^[Primjerice na ovom računalu je bilo potrebno instalirati `stan` i `rstanarm` pri čemu je R stalno *ispadao* kroz instalacijski proces koji je trebalo ponavljati više puta.]
 
 
 ```r
@@ -992,27 +994,27 @@ summary(bayes_reg)
 ## 
 ## Estimates:
 ##                          mean   sd     10%    50%    90% 
-## (Intercept)             -67.6   75.2 -162.1  -66.9   26.4
-## gendermasculine          -0.2    9.0   -7.0    0.0    7.1
+## (Intercept)             -65.7   76.1 -161.2  -65.6   27.7
+## gendermasculine          -0.5    9.1   -7.3   -0.1    5.9
 ## height                    0.8    0.5    0.2    0.8    1.4
-## gendermasculine:height    0.1    0.1   -0.1    0.1    0.2
-## sigma                    15.8    2.7   12.8   15.5   19.3
+## gendermasculine:height    0.1    0.1    0.0    0.1    0.2
+## sigma                    15.9    2.7   12.7   15.6   19.4
 ## 
 ## Fit Diagnostics:
 ##            mean   sd   10%   50%   90%
-## mean_PPD 82.7    4.8 76.7  82.6  88.6 
+## mean_PPD 82.5    4.9 76.3  82.5  88.8 
 ## 
 ## The mean_ppd is the sample average posterior predictive distribution of the outcome variable (for details see help('summary.stanreg')).
 ## 
 ## MCMC diagnostics
 ##                        mcse Rhat n_eff
-## (Intercept)            1.6  1.0  2304 
-## gendermasculine        0.3  1.0   827 
-## height                 0.0  1.0  2125 
-## gendermasculine:height 0.0  1.0  1250 
-## sigma                  0.1  1.0  1729 
-## mean_PPD               0.1  1.0  3083 
-## log-posterior          0.0  1.0  1411 
+## (Intercept)            1.6  1.0  2183 
+## gendermasculine        0.3  1.0  1227 
+## height                 0.0  1.0  2084 
+## gendermasculine:height 0.0  1.0  1584 
+## sigma                  0.1  1.0  2447 
+## mean_PPD               0.1  1.0  3334 
+## log-posterior          0.0  1.0  1376 
 ## 
 ## For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure of effective sample size, and Rhat is the potential scale reduction factor on split chains (at convergence Rhat=1).
 ```
@@ -1033,7 +1035,7 @@ Na poslijetku vrijedi pogledati i neke korisne resurse (knjige i tutoriale) i li
 
 ## Marginalni efekti
 
-Izračun marginalnih efekata u regresiji je jednostavan u slučaju kada nema nelinaernosti u modelu...dovoljno je pogledati vrijednosti koeficijenata u regresijskom ispisu. Za nelinearne modele poput logit, probit i sl., marginalne efekte je potrebno izračunati...a za to postoje funkcije u R. Već smo spominjali **mfx** paket za izračun marginalnih efekata u GLM modelima no ovdje ćemo istaknuti dvije metode za izračun marginalnih efekata kod više različitih vrsta modela: 1) **margins** paket 2) pristup za analizu svih modela sa interakcijskim varijablama.
+Izračun marginalnih efekata u regresiji je jednostavan u slučaju kada nema nelinearnosti u modelu...dovoljno je pogledati vrijednosti koeficijenata u regresijskom ispisu. Za nelinearne modele poput logit, probit i sl., marginalne efekte je potrebno izračunati...a za to postoje funkcije u R. Već smo spominjali **mfx** paket za izračun marginalnih efekata u GLM modelima no ovdje ćemo istaknuti dvije metode za izračun marginalnih efekata kod više različitih vrsta modela: 1) **margins** paket 2) pristup za analizu svih modela sa interakcijskim varijablama.
 
 
 ### **margins** paket
@@ -1103,40 +1105,7 @@ Ovo je samo demonstrativni prikaz bez puno substantivnog sadržaja!
 ```r
 par(mfrow=c(1, 2)) ## definiraj grid za prikaz grafika
 cplot(ols_ie, x = "gender", what = "prediction")
-```
-
-```
-##       xvals    yvals     upper    lower
-## 1 masculine 84.19201  91.70295 76.68107
-## 2  feminine 70.66667 122.57168 18.76166
-```
-
-```r
 cplot(ols_ie, x = "height", what = "prediction")
-```
-
-```
-##       xvals    yvals     upper    lower
-## 1  150.0000 57.71242  86.90520 28.51964
-## 2  152.1667 59.65426  87.02441 32.28411
-## 3  154.3333 61.59610  87.15216 36.04003
-## 4  156.5000 63.53793  87.29040 39.78546
-## 5  158.6667 65.47977  87.44173 43.51781
-## 6  160.8333 67.42161  87.60961 47.23361
-## 7  163.0000 69.36344  87.79883 50.92806
-## 8  165.1667 71.30528  88.01610 54.59446
-## 9  167.3333 73.24711  88.27110 58.22313
-## 10 169.5000 75.18895  88.57808 61.79983
-## 11 171.6667 77.13079  88.95862 65.30296
-## 12 173.8333 79.07262  89.44599 68.69926
-## 13 176.0000 81.01446  90.09168 71.93724
-## 14 178.1667 82.95630  90.97287 74.93972
-## 15 180.3333 84.89813  92.19300 77.60326
-## 16 182.5000 86.83997  93.85745 79.82249
-## 17 184.6667 88.78181  96.01749 81.54612
-## 18 186.8333 90.72364  98.63222 82.81507
-## 19 189.0000 92.66548 101.59946 83.73149
-## 20 191.1667 94.60732 104.81353 84.40110
 ```
 
 ![](08_STATS_files/figure-html/margins4-1.png)<!-- -->
@@ -1166,7 +1135,7 @@ tidy(ols_ie_marg2, conf.int = TRUE)
 ## # A tibble: 4 x 7
 ##   term                   estimate std.error statistic p.value conf.low conf.high
 ##   <chr>                     <dbl>     <dbl>     <dbl>   <dbl>    <dbl>     <dbl>
-## 1 (Intercept)             -61.      204.      -0.299   0.768  -4.90e+2    368.  
+## 1 (Intercept)             -61.0     204.      -0.299   0.768  -4.90e+2    368.  
 ## 2 gendermasculine         -15.7     220.      -0.0716  0.944  -4.77e+2    446.  
 ## 3 genderfeminine:height     0.733     1.27     0.576   0.572  -1.94e+0      3.41
 ## 4 gendermasculine:height    0.896     0.443    2.02    0.0582 -3.46e-2      1.83
@@ -1253,11 +1222,11 @@ msummary(list(ols1, ols_ie, ols_fe, ols_hdfe))
    <td style="text-align:center;">  </td>
   </tr>
   <tr>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> (1.349) </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;">  </td>
+   <td style="text-align:left;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (1.349) </td>
+   <td style="text-align:center;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px">  </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Num.Obs. </td>
@@ -1281,18 +1250,18 @@ msummary(list(ols1, ols_ie, ols_fe, ols_hdfe))
    <td style="text-align:center;"> 1.008 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> R2 Pseudo </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;">  </td>
-  </tr>
-  <tr>
    <td style="text-align:left;"> R2 Within </td>
    <td style="text-align:center;">  </td>
    <td style="text-align:center;">  </td>
    <td style="text-align:center;"> 0.662 </td>
    <td style="text-align:center;"> 0.487 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> R2 Pseudo </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
   </tr>
   <tr>
    <td style="text-align:left;"> AIC </td>
@@ -1323,11 +1292,11 @@ msummary(list(ols1, ols_ie, ols_fe, ols_hdfe))
    <td style="text-align:center;">  </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> FE: homeworld </td>
+   <td style="text-align:left;"> Std.Errors </td>
    <td style="text-align:center;">  </td>
    <td style="text-align:center;">  </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> X </td>
+   <td style="text-align:center;"> by: species </td>
+   <td style="text-align:center;"> by: species &amp; homeworld </td>
   </tr>
   <tr>
    <td style="text-align:left;"> FE: species </td>
@@ -1337,11 +1306,11 @@ msummary(list(ols1, ols_ie, ols_fe, ols_hdfe))
    <td style="text-align:center;"> X </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> Std. errors </td>
+   <td style="text-align:left;"> FE: homeworld </td>
    <td style="text-align:center;">  </td>
    <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> Clustered (species) </td>
-   <td style="text-align:center;"> Two-way (species &amp; homeworld) </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> X </td>
   </tr>
 </tbody>
 </table>
@@ -1365,120 +1334,119 @@ datasummary_balance(~ gender,
 <th style="empty-cells: hide;border-bottom:hidden;" colspan="2"></th>
 <th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">feminine (N=9)</div></th>
 <th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">masculine (N=26)</div></th>
-<th style="empty-cells: hide;border-bottom:hidden;" colspan="1"></th>
-<th style="empty-cells: hide;border-bottom:hidden;" colspan="1"></th>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="2"></th>
 </tr>
   <tr>
    <th style="text-align:left;">   </th>
    <th style="text-align:left;">    </th>
-   <th style="text-align:left;"> Mean </th>
-   <th style="text-align:left;"> Std. Dev. </th>
-   <th style="text-align:left;"> Mean  </th>
-   <th style="text-align:left;"> Std. Dev.  </th>
-   <th style="text-align:left;"> Diff. in Means </th>
-   <th style="text-align:left;"> Std. Error </th>
+   <th style="text-align:right;"> Mean </th>
+   <th style="text-align:right;"> Std. Dev. </th>
+   <th style="text-align:right;"> Mean  </th>
+   <th style="text-align:right;"> Std. Dev.  </th>
+   <th style="text-align:right;"> Diff. in Means </th>
+   <th style="text-align:right;"> Std. Error </th>
   </tr>
  </thead>
 <tbody>
   <tr>
    <td style="text-align:left;"> height </td>
    <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> 160.2 </td>
-   <td style="text-align:left;"> 7.0 </td>
-   <td style="text-align:left;"> 182.3 </td>
-   <td style="text-align:left;"> 8.2 </td>
-   <td style="text-align:left;"> 22.1 </td>
-   <td style="text-align:left;"> 3.0 </td>
+   <td style="text-align:right;"> 160.2 </td>
+   <td style="text-align:right;"> 7.0 </td>
+   <td style="text-align:right;"> 182.3 </td>
+   <td style="text-align:right;"> 8.2 </td>
+   <td style="text-align:right;"> 22.1 </td>
+   <td style="text-align:right;"> 3.0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> mass </td>
    <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> 56.3 </td>
-   <td style="text-align:left;"> 16.3 </td>
-   <td style="text-align:left;"> 87.0 </td>
-   <td style="text-align:left;"> 16.5 </td>
-   <td style="text-align:left;"> 30.6 </td>
-   <td style="text-align:left;"> 10.1 </td>
+   <td style="text-align:right;"> 56.3 </td>
+   <td style="text-align:right;"> 16.3 </td>
+   <td style="text-align:right;"> 87.0 </td>
+   <td style="text-align:right;"> 16.5 </td>
+   <td style="text-align:right;"> 30.6 </td>
+   <td style="text-align:right;"> 10.1 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> birth_year </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> 46.4 </td>
-   <td style="text-align:left;"> 18.8 </td>
-   <td style="text-align:left;"> 55.2 </td>
-   <td style="text-align:left;"> 26.0 </td>
-   <td style="text-align:left;"> 8.8 </td>
-   <td style="text-align:left;"> 10.2 </td>
+   <td style="text-align:left;box-shadow: 0px 1px"> birth_year </td>
+   <td style="text-align:left;box-shadow: 0px 1px">  </td>
+   <td style="text-align:right;box-shadow: 0px 1px"> 46.4 </td>
+   <td style="text-align:right;box-shadow: 0px 1px"> 18.8 </td>
+   <td style="text-align:right;box-shadow: 0px 1px"> 55.2 </td>
+   <td style="text-align:right;box-shadow: 0px 1px"> 26.0 </td>
+   <td style="text-align:right;box-shadow: 0px 1px"> 8.8 </td>
+   <td style="text-align:right;box-shadow: 0px 1px"> 10.2 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
    <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> N </td>
-   <td style="text-align:left;"> % </td>
-   <td style="text-align:left;"> N </td>
-   <td style="text-align:left;"> % </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
+   <td style="text-align:right;"> N </td>
+   <td style="text-align:right;"> Pct. </td>
+   <td style="text-align:right;"> N </td>
+   <td style="text-align:right;"> Pct. </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
   </tr>
   <tr>
    <td style="text-align:left;"> eye_color </td>
    <td style="text-align:left;"> blue </td>
-   <td style="text-align:left;"> 3 </td>
-   <td style="text-align:left;"> 8.6 </td>
-   <td style="text-align:left;"> 9 </td>
-   <td style="text-align:left;"> 25.7 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 33.3 </td>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 34.6 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
    <td style="text-align:left;"> blue-gray </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 0.0 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> 2.9 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0.0 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 3.8 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
    <td style="text-align:left;"> brown </td>
-   <td style="text-align:left;"> 5 </td>
-   <td style="text-align:left;"> 14.3 </td>
-   <td style="text-align:left;"> 12 </td>
-   <td style="text-align:left;"> 34.3 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 55.6 </td>
+   <td style="text-align:right;"> 12 </td>
+   <td style="text-align:right;"> 46.2 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
    <td style="text-align:left;"> dark </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 0.0 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> 2.9 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0.0 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 3.8 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
    <td style="text-align:left;"> hazel </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> 2.9 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> 2.9 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 11.1 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 3.8 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
    <td style="text-align:left;"> yellow </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 0.0 </td>
-   <td style="text-align:left;"> 2 </td>
-   <td style="text-align:left;"> 5.7 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0.0 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 7.7 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
   </tr>
 </tbody>
 </table>
@@ -1494,7 +1462,7 @@ st(select(humans, gender, height, mass, birth_year, eye_color),
    group = 'gender')
 ```
 
-<table>
+<table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>Summary Statistics</caption>
  <thead>
 <tr>
@@ -1614,7 +1582,7 @@ st(select(humans, gender, height, mass, birth_year, eye_color),
 st(starwars)
 ```
 
-<table>
+<table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>Summary Statistics</caption>
  <thead>
   <tr>
@@ -1783,7 +1751,7 @@ modelplot(ie_mods, coef_map = c("gendermasculine:height" = "Masculine × Height"
 
 #### Predikcija i validacija modela
 
-Najjednostavniji način za vizualnu provjeru modela (i.e. validacija i predikcija) je  **ggplot2**. Tu je posebno pogodna `geom_smooth()` funkcija koju smo već spominjali, a koja omogućuje mapiranje modela na grafikon. Na osnovi`starwars2` data frame-a, bez outlier-a, bi to izgledalo otprilike ovako :
+Najjednostavniji način za vizualnu provjeru modela (i.e. validacija i predikcija) je  **ggplot2**. Tu je posebno pogodna `geom_smooth()` funkcija koju smo već spominjali, a koja omogućuje mapiranje modela na grafikon. Na osnovi`starwars2` data.frame-a, bez outlier-a, bi to izgledalo otprilike ovako :
 
 
 ```r
@@ -1820,7 +1788,7 @@ predict(ols1_train, newdata = starwars2, interval = "prediction") %>%
 ## 5 57.22718 35.874679  78.57968
 ```
 
-Prthodno korišteni data frame se može jednostavno kombinirati sa originalnim podatcima u **ggplot2** vizualizaciji. Za tu svrhu je posebno koristan **broom** paket, odnosno njegova `augment()` funkcija koja omogućava dodavanje modelskih predviđanja podatkovnom skupu. `augment()` funkcija prihvaća iste argumente kao i `predict()` funkcija, naravno, uzne neke manje izmjene.^[Ovdje dodajemo ".fitted", ".resid", ".conf.low", i ".conf.high" varijable (i.e. kolone) data frame-u. Konvencija u `augment()` funkciji je prefiksiranje dodanih varijabli sa "." kako bi se izbjegli konflikti sa postojećim varijablama.]
+Prthodno korišteni data.frame se može jednostavno kombinirati sa originalnim podatcima u **ggplot2** vizualizaciji. Za tu svrhu je posebno koristan **broom** paket, odnosno njegova `augment()` funkcija koja omogućava dodavanje modelskih predviđanja podatkovnom skupu. `augment()` funkcija prihvaća iste argumente kao i `predict()` funkcija, naravno, uz neke manje izmjene.^[Ovdje dodajemo ".fitted", ".resid", ".conf.low", i ".conf.high" varijable (i.e. kolone) data.frame-u. Konvencija u `augment()` funkciji je prefiksiranje dodanih varijabli sa "." kako bi se izbjegli konflikti sa postojećim varijablama.]
 
 
 ```r
@@ -1832,17 +1800,18 @@ starwars2 %>% select(contains("."), everything()) %>% head()
 ```
 
 ```
-## # A tibble: 6 x 16
-##   .fitted .resid name  height  mass hair_color skin_color eye_color birth_year
-##     <dbl>  <dbl> <chr>  <int> <dbl> <chr>      <chr>      <chr>          <dbl>
-## 1    68.0   9.00 Luke~    172    77 blond      fair       blue            19  
-## 2    65.6   9.45 C-3PO    167    75 <NA>       gold       yellow         112  
-## 3    30.8   1.22 R2-D2     96    32 <NA>       white, bl~ red             33  
-## 4    82.7  53.3  Dart~    202   136 none       white      yellow          41.9
-## 5    57.2  -8.23 Leia~    150    49 brown      light      brown           19  
-## 6    70.9  49.1  Owen~    178   120 brown, gr~ light      blue            52  
-## # ... with 7 more variables: sex <chr>, gender <chr>, homeworld <chr>,
-## #   species <chr>, films <list>, vehicles <list>, starships <list>
+## # A tibble: 6 x 18
+##   .fitted .lower .upper .resid name           height  mass hair_color skin_color
+##     <dbl>  <dbl>  <dbl>  <dbl> <chr>           <int> <dbl> <chr>      <chr>     
+## 1    68.0  46.3    89.7   9.00 Luke Skywalker    172    77 blond      fair      
+## 2    65.6  44.0    87.1   9.45 C-3PO             167    75 <NA>       gold      
+## 3    30.8   8.79   52.8   1.22 R2-D2              96    32 <NA>       white, bl~
+## 4    82.7  60.0   105.   53.3  Darth Vader       202   136 none       white     
+## 5    57.2  35.9    78.6  -8.23 Leia Organa       150    49 brown      light     
+## 6    70.9  49.1    92.8  49.1  Owen Lars         178   120 brown, gr~ light     
+## # ... with 9 more variables: eye_color <chr>, birth_year <dbl>, sex <chr>,
+## #   gender <chr>, homeworld <chr>, species <chr>, films <list>,
+## #   vehicles <list>, starships <list>
 ```
 
 Sada možemo vidjeti rezulatate modela na 30 najnižih starwaars likova u usporedbi sa punim podatkovnim skupom.
@@ -1866,7 +1835,7 @@ starwars2 %>%
 
 ## Dodatni resursi (uglavnom za ekonometriju)
 
-- Izvrsni [kolegiji](http://edrub.in/teaching.html) za ekonometriju u R. To uključuje [dodiplomski](https://github.com/edrubin/EC421S19) i [diplomski](https://github.com/edrubin/EC525S19) kolegij. 
+- Izvrsni [kolegiji](http://edrub.in/teaching.html) za ekonometriju u R. To uključuje [dodiplomsku](https://github.com/edrubin/EC421S19) i [diplomsku](https://github.com/edrubin/EC525S19) razinu. 
 - Nekoliko besplatnih uvodnih udžbenka [*Introduction to Econometrics with R*](https://www.econometrics-with-r.org/) (Christoph Hanck *et al.*), [*Using R for Introductory Econometrics*](http://www.urfie.net/) (Florian Heiss), i [*Modern Dive*](https://moderndive.com/) (Chester Ismay and Albert Kim).
 - [Tyler Ransom](https://twitter.com/tyleransom) ima izvrstan [cheat sheet](https://github.com/tyleransom/EconometricsLabs/blob/master/tidyRcheatsheet.pdf) za regresiju i slične specifikacije.
 - R ima izvrsnu podršku i za analizu [Vremenskih serija](https://cran.r-project.org/web/views/TimeSeries.html).
