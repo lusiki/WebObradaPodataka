@@ -2,7 +2,7 @@
 title: "Obrada podataka"
 author:
   name: Luka Sikic, PhD
-  affiliation: Fakultet hrvatskih studija | [OP](https://github.com/BrbanMiro/Obrada-podataka)
+  affiliation: Fakultet hrvatskih studija | [OP](https://lusiki.github.io/WebObradaPodataka/)
 subtitle: 'Predavanje 9: Strojno učenje'
 output:
   html_document:
@@ -21,11 +21,11 @@ output:
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE, dpi=300)
 ```
 
-Današnje predavanje se odnosi na pregled najvažnijih principa i tehnika **strojnog učenja** (ML - machine learning). Cilj je dati sveobuhvatan pregled osnovnih (uvodnih) koncepata i smjestiti metodologiju *strojnog učenja* u širi kontekst kvantitativnih medodoloških pristupa koje već poznajemo. U predavanju ćemo objasniti što je ML, koje su najčešće korisštene metode te kako odrediti kvalitetu modela. 
+Današnje predavanje se odnosi na pregled najvažnijih principa i tehnika **strojnog učenja** (ML - machine learning). Cilj je dati sveobuhvatan pregled osnovnih (uvodnih) koncepata i smjestiti metodologiju *strojnog učenja* u širi kontekst kvantitativnih medodoloških pristupa koje već poznajemo. U predavanju ćemo objasniti što je ML, koje su najčešće korištene metode te kako odrediti kvalitetu modela. 
 
 ## Što je strojno učenje?
 
-Strojno učenje uključuje izradu i korištenje algoritama s ciljem učenja na osnovi podataka.  Sposobnost *stroja* (računala) da nešto nauči se odražava u **poboljšanju peformansi** pri povećanju **informacijskog inputa**. Informacijski input se zapravo odnosi na *podatke* (slično *data frame* objektima koje smo do sada stalno koristili). Jednostavnije rečeno, ukoliko računalu damo više podataka, ono će više (bolje) naučiti (model). Strojno učenje i statistika (kakvu smo do sada upoznali) se u bitnom ne razlikuju mnogo, dapače među njima ima više sličnosti nego razlika. Razlog za nerazumijevanje i nepristupačnost strojnog učenja (statističarima) često predstavlja specifičan žargon strojnog učenja. Riječ je o specifičnoj terminologiji koju koriste analitičari i inženjeri strojnog učenje, a često se pritom misli na pojmove koje već poznajemo iz statistike...varijable se u ML primjerice nazivaju **karakteristike** (feature, label), procjena je **trening** modela...
+Strojno učenje uključuje izradu i korištenje algoritama s ciljem učenja na osnovi podataka.  Sposobnost *stroja* (računala) da nešto nauči se odražava u **poboljšanju peformansi - outputa** pri povećanju **informacijskog inputa**. Informacijski input se zapravo odnosi na *podatke* (slično *data.frame* objektima koje smo do sada stalno koristili). Jednostavnije rečeno, ukoliko računalu damo više podataka, ono će više (bolje) naučiti (model). Strojno učenje i statistika (kakvu smo do sada upoznali) se u bitnom ne razlikuju mnogo, dapače među njima ima više sličnosti nego razlika. Razlog za nerazumijevanje i nepristupačnost strojnog učenja (statističarima) često predstavlja specifičan žargon strojnog učenja. Riječ je o specifičnoj terminologiji koju koriste analitičari i inženjeri strojnog učenje, a često se pritom misli na pojmove koje već poznajemo iz statistike...varijable se u ML primjerice nazivaju **karakteristike** (feature, label), procjena je **trening** modela...
 
 ```{r echo=F}
 knitr::include_graphics("../Foto/ml.png")
@@ -145,7 +145,7 @@ Pogledajmo jedan praktični primjer klasifikacijske procedure na osnovi elektron
     return(prediction) # predikcije je 0 ili 1
   }
 
-# primijenji klasifikator na  avgCapitalSeq kolonu
+# primijeni klasifikator na  avgCapitalSeq kolonu
 > spamPred <- sapply(emails$avgCapitalSeq, spamClassifier)
 
 # Usporedi predikcije sa stvarnim podatcima
@@ -164,7 +164,7 @@ Regresijska analiza se koristi za predviđanje kontinuirane ili kvantitativne vr
 knitr::include_graphics("../Foto/ml_mlreg.png")
 ```
 
-Regresija je slična klasifikaciji uz bitnu razliku da želimo predvidjeti **vrijednost**, a ne **klasu** kao kod klasifikacije. Tipični regresijski problemi se odnose na predviđanje kreditnog rejtinga na osnovi redovitosti plaćanja u prošlosti, analize pretplata na časops kroz vrijeme, vjerojatnost zaposlenja na osnovi ocjena... Regresijske tehnike imaju kvantitativni output i zahtijevaju input-output podatkovni skup.
+Regresija je slična klasifikaciji uz bitnu razliku da želimo predvidjeti **vrijednost**, a ne **klasu** kao kod klasifikacije. Tipični regresijski problemi se odnose na predviđanje kreditnog rejtinga na osnovi redovitosti plaćanja u prošlosti, analize pretplata na časopis kroz vrijeme, vjerojatnost zaposlenja na osnovi ocjena... Regresijske tehnike imaju kvantitativni output i zahtijevaju input-output podatkovni skup.
 
 Za praktični primjer (još jedan!) analizirajmo broj pogleda na LinkedIn profilu u regresijskom kontekstu. Cilj je predvidjeti broj pregleda profila u sljedeća 3 dana na osnovi podataka o pregledima u prethodna 3 tjedna. Za to je potrebno definirati vektor LinkedIn pregleda: 
 
@@ -179,7 +179,7 @@ days <- rep(NA, length(linkedin))
 days <- seq(1, 21, by = 1)
 ```
 
-Sada možemo procijenjiti regresijski odnos:
+Sada možemo procijeniti regresijski odnos:
 
 ```{r}
 linkedin_lm <- lm(linkedin ~ days)
@@ -389,6 +389,7 @@ $$\mbox{točnost} = \frac{tp+tn}{tp+fp+tn+fn}$$
 $$\mbox{preciznost} = \frac{tp}{tp+fp}$$
 
 $$\mbox{recall} = \frac{tp}{tp+fn}$$
+
 #### Praktični primjer
 
 U ovom primjeru ćemo pokušati predvidjeti vjerojatnost preživljavanja nesreće na Titaniku s obzirom na karakteristike putnika (osobe) koje uključuju dob, spol i putničku klasu. Prvo učitavamo i izabiremo potrebne podatke:
@@ -489,11 +490,11 @@ Novi i bogatiji model ima niži pripadajući rmse od 4.8 pa za možemo zaključi
 ### Klastering
 
 
-U slučaju klastringa ne postoje explicitne varijable (*labels*) pa je se kvaliteta procjene radi na osnovi mjera udaljenosti unutar i između klastera. Te se mjere odnose na sličnost unutar klastera (poželjno visoka WSS), sličnost između klastera (poželjno niska BSS) i Dunnov indeks.
+U slučaju klastringa ne postoje explicitne varijable (*labels*) pa se kvaliteta procjene radi na osnovi mjera udaljenosti unutar i između klastera. Te se mjere odnose na sličnost unutar klastera (poželjno visoka WSS), sličnost između klastera (poželjno niska BSS) i Dunnov indeks.
 
 #### Praktični primjer
 
-Sljedeći primjer se koristii podatke o različitim karakteristikama sjemena no pošto ne znamo nazive vrijabli (*labels*), ali znamo da podatci sadržavaju tri vrste sjemena...koristiti ćemo klastering metodu. Prvo učitamo podatke i pregledamo strukturu:
+Sljedeći primjer se koristi podatke o različitim karakteristikama sjemena no pošto ne znamo nazive vrijabli (*labels*) ali znamo da podatci sadržavaju tri vrste sjemena...koristiti ćemo klastering metodu. Prvo učitamo podatke i pregledamo strukturu:
 
 ```{r}
 seeds <- read.table("../Dta/seeds_dataset.txt",header = T)  # dostupno na UCIMLR
