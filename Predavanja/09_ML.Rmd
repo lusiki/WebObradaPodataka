@@ -240,7 +240,76 @@ ggbiplot(ppv_pca, choices=c(1, 2),
 
 ### Klastering
 
-Ovo je također jedna od vrlo popularnih metoda nenadgledanog strojnog učenja koja prepoznaje strukturu u podatcima na način da organizira podatke u interno koherentne klastere, a eksterno heterogene klastere. Drugačije rečeno, opservacije unutar klastera trebaju biti jako slične, a opservacije između klastera jako različite.
+Ovo je također jedna od vrlo popularnih metoda nenadgledanog strojnog učenja koja prepoznaje strukturu u podatcima na način da organizira podatke (opservacije) u interno koherentne i eksterno heterogene klastere. Drugačije rečeno, opservacije unutar klastera trebaju biti jako slične, a opservacije između klastera jako različite. Klasterski algoritmi se najčešće dijele na **aglomerativne** i **divizivne**. Aglomerativni započinju sa svakom opservacijom u pojedinačnom klasteru i sukcesivno ih spajaju do ispunjenja kriterija zaustavljanja. Divizivni počinju od jednog jedinstvenog klastera i dijele ga do ispunjenja kriterija zaustavljanje. I jedna i druga vrsta su zapravo procedure grupiranja opservacija prema nekom kriteriju (blizina u prostoru).  
+
+Sada ćemo provesti klastering na podatcima o tumoru koristeći algoritam k-means. Ovaj algoritam provodi grupiranje po principu minimizacije varijance unutar klastera. Postoji više varijanti k-means klastera, a u ovom primjeru koristimo standardni algoritam koji funkcionira na principu ukupne unutar-klasterske varijacije definirane kao suma kvadrata kvadriranih ekuklidovskih udaljenosti između opservacije i pripadajućeg centroida.
+
+Provedimo sada k-means algoritam:
+
+```{r, echo=T, warning=F, message=FALSE}
+set.seed(1)
+km.out <- kmeans(breastCancerData[3:ncol(breastCancerData)],
+                 centers=2,  # broj klastera
+                 nstart=20)  #  broj višestrukih inicijalnih konfiguracija
+```
+
+
+Rezultati provedene procedure izgledaju ovako:
+
+```{r, echo=T, warning=F, message=FALSE}
+str(km.out)
+```
+
+
+Sada možemo vizualizirati dobivene rezultate:
+
+
+```{r, echo=T, warning=F, message=FALSE}
+ggplot(as.data.frame(ppv_pca$x),
+       aes(x=PC1, y=PC2,
+           color=as.factor(km.out$cluster),
+           shape = breastCancerData$Diagnosis)) +
+  geom_point( alpha = 0.6, size = 3) +
+  theme_minimal()+
+  theme(legend.position = "bottom") +
+  labs(title = "K-Means clusteri i PCA", x = "PC1", y = "PC2", color = "Cluster", shape = "Diagnosis")
+
+```
+
+Kod klaseringa je potrebno prethodno kalibrirati algoritam na način da se unaprijed specificira broj klastera. Taj broj se određuje tzv. *elbow* metodom koja funkcionira u nekoliko koraka. Prvo je potrebno izračunati ukupnu sumu kvadrata odstupanja ("varijabilnost") naputem sljedeće funkcije:
+
+```{r, echo=T, warning=F, message=FALSE}
+kmean_withinss <- function(k) {
+  cluster <- kmeans(breastCancerData[3:ncol(breastCancerData)], k)
+  return (cluster$tot.withinss)
+}
+```
+
+Nakon toga možemo probati sa 2 klastera:
+
+```{r, echo=T, warning=F, message=FALSE}
+kmean_withinss(2)
+```
+
+Potom ćemo probati za sekvencu klastera od 1 do 20:
+
+```{r, echo=T, warning=F, message=FALSE}
+max_k <-20
+# provedi funkciju na klasterskom k rasponu  
+wss <- sapply(2:max_k, kmean_withinss)
+```
+
+Na kraju ćemo prikazati rezultate grafički:
+
+```{r, echo=T, warning=F, message=FALSE}
+elbow <- data.frame(2:max_k, wss)
+
+ggplot(elbow, aes(x = X2.max_k, y = wss)) +
+  geom_point() +
+  geom_line() +
+  scale_x_continuous(breaks = seq(1, 20, by = 1))
+```
+
 
 
 
