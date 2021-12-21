@@ -52,7 +52,7 @@ Najvažniji zadatci koje obavlja ML su:
 
 - **Regresija** se odnosi na sličan problem uz razliku što je output kontinuirana varijabla (ne diskretna/kategorijalna).
 
-Duboko učenje (Deep Learning) je dio ML-a koji se koristi za modeliranje visoko nelinearnih podataka i doživljava veliki uspjeh (popularnost) zbog koristi u mnoštvu praktičnih primjena poput prepoznavanja govora (speech recognition), autonomnih vozila, procesuiranja prirodnog jezika (natural language processing) i dr. Većina koncepata dubokog učenja je (u matematici) poznata već duže vrijeme no zbog razvoja u računalnim kapacitetima postaje sve šire zastupljena u prakski.
+**Duboko učenje** (Deep Learning) je dio ML-a koji se koristi za modeliranje visoko nelinearnih podataka i doživljava veliki uspjeh (popularnost) zbog koristi u mnoštvu praktičnih primjena poput prepoznavanja govora (speech recognition), autonomnih vozila, procesuiranja prirodnog jezika (natural language processing) i dr. Većina koncepata dubokog učenja je (u matematici) poznata već duže vrijeme no zbog razvoja u računalnim kapacitetima postaje sve šire zastupljena u prakski.
 
 
 Procjena kvalitete modela kod nadgledanog ML se vrši usporedbom stvarnih *label-a* sa onima koje je generirao model. U dobroj procjeni je razlika između istih vrlo mala. Kod ne-nadgledanog ML je procjena kvalitete modela nešto složenija pošto ne postoje *label-i* za usporedbu. Vrlo često se susrećemo i sa kvazi nadgledanim ML gdje dio opservacija ima pripisane *label-e* , a dio ne. Procedura procjene kvalitete modela u ML ima određene specifičnosti i ponešto se razlikuje od procjene kvalitete modela u statistici (*model fit*). Zbog toga ćemo kasnije pogledati detaljnije o kojim procedurama se radi i kako se provode.
@@ -104,7 +104,7 @@ knitr::include_graphics("../Foto/ml_reg.png")
 ```
 
 
-### Osnovni predikcijski model
+### Osnovni primjer predikcijskog modela
 
 Za izgradnju jednostavnog predikcijskog modela ćemo koristiti `wage` podatkovni skup iz `ISLR` paketa. Modelom ćemo pokušati opisati odnos između starosti radnika i visine plaće. Očekujemo da će stariji radnici imati više iskustva pa će prema tome biti i bolje plaćeni. Prvo ćemo učitati i pregledati podatke:
 
@@ -131,10 +131,155 @@ Na kraju ćemo korištenjem fukcije `predict` uz kombinaciju regresijskog objekt
 ```{r}
 predict(lm_wage, unseen)
 ```
+
 Na osnovi linearnog modela i `Wage` podataka smo predvidjeli da će 60 godišnji radnik zarađivati 124 $ na dan.
 
+Nakon ovih primjera ćemo pogledati kako izgleda ML procedura "od početka"...
 
-## Metode strojnog učenja
+## Eksplorativna analiza i nenadgledano strojno učenje
+
+Prvo ćemo učitati podatke [Breast Cancer Wisconsin (Diagnostic) Data Set](http://archive.ics.uci.edu/ml/datasets/breast+cancer+wisconsin+%28diagnostic%29) iz  [UCI Machine Learning](http://archive.ics.uci.edu/ml/index.php) repozitorija.
+
+```{r, echo=T, warning=F, message=FALSE}
+library(tidyverse) 
+
+url1 <-"https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/wdbc.data"
+url2 <- "https://raw.githubusercontent.com/fpsom/2020-07-machine-learning-sib/master/data/wdbc.colnames.csv"
+
+breastCancerData <- read_csv(url1, col_names = FALSE)
+
+breastCancerDataColNames <- read_csv(url2, col_names = FALSE)
+
+colnames(breastCancerData) <- breastCancerDataColNames$X1
+
+```
+
+Nakon učitavanja podataka ćemo pogledati kako izgledaju podatci:
+
+
+```{r, echo=T, warning=F, message=FALSE}
+breastCancerData %>% head(10)
+```
+
+
+U okviru eksplorativne analize ćemo pogledati kako izgledaju podatci. U tu svrhu je potrebno napraviti nekoliko prilagodbi podataka:
+
+
+```{r, echo=T, warning=F, message=FALSE}
+# napravi faktorsku varijablu
+breastCancerData$Diagnosis <- as.factor(breastCancerData$Diagnosis)
+# ukloni prvu kolonu 
+breastCancerDataNoID <- breastCancerData[2:ncol(breastCancerData)]
+# vizualizacija
+library(GGally)  
+ggpairs(breastCancerDataNoID[1:5], aes(color=Diagnosis, alpha=0.4))
+```
+
+
+Sljedeća stvar koju moramo napraviti je prilagodba podataka u smislu centriranja i skaliranja. To je potrebno napraviti jer prediktori imaju vrlo varijablne prosjeke i standardne devijacije pa nisu usporedivi. 
+
+
+```{r, echo=T, warning=F, message=FALSE}
+# koristimo funkcije iz ML paketa caret
+library(caret)
+ppv <- preProcess(breastCancerDataNoID, method = c("center", "scale"))
+breastCancerDataNoID_tr <- predict(ppv, breastCancerDataNoID)
+# pregledaj podatke prije centriranja i skaliranja
+breastCancerDataNoID[1:5] %>% summary()
+```
+
+
+Podatci nakon predprocesnih prilagodbi centriranja i skaliranja izgledaju ovako:
+
+```{r, echo=T, warning=F, message=FALSE}
+breastCancerDataNoID_tr[1:5] %>% summary()
+```
+
+
+Vidljivo je da varijable imaju prosjek i da su zadržali distribucijska svojstva kao originalne varijable. Pogledajmo nove varijable i grafički:
+
+```{r, echo=T, warning=F, message=FALSE}
+ggpairs(breastCancerDataNoID_tr[1:5], aes(color=Diagnosis, alpha=0.4))
+```
+
+### Smanjenje dimenzionalnosti i PCA
+
+Smanjenje dimenzionalnosti je jedna od metoda strojnog učenja pričemu je analiza glavnih komponenti (PCA) jedna od najzastupljenijih. Bez da ulazimo u detalje oko PCA, pogledajmo kako to izgleda u praksi:
+
+```{r, echo=T, warning=F, message=FALSE}
+# provedi PCA
+ppv_pca <- prcomp(breastCancerData[3:ncol(breastCancerData)],
+                  center = TRUE,
+                  scale. = TRUE)
+# pregledaj rezultate
+summary(ppv_pca)
+```
+
+Detaljniji pregled PCA objekta izgleda ovako:
+
+```{r, echo=T, warning=F, message=FALSE}
+str(ppv_pca)
+```
+Rezultati analize izgledaju ovako:
+
+```{r, echo=T, warning=F, message=FALSE}
+# vizualizacija
+library(ggbiplot)
+
+ggbiplot(ppv_pca, choices=c(1, 2),
+         labels=rownames(breastCancerData),
+         ellipse=TRUE,
+         groups = breastCancerData$Diagnosis,
+         obs.scale = 1,
+         var.axes=TRUE, var.scale = 1) +
+  ggtitle("PCA of Breast Cancer Dataset")+
+  theme_minimal()+
+  theme(legend.position = "bottom")
+```
+
+
+### Klastering
+
+Ovo je također jedna od vrlo popularnih metoda nenadgledanog strojnog učenja koja prepoznaje strukturu u podatcima na način da organizira podatke u interno koherentne klastere, a eksterno heterogene klastere. Drugačije rečeno, opservacije unutar klastera trebaju biti jako slične, a opservacije između klastera jako različite.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 U najširem je smislu moguće izdvojiti tri vrste ML metoda (procedura):
 

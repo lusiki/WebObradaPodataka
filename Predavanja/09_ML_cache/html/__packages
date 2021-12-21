@@ -2,3 +2,17 @@ base
 ISLR
 rpart
 dplyr
+tidyverse
+ggplot2
+tibble
+tidyr
+readr
+purrr
+stringr
+forcats
+GGally
+lattice
+caret
+plyr
+scales
+ggbiplot
