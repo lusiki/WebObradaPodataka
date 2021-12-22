@@ -377,21 +377,135 @@ table(BreastCancer_pred, breastCancerData.test$Diagnosis)
 ```
 
 
+### Random Forest algoritam
+
+Riječ je o ansambl algoritmu koji konstruira višestruka stabla odlučivanja tako da je konačna predikcija izvedena kao kombinacija predikcija svakog pojedinačnog stabla odlučivanja. Ovaj algoritam često daje bolje rezultate ali pod cijenu lošije interpretabilnosti. Pogledajmo kako algoritam funkcionira u praksi. Prvo ćemo specificirati model:
+
+
+```{r, echo=T, warning=F, message=FALSE}
+
+library(randomForest)
+set.seed(1000)
+# specifikacija model
+rf <- randomForest(Diagnosis ~ ., data = breastCancerData.train,
+                   ntree=100,
+                   proximity=T)
+# pogledaj rezultate
+table(predict(rf), breastCancerData.train$Diagnosis)
+```
+
+Pogledajmo modelski objekt:
+
+```{r, echo=T, warning=F, message=FALSE}
+print(rf)
+```
+Također je moguće pregledati važnost varijabli:
+ 
+ 
+```{r, echo=T, warning=F, message=FALSE}
+importance(rf)
+
+varImpPlot(rf)
+
+```
+ 
+Sada ćemo provesti predikciju na testnom dijelu uzorka:
+
+```{r, echo=T, warning=F, message=FALSE}
+BreastCancer_pred_RD <- predict(rf, newdata = breastCancerData.test)
+table(BreastCancer_pred_RD, breastCancerData.test$Diagnosis)
+
+plot(margin(rf, breastCancerData.test$Diagnosis))
+
+```
+
+Provedi predikciju sa smanjenim brojem varijabli rangiranima prema važnosti:
+
+
+```{r, echo=T, warning=F, message=FALSE}
+
+result <- rfcv(breastCancerData.train, breastCancerData.train$Diagnosis, cv.fold=3)
+with(result, plot(n.var, error.cv, log="x", type="o", lwd=2))
+
+```
 
 
 
+### Regresija
+
+Prije provedbe regresijskog modela je korisno pogledati korelaciju između varijabli:
+
+
+```{r, echo=T, warning=F, message=FALSE}
+# korelacija između Radius.Mean i Concave.Points.Mean / Area.Mean
+cor(breastCancerData$Radius.Mean, breastCancerData$Concave.Points.Mean)
+cor(breastCancerData$Concave.Points.Mean, breastCancerData$Area.Mean)
+
+# selektiraj varijable koje se koriste u modelu
+bc <- select(breastCancerData,Radius.Mean,Concave.Points.Mean,Area.Mean)
+```
+
+Napravi regresijski model:
+
+```{r, echo=T, warning=F, message=FALSE}
+
+bc_model_full <- lm(Radius.Mean ~ Concave.Points.Mean + Area.Mean, data=bc)
+bc_model_full
+```
+
+Napravimo sada predikciju na osnovi provedenog modela:
+
+
+```{r, echo=T, warning=F, message=FALSE}
+# predikcija
+preds <- predict(bc_model_full)
+# vizualni prikaz
+plot(preds, bc$Radius.Mean, xlab = "Predikcija", ylab = "OPservacije")
+abline(a = 0, b = 1)
+# pregled punog modela
+summary(bc_model_full)
+```
+
+Ovo je procjena na cijelom podatkovnom skupu pa ne znamo kaka će biti rezultat na novim, neviđenim podatcima. Zbog toga ćemo napraviti podjelu na trening/test i provjeriti kvalitetu modela na test podatcima:
+
+```{r, echo=T, warning=F, message=FALSE}
+
+set.seed(123)
+
+ind <- sample(2, nrow(bc), replace=TRUE, prob=c(0.75, 0.25))
+bc_train <- bc[ind==1,]
+bc_test <- bc[ind==2,]
+
+# linearna regresija na trening podatcima
+(bc_model <- lm(Radius.Mean ~ Concave.Points.Mean + Area.Mean, data=bc_train))
+
+# pregled rezultata
+summary(bc_model)
+
+# predikcija modela
+bc_train$pred <- predict(bc_model)
+
+# vizalizacija stvarnih i predikcijskih vrijednosti
+ggplot(bc_train, aes(x = pred, y = Radius.Mean)) +
+  geom_point() +
+  geom_abline(color = "blue")
+
+```
 
 
 
+Predikcija na testnim podatcima:
 
+```{r, echo=T, warning=F, message=FALSE}
+# provedi predikciju
+bc_test$pred <- predict(bc_model , newdata=bc_test)
+# vizualiziraj rezultate
+# plot the ground truths vs predictions for test set and examine the plot. Does it look as good with the predictions on the training set?
+ggplot(bc_test, aes(x = pred, y = Radius.Mean)) +
+  geom_point() +
+  geom_abline(color = "blue")
 
-
-
-
-
-
-
-
+```
 
 
 
