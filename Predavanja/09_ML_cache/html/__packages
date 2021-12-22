@@ -17,3 +17,4 @@ plyr
 scales
 ggbiplot
 rpart.plot
+randomForest
