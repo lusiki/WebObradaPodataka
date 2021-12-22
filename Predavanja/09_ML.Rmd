@@ -34,7 +34,7 @@ knitr::include_graphics("../Foto/ml.png")
 ```
 
 
-## Osnovna taksonomija
+## Osnovni pojmovi
 
 Strojno učenje se često dijeli na **nadgledano** i **ne-nadgledano**: 
 
@@ -62,7 +62,7 @@ Procjena kvalitete modela kod nadgledanog ML se vrši usporedbom stvarnih *label
 
 
 
-### Općeniti primjer ML pristupa na "pravim" podatcima
+### Općeniti primjer ML pristupa 
 
 ```{r}
 squares <- data.frame(
@@ -103,8 +103,7 @@ Jednostavan i intuitivan primjer ML je također i korištenje regresijskog model
 knitr::include_graphics("../Foto/ml_reg.png")
 ```
 
-
-### Osnovni primjer predikcijskog modela
+### Osnovni primjer predikcijskog ML modela
 
 Za izgradnju jednostavnog predikcijskog modela ćemo koristiti `wage` podatkovni skup iz `ISLR` paketa. Modelom ćemo pokušati opisati odnos između starosti radnika i visine plaće. Očekujemo da će stariji radnici imati više iskustva pa će prema tome biti i bolje plaćeni. Prvo ćemo učitati i pregledati podatke:
 
@@ -311,12 +310,71 @@ ggplot(elbow, aes(x = X2.max_k, y = wss)) +
 ```
 
 
+## Nadgledano strojno učenje
+
+Nadgledano ML se bavi predikcijom ishoda (*labels*) poput preživio/nije preživio na osnovi učenja sa označenih (*labelled*) podataka. Cilj je izvršiti "trening" modela na postojećim podatcima kako bi model mogao predvidjeti nove, nepoznate podatke. Ti novi podatci se najčešće odnose na dio (80/20,70/30,60/40) postojećeg uzorka koji se izdvaja iz "trening" dijela uzorka kako bi se na njima provela procjna kvalitete predikcije. Procjena kvalitete se provodi na osnovi različitih kriterija kojima se procjenjuje točnost modela. Standardni koraci u provedbi nadgledanog strojnog učenja su: provedba eksplorativne podatkovne analize, isprobaj neki početni model, poboljšaj varijable i preuredi, procijeni bolji model. Neki od često korištenih modela su stabla odlučivanja (decision trees), bayesov klasifikator, knn klasifikator, *support vector machines*.
+
+### Stabla odlučivanja
+
+Bez da ulazimo u detalje oko ovog algoritma, pogledajmo kako on funkcionira u praksi. Prvo ćemo podijeliti podake na trening i test uzorak u odnosu 70/30.
+
+```{r , echo=T, warning=F, message=FALSE}
+# podijeli uzorak na training i test 
+set.seed(1000)
+ind <- sample(2, nrow(breastCancerData), replace=TRUE, prob=c(0.7, 0.3))
+breastCancerData.train <- breastCancerDataNoID[ind==1,]
+breastCancerData.test <- breastCancerDataNoID[ind==2,]
+
+```
+
+Nakon toga ćemo specificirati model i definirati parametre:
+
+```{r , echo=T, warning=F, message=FALSE}
+# učitaj knjužnice
+library(rpart)
+library(rpart.plot)
+# specificiraj formulu
+myFormula <- Diagnosis ~ Radius.Mean + Area.Mean + Texture.SE
+# specificiraj algoritam
+breastCancerData.model <- rpart(myFormula,
+                                method = "class",
+                                data = breastCancerData.train,
+                                minsplit = 10, # minimalni broj instanci u čvoru
+                                minbucket = 1, # minimalni broj instanci u listu
+                                maxdepth = 3,  # maksimalna dubina drveta
+                                cp = -1)       # parametar kompleksnosti;intuitivno
+# pregledaj rezultate
+print(breastCancerData.model$cptable)
+rpart.plot(breastCancerData.model)
+
+```
+
+Izaberimo model sa najmanjom predikcijskom pogreškom:
+
+```{r, echo=T, warning=F, message=FALSE}
+opt <- which.min(breastCancerData.model$cptable[, "xerror"])
+cp <- breastCancerData.model$cptable[opt, "CP"]
+# očisti drvo
+breastCancerData.pruned.model <- prune(breastCancerData.model, cp = cp)
+# vizualiziraj
+rpart.plot(breastCancerData.pruned.model)
+# pogledaj rezultate
+table(predict(breastCancerData.pruned.model, type="class"), breastCancerData.train$Diagnosis)
+```
+
+Nakon provedenog modela valja pogledati kvalitetu predikcije na testnom dijelu uzorka:
 
 
-
-
-
-
+```{r, echo=T, warning=F, message=FALSE}
+# provedi predikciju
+BreastCancer_pred <- predict(breastCancerData.pruned.model, newdata = breastCancerData.test, type="class")
+# vizualizacija
+plot(BreastCancer_pred ~ Diagnosis, data = breastCancerData.test,
+     xlab = "Observed",
+     ylab = "Prediction")
+# pregled rezultata
+table(BreastCancer_pred, breastCancerData.test$Diagnosis)
+```
 
 
 
