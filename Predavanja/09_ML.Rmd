@@ -1031,42 +1031,6 @@ rec
 Rezultati ukazuju na nešto manju točnost i preciznost modela, ~76% i ~78% u odnosu na ~82% koju smo imali u prvom slučaju. Ovi rezultati predstavljaju realniju procjenu prediktivne moći modela.
 
 
-## Pristranost i varijanca
-
-Predikcijska pogreška modela se može podijeliti u dvije komponente: 
-1. *fiksna pogreška* (i.e. irreducible error) koja predstavlja nepravilnosti u podatcima
-2. *varijabilna pogreška* (i.e. reducible error) se odnosi na "fit" modela. Cilj ML modela je minimizacija ove pogreške. Može biti vezana uz **pristranost** ili **varijancu**.
- 
-### Greška na osnovi pristranosti
-
-Ova vrsta greške nastaje zbog pretpostavki koje unosimo u ML algoritam i predstavlja razliku između predviđanja modela i pravih vrijednosti. Greška na osnovi pristranosti nastaje zbog prevelikih restrikcija koje unosimo u model, primjerice ukoliko podatke koje karakterizira kvadratni odnos opišemo s linearnom funkcijom. Primjer je na sljedećem grafikonu:
-
-```{r echo  = F}
-knitr::include_graphics("../Foto/ml_bias.png")
-```
-
-
-### Greška na osnovi varijance
-
-Ova greška nastaje kada model "predobro" opisuje podatke. Na istim podatcima kao u prethodnom slučaju, podatke možemo umjesto s kvadratnom funkcijom, modelirati i polinomijalnom funkcijom...to bi izgledalo otprilike ovako:
-
-```{r echo  = F}
-knitr::include_graphics("../Foto/ml_var.png")
-```
-
-
-
-Slika prikazije polinomijalnu funkkciju koja vrlo točno modelira svaku opservaciju pa je vrlo vjerojatno da novi podatci neće biti dobro predstavljeni takvim modelom. Drugačje rečeno, model će dobro opisati podatke na trening uzorku, ali i proizvesti dosta reziduala na training uzorku. Dakle, ovakav model će loše generalizirati (nove podatke).
-
-
-### Pristranost vs varijanca (tradeoff)
-
-Sada je jasno da model sa niskim stupnjem restriktivnosti dovodi do viskoke varijance dok nesenzitivni model dovodi do pristranosti. U ML algoritmu je ciljpostići optimalnu konvergenciju između ove dvije krajnosti. *Overfitting* modela se odnosi na "predobro" opisivanje podataka u training uzorku i generira **specifičan** model dok **underfitting** označava model koji dobro generalizira ali ima nisku točnost.
-
-
-## Interpretabilnost modela
-
-U ML je vrlo važno na koji način i u kojoj mjeri možemo interpšretirati rezultate modela. Pri tome visoka interpretabilnost najačešće implicira visoku pristranost
 
 
 ## Dodatni resursi 
