@@ -62,7 +62,6 @@ Procjena kvalitete modela kod nadgledanog ML se vrši usporedbom stvarnih *label
 
 
 
-
 #### Uvodni primjeri ML pristupa 
 
 ```{r}
@@ -134,7 +133,187 @@ predict(lm_wage, unseen)
 
 Na osnovi linearnog modela i `Wage` podataka smo predvidjeli da će 60 godišnji radnik zarađivati 124 $ na dan.
 
+#### ML procedure
+
+U najširem je smislu moguće izdvojiti tri vrste ML metoda (procedura):
+
+1. Klasifikacija
+
+2. Regresija
+
+3. Klastering
+
+#### Klasifikacija
+
+Svrha klasifikacije je predviđanje kategorije novih opservacija na osnovi prethodnog znanja (podataka, informacija). ML definira klasifikator (funkciju, model) koji će odlučiti kojoj kategoriji pripada novi objekt. Klasifikacijske tehnike imaju kvalitativni output, a kategorije moraju uvijek biti unaprijed definirane. Primjeri klasifikacije su medicinska dijagoza, prepoznavanje životinja, lica... 
+
+Pogledajmo jedan praktični primjer klasifikacijske procedure elektronske pošte koja je prethodno klasificirana kao spam/no spam. *Feature* koji želimo predvidjeti je `avg_capital_seq`, a u klasifikatoru se referiramo na njega sa `x`. Kriterij za odluku da li je pošta spam ili nije ćemo definirati kao prosječni broj velikih tiskanih slova u svakom pojedinačnom mail-u.
+
+```{r eval = F}
+# Učitaj podatke
+> emails <- read.table("../Podatci/emails.dat", header = T, sep = "")
+
+# Pogledaj dimenzije podataka
+> dim(emails)
+[1] 13  2
+
+# Definiraj klasifikator spam_classifier()
+> spam_classifier <- function(x){
+    prediction <- rep(NA, length(x)) # predikcijiski vektor
+    prediction[x > 4] <- 1
+    prediction[x >= 3 & x <= 4] <- 0
+    prediction[x >= 2.2 & x < 3] <- 1
+    prediction[x >= 1.4 & x < 2.2] <- 0
+    prediction[x > 1.25 & x < 1.4] <- 1
+    prediction[x <= 1.25] <- 0
+    return(prediction) # predikcije je 0 ili 1
+  }
+
+# primijeni klasifikator na  avgCapitalSeq kolonu
+> spamPred <- sapply(emails$avgCapitalSeq, spamClassifier)
+
+# Usporedi predikcije sa stvarnim podatcima
+> spam_pred == emails$spam
+ [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+
+```
+
+U ovoj proceduri je `spam_classifier` točno filtrirao spam poštu u svih 13 slučajeva. Valja istaknuti da je ovo bio samo demonstrativni primjer te da klasifikacija na novim podatcima gotovo sigurno ne bi bila tako precizna!
+
+#### Regresija
+
+Regresijska analiza se koristi za predviđanje kontinuirane ili kvantitativne vrijednosti na osnovi prethodnih podataka (informacija).
+
+```{r echo  = F}
+knitr::include_graphics("../Foto/ml_mlreg.png")
+```
+
+Regresija je slična klasifikaciji uz bitnu razliku da želimo predvidjeti **vrijednost**, a ne **klasu** kao kod klasifikacije. Tipični regresijski problemi se odnose na predviđanje kreditnog rejtinga na osnovi redovitosti plaćanja u prošlosti, analize pretplata na časopis kroz vrijeme, vjerojatnost zaposlenja na osnovi ocjena... Regresijske tehnike imaju kvantitativni output i zahtijevaju input-output podatkovni skup.
+
+Za praktični primjer (još jedan!) analiziramo broj pogleda na LinkedIn profilu u regresijskom kontekstu. Cilj je predvidjeti broj pregleda profila u sljedeća 3 dana na osnovi podataka o pregledima u prethodna 3 tjedna. Za to je potrebno definirati vektor LinkedIn pregleda: 
+
+```{r}
+linkedin <- c(5,7,4,9,11,10,14,17,13,11,18,17,21,21,24,23,28,35,21,27,23)
+```
+
+Potom valja napraviti vektor dana:
+
+```{r}
+days <- rep(NA, length(linkedin))
+days <- seq(1, 21, by = 1)
+```
+
+Sada možemo procijeniti regresijski odnos:
+
+```{r}
+linkedin_lm <- lm(linkedin ~ days)
+```
+
+Za predviđanje je potrebno specificirati dane za koje želimo rezultate te potom provesti predikciju:
+
+```{r}
+future_days <- data.frame(days = 22:24)
+linkedin_pred <- predict(linkedin_lm, future_days)
+```
+
+Na kraju pogledajmo jednu vizualizaciju predviđanja:
+
+```{r}
+plot(linkedin ~ days, xlim = c(1, 24))
+points(22:24, linkedin_pred, col = "green")
+
+```
+
+
+#### Klastering
+
+Procedura klasteringa ima za cilj grupirati objekte u klastere na način da su klasteri međusobno različiti, a objekti unutar svakog klastera slični. Klastering je sličan klasifikaciji uz razliku da ne postoje prethodno definirane kategorije već klaster procedura sortira objekte prema sličnosti (ne prema kategorijama). Za klastering nije potrebno definirati kategorije (*labels*) i ne postoji točan ili netočan output...postoji beskonačno mnogo mogućih klastera. 
+
+Za primjer klastering procedure ćemo koristiti otprije poznati podatkovni skup `iris`. Pri tome je cilj grupirati iris cvijetove u 3 zasebna klastera, prema karakteristikama cvjetova koje su dane u podatcima. Pogledajmo prvo podatke:
+
+
+```{r}
+library(datasets)
+data(iris)
+```
+
+Pregled podataka:
+
+```{r}
+str(iris)
+```
+Pregled dimenzija podatkovnog skupa:
+
+```{r}
+dim(iris)
+```  
+  
+Pregled opservacija:
+
+```{r}
+head(iris)
+``` 
+
+Deskriptivna statistika podataka:
+
+```{r}
+summary(iris)
+``` 
+
+Za procjenu je potebno maknuti zadnju kolonu jer sadrži string varijable i pospremiti ju u zasebni objekt:
+
+```{r}
+my_iris <- iris[-5]
+species <- iris$Species
+```
+
+Potom ćemo provesti klastering pomoću `kmeans()` funkcije:
+
+```{r}
+kmeans_iris <- kmeans(my_iris, 3)
+```
+
+Usporedimo sada rezultate klastering procedure sa orginalnim podatcima pomoću `table` funkcije. Procijenjene grupe se nalaze u `cluster` dijelu objekta `kmeans_iris`:
+
+```{r}
+table(kmeans_iris$cluster, species)
+```
+
+Rezultati imaju visok stupanj preciznosti. Za kraj je uvijek korisno i vizualno prikazati rezultate:
+
+```{r}
+plot(Petal.Length ~ Petal.Width,
+     data = my_iris,
+     col = kmeans_iris$cluster)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Nakon ovih primjera ćemo pogledati kako izgleda ML procedura "od početka"...
+
 
 ## Eksplorativna analiza i nenadgledano strojno učenje
 
@@ -222,7 +401,7 @@ str(ppv_pca)
 ```
 Rezultati analize izgledaju ovako:
 
-```{r, echo=T, warning=F, message=FALSE, fig.height=10, fig.width=10}
+```{r, echo=T, warning=F, message=FALSE, fig.height=12, fig.width=12}
 # vizualizacija
 library(ggbiplot)
 
@@ -315,6 +494,7 @@ ggplot(elbow, aes(x = X2.max_k, y = wss)) +
 
 Nadgledano ML se bavi predikcijom ishoda (*labels*) poput preživio/nije preživio na osnovi učenja sa označenih (*labelled*) podataka. Cilj je izvršiti "trening" modela na postojećim podatcima kako bi model mogao predvidjeti nove, nepoznate podatke. Ti novi podatci se najčešće odnose na dio (80/20,70/30,60/40) postojećeg uzorka koji se izdvaja iz "trening" dijela uzorka kako bi se na njima provela procjena kvalitete predikcije. Procjena kvalitete se provodi na osnovi različitih kriterija kojima se procjenjuje točnost modela. Standardni koraci u provedbi nadgledanog strojnog učenja su: provedba eksplorativne podatkovne analize, provedba nekog početnog modela, poboljšanje i preuređenje varijabli, procijena boljeg modela. Neki od često korištenih modela su stabla odlučivanja (decision trees), bayesov klasifikator, knn klasifikator, *support vector machines* i dr.
 
+
 #### Stabla odlučivanja
 
 Bez da ulazimo u detalje oko ovog algoritma, pogledajmo kako on funkcionira u praksi. Prvo ćemo podijeliti podake na trening i test uzorak u odnosu 70/30.
@@ -378,7 +558,7 @@ table(BreastCancer_pred, breastCancerData.test$Diagnosis)
 ```
 
 
-### Random Forest algoritam
+#### Random Forest algoritam
 
 Riječ je o ansambl algoritmu koji konstruira višestruka stabla odlučivanja tako da je konačna predikcija izvedena kao kombinacija predikcija svakog pojedinačnog stabla odlučivanja. Ovaj algoritam često daje bolje rezultate ali pod cijenu lošije interpretabilnosti. Pogledajmo kako algoritam funkcionira u praksi. Prvo ćemo specificirati model:
 
@@ -403,7 +583,7 @@ print(rf)
 Također je moguće pregledati važnost varijabli:
  
  
-```{r, echo=T, warning=F, message=FALSE}
+```{r, echo=T, warning=F, message=FALSE, fig.height=12, fig.width=10}
 importance(rf)
 
 varImpPlot(rf)
@@ -432,7 +612,7 @@ with(result, plot(n.var, error.cv, log="x", type="o", lwd=2))
 
 
 
-### Regresija
+#### Regresija
 
 Prije provedbe regresijskog modela je korisno pogledati korelaciju između varijabli:
 
@@ -461,13 +641,13 @@ Napravimo sada predikciju na osnovi provedenog modela:
 # predikcija
 preds <- predict(bc_model_full)
 # vizualni prikaz
-plot(preds, bc$Radius.Mean, xlab = "Predikcija", ylab = "OPservacije")
+plot(preds, bc$Radius.Mean, xlab = "Predikcija", ylab = "Opservacija")
 abline(a = 0, b = 1)
 # pregled punog modela
 summary(bc_model_full)
 ```
 
-Ovo je procjena na cijelom podatkovnom skupu pa ne znamo kaka će biti rezultat na novim, neviđenim podatcima. Zbog toga ćemo napraviti podjelu na trening/test i provjeriti kvalitetu modela na test podatcima:
+Ovo je procjena na cijelom podatkovnom skupu pa ne znamo kaka će biti rezultat na novim, neviđenim podatcima. Zbog toga ćemo napraviti podjelu na trening/test i provjeriti kvalitetu modela, prvo na trening uzorku:
 
 ```{r, echo=T, warning=F, message=FALSE}
 
@@ -514,168 +694,6 @@ ggplot(bc_test, aes(x = pred, y = Radius.Mean)) +
 
 
 
-
-
-
-
-
-
-
-
-
-U najširem je smislu moguće izdvojiti tri vrste ML metoda (procedura):
-
-1. Klasifikacija
-
-2. Regresija
-
-3. Klasteri
-
-### Klasifikacija
-
-Svrha klasifikacije je predviđanje kategorije novih opservacija na osnovi prethodnog znanja (podataka, informacija). ML definira klasifikator (funkciju, model) koji će odlučiti kojoj kategoriji pripada novi objekt. Klasifikacijske tehnike imaju kvalitativni output, a kategorije moraju uvijek biti unaprijed definirane. Primjeri klasifikacije su medicinska dijagoza, prepoznavanje životinja, lica... 
-
-Pogledajmo jedan praktični primjer klasifikacijske procedure na osnovi elektronske pošte koja je prethodno klasificirana kao spam/no spam. *Feature* koji želimo predvidjeti je `avg_capital_seq`, a u klasifikatoru se referiramo na njega sa `x`. Kriterij za odluku da li je pošta spam ili nije ćemo definirati kao prosječni broj velikih tiskanih slova u svakom pojedinačnom mail-u.
-
-```{r eval = F}
-# Učitaj podatke
-> emails <- read.table("../Podatci/emails.dat", header = T, sep = "")
-
-# Pogledaj dimenzije podataka
-> dim(emails)
-[1] 13  2
-
-# Definiraj klasifikator spam_classifier()
-> spam_classifier <- function(x){
-    prediction <- rep(NA, length(x)) # predikcijiski vektor
-    prediction[x > 4] <- 1
-    prediction[x >= 3 & x <= 4] <- 0
-    prediction[x >= 2.2 & x < 3] <- 1
-    prediction[x >= 1.4 & x < 2.2] <- 0
-    prediction[x > 1.25 & x < 1.4] <- 1
-    prediction[x <= 1.25] <- 0
-    return(prediction) # predikcije je 0 ili 1
-  }
-
-# primijeni klasifikator na  avgCapitalSeq kolonu
-> spamPred <- sapply(emails$avgCapitalSeq, spamClassifier)
-
-# Usporedi predikcije sa stvarnim podatcima
-> spam_pred == emails$spam
- [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
-
-```
-
-U ovoj proceduri je `spam_classifier` točno filtrirao spam poštu u svih 13 slučajeva. Valja istaknuti da je ovo bio samo demonstrativni primjer te da klasifikacija na novim podatcima gotovo sigurno ne bi bila tako precizna!
-
-### Regresija
-
-Regresijska analiza se koristi za predviđanje kontinuirane ili kvantitativne vrijednosti na osnovi prethodnih podataka (informacija).
-
-```{r echo  = F}
-knitr::include_graphics("../Foto/ml_mlreg.png")
-```
-
-Regresija je slična klasifikaciji uz bitnu razliku da želimo predvidjeti **vrijednost**, a ne **klasu** kao kod klasifikacije. Tipični regresijski problemi se odnose na predviđanje kreditnog rejtinga na osnovi redovitosti plaćanja u prošlosti, analize pretplata na časopis kroz vrijeme, vjerojatnost zaposlenja na osnovi ocjena... Regresijske tehnike imaju kvantitativni output i zahtijevaju input-output podatkovni skup.
-
-Za praktični primjer (još jedan!) analizirajmo broj pogleda na LinkedIn profilu u regresijskom kontekstu. Cilj je predvidjeti broj pregleda profila u sljedeća 3 dana na osnovi podataka o pregledima u prethodna 3 tjedna. Za to je potrebno definirati vektor LinkedIn pregleda: 
-
-```{r}
-linkedin <- c(5,7,4,9,11,10,14,17,13,11,18,17,21,21,24,23,28,35,21,27,23)
-```
-
-Potom valja napraviti vektor dana:
-
-```{r}
-days <- rep(NA, length(linkedin))
-days <- seq(1, 21, by = 1)
-```
-
-Sada možemo procijeniti regresijski odnos:
-
-```{r}
-linkedin_lm <- lm(linkedin ~ days)
-```
-
-Za predviđanje je potrebno specificirati dane za koje želimo rezultate te potom provesti predikciju:
-
-```{r}
-future_days <- data.frame(days = 22:24)
-linkedin_pred <- predict(linkedin_lm, future_days)
-```
-
-Na kraju pogledajmo jednu vizualizaciju predviđanja:
-
-```{r}
-plot(linkedin ~ days, xlim = c(1, 24))
-points(22:24, linkedin_pred, col = "green")
-
-```
-
-
-
-### Klasteri
-
-Procedura klasteringa ima za cilj grupirati objekte u klastere na način da su klasteri međusobno različiti, a objekti unutar svakog klastera slični. Klastering je sličan klasifikaciji uz razliku da ne postoje prethodno definirane kategorije već klaster procedura sama sortira objekte prema sličnosti (ne prema kategorijama). Za klastering nije potrebno definirati kategorije (*labels*) i ne postoji točan ili netočan output...postoji mnogo mogućih klastera. 
-
-
-Za primjer klastering procedure ćemo koristiti otprije poznati podatkovni skup `iris`. Pri tome je cilj grupirati iris cvijetove u 3 zasebna klastera, prema karakteristikama cvjetova koje su dane u podatcima. Pogledajmo prvo podatke:
-
-
-```{r}
-library(datasets)
-data(iris)
-```
-
-Pregled podataka:
-
-```{r}
-str(iris)
-```
-Pregled dimenzija podatkovnog skupa:
-
-```{r}
-dim(iris)
-```  
-  
-Pregled opservacija:
-
-```{r}
-head(iris)
-``` 
-
-Deskriptivna statistika podataka:
-
-```{r}
-summary(iris)
-``` 
-
-Za procjenu je potebno maknuti zadnju kolonu jer sadrži string varijable i pospremiti ju u zasebni objekt:
-
-```{r}
-my_iris <- iris[-5]
-species <- iris$Species
-```
-
-Potom ćemo provesti klastering pomoću `kmeans()` funkcije:
-
-```{r}
-kmeans_iris <- kmeans(my_iris, 3)
-```
-
-Usporedimo sada rezultate klastering procedure sa orginalnim podatcima pomoću `table` funkcije. Procijenjene grupe se nalaze u `cluster` dijelu objekta `kmeans_iris`:
-
-```{r}
-table(kmeans_iris$cluster, species)
-```
-
-Rezultati imaju visok stupanj preciznosti. Za kraj je uvijek korisno i vizualno prikazati rezultate:
-
-```{r}
-plot(Petal.Length ~ Petal.Width,
-     data = my_iris,
-     col = kmeans_iris$cluster)
-```
 
 ## Primjeri
 
