@@ -466,6 +466,58 @@ ggplot(elbow, aes(x = X2.max_k, y = wss)) +
   scale_x_continuous(breaks = seq(1, 20, by = 1))
 ```
 
+#### Dodatni primjer
+
+
+U ovom primjeru želimo grupirati automobile na osnovi snage motora i težine. Pri tome koristimo `mtcars` podatkovni skup. Prvo ćemo učitati, izabrati i pregledati podatke:
+
+```{r}
+data(mtcars)
+cars <- subset(mtcars, select = c(wt,hp))
+head(cars)
+```
+
+Upoznajmo se dodatno s podatcima:
+
+```{r}
+str(cars)
+```
+
+Pogledajmo i deskriptivnu statistiku:
+
+```{r}
+summary(cars)
+```
+
+Za provedbu klasteringa ćemo koristiti `kmeans()` funkciju koju već poznajemo:
+
+```{r}
+km_cars <- kmeans(cars,2)
+```
+
+Pogledajmo rezultate:
+
+```{r}
+km_cars$cluster
+```
+Broj ispod modela predstavlja pripadnost klasteru!
+
+
+Pogledajmo sada klasterske centroide. Centroidi predstavljaju "centar" svakog klastera i mogu se dohvatiti kao `centers` element procijenjenog klasterskog objekta na sljedeći način:
+
+```{r}
+km_cars$centers
+```
+
+
+Za kraj ćemo još vizualno prikazati rezultate:
+
+```{r}
+plot(cars, col = km_cars$cluster)
+points(km_cars$centers, pch = 22, bg = c(1, 2), cex = 2)
+```
+
+
 
 ## Nadgledano strojno učenje
 
@@ -533,6 +585,46 @@ plot(BreastCancer_pred ~ Diagnosis, data = breastCancerData.test,
 # pregled rezultata
 table(BreastCancer_pred, breastCancerData.test$Diagnosis)
 ```
+
+
+
+#### Dodatni primjer
+
+U prethodnom primjeru smo koristili `kmeans()` funkciju za klastering na *iris* podatcima. U ovom primjeru ćemo koristiti rekurzivno particioniranje na istim podatcima (no nećemo maknuti zadnju kolonu).
+
+Pogledajmo za početak strukturu podataka:
+
+```{r}
+summary(iris)
+```
+
+U sljedećem koraku ćemo napraviti model nadgledanog strojnog učenja koristeći funkciju  `rpart()` iz istoimenog paketa. Specifikacija *decision tree* modela izgleda ovako:
+
+```{r}
+library(rpart)
+tree <- rpart(Species ~ Sepal.Length + Sepal.Width + Petal.Length + Petal.Width,
+              data = iris,
+              method = "class")
+```
+
+
+Potom je potrebno specificirati podatke za koje želimo predviđanje:
+
+```{r}
+unseen <- data.frame(Sepal.Length = c(5.3, 7.2),
+                       Sepal.Width = c(2.9, 3.9),
+                       Petal.Length = c(1.7, 5.4),
+                       Petal.Width = c(0.8, 2.3))
+```
+
+
+U zadnjem koraku izvršimo predviđanje pomoću `predict` funkcije:
+
+```{r}
+predict(tree, unseen, type = "class")
+```
+
+
 
 
 #### Random Forest algoritam
@@ -667,101 +759,6 @@ ggplot(bc_test, aes(x = pred, y = Radius.Mean)) +
 
 
 
-
-
-## Primjeri
-
-
-### Primjer 1. (Nadgledano ML)
-
-U prethodnom primjeru smo koristili `kmeans()` funkciju za klastering na *iris* podatcima. U ovom primjeru ćemo koristiti rekurzivno particioniranje na istim podatcima (no nećemo maknuti zadnju kolonu).
-
-Pogledajmo za početak strukturu podataka:
-
-```{r}
-summary(iris)
-```
-
-U sljedećem koraku ćemo napraviti model nadgledanog strojnog učenja koristeći funkciju  `rpart()` iz istoimenog paketa. Specifikacija *decision tree* modela izgleda ovako:
-
-```{r}
-library(rpart)
-tree <- rpart(Species ~ Sepal.Length + Sepal.Width + Petal.Length + Petal.Width,
-              data = iris,
-              method = "class")
-```
-
-
-Potom je potrebno specificirati podatke za koje želimo predviđanje:
-
-```{r}
-unseen <- data.frame(Sepal.Length = c(5.3, 7.2),
-                       Sepal.Width = c(2.9, 3.9),
-                       Petal.Length = c(1.7, 5.4),
-                       Petal.Width = c(0.8, 2.3))
-```
-
-
-U zadnjem koraku izvršimo predviđanje pomoću `predict` funkcije:
-
-```{r}
-predict(tree, unseen, type = "class")
-```
-
-
-### Primjer 2. (Ne-nadgledano ML)
-
-
-U ovom primjeru želimo grupirati automobile na osnovi snage motora i težine. Pri tome koristimo `mtcars` podatkovni skup. Prvo ćemo učitati, izabrati i pregledati podatke:
-
-```{r}
-data(mtcars)
-cars <- subset(mtcars, select = c(wt,hp))
-head(cars)
-```
-
-Upoznajmo se dodatno s podatcima:
-
-```{r}
-str(cars)
-```
-
-Pogledajmo i deskriptivnu statistiku:
-
-```{r}
-summary(cars)
-```
-
-Za provedbu klasteringa ćemo koristiti `kmeans()` funkciju koju već poznajemo:
-
-```{r}
-km_cars <- kmeans(cars,2)
-```
-
-Pogledajmo rezultate:
-
-```{r}
-km_cars$cluster
-```
-Broj ispod modela predstavlja pripadnost klasteru!
-
-
-Pogledajmo sada klasterske centroide. Centroidi predstavljaju "centar" svakog klastera i mogu se dohvatiti kao `centers` element procijenjenog klasterskog objekta na sljedeći način:
-
-```{r}
-km_cars$centers
-```
-
-
-Za kraj ćemo još vizualno prikazati rezultate:
-
-```{r}
-plot(cars, col = km_cars$cluster)
-points(km_cars$centers, pch = 22, bg = c(1, 2), cex = 2)
-```
-
-
-
 ## Procjena kvalitete modela
 
 
@@ -846,6 +843,7 @@ prec
 rec <- TP/(TP+FN)
 rec
 ```
+
 Točnost i preciznost modela su ~82% dok je model krivo predvidio sudbinu 18% putnika na Titaniku. Nije loše, ali nije ni posebno dobro...
 
 ### Regresija
@@ -873,6 +871,7 @@ dplyr::rename(freq = "X800",
  
 str(air)
 ```
+
 Potom procjenjujemo model i predikciju pa računamo RMSE:
 
 ```{r}
