@@ -757,10 +757,7 @@ ggplot(bc_test, aes(x = pred, y = Radius.Mean)) +
 
 ```
 
-
-
 ## Procjena kvalitete modela
-
 
 Procjena kvalitete modela kod nadgledanog ML se vrši usporedbom stvarnih *label-a* sa onima koje je generirao model. U dobroj procjeni je razlika između istih vrlo mala. Kod ne-nadgledanog ML je procjena kvalitete modela nešto složenija pošto ne postoje *label-i* za usporedbu. Vrlo često se susrećemo i sa kvazi nadgledanim ML gdje dio opservacija ima pripisane *label-e* , a dio ne. Procedura procjene kvalitete modela u ML ima određene specifičnosti i ponešto se razlikuje od procjene kvalitete modela u statistici (*model fit*). Zbog toga ćemo kasnije pogledati detaljnije o kojim procedurama se radi i kako se provode.
 
