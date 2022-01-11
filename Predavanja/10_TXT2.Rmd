@@ -88,7 +88,7 @@ Prije opisa podataka koje ćemo koristiti valja naglasiti da `tidytext` pristup 
 
 Svaka analiza (teksta)  počinje od podataka. Pribava tekstualnih podataka o specifičnim temama najčešće nije jednostavna. Najčešći je način preuzimanja podataka neki od dostupnih API servisa za novinske članke ili tekstualnih repozitorija ili servisi poput Twitter-a. No to često nije dovoljno ukolilko želimo analizirati specifičnu temu ili temu na specifičnom jeziku (npr. hrvatskom). Ovdje još valja napomeniti da je preuzimanje kvalitetnih tekstualnih podataka često moguće isključivo uz nadoplatu kao što je to slučaj člancima na hrvatskom jeziku kroz [webhose.io](https://webhose.io/) servis, [presscliping](https://www.pressclipping.hr/), [presscut](https://www1.presscut.hr/en/) i [mediatoolkit](https://www.mediatoolkit.com/)
 
-U ovom ćemo predavanju analizirati tržište aparata za kavu u Hrvatskoj na osnovi osnovi svih tekstova objavljenih u svim domaćim medijima u perodu od  2021-01-09) do 2022-11-01. Članci su preuzeti strojno sa [mediatoolkit servisa](https://www.mediatoolkit.com/) i na način da sadrže riječ: *LatteGo*, *De`Longhi*, *Krups* i *Nesspreso*. Na taj je način prikupljeno 290 objava koje sadrže ukupno 6.250 riječi. Analiza teksta koju ćemo provesti uključuje: **čišćenje, uređivanje i prilagodbu podataka**, **dekriptivnu statistiku na tekstualnim podatcima**, **analizu sentimenta**, **analizu frekvencija** i **tematsku analizu**.
+U ovom ćemo predavanju analizirati tržište aparata za kavu u Hrvatskoj na osnovi osnovi svih tekstova objavljenih u svim domaćim medijima u perodu od  2021-01-09) do 2022-11-01. Članci su preuzeti strojno sa [mediatoolkit servisa](https://www.mediatoolkit.com/) i na način da sadrže riječ: *LatteGo*, *De`Longhi*, *Krups* i *Nesspreso*. Na taj je način prikupljeno 290 objava koje sadrže ukupno 8.980 riječi. Analiza teksta koju ćemo provesti uključuje: **čišćenje, uređivanje i prilagodbu podataka**, **dekriptivnu statistiku na tekstualnim podatcima**, **analizu sentimenta**, **analizu frekvencija** i **tematsku analizu**.
 
 
 ## Uvoz podataka
@@ -525,7 +525,7 @@ newskava_tokenTidy %>%
 
 ```
 
-...također i pozitivnosti portala:
+...također i pozitivnosti brandova:
 
 ```{r pozDomen, warning=F, message=F}
 ## Najpozitivniji portali
@@ -585,14 +585,14 @@ newsCOVID_tokenTidy %>%
 
 ## Analiza važnosti pojmova
 
-Nakon analize sentimenta je korisno analizirati i **najbitnije** riječi. To se radi pomoću IDF (inverse document frequency) metode. IDF metoda omogućuje identifikaciju važnih (ne nužno čestih) riječi u korpusu i može poslužiti za analizu najvažnijih pojmova po domenama.
+Nakon analize sentimenta je korisno analizirati i **najbitnije** riječi. To se radi pomoću IDF (inverse document frequency) metode. IDF metoda omogućuje identifikaciju važnih (ne nužno čestih) riječi u korpusu i može poslužiti za analizu najvažnijih pojmova po brandovima.
 
 ```{r frekvencija, message=F, warning=F, fig.height=10, fig.width=10}
 
 ## Udio riječi po domenama
 
 domenaWords <- newskava %>%
-  unnest_tokens(word,TITLE) %>% 
+  unnest_tokens(word,MENTION_SNIPPET) %>% 
   count(kword, word, sort = T)
   
 ukupnoWords <- domenaWords %>%
@@ -626,7 +626,7 @@ idf %>%
   mutate(word = factor(word, levels = rev(unique(word)))) %>% 
   mutate(domena = factor(kword)) %>%
   group_by(domena) %>% 
-  top_n(5) %>% 
+  top_n(10,tf_idf) %>% 
   ungroup() %>%
   ggplot(aes(word, tf_idf, fill = kword)) +
   geom_col(show.legend = FALSE) +
@@ -644,20 +644,20 @@ Do sada smo analizirali tekst tako da je tekst tokeniziran na jednu riječ. To m
 
 ```{r nGRAMI, message=F, warning=F, fig.height=10, fig.width=10}
 
-newsCOVID_bigram <- newsCOVID %>%
-  unnest_tokens(bigram, naslov, token = "ngrams", n = 2)
+newskava_bigram <- newskava %>%
+  unnest_tokens(bigram, MENTION_SNIPPET, token = "ngrams", n = 2)
 
-newsCOVID_bigram %>% head(10)
+newskava_bigram %>% head(10)
 
 
-newsCOVID_bigram %>%
+newskava_bigram %>%
   count(bigram, sort = T) %>%
-  head(15)
+  head(25)
 
-newsCOVID_bigram_sep <- newsCOVID_bigram %>%
+newskava_bigram_sep <- newskava_bigram %>%
   separate(bigram, c("word1","word2"), sep = " ")
 
-newsCOVID_bigram_tidy <- newsCOVID_bigram_sep %>%
+newskava_bigram_tidy <- newskava_bigram_sep %>%
   filter(!word1 %in% stop_corpus$word) %>%
   filter(!word2 %in% stop_corpus$word) %>%
   mutate(word1 = gsub("\\d+", NA, word1)) %>%
@@ -667,12 +667,13 @@ newsCOVID_bigram_tidy <- newsCOVID_bigram_sep %>%
   drop_na(.)
 
 
-newsCOVID_bigram_tidy_bigram_counts <- newsCOVID_bigram_tidy %>% 
+newskava_bigram_tidy_bigram_counts <- newskava_bigram_tidy %>% 
   count(word1, word2, sort = TRUE)
+
 
 #newsCOVID_bigram_tidy_bigram_counts
 
-bigrams_united <- newsCOVID_bigram_tidy %>%
+bigrams_united <- newskava_bigram_tidy %>%
   drop_na(.) %>%
   unite(bigram, word1, word2, sep = " ")
 
@@ -684,20 +685,20 @@ bigrams_united %>%
 # Najvažniji bigrami po domenama
 
  bigram_tf_idf <- bigrams_united %>%
-  count(domena, bigram) %>%
-  bind_tf_idf(bigram, domena, n) %>%
+  count(kword, bigram) %>%
+  bind_tf_idf(bigram, kword, n) %>%
   arrange(desc(tf_idf))
 
 bigram_tf_idf %>%
   arrange(desc(tf_idf)) %>%
   mutate(bigram = factor(bigram, levels = rev(unique(bigram)))) %>% 
-  group_by(domena) %>% 
+  group_by(kword) %>% 
   top_n(7) %>% 
   ungroup() %>%
-  ggplot(aes(bigram, tf_idf, fill = domena)) +
+  ggplot(aes(bigram, tf_idf, fill = kword)) +
   geom_col(show.legend = FALSE) +
   labs(x = NULL, y = "tf-idf") +
-  facet_wrap(~domena, ncol = 2, scales = "free") +
+  facet_wrap(~kword, ncol = 2, scales = "free") +
   coord_flip() + 
   theme_economist()
 
@@ -708,13 +709,13 @@ bigram_tf_idf %>%
 
 # Analiza bigramskih fraza
 
-newsCOVID_bigram_tidy %>%
-  filter(word1 == "covid") %>%
+newskava_bigram_tidy %>%
+  filter(word1 == "kava") %>%
   count(word1,word2,sort=T)
 
 # Vizualiziraj bigrame
 
-bigram_graph <- newsCOVID_bigram_tidy_bigram_counts %>%
+bigram_graph <- newskava_bigram_tidy_bigram_counts %>%
   filter(n >50) %>%
    graph_from_data_frame()
 
@@ -741,7 +742,7 @@ Provjerimo koje su riječi najviše korelirane sa izabranim ključnim riječima:
 #  pairwise_count(word, domena, sort = T) %>%
 #  filter_all(any_vars(!is.na(.))) -> pairsWords
 
-newsCOVID_tokenTidy %>% 
+newskava_tokenTidy %>% 
 #  filter(datum > "2020-02-20") %>%
   group_by(word) %>%
   filter(n() > 20) %>%
@@ -752,7 +753,7 @@ newsCOVID_tokenTidy %>%
 #  filter(item1 == "oporavak")
 
 corsWords %>%
-  filter(item1 %in% c("stožer", "beroš", "mjere", "maske")) %>%
+  filter(item1 %in% c("de’longhi", "krups", "lattego", "nespresso", "dom")) %>%
   group_by(item1) %>%
   top_n(10) %>%
   ungroup() %>%
@@ -771,16 +772,16 @@ Na kraju provodimo tematsku analizu kao najsloženiji dio do sada provedene anal
 
 ```{r TEME, message=F, warning=F, fig.height=10, fig.width=10}
 
-newsCOVID_tokenTidy %>%
+newskava_tokenTidy %>%
   count(clanak, word, sort = TRUE) %>%
   cast_dtm(clanak, word,n) -> dtm
 
-newsCOVID_LDA <- LDA(dtm, k = 4,  control = list(seed = 1234))
+newskava_LDA <- LDA(dtm, k = 4,  control = list(seed = 1234))
 
-newsCOVID_LDA_tidy <- tidy(newsCOVID_LDA, matrix = "beta")
+newskava_LDA_tidy <- tidy(newskava_LDA, matrix = "beta")
 #newsCOVID_LDA_tidy
 
-newsCOVID_terms <- newsCOVID_LDA_tidy %>%
+newskava_terms <- newskava_LDA_tidy %>%
   drop_na(.) %>%
   group_by(topic) %>%
   top_n(15, beta) %>%
@@ -789,7 +790,7 @@ newsCOVID_terms <- newsCOVID_LDA_tidy %>%
 
 #newsCOVID_terms
 
-newsCOVID_terms %>%
+newskava_terms %>%
   mutate(term = reorder_within(term, beta, topic)) %>%
   ggplot(aes(term, beta, fill = factor(topic))) +
   geom_col(show.legend = FALSE) +
@@ -809,12 +810,12 @@ Tematsku analizu je moguće i napraviti na bigramski tokeniziranom tekstu. Tada 
 topicBigram %>%
   cast_dtm(clanak, bigram,n) -> dtmB
 
-newsCOVID_LDA <- LDA(dtmB, k = 4,  control = list(seed = 1234))
+newskava_LDA <- LDA(dtmB, k = 4,  control = list(seed = 1234))
 
-newsCOVID_LDA_tidy <- tidy(newsCOVID_LDA, matrix = "beta")
+newskava_LDA_tidy <- tidy(newskava_LDA, matrix = "beta")
 #newsCOVID_LDA_tidy
 
-newsCOVID_terms <- newsCOVID_LDA_tidy %>%
+newskava_terms <- newskava_LDA_tidy %>%
   drop_na(.) %>%
   group_by(topic) %>%
   top_n(10, beta) %>%
@@ -824,7 +825,7 @@ newsCOVID_terms <- newsCOVID_LDA_tidy %>%
 #newsCOVID_terms
 
 
-newsCOVID_terms %>%
+newskava_terms %>%
   mutate(term = reorder_within(term, beta, topic)) %>%
   ggplot(aes(term, beta, fill = factor(topic))) +
   geom_col(show.legend = FALSE) +
