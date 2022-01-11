@@ -2,7 +2,7 @@
 title: "Obrada podataka"
 author:
   name: Luka Sikic, PhD
-  affiliation: Fakultet hrvatskih studija | [OP](https://github.com/BrbanMiro/Obrada-podataka)
+  affiliation: Fakultet hrvatskih studija | [OP](https://lusiki.github.io/WebObradaPodataka/)
 subtitle: 'Predavanje 9: Strojno učenje'
 output:
   html_document:
@@ -21,23 +21,48 @@ output:
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE, dpi=300)
 ```
 
-Današnje predavanje se odnosi na pregled najvažnijih principa i tehnika **strojnog učenja** (ML - machine learning). Cilj je dati sveobuhvatan pregled osnovnih (uvodnih) koncepata i smjestiti metodologiju *strojnog učenja* u širi kontekst kvantitativnih medodoloških pristupa koje već poznajemo. U predavanju ćemo objasniti što je ML, koje su najčešće korisštene metode te kako odrediti kvalitetu modela. 
+Današnje predavanje se odnosi na pregled najvažnijih principa i tehnika **strojnog učenja** (ML - *Machine Learning*). Cilj je dati sveobuhvatan pregled osnovnih koncepata i smjestiti ML metodologiju u širi kontekst kvantitativnih medodoloških pristupa koje već poznajemo. U predavanju ćemo objasniti:
+<br>
+
+1. što je strojno učenje i koja mu je svrha,
+<br>
+2. koje su najčešće korištene metode, 
+<br>
+3.  kako odrediti kvalitetu procijenjenog modela. 
 
 ## Što je strojno učenje?
 
-Strojno učenje uključuje izradu i korištenje algoritama s ciljem učenja na osnovi podataka.  Sposobnost *stroja* (računala) da nešto nauči se odražava u **poboljšanju peformansi** pri povećanju **informacijskog inputa**. Informacijski input se zapravo odnosi na *podatke* (slično *data frame* objektima koje smo do sada stalno koristili). Jednostavnije rečeno, ukoliko računalu damo više podataka, ono će više (bolje) naučiti (model). Strojno učenje i statistika (kakvu smo do sada upoznali) se u bitnom ne razlikuju mnogo, dapače među njima ima više sličnosti nego razlika. Razlog za nerazumijevanje i nepristupačnost strojnog učenja (statističarima) često predstavlja specifičan žargon strojnog učenja. Riječ je o specifičnoj terminologiji koju koriste analitičari i inženjeri strojnog učenje, a često se pritom misli na pojmove koje već poznajemo iz statistike...varijable se u ML primjerice nazivaju **karakteristike** (feature, label), procjena je **trening** modela...
+ML je dio umjetne inteligencije (*Artificial Inteligence* - AI) i spada u područje računalnih znanosti koje koriste statističke tehnike kako bi se računalu omogućilo "učenje" na osnovi podataka bez eksplicitnog programiranja. "Učenje" se pri tome odnosi na progresivno poboljšanje performansi u provedbi nekog zadatka. ML je usko povezano sa područjima rudarenja podataka (Data Mining), prepoznavanja obrazaca (Pattern Recognition), inferencijalnom statistikom i statističkim učenjem, a često je riječ o istim "stvarima" sa različitim nazivom. Neki tipični ML primjeri uključuju diskriminaciju spam elektroničke pošte, automatsko tagiranje Facebook slika, preporuke kupnje, identifikaciju bolesti na osnovi simptoma, predviđanje tečaja... 
+
+Strojno učenje uključuje izradu i korištenje algoritama s ciljem učenja na osnovi podataka.  Sposobnost *stroja* (računala) da nešto nauči se odražava u **poboljšanju peformansi - outputa** pri povećanju **informacijskog inputa**. Informacijski input se zapravo odnosi na *podatke* slično *data.frame* objektima koje smo do sada stalno koristili. Jednostavnije rečeno, ukoliko računalu damo više podataka, ono će više (bolje) naučiti (model). Strojno učenje i statistika (kakvu smo do sada upoznali) se u bitnom ne razlikuju mnogo, dapače među njima ima više sličnosti nego razlika. Razlog za nerazumijevanje i nepristupačnost strojnog učenja (statističarima) često predstavlja specifičan žargon strojnog učenja (ali i naprednije informatičke vještine koje zahtijeva ML). ML ima specifičnu terminologiju koju koriste analitičari i inženjeri strojnog učenja, a često se pritom misli na pojmove koje već poznajemo iz statistike...varijable se u ML tako nazivaju **karakteristike** (feature, label), procjena je **trening** modela i sl.
 
 ```{r echo=F}
 knitr::include_graphics("../Foto/ml.png")
 ```
 
-Neki praktični primjeri ML uključuju diskriminaciju spam elektroničke pošte, automatsko tagiranje Facebook slika, preporuka kupnje, identifikacija bolesti na osnovi simptoma, predviđanje tečaja... 
 
-Strojno učenje se često dijeli na **nadgledano** i **ne-nadgledano**. U nadgledanom (supervised) ML je cilj pronaći funkciju koja pripisuje vrijednost ili klasu novim (neviđenim) opservacijama uz dani skup (*labeled* opservacija) varijabli. Ne-nadgledano ML ne zahtijeva definirane varijable (i.e. *labeld* opservacije) .
+## Osnovni pojmovi
 
-Procjena kvalitete modela kod nadgledanog ML se vrši usporedbom stvarnih *label-a* sa onima koje je generirao model. U dobroj procjeni je razlika između istih vrlo mala. Kod ne-nadgledanog ML je procjena kvalitete modela nešto složenija pošto ne postoje *label-i* za usporedbu. Vrlo često se susrećemo i sa kvazi nadgledanim ML gdje dio opservacija ima pripisane *label-e* , a dio ne. Procedura procjene kvalitete modela u ML ima određene specifičnosti i ponešto se razlikuje od procjene kvalitete modela u statistici (*model fit*). Zbog toga ćemo kasnije pogledati detaljnije o kojim procedurama se radi i kako se provode.
+Strojno učenje se često dijeli na **nadgledano** i **ne-nadgledano**: 
 
-Za početak pogledajmo jedan općeniti primjer ML pristupa na "pravim" podatcima:
+- U nadgledanom (supervised) ML cilj je pronaći funkciju koja pripisuje vrijednost ili klasu novim (neviđenim) opservacijama uz dani skup  varijabli (i.e. *labeled* opservacija).
+
+- Ne-nadgledano (unsupervised) ML ne zahtijeva definirane varijable (i.e. *labeld* opservacije) već algoritam samostalno pronalazi strukturu u podatcima.
+
+Najvažniji zadatci koje obavlja ML su:
+
+- **Smanjenje dimenzionalnosti** označava pojednostavljenje skupa varijabli u niže dimenzionalni prostor. Klasični primjer je redukcija velikog teksta (mnoštva dokumenata) na najbinije teme (grupe u koje dokumenti pripadaju).
+
+- **Klastering** je procedura grupiranja skupa inputa pri čemu grupe nisu unaprijed poznate.
+
+- **Klasifikacija** je procedura selekcije inputa u dvije ili više klasa pri čemu je cilj ispravno selektirati nove, neviđene opservacije. Klasični primjer je selekcija pacijenta u kategorije zdrav ili bolestan.
+
+- **Regresija** se odnosi na sličan problem uz razliku što je output kontinuirana varijabla (ne diskretna/kategorijalna).
+
+Neki od novijih i popularnih pristupa u ML-u su **neuralne mreže** (*Neural Network*), **pojačano učenje** (*Reinforcement Learning*) i **duboko učenje** (*Deep Learning*).  Detaljniji opis svakog pojedinačnog pristupa je dovoljno opsežan da bi se mogao smjestiti u zaseban kolegij. Ovdje kratko ističemo duboko učenje kao dio ML-a koji se koristi za modeliranje visoko nelinearnih podataka i doživljava veliki uspjeh (popularnost) zbog koristi u mnoštvu praktičnih primjena poput prepoznavanja govora (speech recognition), autonomnih vozila, procesuiranja prirodnog jezika (natural language processing) i dr. Većina koncepata dubokog učenja je (u matematici) poznata već duže vrijeme no zbog razvoja u računalnim kapacitetima postaje sve šire zastupljena u prakski.
+
+
+#### Uvodni primjeri ML pristupa 
 
 ```{r}
 squares <- data.frame(
@@ -70,7 +95,7 @@ Formulirajmo problem *labeling-a* nepoznatog kvadrata (square) na osnovi prethod
 knitr::include_graphics("../Foto/ml_princip.png")
 ```
 
-Procedura strojnog učenja (ML - machine learning) rješava ovakav (*labeling*) problem na osnovi naučenog znanja koje je formirano rješavanjem sličnih problema (i.e. inputu `square` podataka). Pojednostavljeno rečeno, računalu damo podatke, ono nauči strukturu i na osnovi toga ima sposobnost dati odgovor na novim, neviđenim podatcima. Glavna svrha ML je **konstrukcija prediktivnih modela na osnovi podataka** koji su sposobni dati odgovore na slična ali nova i nepostavljena pitanja. 
+Procedura strojnog učenja (ML - machine learning) rješava ovakav (*labeling*) problem na osnovi naučenog znanja koje je formirano rješavanjem sličnih problema (i.e. inputu `square` podataka). Pojednostavljeno rečeno, računalu damo podatke, ono nauči strukturu i na osnovi toga ima sposobnost dati odgovor na novim, neviđenim podatcima. Glavna svrha ML je **konstrukcija prediktivnih modela na osnovi podataka** koji su sposobni dati odgovore na slična, ali ipak nova i nepostavljena pitanja. 
 
 Jednostavan i intuitivan primjer ML je također i korištenje regresijskog modela (koji već poznajemo) na podatcima o visini i težini ljudi kako bismo predvidjeli visinu nove osobe na osnovi njene težine:
 
@@ -78,8 +103,7 @@ Jednostavan i intuitivan primjer ML je također i korištenje regresijskog model
 knitr::include_graphics("../Foto/ml_reg.png")
 ```
 
-
-### Osnovni predikcijski model
+#### Realniji primjer predikcijskog ML modela
 
 Za izgradnju jednostavnog predikcijskog modela ćemo koristiti `wage` podatkovni skup iz `ISLR` paketa. Modelom ćemo pokušati opisati odnos između starosti radnika i visine plaće. Očekujemo da će stariji radnici imati više iskustva pa će prema tome biti i bolje plaćeni. Prvo ćemo učitati i pregledati podatke:
 
@@ -106,24 +130,24 @@ Na kraju ćemo korištenjem fukcije `predict` uz kombinaciju regresijskog objekt
 ```{r}
 predict(lm_wage, unseen)
 ```
+
 Na osnovi linearnog modela i `Wage` podataka smo predvidjeli da će 60 godišnji radnik zarađivati 124 $ na dan.
 
+#### ML procedure
 
-## Metode strojnog učenja
-
-U najširem je smislu moguće izdvojiti tri vrste ML metoda (procedura):
+U najširem je smislu moguće izdvojiti tri vrste ML procedura:
 
 1. Klasifikacija
 
 2. Regresija
 
-3. Klasteri
+3. Klastering
 
-### Klasifikacija
+#### Klasifikacija
 
 Svrha klasifikacije je predviđanje kategorije novih opservacija na osnovi prethodnog znanja (podataka, informacija). ML definira klasifikator (funkciju, model) koji će odlučiti kojoj kategoriji pripada novi objekt. Klasifikacijske tehnike imaju kvalitativni output, a kategorije moraju uvijek biti unaprijed definirane. Primjeri klasifikacije su medicinska dijagoza, prepoznavanje životinja, lica... 
 
-Pogledajmo jedan praktični primjer klasifikacijske procedure na osnovi elektronske pošte koja je prethodno klasificirana kao spam/no spam. *Feature* koji želimo predvidjeti je `avg_capital_seq`, a u klasifikatoru se referiramo na njega sa `x`. Kriterij za odluku da li je pošta spam ili nije ćemo definirati kao prosječni broj velikih tiskanih slova u svakom pojedinačnom mail-u.
+Pogledajmo jedan praktični primjer klasifikacijske procedure elektronske pošte koja je prethodno klasificirana kao spam/no spam. *Feature* koji želimo predvidjeti je `avg_capital_seq`, a u klasifikatoru se referiramo na njega sa `x`. Kriterij za odluku da li je pošta spam ili nije ćemo definirati kao prosječni broj velikih tiskanih slova u svakom pojedinačnom mail-u.
 
 ```{r eval = F}
 # Učitaj podatke
@@ -145,7 +169,7 @@ Pogledajmo jedan praktični primjer klasifikacijske procedure na osnovi elektron
     return(prediction) # predikcije je 0 ili 1
   }
 
-# primijenji klasifikator na  avgCapitalSeq kolonu
+# primijeni klasifikator na  avgCapitalSeq kolonu
 > spamPred <- sapply(emails$avgCapitalSeq, spamClassifier)
 
 # Usporedi predikcije sa stvarnim podatcima
@@ -156,7 +180,7 @@ Pogledajmo jedan praktični primjer klasifikacijske procedure na osnovi elektron
 
 U ovoj proceduri je `spam_classifier` točno filtrirao spam poštu u svih 13 slučajeva. Valja istaknuti da je ovo bio samo demonstrativni primjer te da klasifikacija na novim podatcima gotovo sigurno ne bi bila tako precizna!
 
-### Regresija
+#### Regresija
 
 Regresijska analiza se koristi za predviđanje kontinuirane ili kvantitativne vrijednosti na osnovi prethodnih podataka (informacija).
 
@@ -164,9 +188,9 @@ Regresijska analiza se koristi za predviđanje kontinuirane ili kvantitativne vr
 knitr::include_graphics("../Foto/ml_mlreg.png")
 ```
 
-Regresija je slična klasifikaciji uz bitnu razliku da želimo predvidjeti **vrijednost**, a ne **klasu** kao kod klasifikacije. Tipični regresijski problemi se odnose na predviđanje kreditnog rejtinga na osnovi redovitosti plaćanja u prošlosti, analize pretplata na časops kroz vrijeme, vjerojatnost zaposlenja na osnovi ocjena... Regresijske tehnike imaju kvantitativni output i zahtijevaju input-output podatkovni skup.
+Regresija je slična klasifikaciji uz bitnu razliku da želimo predvidjeti **vrijednost**, a ne **klasu** kao kod klasifikacije. Tipični regresijski problemi se odnose na predviđanje kreditnog rejtinga na osnovi redovitosti plaćanja u prošlosti, analize pretplata na časopis kroz vrijeme, vjerojatnost zaposlenja na osnovi ocjena... Regresijske tehnike imaju kvantitativni output i zahtijevaju input-output podatkovni skup.
 
-Za praktični primjer (još jedan!) analizirajmo broj pogleda na LinkedIn profilu u regresijskom kontekstu. Cilj je predvidjeti broj pregleda profila u sljedeća 3 dana na osnovi podataka o pregledima u prethodna 3 tjedna. Za to je potrebno definirati vektor LinkedIn pregleda: 
+Za praktični primjer (još jedan!) analiziramo broj pogleda na LinkedIn profilu u regresijskom kontekstu. Cilj je predvidjeti broj pregleda profila u sljedeća 3 dana na osnovi podataka o pregledima u prethodna 3 tjedna. Za to je potrebno definirati vektor LinkedIn pregleda: 
 
 ```{r}
 linkedin <- c(5,7,4,9,11,10,14,17,13,11,18,17,21,21,24,23,28,35,21,27,23)
@@ -179,7 +203,7 @@ days <- rep(NA, length(linkedin))
 days <- seq(1, 21, by = 1)
 ```
 
-Sada možemo procijenjiti regresijski odnos:
+Sada možemo procijeniti regresijski odnos:
 
 ```{r}
 linkedin_lm <- lm(linkedin ~ days)
@@ -201,11 +225,9 @@ points(22:24, linkedin_pred, col = "green")
 ```
 
 
+#### Klastering
 
-### Klasteri
-
-Procedura klasteringa ima za cilj grupirati objekte u klastere na način da su klasteri međusobno različiti, a objekti unutar svakog klastera slični. Klastering je sličan klasifikaciji uz razliku da ne postoje prethodno definirane kategorije već klaster procedura sama sortira objekte prema sličnosti (ne prema kategorijama). Za klastering nije potrebno definirati kategorije (*labels*) i ne postoji točan ili netočan output...postoji mnogo mogućih klastera. 
-
+Procedura klasteringa ima za cilj grupirati objekte u klastere na način da su klasteri međusobno različiti, a objekti unutar svakog klastera slični. Klastering je sličan klasifikaciji uz razliku da ne postoje prethodno definirane kategorije već klaster procedura sortira objekte prema sličnosti (ne prema kategorijama). Za klastering nije potrebno definirati kategorije (*labels*) i ne postoji točan ili netočan output...postoji beskonačno mnogo mogućih klastera. 
 
 Za primjer klastering procedure ćemo koristiti otprije poznati podatkovni skup `iris`. Pri tome je cilj grupirati iris cvijetove u 3 zasebna klastera, prema karakteristikama cvjetova koje su dane u podatcima. Pogledajmo prvo podatke:
 
@@ -265,47 +287,186 @@ plot(Petal.Length ~ Petal.Width,
      col = kmeans_iris$cluster)
 ```
 
-## Primjeri
 
 
-### Primjer 1. (Nadgledano ML)
+Nakon ovih primjera ćemo pogledati kako izgleda ML procedura "od početka"...
 
-U prethodnom primjeru smo koristili `kmeans()` funkciju za klastering na *iris* podatcima. U ovom primjeru ćemo koristiti rekurzivno particioniranje na istim podatcima (no nećemo maknuti zadnju kolonu).
 
-Pogledajmo za početak strukturu podataka:
+## Eksplorativna analiza i nenadgledano strojno učenje
 
-```{r}
-summary(iris)
+Prvo ćemo učitati podatke [Breast Cancer Wisconsin (Diagnostic) Data Set](http://archive.ics.uci.edu/ml/datasets/breast+cancer+wisconsin+%28diagnostic%29) iz  [UCI Machine Learning](http://archive.ics.uci.edu/ml/index.php) repozitorija.
+
+```{r, echo=T, warning=F, message=FALSE}
+library(tidyverse) 
+
+url1 <-"https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/wdbc.data"
+url2 <- "https://raw.githubusercontent.com/fpsom/2020-07-machine-learning-sib/master/data/wdbc.colnames.csv"
+
+breastCancerData <- read_csv(url1, col_names = FALSE)
+
+breastCancerDataColNames <- read_csv(url2, col_names = FALSE)
+
+colnames(breastCancerData) <- breastCancerDataColNames$X1
+
 ```
 
-U sljedećem koraku ćemo napraviti model nadgledanog strojnog učenja koristeći funkciju  `rpart()` iz istoimenog paketa. Specifikacija *decision tree* modela izgleda ovako:
-
-```{r}
-library(rpart)
-tree <- rpart(Species ~ Sepal.Length + Sepal.Width + Petal.Length + Petal.Width,
-              data = iris,
-              method = "class")
-```
+Nakon učitavanja podataka ćemo pogledati kako izgledaju podatci:
 
 
-Potom je potrebno specificirati podatke za koje želimo predviđanje:
-
-```{r}
-unseen <- data.frame(Sepal.Length = c(5.3, 7.2),
-                       Sepal.Width = c(2.9, 3.9),
-                       Petal.Length = c(1.7, 5.4),
-                       Petal.Width = c(0.8, 2.3))
-```
-
-
-U zadnjem koraku izvršimo predviđanje pomoću `predict` funkcije:
-
-```{r}
-predict(tree, unseen, type = "class")
+```{r, echo=T, warning=F, message=FALSE}
+breastCancerData %>% head(10)
 ```
 
 
-### Primjer 2. (Ne-nadgledano ML)
+U okviru eksplorativne analize ćemo pogledati kako izgledaju podatci. U tu svrhu je potrebno napraviti nekoliko prilagodbi podataka:
+
+
+```{r, echo=T, warning=F, message=FALSE}
+# napravi faktorsku varijablu
+breastCancerData$Diagnosis <- as.factor(breastCancerData$Diagnosis)
+# ukloni prvu kolonu 
+breastCancerDataNoID <- breastCancerData[2:ncol(breastCancerData)]
+# vizualizacija
+library(GGally)  
+ggpairs(breastCancerDataNoID[1:5], aes(color=Diagnosis, alpha=0.4))
+```
+
+
+Sljedeća stvar koju moramo napraviti je prilagodba podataka u smislu centriranja i skaliranja. To je potrebno napraviti jer prediktori imaju vrlo varijablne prosjeke i standardne devijacije pa nisu usporedivi. 
+
+
+```{r, echo=T, warning=F, message=FALSE}
+# koristimo funkcije iz ML paketa caret
+library(caret)
+ppv <- preProcess(breastCancerDataNoID, method = c("center", "scale"))
+breastCancerDataNoID_tr <- predict(ppv, breastCancerDataNoID)
+# pregledaj podatke prije centriranja i skaliranja
+breastCancerDataNoID[1:5] %>% summary()
+```
+
+
+Podatci nakon predprocesnih prilagodbi centriranja i skaliranja izgledaju ovako:
+
+```{r, echo=T, warning=F, message=FALSE}
+breastCancerDataNoID_tr[1:5] %>% summary()
+```
+
+
+Vidljivo je da varijable imaju prosjek 0 i da su zadržali distribucijska svojstva kao originalne varijable. Pogledajmo nove varijable i grafički:
+
+```{r, echo=T, warning=F, message=FALSE}
+ggpairs(breastCancerDataNoID_tr[1:5], aes(color=Diagnosis, alpha=0.4))
+```
+
+#### Smanjenje dimenzionalnosti i PCA
+
+Smanjenje dimenzionalnosti jedan je od važnih ciljeva strojnog učenja pri čemu je analiza glavnih komponenti (PCA) jedna od najzastupljenijih metoda za tu svrhu. Bez da ulazimo u metodološke detalje PCA, pogledajmo kako ova procedura izgleda u praksi:
+
+```{r, echo=T, warning=F, message=FALSE}
+# provedi PCA
+ppv_pca <- prcomp(breastCancerData[3:ncol(breastCancerData)],
+                  center = TRUE,
+                  scale. = TRUE)
+# pregledaj rezultate
+summary(ppv_pca)
+```
+
+Detaljniji pregled PCA objekta izgleda ovako:
+
+```{r, echo=T, warning=F, message=FALSE}
+str(ppv_pca)
+```
+Rezultati analize izgledaju ovako:
+
+```{r, echo=T, warning=F, message=FALSE, fig.height=12, fig.width=12}
+# vizualizacija
+library(ggbiplot)
+
+ggbiplot(ppv_pca, choices=c(1, 2),
+         labels=rownames(breastCancerData),
+         ellipse=TRUE,
+         groups = breastCancerData$Diagnosis,
+         obs.scale = 1,
+         var.axes=TRUE, var.scale = 1) +
+  ggtitle("PCA of Breast Cancer Dataset")+
+  theme_minimal()+
+  theme(legend.position = "bottom")
+```
+
+
+#### Klastering
+
+Ovo je također jedna od vrlo popularnih metoda nenadgledanog strojnog učenja koja prepoznaje strukturu u podatcima na način da organizira podatke (opservacije) u interno koherentne i eksterno heterogene klastere. Drugačije rečeno, opservacije unutar klastera trebaju biti jako slične, a opservacije između klastera jako različite. Klasterski algoritmi se najčešće dijele na **aglomerativne** i **divizivne**. Aglomerativni započinju sa svakom opservacijom u pojedinačnom klasteru i sukcesivno ih spajaju do ispunjenja kriterija zaustavljanja. Divizivni počinju od jednog jedinstvenog klastera i dijele ga do ispunjenja kriterija zaustavljanje. I jedna i druga vrsta su zapravo procedure grupiranja opservacija prema nekom kriteriju, najčešće blizine u prostoru.  
+
+Sada ćemo provesti klastering na podatcima o tumoru koristeći algoritam k-means. Ovaj algoritam provodi grupiranje po principu minimizacije varijance unutar klastera. Postoji više varijanti k-means klastera, a u ovom primjeru koristimo standardni algoritam koji funkcionira na principu ukupne unutar-klasterske varijacije definirane kao sume kvadrata ekuklidovskih udaljenosti između opservacije i pripadajućeg centroida.
+
+Provedimo k-means algoritam:
+
+```{r, echo=T, warning=F, message=FALSE}
+set.seed(1)
+km.out <- kmeans(breastCancerData[3:ncol(breastCancerData)],
+                 centers=2,  # broj klastera
+                 nstart=20)  #  broj višestrukih inicijalnih konfiguracija
+```
+
+
+Rezultati provedene procedure izgledaju ovako:
+
+```{r, echo=T, warning=F, message=FALSE}
+str(km.out)
+```
+
+
+Sada možemo vizualizirati dobivene rezultate:
+
+
+```{r, echo=T, warning=F, message=FALSE}
+ggplot(as.data.frame(ppv_pca$x),
+       aes(x=PC1, y=PC2,
+           color=as.factor(km.out$cluster),
+           shape = breastCancerData$Diagnosis)) +
+  geom_point( alpha = 0.6, size = 3) +
+  theme_minimal()+
+  theme(legend.position = "bottom") +
+  labs(title = "K-Means clusteri i PCA", x = "PC1", y = "PC2", color = "Cluster", shape = "Diagnosis")
+
+```
+
+Kod klasteringa je potrebno prethodno kalibrirati algoritam na način da se unaprijed specificira broj klastera. Taj broj se određuje tzv. *elbow* metodom koja funkcionira u nekoliko koraka. Prvo je potrebno izračunati ukupnu sumu kvadrata odstupanja (varijabilnost) putem sljedeće funkcije:
+
+```{r, echo=T, warning=F, message=FALSE}
+kmean_withinss <- function(k) {
+  cluster <- kmeans(breastCancerData[3:ncol(breastCancerData)], k)
+  return (cluster$tot.withinss)
+}
+```
+
+Nakon toga možemo probati sa 2 klastera:
+
+```{r, echo=T, warning=F, message=FALSE}
+kmean_withinss(2)
+```
+
+Potom ćemo probati za sekvencu klastera od 1 do 20:
+
+```{r, echo=T, warning=F, message=FALSE}
+max_k <-20
+# provedi funkciju na klasterskom k rasponu  
+wss <- sapply(2:max_k, kmean_withinss)
+```
+
+Na kraju ćemo prikazati rezultate grafički:
+
+```{r, echo=T, warning=F, message=FALSE}
+elbow <- data.frame(2:max_k, wss)
+
+ggplot(elbow, aes(x = X2.max_k, y = wss)) +
+  geom_point() +
+  geom_line() +
+  scale_x_continuous(breaks = seq(1, 20, by = 1))
+```
+
+#### Dodatni primjer
 
 
 U ovom primjeru želimo grupirati automobile na osnovi snage motora i težine. Pri tome koristimo `mtcars` podatkovni skup. Prvo ćemo učitati, izabrati i pregledati podatke:
@@ -358,7 +519,247 @@ points(km_cars$centers, pch = 22, bg = c(1, 2), cex = 2)
 
 
 
+## Nadgledano strojno učenje
+
+Nadgledano ML se bavi predikcijom ishoda (*labels*) poput preživio/nije preživio na osnovi učenja sa označenih (*labelled*) podataka. Cilj je izvršiti "trening" modela na postojećim podatcima kako bi model mogao predvidjeti nove, nepoznate podatke. Ti novi podatci se najčešće odnose na dio (80/20,70/30,60/40) postojećeg uzorka koji se izdvaja iz "trening" dijela uzorka kako bi se na njima provela procjena kvalitete predikcije. Procjena kvalitete se provodi na osnovi različitih kriterija kojima se procjenjuje točnost modela. Standardni koraci u provedbi nadgledanog strojnog učenja su: provedba eksplorativne podatkovne analize, provedba nekog početnog modela, poboljšanje i preuređenje varijabli, procijena boljeg modela. Neki od često korištenih modela su stabla odlučivanja (decision trees), bayesov klasifikator, knn klasifikator, *support vector machines* i dr.
+
+
+#### Stabla odlučivanja
+
+Bez da ulazimo u detalje oko ovog algoritma, pogledajmo kako on funkcionira u praksi. Prvo ćemo podijeliti podake na trening i test uzorak u odnosu 70/30.
+
+```{r , echo=T, warning=F, message=FALSE}
+# podijeli uzorak na training i test 
+set.seed(1000)
+ind <- sample(2, nrow(breastCancerData), replace=TRUE, prob=c(0.7, 0.3))
+breastCancerData.train <- breastCancerDataNoID[ind==1,]
+breastCancerData.test <- breastCancerDataNoID[ind==2,]
+
+```
+
+Nakon toga ćemo specificirati model i definirati parametre:
+
+```{r , echo=T, warning=F, message=FALSE}
+# učitaj knjužnice
+library(rpart)
+library(rpart.plot)
+# specificiraj formulu
+myFormula <- Diagnosis ~ Radius.Mean + Area.Mean + Texture.SE
+# specificiraj algoritam
+breastCancerData.model <- rpart(myFormula,
+                                method = "class",
+                                data = breastCancerData.train,
+                                minsplit = 10, # minimalni broj instanci u čvoru
+                                minbucket = 1, # minimalni broj instanci u listu
+                                maxdepth = 3,  # maksimalna dubina drveta
+                                cp = -1)       # parametar kompleksnosti;intuitivno
+# pregledaj rezultate
+print(breastCancerData.model$cptable)
+rpart.plot(breastCancerData.model)
+
+```
+
+Izaberimo model sa najmanjom predikcijskom pogreškom:
+
+```{r, echo=T, warning=F, message=FALSE}
+opt <- which.min(breastCancerData.model$cptable[, "xerror"])
+cp <- breastCancerData.model$cptable[opt, "CP"]
+# očisti drvo
+breastCancerData.pruned.model <- prune(breastCancerData.model, cp = cp)
+# vizualiziraj
+rpart.plot(breastCancerData.pruned.model)
+# pogledaj rezultate
+table(predict(breastCancerData.pruned.model, type="class"), breastCancerData.train$Diagnosis)
+```
+
+Nakon provedenog modela valja pogledati kvalitetu predikcije na testnom dijelu uzorka:
+
+
+```{r, echo=T, warning=F, message=FALSE}
+# provedi predikciju
+BreastCancer_pred <- predict(breastCancerData.pruned.model, newdata = breastCancerData.test, type="class")
+# vizualizacija
+plot(BreastCancer_pred ~ Diagnosis, data = breastCancerData.test,
+     xlab = "Observed",
+     ylab = "Prediction")
+# pregled rezultata
+table(BreastCancer_pred, breastCancerData.test$Diagnosis)
+```
+
+
+
+#### Dodatni primjer
+
+U prethodnom primjeru smo koristili `kmeans()` funkciju za klastering na *iris* podatcima. U ovom primjeru ćemo koristiti rekurzivno particioniranje na istim podatcima (no nećemo maknuti zadnju kolonu).
+
+Pogledajmo za početak strukturu podataka:
+
+```{r}
+summary(iris)
+```
+
+U sljedećem koraku ćemo napraviti model nadgledanog strojnog učenja koristeći funkciju  `rpart()` iz istoimenog paketa. Specifikacija *decision tree* modela izgleda ovako:
+
+```{r}
+library(rpart)
+tree <- rpart(Species ~ Sepal.Length + Sepal.Width + Petal.Length + Petal.Width,
+              data = iris,
+              method = "class")
+```
+
+
+Potom je potrebno specificirati podatke za koje želimo predviđanje:
+
+```{r}
+unseen <- data.frame(Sepal.Length = c(5.3, 7.2),
+                       Sepal.Width = c(2.9, 3.9),
+                       Petal.Length = c(1.7, 5.4),
+                       Petal.Width = c(0.8, 2.3))
+```
+
+
+U zadnjem koraku izvršimo predviđanje pomoću `predict` funkcije:
+
+```{r}
+predict(tree, unseen, type = "class")
+```
+
+
+
+
+#### Random Forest algoritam
+
+Riječ je o ansambl algoritmu koji konstruira višestruka stabla odlučivanja tako da je konačna predikcija izvedena kao kombinacija predikcija svakog pojedinačnog stabla odlučivanja. Ovaj algoritam često daje bolje rezultate ali pod cijenu lošije interpretabilnosti. Pogledajmo kako algoritam funkcionira u praksi. Prvo ćemo specificirati model:
+
+
+```{r, echo=T, warning=F, message=FALSE}
+
+library(randomForest)
+set.seed(1000)
+# specifikacija model
+rf <- randomForest(Diagnosis ~ ., data = breastCancerData.train,
+                   ntree=100,
+                   proximity=T)
+# pogledaj rezultate
+table(predict(rf), breastCancerData.train$Diagnosis)
+```
+
+Pogledajmo modelski objekt:
+
+```{r, echo=T, warning=F, message=FALSE}
+print(rf)
+```
+Također je moguće pregledati važnost varijabli:
+ 
+ 
+```{r, echo=T, warning=F, message=FALSE, fig.height=12, fig.width=10}
+importance(rf)
+
+varImpPlot(rf)
+
+```
+ 
+Sada ćemo provesti predikciju na testnom dijelu uzorka:
+
+```{r, echo=T, warning=F, message=FALSE}
+BreastCancer_pred_RD <- predict(rf, newdata = breastCancerData.test)
+table(BreastCancer_pred_RD, breastCancerData.test$Diagnosis)
+
+plot(margin(rf, breastCancerData.test$Diagnosis))
+
+```
+
+Provedi predikciju sa smanjenim brojem varijabli rangiranima prema važnosti:
+
+
+```{r, echo=T, warning=F, message=FALSE}
+
+result <- rfcv(breastCancerData.train, breastCancerData.train$Diagnosis, cv.fold=3)
+with(result, plot(n.var, error.cv, log="x", type="o", lwd=2))
+
+```
+
+
+
+#### Regresija
+
+Prije provedbe regresijskog modela je korisno pogledati korelaciju između varijabli:
+
+
+```{r, echo=T, warning=F, message=FALSE}
+# korelacija između Radius.Mean i Concave.Points.Mean / Area.Mean
+cor(breastCancerData$Radius.Mean, breastCancerData$Concave.Points.Mean)
+cor(breastCancerData$Concave.Points.Mean, breastCancerData$Area.Mean)
+
+# selektiraj varijable koje se koriste u modelu
+bc <- select(breastCancerData,Radius.Mean,Concave.Points.Mean,Area.Mean)
+```
+
+Napravi regresijski model:
+
+```{r, echo=T, warning=F, message=FALSE}
+
+bc_model_full <- lm(Radius.Mean ~ Concave.Points.Mean + Area.Mean, data=bc)
+bc_model_full
+```
+
+Napravimo sada predikciju na osnovi provedenog modela:
+
+
+```{r, echo=T, warning=F, message=FALSE}
+# predikcija
+preds <- predict(bc_model_full)
+# vizualni prikaz
+plot(preds, bc$Radius.Mean, xlab = "Predikcija", ylab = "Opservacija")
+abline(a = 0, b = 1)
+# pregled punog modela
+summary(bc_model_full)
+```
+
+Ovo je procjena na cijelom podatkovnom skupu pa ne znamo kaka će biti rezultat na novim, neviđenim podatcima. Zbog toga ćemo napraviti podjelu na trening/test i provjeriti kvalitetu modela, prvo na trening uzorku:
+
+```{r, echo=T, warning=F, message=FALSE}
+
+set.seed(123)
+
+ind <- sample(2, nrow(bc), replace=TRUE, prob=c(0.75, 0.25))
+bc_train <- bc[ind==1,]
+bc_test <- bc[ind==2,]
+
+# linearna regresija na trening podatcima
+(bc_model <- lm(Radius.Mean ~ Concave.Points.Mean + Area.Mean, data=bc_train))
+
+# pregled rezultata
+summary(bc_model)
+
+# predikcija modela
+bc_train$pred <- predict(bc_model)
+
+# vizalizacija stvarnih i predikcijskih vrijednosti
+ggplot(bc_train, aes(x = pred, y = Radius.Mean)) +
+  geom_point() +
+  geom_abline(color = "blue")
+
+```
+
+
+
+Predikcija na testnim podatcima:
+
+```{r, echo=T, warning=F, message=FALSE}
+# provedi predikciju
+bc_test$pred <- predict(bc_model , newdata=bc_test)
+# vizualiziraj rezultate
+# plot the ground truths vs predictions for test set and examine the plot. Does it look as good with the predictions on the training set?
+ggplot(bc_test, aes(x = pred, y = Radius.Mean)) +
+  geom_point() +
+  geom_abline(color = "blue")
+
+```
+
 ## Procjena kvalitete modela
+
+Procjena kvalitete modela kod nadgledanog ML se vrši usporedbom stvarnih *label-a* sa onima koje je generirao model. U dobroj procjeni je razlika između istih vrlo mala. Kod ne-nadgledanog ML je procjena kvalitete modela nešto složenija pošto ne postoje *label-i* za usporedbu. Vrlo često se susrećemo i sa kvazi nadgledanim ML gdje dio opservacija ima pripisane *label-e* , a dio ne. Procedura procjene kvalitete modela u ML ima određene specifičnosti i ponešto se razlikuje od procjene kvalitete modela u statistici (*model fit*). Zbog toga ćemo kasnije pogledati detaljnije o kojim procedurama se radi i kako se provode.
 
 Procjena prediktivne sposobnosti ML modela uvelike ovisi o empirisjkom problemu i korištenoj metodi. Tri su najčešće korištena kriterija za procjenu kvalitete modela:
 
@@ -389,6 +790,7 @@ $$\mbox{točnost} = \frac{tp+tn}{tp+fp+tn+fn}$$
 $$\mbox{preciznost} = \frac{tp}{tp+fp}$$
 
 $$\mbox{recall} = \frac{tp}{tp+fn}$$
+
 #### Praktični primjer
 
 U ovom primjeru ćemo pokušati predvidjeti vjerojatnost preživljavanja nesreće na Titaniku s obzirom na karakteristike putnika (osobe) koje uključuju dob, spol i putničku klasu. Prvo učitavamo i izabiremo potrebne podatke:
@@ -438,6 +840,7 @@ prec
 rec <- TP/(TP+FN)
 rec
 ```
+
 Točnost i preciznost modela su ~82% dok je model krivo predvidio sudbinu 18% putnika na Titaniku. Nije loše, ali nije ni posebno dobro...
 
 ### Regresija
@@ -465,6 +868,7 @@ dplyr::rename(freq = "X800",
  
 str(air)
 ```
+
 Potom procjenjujemo model i predikciju pa računamo RMSE:
 
 ```{r}
@@ -489,11 +893,11 @@ Novi i bogatiji model ima niži pripadajući rmse od 4.8 pa za možemo zaključi
 ### Klastering
 
 
-U slučaju klastringa ne postoje explicitne varijable (*labels*) pa je se kvaliteta procjene radi na osnovi mjera udaljenosti unutar i između klastera. Te se mjere odnose na sličnost unutar klastera (poželjno visoka WSS), sličnost između klastera (poželjno niska BSS) i Dunnov indeks.
+U slučaju klastringa ne postoje explicitne varijable (*labels*) pa se kvaliteta procjene radi na osnovi mjera udaljenosti unutar i između klastera. Te se mjere odnose na sličnost unutar klastera (poželjno visoka WSS), sličnost između klastera (poželjno niska BSS) i Dunnov indeks.
 
 #### Praktični primjer
 
-Sljedeći primjer se koristii podatke o različitim karakteristikama sjemena no pošto ne znamo nazive vrijabli (*labels*), ali znamo da podatci sadržavaju tri vrste sjemena...koristiti ćemo klastering metodu. Prvo učitamo podatke i pregledamo strukturu:
+Sljedeći primjer se koristi podatke o različitim karakteristikama sjemena no pošto ne znamo nazive vrijabli (*labels*) ali znamo da podatci sadržavaju tri vrste sjemena...koristiti ćemo klastering metodu. Prvo učitamo podatke i pregledamo strukturu:
 
 ```{r}
 seeds <- read.table("../Dta/seeds_dataset.txt",header = T)  # dostupno na UCIMLR
@@ -522,7 +926,7 @@ km_seeds$tot.withinss/km_seeds$betweenss
 Unutar- klasterska sličnost je niža od među- klsterske sličnostišto znači da su klasteri dobro odijeljeni i kompaktni. To je jasno vidljivo i na vizualnom prikazu pa možemo zaključiti da klasteri dobro predstavljaju tri vrste sjemena.
 
 
-## Trening vs. test podjela
+### Trening vs. test podjela
 
 Bitna razlika između strojnog učenja i statistike je *prediktivna* vs *deskriptivna* moć modela. Modeli nadgledanog ML bi trebali imati veliku prediktivnu moć, tj. dobro predvidjeti odnos na novim, neviđenim opservacijama. Klasična statistika se bazira na kvaliteti modela s obzirom na dane (postojeće) podatke tj. model treba dobro opisati podatke (poznate opservacije).
 
@@ -600,42 +1004,6 @@ rec
 Rezultati ukazuju na nešto manju točnost i preciznost modela, ~76% i ~78% u odnosu na ~82% koju smo imali u prvom slučaju. Ovi rezultati predstavljaju realniju procjenu prediktivne moći modela.
 
 
-## Pristranost i varijanca
-
-Predikcijska pogreška modela se može podijeliti u dvije komponente: 
-1. *fiksna pogreška* (i.e. irreducible error) koja predstavlja nepravilnosti u podatcima
-2. *varijabilna pogreška* (i.e. reducible error) se odnosi na "fit" modela. Cilj ML modela je minimizacija ove pogreške. Može biti vezana uz **pristranost** ili **varijancu**.
- 
-### Greška na osnovi pristranosti
-
-Ova vrsta greške nastaje zbog pretpostavki koje unosimo u ML algoritam i predstavlja razliku između predviđanja modela i pravih vrijednosti. Greška na osnovi pristranosti nastaje zbog prevelikih restrikcija koje unosimo u model, primjerice ukoliko podatke koje karakterizira kvadratni odnos opišemo s linearnom funkcijom. Primjer je na sljedećem grafikonu:
-
-```{r echo  = F}
-knitr::include_graphics("../Foto/ml_bias.png")
-```
-
-
-### Greška na osnovi varijance
-
-Ova greška nastaje kada model "predobro" opisuje podatke. Na istim podatcima kao u prethodnom slučaju, podatke možemo umjesto s kvadratnom funkcijom, modelirati i polinomijalnom funkcijom...to bi izgledalo otprilike ovako:
-
-```{r echo  = F}
-knitr::include_graphics("../Foto/ml_var.png")
-```
-
-
-
-Slika prikazije polinomijalnu funkkciju koja vrlo točno modelira svaku opservaciju pa je vrlo vjerojatno da novi podatci neće biti dobro predstavljeni takvim modelom. Drugačje rečeno, model će dobro opisati podatke na trening uzorku, ali i proizvesti dosta reziduala na training uzorku. Dakle, ovakav model će loše generalizirati (nove podatke).
-
-
-### Pristranost vs varijanca (tradeoff)
-
-Sada je jasno da model sa niskim stupnjem restriktivnosti dovodi do viskoke varijance dok nesenzitivni model dovodi do pristranosti. U ML algoritmu je ciljpostići optimalnu konvergenciju između ove dvije krajnosti. *Overfitting* modela se odnosi na "predobro" opisivanje podataka u training uzorku i generira **specifičan** model dok **underfitting** označava model koji dobro generalizira ali ima nisku točnost.
-
-
-## Interpretabilnost modela
-
-U ML je vrlo važno na koji način i u kojoj mjeri možemo interpšretirati rezultate modela. Pri tome visoka interpretabilnost najačešće implicira visoku pristranost
 
 
 ## Dodatni resursi 
@@ -652,7 +1020,7 @@ U ML je vrlo važno na koji način i u kojoj mjeri možemo interpšretirati rezu
 - pregled [ML za sociologiju](https://www.annualreviews.org/doi/10.1146/annurev-soc-073117-041106)
 
 
-
+- izvrstan [tutorial](https://training.galaxyproject.org/training-material/topics/statistics/tutorials/intro-to-ml-with-r/tutorial.html)
 
 
 

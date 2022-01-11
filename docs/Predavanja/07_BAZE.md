@@ -2,7 +2,7 @@
 title: "Obrada podataka"
 author:
   name: Luka Sikic, PhD
-  affiliation: Fakultet hrvatskih studija | [OP](https://github.com/BrbanMiro/Obrada-podataka)
+  affiliation: Fakultet hrvatskih studija | [OP](https://lusiki.github.io/WebObradaPodataka/)
 subtitle: 'Predavanje 7: Rad sa bazama podataka'
 output:
   html_document:
@@ -124,7 +124,7 @@ flights_db
 
 ```
 ## # Source:   table<flights> [?? x 19]
-## # Database: sqlite 3.33.0 []
+## # Database: sqlite 3.37.0 []
 ##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
 ##    <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>
 ##  1  2013     1     1      517            515         2      830            819
@@ -157,7 +157,7 @@ flights_db %>% select(year:day, dep_delay, arr_delay)
 
 ```
 ## # Source:   lazy query [?? x 5]
-## # Database: sqlite 3.33.0 []
+## # Database: sqlite 3.37.0 []
 ##     year month   day dep_delay arr_delay
 ##    <int> <int> <int>     <dbl>     <dbl>
 ##  1  2013     1     1         2        11
@@ -180,7 +180,7 @@ flights_db %>% filter(dep_delay > 240)
 
 ```
 ## # Source:   lazy query [?? x 19]
-## # Database: sqlite 3.33.0 []
+## # Database: sqlite 3.37.0 []
 ##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
 ##    <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>
 ##  1  2013     1     1      848           1835       853     1001           1950
@@ -207,7 +207,7 @@ flights_db %>%
 
 ```
 ## # Source:   lazy query [?? x 2]
-## # Database: sqlite 3.33.0 []
+## # Database: sqlite 3.37.0 []
 ##    dest  delay
 ##    <chr> <dbl>
 ##  1 ABQ   2006.
@@ -256,21 +256,26 @@ tailnum_delay_db
 ```
 
 ```
+## Warning: ORDER BY is ignored in subqueries without LIMIT
+## i Do you need to move arrange() later in the pipeline or use window_order() instead?
+```
+
+```
 ## # Source:     lazy query [?? x 4]
-## # Database:   sqlite 3.33.0 []
+## # Database:   sqlite 3.37.0 []
 ## # Ordered by: desc(mean_arr_delay)
 ##    tailnum mean_dep_delay mean_arr_delay     n
 ##    <chr>            <dbl>          <dbl> <int>
-##  1 N11119            32.6           30.3   148
-##  2 N16919            32.4           29.9   251
-##  3 N14998            29.4           27.9   230
-##  4 N15910            29.3           27.6   280
-##  5 N13123            29.6           26.0   121
-##  6 N11192            27.5           25.9   154
-##  7 N14950            26.2           25.3   219
-##  8 N21130            27.0           25.0   126
-##  9 N24128            24.8           24.9   129
-## 10 N22971            26.5           24.7   230
+##  1 <NA>             NA             NA     2512
+##  2 N0EGMQ            8.49           9.98   371
+##  3 N10156           17.8           12.7    153
+##  4 N10575           22.7           20.7    289
+##  5 N11106           15.6           14.9    129
+##  6 N11107           20.4           15.0    148
+##  7 N11109           21.1           14.9    148
+##  8 N11113           19.6           15.8    138
+##  9 N11119           32.6           30.3    148
+## 10 N11121           16.6           10.3    154
 ## # ... with more rows
 ```
 
@@ -284,6 +289,14 @@ Najčešće je potrebno iterirati kroz podatke nekoliko puta prije nego uistinu 
 tailnum_delay <- 
   tailnum_delay_db %>% 
   collect()
+```
+
+```
+## Warning: ORDER BY is ignored in subqueries without LIMIT
+## i Do you need to move arrange() later in the pipeline or use window_order() instead?
+```
+
+```r
 tailnum_delay
 ```
 
@@ -291,16 +304,16 @@ tailnum_delay
 ## # A tibble: 1,201 x 4
 ##    tailnum mean_dep_delay mean_arr_delay     n
 ##    <chr>            <dbl>          <dbl> <int>
-##  1 N11119            32.6           30.3   148
-##  2 N16919            32.4           29.9   251
-##  3 N14998            29.4           27.9   230
-##  4 N15910            29.3           27.6   280
-##  5 N13123            29.6           26.0   121
-##  6 N11192            27.5           25.9   154
-##  7 N14950            26.2           25.3   219
-##  8 N21130            27.0           25.0   126
-##  9 N24128            24.8           24.9   129
-## 10 N22971            26.5           24.7   230
+##  1 <NA>             NA             NA     2512
+##  2 N0EGMQ            8.49           9.98   371
+##  3 N10156           17.8           12.7    153
+##  4 N10575           22.7           20.7    289
+##  5 N11106           15.6           14.9    129
+##  6 N11107           20.4           15.0    148
+##  7 N11109           21.1           14.9    148
+##  8 N11113           19.6           15.8    138
+##  9 N11119           32.6           30.3    148
+## 10 N11121           16.6           10.3    154
 ## # ... with 1,191 more rows
 ```
 
@@ -331,13 +344,16 @@ tailnum_delay_db %>% show_query()
 ```
 
 ```
+## Warning: ORDER BY is ignored in subqueries without LIMIT
+## i Do you need to move arrange() later in the pipeline or use window_order() instead?
+```
+
+```
 ## <SQL>
 ## SELECT *
-## FROM (SELECT *
-## FROM (SELECT `tailnum`, AVG(`dep_delay`) AS `mean_dep_delay`, AVG(`arr_delay`) AS `mean_arr_delay`, COUNT() AS `n`
+## FROM (SELECT `tailnum`, AVG(`dep_delay`) AS `mean_dep_delay`, AVG(`arr_delay`) AS `mean_arr_delay`, COUNT(*) AS `n`
 ## FROM `flights`
 ## GROUP BY `tailnum`)
-## ORDER BY `mean_arr_delay` DESC)
 ## WHERE (`n` > 100.0)
 ```
 
@@ -520,7 +536,7 @@ billing_id <- Sys.getenv("GCE_DEFAULT_PROJECT_ID") ## zamijenite sa vašim ID
 
 
 ```r
-bigrquery::bq_auth(path = "D:/LUKA/Academic/HS/NASTAVA/20-21/key.json")
+bigrquery::bq_auth(path = "D:/LUKA/Academic/HS/NASTAVA/20-21/Creds/key.json")
 ```
 
 Nakon što smo podesili ID (*i ključ za interaktivno izvršavanje*), možemo započeti sa upitima na bazu i preuzimanjem BigQuery podataka u radni prostor R. To ćemo napraviti kroz dva primjera: 1) podatci o natalitetu u SAD-u i 2) podatci o ribolovu u okviru Global Fishing Watch projekta.
@@ -599,6 +615,10 @@ bw_st <-
   summarise(weight_pounds = mean(weight_pounds, na.rm=T)) %>% 
   mutate(gender = ifelse(is_male, "Male", "Female")) %>% 
   collect()
+```
+
+```
+## `summarise()` has grouped output by 'year', 'state'. You can override using the `.groups` argument.
 ```
 
 Prikažimo podatke:
@@ -786,6 +806,10 @@ globe <-
   group_by(lat_bin_center, lon_bin_center) %>%
   summarise(fishing_hours = sum(fishing_hours, na.rm=T)) %>%
   collect()
+```
+
+```
+## `summarise()` has grouped output by 'lat_bin_center'. You can override using the `.groups` argument.
 ```
 
 Napravimo sada vizualizaciju:

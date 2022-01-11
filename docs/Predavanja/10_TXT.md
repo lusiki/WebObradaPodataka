@@ -196,10 +196,10 @@ glimpse(newsCOVID)
 ```
 ## Rows: 2,623
 ## Columns: 4
-## $ naslov <chr> "Koliko nas je koštala korona? S porastom broja oboljelih, v...
-## $ datum  <date> 2020-12-07, 2020-11-13, 2020-12-04, 2020-12-08, 2020-12-08,...
-## $ domena <chr> "tportal", "nethr", "tportal", "tportal", "tportal", "tporta...
-## $ clanak <int> 1, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19, ...
+## $ naslov <chr> "Koliko nas je koštala korona? S porastom broja oboljelih, vrto~
+## $ datum  <date> 2020-12-07, 2020-11-13, 2020-12-04, 2020-12-08, 2020-12-08, 20~
+## $ domena <chr> "tportal", "nethr", "tportal", "tportal", "tportal", "tportal",~
+## $ clanak <int> 1, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,~
 ```
 
 ```r
@@ -209,28 +209,28 @@ newsCOVID %>%
 ```
 
 ```
-##                                                                                                                       naslov
-## 1                                              Posljednje prognoze: Restart će imati najviše mandata, ali ostat će bez vlade
-## 2                                      Hrvatska novinarka u Njemačkoj: Trebala sam biti na Korčuli, ali korona me zaustavila
-## 3                                           Muzej tražio od ljudi da rekreiraju omiljena umjetnička djela, neke fotke su sve
-## 4                                               Restoran predstavio neočekivano rješenje za održavanje mušterija na distanci
-## 5  SINDIKALISTI O POVEĆANJU IZNOSA MINIMALNE PLAĆE: ‘S obzirom na epidemiološke i ekonomske probleme, to je zadovoljavajuće’
-## 6          RTL-ova voditeljica u novom poslovnom pothvatu: 'Korona me 'pogurala' da u svoja četiri zida stvaram svoju priču'
-## 7     PANDEMIJA KORONAVIRUSA ZAUSTAVILA JE NEGATIVAN TREND: Nikad manje ljudi nije poginulo u prometnim nesrećama, ali ipak…
-## 8      KORONAVIRUS U ŠKOLI: Kod kuće testirali djecu koja su bila u kontaktu sa zaraženim; Majka djevojčice: ‘Bilo je čudno’
-## 9                                          Epidemiolog odgovarao na pitanja građana o koroni: Koliko traje, što s maskama...
-## 10                                                              Ponovno raste broj zaraženih u BiH, sedam osoba je preminulo
+##                                                                                                                                        naslov
+## 1                                                                          Vozači kamiona koji su bili na sjeveru Italije ne žele u karantenu
+## 2  NEKI SU CIJENE SNIZILI ZA POLA, A NEKI IH DRŽE KAO DA SE NIŠTA NE DOGAĐA: Novinar analizirao našu glavnu konkurenciju – dosta su jeftiniji
+## 3                                                              Hrvatska odmah iza Švedske po broju pozitivnih na ukupan broj covid-19 testova
+## 4            ANALITIČAR UPOZORAVA: ‘Privatni sektor će smanjiti zaposlenost i plaće, ali državni nastavlja trošiti kao da se ništa ne događa’
+## 5                            Unatoč koronavirusu i dalje je duhovita: Holivudska glumica i supruga Toma Hanksa putem Twittera zatražila pomoć
+## 6                                                                  U Bruxellesu se lome koplja oko fonda za obnovu EU-a. Ima puno nepoznanica
+## 7                                                        Dvostruka olimpijska pobjednica: Korona je Božja kazna jer ste vrijeđali moju zemlju
+## 8                                                            Učenici nisu mogli vjerovati što je profesorica napravila tijekom nastave online
+## 9                             IMAJU LI SMISLA TESTOVI NA PRISUTNOST ANTITIJELA KORONAVIRUSA? Točnost im je 99 posto, ali ni to nije dovoljno…
+## 10              JE LI KORONA UBRZALA ODUMIRANJE ‘ŠUŠKAVIH’ NOVČANICA? Dok ljudi sve više plaćaju karticama, neki poručuju: ‘To je sve urota!’
 ##         datum  domena clanak
-## 1  2020-07-03   index   3567
-## 2  2020-03-15   index    764
-## 3  2020-03-29   index   1966
-## 4  2020-05-18   index   1479
-## 5  2020-10-29   nethr   2880
-## 6  2020-08-01 tportal    580
-## 7  2020-05-28   nethr   4084
-## 8  2020-03-05   nethr   5730
-## 9  2020-03-25   index   5150
-## 10 2020-09-02 tportal   1066
+## 1  2020-03-03   index   2630
+## 2  2020-07-01   nethr   3638
+## 3  2020-07-17   index   1208
+## 4  2020-08-21   nethr    557
+## 5  2020-03-14 tportal   5558
+## 6  2020-05-21 tportal   4319
+## 7  2020-03-28   index    820
+## 8  2020-03-20   index   2311
+## 9  2020-06-06   nethr   3846
+## 10 2020-06-29   nethr    621
 ```
 
 ```r
@@ -254,17 +254,17 @@ newsCOVID_token %>%
 ```
 
 ```
-##              datum  domena clanak        word
-## 161.10  2020-09-09   index    514          za
-## 1491.5  2020-08-25   index   3214       prije
-## 2011.8  2020-06-21   nethr   3738      koronu
-## 2456.15 2020-03-16 tportal   5248       uvoza
-## 1608.4  2020-08-10   nethr   3331       jedan
-## 244.4   2020-07-22   index    597      velika
-## 432.12  2020-10-30   nethr    967        vidi
-## 632.14  2020-07-30   nethr   1168      porast
-## 1747.2  2020-07-21   index   3472 fotografije
-## 384.6   2020-03-16   index    876          je
+##         datum  domena clanak         word
+## 1  2020-11-03   nethr   2849   komentirao
+## 2  2020-08-24   nethr   3207   komentirao
+## 3  2020-09-29 tportal   3009     skulirao
+## 4  2020-08-17   nethr    565    napraviti
+## 5  2020-11-25   nethr    221      itekako
+## 6  2020-06-09   index   3861         prvi
+## 7  2020-08-28   nethr   3180           je
+## 8  2020-11-14   nethr    432   prvoligaša
+## 9  2020-03-12   index   5142       otkrio
+## 10 2020-10-11   nethr   2969 bombardiraju
 ```
 
 Potom valja očistiti riječi od brojeva i nepotrebnih riječi. Na tako uređenim podatcima ćemo napraviti deskriptivno- statistički pregled teksta.
@@ -284,17 +284,17 @@ newsCOVID_tokenTidy %>%
 ```
 
 ```
-##         datum  domena clanak      word
-## 1  2020-03-19   index   5422      real
-## 2  2020-06-16   nethr    643 otvorenje
-## 3  2020-11-11   nethr   2817     nadam
-## 4  2020-10-04   nethr    482   vratiti
-## 5  2020-11-21 tportal   2769    pošast
-## 6  2020-08-29   nethr   3175   olovkom
-## 7  2020-05-21   nethr   4195    mislim
-## 8  2020-10-26   nethr   2906      koga
-## 9  2020-06-04   index   1343     ljudi
-## 10 2020-03-11   nethr   5645 pandemiju
+##         datum domena clanak     word
+## 1  2020-07-15  index   3518  zemalja
+## 2  2020-07-18  index   3499   jednoj
+## 3  2020-07-21  index   3451 njemaeki
+## 4  2020-10-17  nethr   2943     pola
+## 5  2020-07-31  nethr   1165 lokaciju
+## 6  2020-05-26  nethr    696     gube
+## 7  2020-05-25  nethr   4207     ipak
+## 8  2020-07-13  nethr    609     brzo
+## 9  2020-08-13  index   3306     novi
+## 10 2020-06-23  index   1293    masku
 ```
 
 Na tako uređenim podatcima ćemo napraviti deskriptivno-statistički pregled teksta:
@@ -450,17 +450,17 @@ CroSentilex_n %>% sample_n(10)
 ```
 
 ```
-##                 word sentiment brija
-##  1:          toplica   0.47290   NEG
-##  2:         komunati   0.14723   NEG
-##  3:        preostati   0.39368   NEG
-##  4:         cvjetača   0.14295   NEG
-##  5:        sklapanje   0.50151   NEG
-##  6:     kompatibilan   0.25909   NEG
-##  7:          leipzig   0.34337   NEG
-##  8:        proštenik   0.26667   NEG
-##  9: diskriminirajući   0.36625   NEG
-## 10:      kolažiranje   0.12735   NEG
+##                    word sentiment brija
+##  1:         zatrpavanje   0.28143   NEG
+##  2:         muslimanski   0.52062   NEG
+##  3:               lager   0.16996   NEG
+##  4:        nacionalnost   0.55685   NEG
+##  5:         pogodovanje   0.33142   NEG
+##  6:             prestar   0.33501   NEG
+##  7: četrdesetogodišnjak   0.25620   NEG
+##  8:              stupno   0.16414   NEG
+##  9:        predosjećati   0.31410   NEG
+## 10:         dijagonalan   0.27887   NEG
 ```
 
 ```r
@@ -469,16 +469,16 @@ CroSentilex_p %>% sample_n(10)
 
 ```
 ##              word sentiment brija
-##  1:       berishe  0.179200   POZ
-##  2: bjelosvjetski  0.258700   POZ
-##  3:       rogošić  0.266480   POZ
-##  4:      laurence  0.385980   POZ
-##  5:       posudba  0.503180   POZ
-##  6:    napomenuti  0.267380   POZ
-##  7:       naravan  0.219290   POZ
-##  8:          obod  0.284240   POZ
-##  9:       corinna  0.083348   POZ
-## 10:     zastanuti  0.390960   POZ
+##  1:       georgio  0.332670   POZ
+##  2: neodobravanje  0.128540   POZ
+##  3:       molunat  0.051524   POZ
+##  4:        poklon  0.565020   POZ
+##  5:    monitoring  0.357950   POZ
+##  6:       burrell  0.142170   POZ
+##  7:    ilijašević  0.137140   POZ
+##  8: zimbabveanski  0.099059   POZ
+##  9:        miošić  0.183830   POZ
+## 10:         larga  0.054864   POZ
 ```
 
 ```r
@@ -487,16 +487,16 @@ Crosentilex_sve %>% sample_n(10)
 
 ```
 ##              word sentiment brija
-##  1:       zagovor   0.11602   NEG
-##  2:          owen   0.45149   POZ
-##  3:   skandiranje   0.49131   POZ
-##  4: strossmayerov   0.30755   POZ
-##  5:    pčelarstvo   0.24969   POZ
-##  6:          iljo   0.27278   NEG
-##  7:       ročnica   0.22567   POZ
-##  8:       osimski   0.27088   NEG
-##  9:         obići   0.42460   POZ
-## 10:         štrig   0.23390   NEG
+##  1: angloamerički   0.45456   NEG
+##  2:         čitač   0.30338   NEG
+##  3:      angažman   0.43367   NEG
+##  4:   isplatititi   0.41216   POZ
+##  5:    nazdraviti   0.14007   NEG
+##  6:    poklanjati   0.51084   NEG
+##  7:         sršen   0.35366   POZ
+##  8:          alon   0.29173   POZ
+##  9:           dor   0.44062   NEG
+## 10:         uskrs   0.57030   POZ
 ```
 
 ```r
@@ -504,17 +504,17 @@ CroSentilex_Gold %>% sample_n(10)
 ```
 
 ```
-##          word sentiment
-## 1       dužan         1
-## 2     učinjen         0
-## 3      ležati         0
-## 4      hektar         0
-## 5      odgoda         0
-## 6  podsjećati         0
-## 7       svađa         1
-## 8    dokument         0
-## 9  priznavati         0
-## 10   povratak         0
+##         word sentiment
+## 1   ambicija         2
+## 2     vozilo         0
+## 3   društven         2
+## 4      čitav         0
+## 5  posvetiti         0
+## 6    krajnji         0
+## 7     raniti         1
+## 8     sporan         1
+## 9   rekordan         0
+## 10     kupac         0
 ```
 
 Provjerimo kretanje sentimenta u vremenu:
@@ -773,17 +773,17 @@ newsCOVID_bigram %>% head(10)
 ```
 
 ```
-##         datum domena clanak               bigram
-## 1  2020-02-26  nethr   2648      civilna zaštita
-## 2  2020-02-26  nethr   2648 zaštita mobilizirala
-## 3  2020-02-26  nethr   2648   mobilizirala hotel
-## 4  2020-02-26  nethr   2648             hotel na
-## 5  2020-02-26  nethr   2648          na sljemenu
-## 6  2020-02-26  nethr   2648  sljemenu tomislavov
-## 7  2020-02-26  nethr   2648       tomislavov dom
-## 8  2020-02-26  nethr   2648          dom postaje
-## 9  2020-02-26  nethr   2648    postaje karantena
-## 10 2020-02-26  nethr   2648   karantena izbacili
+##         datum  domena clanak              bigram
+## 1  2020-12-07 tportal      1          koliko nas
+## 2  2020-12-07 tportal      1              nas je
+## 3  2020-12-07 tportal      1          je koštala
+## 4  2020-12-07 tportal      1      koštala korona
+## 5  2020-12-07 tportal      1            korona s
+## 6  2020-12-07 tportal      1          s porastom
+## 7  2020-12-07 tportal      1      porastom broja
+## 8  2020-12-07 tportal      1     broja oboljelih
+## 9  2020-12-07 tportal      1 oboljelih vrtoglavo
+## 10 2020-12-07 tportal      1     vrtoglavo rastu
 ```
 
 ```r

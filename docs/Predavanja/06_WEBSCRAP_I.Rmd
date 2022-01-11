@@ -26,11 +26,11 @@ knitr::opts_chunk$set(echo = TRUE, cache = TRUE, dpi=300)
 
 ### Registracija
 
-U ovom dijelu predavanja ćemo preuzeti ekonomske podatke (između ostalog) sa FRED API-ja. To zatijeva [registraciju](https://research.stlouisfed.org/useraccount/apikey) i pohranu [API ključa](https://research.stlouisfed.org/useraccount/apikey).
+U ovom predavanju ćemo preuzeti ekonomske podatke (između ostalog) sa FRED API-ja. To zatijeva [registraciju](https://research.stlouisfed.org/useraccount/apikey) i pohranu [API ključa](https://research.stlouisfed.org/useraccount/apikey).
 
 ### *Eksterni* software
 
-Koristiti ćemo [JSONView](https://jsonview.com/) browser ekstenziju koja omogućava pregled JSON output-a u Chrome-u i Firefox-u. (Nije nužno ali preporučeno!)
+Koristiti ćemo [JSONView](https://jsonview.com/) browser ekstenziju koja omogućava pregled JSON output-a u Chrome-u i Firefox-u. (Nije nužno ali se  preporuča!)
 
 ### R paketi 
 
@@ -38,7 +38,7 @@ Koristiti ćemo [JSONView](https://jsonview.com/) browser ekstenziju koja omogu�
 - Otprije korišteni: **tidyverse**, **lubridate**, **hrbrthemes**, **janitor**
 
 Prigodan način za instalaciju i učitavanje svih prethodno pobrojanih paketa (ukoliko to niste već napravili):
-```{r packages, cache=F, message=F,warning=F}
+```{r packages, cache=F, message=F,warning=F, eval = F}
 ## učitaj i instaliraj pakete
 if (!require("pacman")) install.packages("pacman")
 pacman::p_load(tidyverse, httr, lubridate, hrbrthemes, janitor, jsonlite, listviewer, usethis)
@@ -51,9 +51,9 @@ theme_set(hrbrthemes::theme_ipsum())
 
 ## Prisjetimo se...
 
-U prvom dijelu predavanja o preuzimanju sadržaja sa interneta smo vidjeli da web stranice i web aplikacije mogu biti: 1) na strani servera i 2) na strani klijenta. Već smo pokazali kako preuzeti podatke koji su procesuirani na strani servera koristeći **rvest** paket. Ta se tehnika fokusira na CSS selektore ([SelectorGadget](http://selectorgadget.com/)) i HTML tagove. Također smo vidjeli da webscraping nije egzaktna zanost već dijelom i umjetnost! Mnoštvo CSS opcija i fleksibilnost HTML-a čine preuzimanje podataka specifičnim za svaku pojedinu stranicu i trenutak. To ne znači da opći principi ne funkcioniraju!
+U prvom dijelu predavanja o preuzimanju sadržaja sa interneta smo vidjeli da *web* stranice i *web* aplikacije mogu biti: 1) na strani servera i 2) na strani klijenta. Već smo pokazali kako preuzeti podatke koji su procesuirani na strani servera koristeći **rvest** paket. Ta se tehnika fokusira na CSS selektore ([SelectorGadget](http://selectorgadget.com/)) i HTML tagove. Također smo vidjeli da *webscraping* nije egzaktna zanost nego uvelike i umjetnost! Mnoštvo CSS opcija i fleksibilnost HTML-a čine preuzimanje podataka specifičnim poslom za svaku pojedinu stranicu i trenutak. To ne znači da opći principi ne funkcioniraju!
 
-Fokus ovog dijela predavanja je preuzimanje podataka koji su procesuirani na strani klijenta (**client-side**). Ovaj je pristup u najvećem broju slučajeva jednostavniji način za preuzimanje podataka sa web-a. To ne znači da određena doza "umjetnosti" nije potrebna...! Još jednom valja naglasiti **etičke** i **zakonske** aspekte preuzimanja web sadržaja...pogledajte u prvom dijelu predavanja!
+Fokus ovog dijela predavanja je na preuzimanje podataka koji su procesuirani na strani klijenta (*client-side*). Ovaj je pristup u najvećem broju slučajeva jednostavniji način za preuzimanje podataka sa web-a. To ne znači da određena doza "umjetnosti" nije potrebna...! Još jednom valja naglasiti **etičke** i **zakonske** aspekte preuzimanja web sadržaja...koje smo spominjali u prvom dijelu predavanja!
 
 ## Strana klijenta (*Client-side*), API i API *izvori*
 
@@ -63,13 +63,13 @@ Webstranice i aplikacije koje su procesuirane na **strani klijenta**  zahtijevaj
 - Posjetite URL koji koristi predložak statičkog sadržaja (HTML tablice, CSS, itd). Taj predložak  sadržava podatke "u sebi".
 - U procesu otvaranja URL-a, browser šalje zahtijev (*request*) na (host) server.
 - Ukoliko je zahtjev ispravan (*valid*), server će vratiti odgovor (*response*) koji poziva tražene podatke i dinamički ih procesuira u browser-u.
-- Stranica koju vidite u browseru je stoga mješavina statičkog sadržaja (predloška) i dinamički generiranih informacija koje su procesuirane u browseru (i.e. *klijent*).
+- Stranica koju vidite u browseru je stoga mješavina statičkog sadržaja (predloška) i dinamički generiranih informacija koje su procesuirane u browseru (i.e. *klijentu*).
 
-Cijelokupni proces slanja zahtjeva, odgovora i procesuiranja se odvija kroz **API** (or **A**pplication **P**rogram **I**nterface) host aplikacije.
+Cijelokupni proces slanja zahtjeva, odgovora i procesuiranja se odvija kroz **API** (or **A**pplication **P**rogram **I**nterface) *host* aplikacije.
 
 ### API
 
-Ako prvi put čujete za API, pogledajte Zapier- ov pregled [An Introduction to APIs](https://zapier.com/learn/apis/). Pregled je opširan ali ne morate proći sve detalje...Zaključak je da API predstavlja skup pravila i metoda koje omogućavaju interakciju različitih software-skih aplikacija u razmjeni informacija. To se ne odnosi samo na web servere i browser-e nego i na npr. neke pakete koje smo već koristili u ovom kolegiju.^[Zanimljivost: Brojn i paketi koje ćemo koristiti u ovom kolegiju (npr. **leaflet**, **plotly**, etc.) su samo skup *wrapper* funkcija koje komuniciraju sa API-jima i pretvaraju R kod u neki drugi jezik (npr. JavaScript).] Ključni koncepti su:
+Ako prvi put čujete za API, pogledajte Zapier- ov pregled [An Introduction to APIs](https://zapier.com/learn/apis/). Pregled je opširan ali ne morate proći sve detalje...Glavni zaključak je da API predstavlja skup pravila i metoda koje omogućavaju interakciju različitih softwareskih aplikacija u razmjeni informacija. To se ne odnosi samo na web servere i browsere nego i na npr. neke pakete koje smo već koristili u ovom kolegiju.^[Zanimljivost: Brojn i paketi koje ćemo koristiti u ovom kolegiju (npr. **leaflet**, **plotly**, etc.) su samo skup *wrapper* funkcija koje komuniciraju sa API-jima i pretvaraju R kod u neki drugi jezik (npr. JavaScript).] Ključni koncepti su:
 
 - **Server:** Računalo koje izvršava (*engl. run*).
 - **Klijent:** Program koji izmjenjuje podatke sa serverom kroz API.
@@ -85,14 +85,14 @@ Ključna točka u razumijevanju API-ja je da možemo pristupiti informacijama *d
 
 API izvori su u mnogočemu sličini normalnim web URL-ovima koje stalno posjećujemo. Za početak, možete navigirati do njih u browser-u. "Normalne" web stranice prikazuju informacije u "lijepom" HTML-u (slike, video, GFI itd.),  a API izvori su "ružni". Navigirajte browser do API izvora i vidjeti ćete samo hrpu neformatiranog teksta. Ono što uistinu vidite je najvjerojatnije [JSON](https://en.wikipedia.org/wiki/JSON) (**J**ava**S**cript **O**bject **No**tation) ili [XML](https://en.wikipedia.org/wiki/XML) (E**x**tensible **M**arkup **L**anguage). 
 
-Sintaksa tih jezika (JSON i XML) vas ne treba zabrinjavati. Važno je da objekt u vašem browser-u (koji učitava hrpu nestrukturiranog teksta) zapravo ima vrlo precizno definiranu strukturu i format. Taj objekt akođer sadžava informacije (podatke) koje je moguće vrlo jednostavno učitati u R (ili Python, Julia...). Potrebno je samo znati točan API izvor za podatke koje želimo!
+Sintaksa tih jezika (JSON i XML) vas ne treba zabrinjavati. Važno je da objekt u vašem browser-u (koji učitava hrpu nestrukturiranog teksta) zapravo ima vrlo precizno definiranu strukturu i format. Taj objekt također sadžava informacije (podatke) koje je moguće vrlo jednostavno učitati u R (ili Python, Julia...). Potrebno je samo znati točan API izvor za podatke koje želimo!
 
 Vrijeme je za nekoliko primjera...Započeti ćemo sa najjednostavnijim slučajem (bez API ključa i sa eksplicitnim API izvorom), a nakon toga nastaviti sa složenijim primjerima.
 
 
 ## Praktični primjer 1: Drveće u New York-u
 
-[NYC Open Data](https://opendata.cityofnewyork.us/) je zanimljiva inicijativa. Njezina misija je *"make the wealth of public data generated by various New York City agencies and other City organizations available for public use*". Podatci koje možete preuzeti uključuju uhićenja, lokacije wifi spotova, oglase za posao, broj beskućnika, licence za pse, popis wc-a u javnim parkovima...Pogledajte popis dostupnih podataka kada stignete! U ovom primjeru ćemo preuzeti podatke o drveću [**2015 NYC Street Tree Census**](https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/uvpi-gqnh).
+[NYC Open Data](https://opendata.cityofnewyork.us/) je zanimljiva inicijativa. Njezina misija je *"make the wealth of public data generated by various New York City agencies and other City organizations available for public use*". Podatci koje možete preuzeti uključuju uhićenja, wifi lokacije, oglase za posao, broj beskućnika, licence za pse, popis wc-a u javnim parkovima...Pogledajte popis dostupnih podataka kada stignete! U ovom primjeru ćemo preuzeti podatke o drveću [**2015 NYC Street Tree Census**](https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/uvpi-gqnh).
 
 Ovaj izvor koristimo na početku pošto nije potrebno postaviti API ključ unaprijed.^[Ipak, da biste smanjili opterećenje na server --- i.e. broj zahtjeva u vremenu --- najbolje je napraviti [registraciju](https://data.cityofnewyork.us/profile/app_tokens) za **NYC Open Data app token**. Za svrhe ovog predavanja ćemo napraviti jedan ili dva zahtjeva na server pa registracija nije nužna.] Podatke ćemo preuzeti u nekoliko koraka:
 
@@ -123,7 +123,7 @@ nyc_trees
 fromJSON("https://data.cityofnewyork.us/resource/nwxe-4ae8.json?$limit=5")
 ```
 
-Vratimo se primjeru sa drvećem i vizualizirajmo podatke koje smo preuzeli. Još jedan dodatni komentar je da `jsonlite::fromJSON()` funkcija automatski pretvara sav sadržaj u string (character ) pa je potrebno promijeniti kolone u numeričke prije vizualizacije.
+Vratimo se primjeru sa drvećem i vizualizirajmo podatke koje smo preuzeli. Dodatna napomena je da `jsonlite::fromJSON()` funkcija automatski pretvara sav sadržaj u string (character ) pa je potrebno promijeniti kolone u numeričke prije vizualizacije.
 
 ```{r nyc3, warning=F}
 nyc_trees %>% 
@@ -141,7 +141,7 @@ nyc_trees %>%
 
 Ovo bi bilo zanimljivije kada bi mapa sadržavala prave geolokacijske podatke New York-a. Prostorna analiza je zanimljivo istraživačko područje, a vizualizacija tog tipa bi zahtijvela zasebno predavanje...
 
-Cilj ovog praktičnog primjera je pokazati kako za preuzimanje API podataka nije uvijek potrebna registracija. To nije tipično jer najveći broj API sučelja dozvoljava pristup isključivo nakon registracije (*potreban je ključ!*). To se najčešće odnosi na preuzimanje javnih podataka ( npr. sudski registar, HNB, etc.). Pogledajmo sada jedan primjer gdje je potrebna API registracija.
+Cilj ovog praktičnog primjera je pokazati kako za preuzimanje API podataka nije uvijek potrebna registracija. To nije tipično jer najveći broj API sučelja dozvoljava pristup isključivo nakon registracije (*potreban je ključ!*). To se najčešće odnosi na preuzimanje javnih podataka ( npr. [sudski registar](https://sudreg-podaci.pravosudje.hr/docs/services/5adda5d214bb2910b8322a96/operations/bris_pravni_oblik_Get), [HNB](http://api.hnb.hr/), etc.). Pogledajmo sada jedan primjer gdje je potrebna API registracija.
 
 
 ## Praktični primjer 2: FRED podatci
@@ -151,12 +151,11 @@ Drugi primjer uključuje preuzimanje podataka sa [**FRED API**](https://research
 
 [FRED](https://fred.stlouisfed.org/) je ekonomska baza Federalne banke u St. Louis-u, podružnice Američke središnje banke. Stranica ima ugrađene alate za vizualizaciju podataka [poput ovog](https://fred.stlouisfed.org/series/GNPCA#0) za seriju BDP/per capita SAD-a od 1929. godine.
 
-<iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=mPCo&width=670&height=475" scrolling="no" frameborder="0"style="overflow:hidden; width:670px; height:525px;" allowTransparency="true"></iframe>
 
 
 </br>
 
-U ovom primjeru preuzimamo podatke na osnovi kojih je napravljen prethodni grafikon kroz **FRED API** kako biste naučili što se događa "u pozadini". Nakon toga ćemo preuzeti iste podatke kroz R paket kojii je netko napisau za tu svrhu.
+U ovom primjeru preuzimamo podatke na osnovi kojih je napravljen prethodni grafikon kroz **FRED API** kako biste vidjeli što se događa "u pozadini". Nakon toga ćemo preuzeti iste podatke kroz R paket kojii je netko napisau za tu svrhu.
 
 
 ### Napravite sami
@@ -217,7 +216,8 @@ Pogledajte`fred` objekt u konzoli. To što vidite je pravi API odgovor (i.e. res
 ```
 
 Da bismo uzeli sadržaj (i.e. podatke) iz ovog odgovora, koristiti ćemo `httr::content()` funkciju. Pošto već znamo da je riječ o JSON array-u, možemo koristiti `jsonlite::fromJSON()` kao u prethodnom slučaju. Možemo očekivati da će taj objekt u R biti učitan kao lista, a za provjeru objekta koristite`str()` funkciju. Ovdje je korisno ukazati na **listviewer**  [paket](https://github.com/timelyportfolio/listviewer) ::jsonedit()`koji omogućava interaktivni pregled podataka.^[Ugnježđene liste (*engl.nested lists*) su karakteristika JSON podataka. Ovo nije previše važno jer R ima podršku za procesuiranje takvih formata.]
-```{r fred3, cache=F, out.width="100%", out.height="10%"}
+```{r fred3, cache=F, out.width="100%",message=F, warning=F, out.height="10%"}
+library(tidyverse)
 fred %>% 
   httr::content("text") %>%
   jsonlite::fromJSON() %>%
@@ -239,7 +239,7 @@ fred
 ```
 
 
-U redu! Povukli smo podatke i sve je spremno za vizualizaciju. Sjetite se da `jsonlite::fromJSON()`  automatski sve prebacuje u *stringove* pa ćemo prilagoditi datume (koristeći `lubridate::ymd()`) i pretvoriti neke kolone u numeričke.
+Super! Povukli smo podatke i sve je spremno za vizualizaciju. Sjetite se da `jsonlite::fromJSON()`  automatski sve prebacuje u *stringove* pa ćemo prilagoditi datume (koristeći `lubridate::ymd()`) i pretvoriti neke kolone u numeričke.
 
 ```{r fred5, message=F}
 # library(lubridate) ## Već učitano
@@ -291,7 +291,7 @@ my_api_key <- Sys.getenv("MY_API_KEY")
 my_api_key
 ```
 
-**Važno:** Iako je ovo jednostavno, valja primijetiti da `Sys.setenv()` dio trebate izvršiti u konzoli. *Nikada* nemojte uključivati osjetljive podatke poput `Sys.setenv()` poziva u R Markdown ili druge dokumente koje dijelite.^[Pošto je nova environment variable definirana samo u trajanju tekuće sesije R Markdown neće imati pristup do nje osim ako nije eksplicitno zadržana u skripti unutar dokumenta.] Cilj je sakriti ovakve podatke! Alternativna opcija postavljanja ključa ne zahtijeva da sistemske varijable unose svaki put kada otvorite R. Ovo može biti posebno korisno za API izvore koje često koristite.
+**Važno:** Iako je ovo jednostavno, valja primijetiti da `Sys.setenv()` dio trebate izvršiti u konzoli. *Nikada* nemojte uključivati osjetljive podatke poput `Sys.setenv()` poziva u R Markdown ili druge dokumente koje dijelite.^[Pošto je nova environment variable definirana samo u trajanju tekuće sesije R Markdown neće imati pristup do nje osim ako nije eksplicitno zadržana u skripti unutar dokumenta.] Cilj je sakriti ovakve podatke! Alternativna opcija postavljanja ključa ne zahtijeva da se sistemske varijable unose svaki put kada otvorite R. Ovo može biti posebno korisno za API izvore koje često koristite.
 
 #### 2) Postavite *environment variable* za sve R sesije
 
@@ -349,7 +349,7 @@ Na sreću postoji bolji način: pristupite cijeloj bazi kroz API! Prvo je potreb
 - Započnite pregledom stranice.(**Ctr+Shift+I** u Chrome-u. **Ctrl+Shift+Q** u Firefox-u.)
 - Pogledajte **Network** tab na vrhu panela za inspekciju elemenata. 
 - Kliknite na **XHR** tab.^[XHR označava **X**ML**H**ttp**R**equest. Riječ je o vrsti zahtjeva koji dohvaća XML ili JSON podatke.]
-- Osvježite stranicu (**Ctrl+R**). To će omogućiti da vidite sav promet po stranici u inspkecijskom panelu. 
+- Osvježite stranicu (**Ctrl+R**). To će omogućiti da vidite sav promet po stranici u inspekcijskom panelu. 
 - Sada valja pogledati različite linkove za protok prometa i odabrati onaj koji sadržava podatke koje tražimo.
 - Gornji lik sadržava URL po nazivom [https://cms<b>api</b>.pulselive.com/rugby/<b>rankings</b>/mru?language=en&client=pulse](https://cmsapi.pulselive.com/rugby/rankings/mru?language=en&client=pulse). *Hmmm. "API", moguće? "Rankings" , možda? Ima smisla probati...* 
 - Kliknite ovaj link i otvorite **Preview** tab.
@@ -383,7 +383,7 @@ Pogledajmo također `rugby$entries$team` data frame kako bismo provjerili  infor
 head(rugby$entries$team)
 ```
 
-Sada stvari polako postaju jasnije. Čini se da možemo povezati (bind) kolone `rugby$entries$team` data frame-a direktno sa drugim elementima `$team` data frame-a (zapravo: "list-e"). Napravimo to pomoću `dplyr::bind_cols()` i uredimo podatke. Taj objekt možemo nazvati `rankings`.
+Sada stvari polako postaju jasnije. Čini se da možemo povezati (bind) kolone `rugby$entries$team` data.frame-a direktno sa drugim elementima `$team` data frame-a (zapravo: "list-e"). Napravimo to pomoću `dplyr::bind_cols()` i uredimo podatke. Taj objekt možemo nazvati `rankings`.
 
 ```{r rugby3, message=F}
 # library(janitor) ## Već učitano
@@ -464,7 +464,7 @@ Pregled svih koraka:
 - Stvorili smo vektor datuma (kretivno nazvan `dates`) u kojem su opservacije razmaknute (otprilike) jednu godinu, od najbližeg ponedjeljka u prvom datumu prvog mjeseca (01.01.).
 - Nakon toga smo proveli iteraciju (i.e. looped) po tim datumima koristeći funkciju `rugby_scrape`, koja je preuzela i očistila podatke sa API izvora. 
 - Na kraju svake iteracije smo naredili R-u da pričeka 3 sekunde prije sljedeće iteracije. To smo napravili kako ne bismo preopteretili server i radi bontona!
-- Svaka iteracija je proizvela zaseban data frame koji `lapply()` funkcija automatski pretvara u list-u. Potom smo koristili `dplyr::bind_rows()` kako bismo povezali odvojene data frame-ove u jedna frame.
+- Svaka iteracija je proizvela zaseban data.frame koji `lapply()` funkcija automatski pretvara u list-u. Potom smo koristili `dplyr::bind_rows()` kako bismo povezali odvojene data frame-ove u jedna frame.
 
 Sada je trenutak za vizualni pregled preuzetih podataka:
 
@@ -491,14 +491,13 @@ rankings_history %>%
 
 New Zealand dominira u globalim rangiranjima što je posebno zanimljivo s obzirom na veličinu te zemlje. Radi se o [najboljem međunarodnom timu](https://www.dailytelegraph.com.au/sport/rugby/are-the-all-blacks-the-greatest-international-team-in-the-history-of-sport/news-story/f61ad2d65623a9586929bbfba386b157) u povijesti profesionalnog sporta.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Forbz3lizUk" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Sažetak
 
 - API predstavlja skup pravila i metoda koje omogućavaju komunikaciju kompjutera ili programa (npr. host server) sa drugim kompjuterom ili programom (npr. klijent ili browser).
 - Moguće je pristupiti informacijama drirektno kroz API ukoliko smo identificirali API izvor.
   - API izvor za najveći broj web aplikacija će biti URL sa JSON ili XML sadržajem.
-- Neki API-ji ne zahtijevaju ključ ili token no najveći broj traži takve podatke. Taj ključ se dodadje kao parametar u API izvor.
+- Neki API-ji ne zahtijevaju ključ ili token no najveći broj traži takve podatke. Taj ključ se dodaje kao parametar u API izvor.
 - Preuzimanje sadržaja sa API izvora na lokalno računalo (i.e. R environment) je moguće na više načina.
    - Npr.. `jsonlite::readJSON()` za direktno učitavanje JSON array-a, `httr::GET()` za preuzimanje čitavog odgovora, ili pak instalacija paketa koji sve radi automatski (ako postoji paket!).
 
