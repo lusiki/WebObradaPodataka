@@ -433,25 +433,43 @@ newskava %>%
 
 ## Analiza sentimenta
 
-Nakon uređivanja podataka i osnovnog pregleda najvažnijih riječi, dinamike kretanja članaka kroz vrijeme i pregleda deskriptivne statistike domena ćemo provesti analizu **sentimenta**. Za analizu sentimenta je potrebno preuzeti leksikone sentimenta koji su za hrvatski jezik dostupni kroz FER-ov [Croatian Sentiment Lexicon](http://meta-share.ffzg.hr/repository/browse/croatian-sentiment-lexicon/940fe19e6c6d11e28a985ef2e4e6c59eff8b12d75f284d58aacfa8d732467509/). Analiza sentimenta i uključuje sentiment kroz vrijeme, doprinos riječi sentimentu, 'wordCloud' i analizu negativnosti portala.
+Nakon uređivanja podataka i osnovnog pregleda ćemo provesti analizu **sentimenta**. Za analizu sentimenta je potrebno preuzeti leksikone koji su za hrvatski jezik napravljeni u okviru FER-ovog [Croatian Sentiment Lexicon](http://meta-share.ffzg.hr/repository/browse/croatian-sentiment-lexicon/940fe19e6c6d11e28a985ef2e4e6c59eff8b12d75f284d58aacfa8d732467509/). Analiza sentimenta i uključuje sentiment kroz vrijeme, doprinos riječi sentimentu, 'wordCloud' i analizu negativnosti brandova.
 
-Pogledajmo prvo kako izgledaju leksikoni (koje smo učitali na početku):
+Pogledajmo prvo kako izgledaju leksikoni (koje smo učitali još na početku):
+
+
+<br>
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block8"> Pregled leksikona sentimenta </button>  
+<div id="Block8" class="collapse">
 
 ```{r sentiment, message=F, warning=F}
 
-## Pregled leksikona
+## Pregled leksikona (negativne riječi)
 CroSentilex_n %>% sample_n(10)
+## Pregled leksikona (pozitivne riječi)
 CroSentilex_p %>% sample_n(10)
+## Pregled leksikona (sve riječi)
 Crosentilex_sve %>% sample_n(10)
+## Pregled leksikona (crosentilex Gold)
 CroSentilex_Gold %>% sample_n(10)
 
 ```
 
+</div>
+<br>
+
+
 Provjerimo kretanje sentimenta u vremenu:
+
+
+<br>
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block9"> Pregled leksikona sentimenta </button>  
+<div id="Block9" class="collapse">
 
 ```{r sentimentTempus, message=F, warning=F}
 
-## Kretanje sentimenta kroz vrijeme
+## Kretanje sentimenta u vremenu 
+
 vizualiziraj_sentiment <- function(dataset, frq = "week") {
 
 dataset %>%
@@ -477,7 +495,7 @@ sm %>%
   summarise(Dnevni_sent = sum(score, na.rm = TRUE)) %>%
   ggplot(., aes(Datum, Dnevni_sent)) +
   geom_bar(stat = "identity") + 
-  ggtitle(paste0("Sentiment kroz vrijeme;frekvencija podataka:", frq)) +
+  ggtitle(paste0("Sentiment kroz vrijeme/frekvencija podataka:", frq)) +
   ylab("SentimentScore") +
   theme_economist()-> gg_sentiment_kroz_vrijeme_qv
 
@@ -490,7 +508,16 @@ vizualiziraj_sentiment(newskava_tokenTidy,"week")
 
 ```
 
+</div>
+<br>
+
+
 Korisno je i promotriti koje riječi najviše doprinose sentimentu (pozitivnom, negativnom i neutralnom):
+
+<br>
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block10"> Pregled riječi prema doprinosu sentimentu </button>  
+<div id="Block10" class="collapse">
+
 
 ```{r doprinoSentimentu, message=F, warning=F}
 
@@ -522,6 +549,10 @@ dataset %>%
 doprinos_sentimentu(newskava_tokenTidy,15)
 
 ```
+
+</div>
+<br>
+
 
 Korisno je pogledati i WordCloud sentiment. Pogledajmo "obični" WordCloud prije toga:
 
@@ -558,8 +589,12 @@ newskava_tokenTidy %>%
 
 Analiza sentimenta se može iskoristiti za pregled negativnosti pojedinih brandova:
 
-```{r  include=F, warning=F, message=F}
-## Najnegativniji portali
+<br>
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block11"> Pregled brandova prema negativnosti </button>  
+<div id="Block11" class="collapse">
+
+```{r  include=T, warning=F, message=F}
+## Najnegativniji brandovi
 wCount <- newskava_tokenTidy %>% 
   group_by(kword) %>%
   summarise(word = n())
@@ -578,10 +613,17 @@ newskava_tokenTidy %>%
 
 ```
 
+</div>
+<br>
+
 ...također i pozitivnosti brandova:
 
+<br>
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block12"> Pregled brandova prema pozitivnosti </button>  
+<div id="Block12" class="collapse">
+
 ```{r pozDomen, warning=F, message=F}
-## Najpozitivniji portali
+## Najpozitivniji brandovi
 
 CroSentilex_Gold_poz <- CroSentilex_Gold %>% filter(sentiment == 2)
 
@@ -594,6 +636,9 @@ newskava_tokenTidy %>%
   arrange(desc(pozitivnostIndex))  
 
 ```
+
+</div>
+<br>
 
 ```{r eval=F, include=F}
 
