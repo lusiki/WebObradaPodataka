@@ -1,0 +1,367 @@
+---
+title: "DIGITALNA SOCIOLOGIJA"
+# subtitle: "<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>"
+subtitle: "Metode, alati i izvori podataka"
+author: "Luka Sikic, PhD"
+date: "Fakultet hrvatskih studija" #"`r format(Sys.time(), '%d %B %Y')`"
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts] 
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+
+
+```{R, setup, include = F}
+options(htmltools.dir.version = FALSE)
+library(knitr)
+opts_chunk$set(
+  fig.align="center",  
+  fig.height=4, #fig.width=6,
+  # out.width="748px", #out.length="520.75px",
+  dpi=500, #fig.path='Figs/',
+  cache=T#, echo=F, warning=F, message=F
+  )
+library(tidyverse)
+library(hrbrthemes)
+#library(fontawesome)
+
+
+```
+
+```{css, echo = F, eval = F}
+@media print {
+  .has-continuation {
+    display: block !important;
+  }
+}
+```
+
+
+# PREGLED PREDAVANJA
+
+<br>
+<br>
+<br>
+<br>
+#### **1. Izvori podataka**
+<br>
+<br>
+
+
+#### **2. Metode u digitalnoj sociologiji**
+<br>
+<br>
+
+#### **3. Alati i vještine**
+
+
+---
+class: inverse, middle
+layout: false
+# Izvori podataka
+---
+layout: true
+# Izvori podataka
+
+---
+<br>
+<br>
+<br>
+.pull-left[
+
+#### **Klasični izvori podataka**
+
+- Eksperiment 
+- Ispitivanje 
+- Intervju
+- Strukturirane baze podataka
+
+]
+
+.pull-right[
+
+#### **Moderni izvori podataka (BigData)**
+
+- Web 
+- Društvene mreže 
+- Aplikacije
+- Senzori  
+
+]
+
+---
+<br>
+<br>
+<br>
+- karakteristike BigData podataka (vidi [članak](https://github.com/lusiki/WebObradaPodataka/blob/main/Literatura/BDSources.pdf))
+<br>
+<br>
+- podatci kao društveno-tehnološki proces (pogledaj [/the social dilemma_](https://www.thesocialdilemma.com/))
+<br>
+<br>
+- pristup podatcima ([APIkalipsa](https://eprints.qut.edu.au/131676/1/After_the_0027APIcalypse_0027.pdf))
+<br>
+<br>
+- komodifikacija podataka
+<br>
+<br>
+- nova istraživačka paradigma ([Compiutational Social Science](https://www.sciencedirect.com/science/article/abs/pii/S0167923613002212))
+
+
+.footnote[[*] [Khunova revolucija!?](https://journals.sagepub.com/doi/10.1177/2053951714528481)]
+
+---
+class: inverse, middle
+layout: false
+# Metode u digitalnoj sociologiji
+---
+layout: true
+# Aktualni trendovi
+
+---
+
+<br>
+<br>
+<br>
+- podatci -> metode 
+<br>
+<br>
+- rastuća interdisciplinarnost
+<br>
+<br>
+- prilagodba kurikuluma ([Vidi blog post](http://croecon.contentio.biz/post/2021-03-16-nova-statistika/))
+<br>
+<br>
+- intenziviranje jaza između društvene teorije i realnog svijeta
+<br>
+<br>
+---
+layout: true
+# Statistika
+
+---
+<br>
+<br>
+<br>
+- deskriptivni prikaz, vizualizacija i interaktivnost
+<br>
+<br>
+- proširenje standarnih modela
+<br>
+<br>
+- naprednije i složenije metode
+<br>
+<br>
+- Bayes-ova statistika
+
+
+---
+layout: true
+# Strojna analiza
+
+---
+<br>
+<br>
+<br>
+- algoritamska analiza 
+<br>
+<br>
+- osnova za umjetnu inteligenciju
+<br>
+<br>
+- memorijski zahtjevno
+<br>
+<br>
+- tehnički kompleksno
+
+---
+layout: true
+# Obrada prirodnog teksta
+
+---
+<br>
+<br>
+<br>
+- tekst kao podatci
+<br>
+<br>
+- trenutno tehnološka granica
+<br>
+<br>
+- sve raširenije područje
+<br>
+<br>
+- široka primjena
+
+---
+class: inverse, middle
+layout: false
+# Alati digitalnoj sociologiji
+---
+layout: true
+# Podatkovne znanosti
+
+---
+<br>
+<br>
+<br>
+- obrada podataka
+<br>
+<br>
+- API i WebScraping
+<br>
+<br>
+- cloud
+<br>
+<br>
+- command prompt/ shell
+<br>
+<br>
+- baze podataka
+<br>
+<br>
+- smanjenje jaza u vještinama
+---
+layout: true
+# Programski jezici
+
+---
+<br>
+<br>
+<br>
+- python i R
+<br>
+<br>
+- SQL
+<br>
+<br>
+- HTML, XML, Java 
+
+---
+layout: true
+# Izvještaji, suradnja i razmjena
+
+---
+<br>
+<br>
+<br>
+- markdown (vidi tekst o [znanstvenom radu](https://jaantollander.com/post/scientific-writing-with-markdown/), također vidi [How to write academic papers in Markdown](https://brainbaking.com/post/2021/02/writing-academic-papers-in-markdown/))
+<br>
+<br>
+- Git/github (vidi kako [funkcionira](https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners) )
+<br>
+<br>
+- open source i reproducibilnost (važan članak iz časopisa [nature](https://www.nature.com/articles/nature10836))
+<br>
+<br>
+- aplikacije (vidi [COVID-19 dashbord](https://public.tableau.com/app/profile/phs.covid.19/viz/COVID-19DailyDashboard_15960160643010/Overview))
+
+---
+class: inverse, middle
+layout: false
+# Zaključno
+---
+
+layout:true
+# Knjige
+
+---
+<br>
+<br>
+<br>
+1. [What is Digital Sociology? (2019), Neil Selwyn, Polity Press ](https://politybooks.com/bookdetail/?isbn=9781509527106&subject_id=1) 
+<br>
+<br>
+2. [Digital Methods for Social Science (2016), Palgrave McMilan](https://link.springer.com/book/10.1057/9781137453662)
+<br>
+<br>
+3. [Thick Big Data: Doing Digital Social Sciences (2020), Dariusz Jemielniak, Oxford University Press](https://oxford.universitypressscholarship.com/view/10.1093/oso/9780198839705.001.0001/oso-9780198839705)
+<br>
+<br>
+4. [Sociological Theory in the Digital Age (2020), By Gabe Ignatow ](https://www.routledge.com/Sociological-Theory-in-the-Digital-Age/Ignatow/p/book/9780367263478)
+ 
+---
+layout:true
+# Časopisi
+
+---
+<br>
+<br>
+<br>
+1. [Big Data & Society](https://journals.sagepub.com/home/bds) 
+<br>
+<br>
+2. [Social Media + Society](https://journals.sagepub.com/home/sms)
+<br>
+<br>
+3. [New Media & Society](https://journals.sagepub.com/home/nms)
+<br>
+<br>
+4. [Information, Communication & Society](https://www.tandfonline.com/toc/rics20/current)
+
+---
+layout:true
+# Programi
+---
+<br>
+<br>
+<br>
+1. [Københavns Universitet Copenhagen Center for Social Data Science](https://sodas.ku.dk/)
+<br>
+<br>
+2. [MSc in Social Data Science at Oxford Internet Institute](https://www.ox.ac.uk/admissions/graduate/courses/msc-social-data-science)
+<br>
+<br>
+3. [MSc Applied Social Data Science at LSE](https://www.lse.ac.uk/study-at-lse/Graduate/degree-programmes-2021/MSc-Applied-Social-Data-Science)
+<br>
+<br>
+4. [MSc Social Data Science at Uni Essex](https://www.essex.ac.uk/courses/pg01314/1/msc-social-data-science)
+<br>
+<br>
+<br>
+<br>
+.footnote[[*]Dobar [blog post](https://towardsdatascience.com/first-day-of-social-data-science-beedc2174232) o programu University of Copenhagen’s MSc of Social Data Science]
+---
+layout:true
+# Pitanja za diskusiju
+
+---
+<br>
+<br>
+<br>
+
+- Promjena paradigme!?
+<br><br>
+- Sociologija digitalnog ili rad na digitalnim vještinama?
+<br><br>
+- Teorija u krizi ili rastuća vrijednost teorije uz nove vještine?
+<br><br>
+- Koliko su važne vještine? Perspektive na tržištu rada?
+
+---
+class: inverse, middle
+layout:false
+# Hvala na pozornosti!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
