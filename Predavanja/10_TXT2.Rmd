@@ -196,8 +196,8 @@ CroSentilex_Gold$sentiment <- as.numeric(unlist(CroSentilex_Gold$sentiment))
 stopwords_cro <- get_stopwords(language = "hr", source = "stopwords-iso")
 my_stop_words <- tibble(
   word = c(
-    "jedan",
-    "e","prvi", "dva","dvije","drugi",
+    "jedan","i", "za", "je", "ti","mp","50","4300","5400",
+    "e","prvi", "dva","dvije","drugi","u","na",
     "tri","tre?i","pet","kod",
     "ove","ova",  "ovo","bez",
     "evo","oko",  "om", "ek",
@@ -683,7 +683,12 @@ newsCOVID_tokenTidy %>%
 
 ## Analiza važnosti pojmova
 
-Nakon analize sentimenta je korisno analizirati i **najbitnije** riječi. To se radi pomoću IDF (inverse document frequency) metode. IDF metoda omogućuje identifikaciju važnih (ne nužno čestih) riječi u korpusu i može poslužiti za analizu najvažnijih pojmova po brandovima.
+Nakon analize sentimenta je korisno analizirati i **najbitnije** riječi. To se radi pomoću [IDF (inverse document frequency)](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.438.2284&rep=rep1&type=pdf) metode. IDF metoda omogućuje identifikaciju važnih (ne nužno čestih) riječi u korpusu i može poslužiti za analizu najvažnijih pojmova po brandovima.
+
+
+<br>
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block13"> Pregled najvažnijih riječi </button>  
+<div id="Block13" class="collapse">
 
 ```{r frekvencija, message=F, warning=F, fig.height=10, fig.width=10}
 
@@ -713,7 +718,7 @@ domenaWords <- left_join(domenaWords, ukupnoWords)
 idf <- domenaWords %>%
   bind_tf_idf(word, kword, n)
 
-idf %>% head(10)
+idf %>% head(30)
 
 # idf %>% 
 #   select(-totWords) %>%
@@ -736,17 +741,32 @@ idf %>%
 
 ```
 
+</div>
+<br>
+
+
 ## nGrami
 
-Do sada smo analizirali tekst tako da je tekst tokeniziran na jednu riječ. To može prikriti bitne nalaze do kojih je moguće doći kada se tekst tokenizira na fraze (dvije ili N riječi). U sljedećemo koraku ćemo tokenizirati tekst na bigrame (dvije riječi) kako bismo proveli frazeološku analizu. Korištenje bigrama omogućava korištenje dodatnih metoda pa ćemo provesti i analizu korelacije među riječima.
+Do sada smo analizirali tekst na osnovi pojedinačnih riječi. Takav pristup ograničava  nalaze do kojih je moguće doći kada se tekst sagleda na osnovi fraza (dvije ili *n* riječi). U sljedećemo koraku ćemo tokenizirati tekst na bigrame (dvije riječi) kako bismo proveli frazeološku analizu. Korištenje bigrama otvara mogućnosti korištenja dodatnih pokazatelja pa ćemo provesti i analizu korelacije među riječima.
+
+<br>
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block14"> Pregled najvažnijih bigrama </button>  
+<div id="Block14" class="collapse">
 
 ```{r nGRAMI, message=F, warning=F, fig.height=10, fig.width=10}
+
+
+## tokeniziraj na bigram
 
 newskava_bigram <- newskava %>%
   unnest_tokens(bigram, MENTION_SNIPPET, token = "ngrams", n = 2)
 
-newskava_bigram %>% head(10)
+## pregledaj podatke
 
+# newskava_bigram %>% head(25)
+
+
+## najvažniji bigrami
 
 newskava_bigram %>%
   count(bigram, sort = T) %>%
@@ -780,7 +800,7 @@ bigrams_united <- newskava_bigram_tidy %>%
 bigrams_united %>% 
   count(clanak,bigram,sort = T) -> topicBigram
 
-# Najvažniji bigrami po domenama
+# Najvažniji bigrami po brandovima
 
  bigram_tf_idf <- bigrams_united %>%
   count(kword, bigram) %>%
@@ -803,7 +823,11 @@ bigram_tf_idf %>%
 
 ```
 
-```{r vizualizacijaBigrama, eval = F}
+</div>
+<br>
+
+
+```{r vizualizacijaBigrama, eval = F, include = F}
 
 # Analiza bigramskih fraza
 
