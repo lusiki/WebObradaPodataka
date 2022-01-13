@@ -88,19 +88,32 @@ Prije opisa podataka koje ćemo koristiti valja naglasiti da `tidytext` pristup 
 
 Svaka analiza (teksta)  počinje od podataka. Pribava tekstualnih podataka o specifičnim temama najčešće nije jednostavna. Najčešći je način preuzimanja podataka neki od dostupnih API servisa za novinske članke ili tekstualnih repozitorija ili servisi poput Twitter-a. No to često nije dovoljno ukolilko želimo analizirati specifičnu temu ili temu na specifičnom jeziku (npr. hrvatskom). Ovdje još valja napomeniti da je preuzimanje kvalitetnih tekstualnih podataka često moguće isključivo uz nadoplatu kao što je to slučaj člancima na hrvatskom jeziku kroz [webhose.io](https://webhose.io/) servis, [presscliping](https://www.pressclipping.hr/), [presscut](https://www1.presscut.hr/en/) i [mediatoolkit](https://www.mediatoolkit.com/)
 
-U ovom ćemo predavanju analizirati tržište aparata za kavu u Hrvatskoj na osnovi osnovi svih tekstova objavljenih u svim domaćim medijima u perodu od  2021-01-09) do 2022-11-01. Članci su preuzeti strojno sa [mediatoolkit servisa](https://www.mediatoolkit.com/) i na način da sadrže riječ: *LatteGo*, *De`Longhi*, *Krups* i *Nesspreso*. Na taj je način prikupljeno 290 objava koje sadrže ukupno 8.980 riječi. Analiza teksta koju ćemo provesti uključuje: **čišćenje, uređivanje i prilagodbu podataka**, **dekriptivnu statistiku na tekstualnim podatcima**, **analizu sentimenta**, **analizu frekvencija** i **tematsku analizu**.
+U ovom ćemo predavanju analizirati tržište aparata za kavu u Hrvatskoj na osnovi osnovi svih tekstova objavljenih u svim domaćim medijima u perodu od  2021-01-09 do 2022-11-01. Članci su preuzeti strojno sa [mediatoolkit servisa](https://www.mediatoolkit.com/) i identificirani na način da sadrže riječ: *LatteGo*, *De`Longhi*, *Krups* i *Nesspreso*. Na taj je način prikupljeno 290 objava koje sadrže ukupno 8.980 riječi. Analiza teksta koju ćemo provesti uključuje nekoliko etapa: **čišćenje, uređivanje i prilagodbu podataka**, **dekriptivnu statistiku na tekstualnim podatcima**, **analizu sentimenta**, **analizu frekvencija** i **tematsku analizu**.
 
 
 ## Uvoz podataka
 
-Podatci za analizu su prikupljeni na prethodno opisan način i dostupni u GitHub repozitoriju kolegija (Dta folder;korona.csv file). Podataci uključuju i članke sa nekih drugih portala, ali u kraćem vremenskom rasponu pa su izostavljeni iz analize. Učitajmo podatke:
+Podatci za analizu su prikupljeni na prethodno opisan način i dostupni u GitHub repozitoriju kolegija. Učitajmo i pregledajmo cjelopkupni podatkovni skup:
+
+<br>
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block1"> Pregled podataka </button>  
+<div id="Block1" class="collapse">
 
 ```{r podatci, eval=T,message=F, warning=F}
 kava <- read_excel("../Dta/kava.xlsx") #, encoding="UTF-8"
 glimpse(kava)
 ```
 
-Nakon što smo učitali podatke u radni prostor R, potrebno je učitati i druge podatke koji su nam potrebni za ovu  analizu. Osim **članaka**, potrebni su nam **leksikoni** i **stop riječi**. Leksikone ćemo preuzeti iz FER-ovog [repozitorija](http://meta-share.ffzg.hr/repository/browse/croatian-sentiment-lexicon/940fe19e6c6d11e28a985ef2e4e6c59eff8b12d75f284d58aacfa8d732467509/), a "stop riječi" ćemo napraviti sami. 
+</div>
+<br>
+
+
+Nakon što smo učitali podatke u radni prostor R, potrebno je učitati i druge podatke koji su nam potrebni za ovu  analizu. Osim **članaka**, potrebni su nam **leksikoni** i **stop riječi**. Leksikone ćemo preuzeti iz FER-ovog [repozitorija](http://meta-share.ffzg.hr/repository/browse/croatian-sentiment-lexicon/940fe19e6c6d11e28a985ef2e4e6c59eff8b12d75f284d58aacfa8d732467509/), a "stop riječi" ćemo napraviti sami. Ti su podatci trenutno pohranjeni na privatnoj MFiles bazi pa ćemo ih od tamo preuzeti na lokalno računalno:
+
+<br>
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block2"> Preuzimanje leksikona i stop riječi </button>  
+<div id="Block2" class="collapse">
+
 
 ```{r leksikoni, message=F, warning=F}
 
@@ -203,7 +216,19 @@ stop_corpus <- my_stop_words %>%
   bind_rows(stopwords_cro)
 ```
 
-```{r,message=F, warning=F}
+
+</div>
+<br>
+
+
+
+
+
+## Prilagodba podataka
+
+U sljedećem koraku ćemo stvoriti neke dodatne varijable korisne za analizu:
+
+```{r, message=F, warning=F}
 
 kava %>%
    mutate(kword = case_when(grepl("latteg", MENTION_SNIPPET, ignore.case = TRUE) ~ "LatteGo",
@@ -211,21 +236,12 @@ kava %>%
                             grepl("krups", MENTION_SNIPPET, ignore.case = TRUE) ~ "Krups",
                             grepl("Nespresso", MENTION_SNIPPET, ignore.case = TRUE) ~ "Nespresso")) -> kava
 
-kava %>%  
-#  filter(SOURCE_TYPE == "web" & kword == "bosch") %>%
-  unnest_tokens(word, MENTION_SNIPPET) %>%
-  anti_join(stop_corpus, by = "word") %>%
-  mutate(word = gsub("\\d+", NA, word)) %>%
-  mutate(word = gsub("^[a-zA-Z]$", NA, word)) %>%
-  filter(!is.na(word)) -> rijeci_clean
-
 
 
 ```
 
-## Prilagodba podataka
 
-U sljedećem koraku ćemo prilagoditi podatke u **tidy** format koji je prikladan za analizu. Pri tome pretvaramo podatke u `dataframe`, izabiremo varijable za analizu, specificiramo vremenski pečat članka kao datumsku varijablu, pripisujemo id svakom članku, izabiremo vremenski raspon analize i portale: 
+Potom pretvaramo podatke u `dataframe`, izabiremo varijable za analizu, specificiramo vremenski pečat članka kao datumsku varijablu, pripisujemo id svakom članku, izabiremo vremenski raspon analize i dodajemo numerički označitelj svakom članku: 
 
 ```{r prilagodi, message=F, warning=F}
 # prilagodi podatke
@@ -234,6 +250,15 @@ newskava <- kava %>%
   select(TITLE,MENTION_SNIPPET, DATE, SOURCE_TYPE, AUTHOR, FROM, kword) %>%  
   mutate(datum = as.Date(DATE,"%Y-%m-%d")) %>%
   mutate(clanak = 1:n()) 
+
+```
+
+
+<br>
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block3"> Pregled uređenih podatka </button>  
+<div id="Block3" class="collapse">
+
+```{r }
 
 # brzi pregled strukture podataka
 glimpse(newskava)
@@ -246,8 +271,14 @@ datatable(newskava, rownames = FALSE, filter="top", options = list(pageLength = 
 
 ```
 
+</div>
+<br>
 
-U sljedećem koraku provodimo *tokenizaciju*, odnosno pretvaranje teksta na jedinice analize. U ovom slučaju su to riječi:
+U sljedećem koraku provodimo *tokenizaciju*, odnosno pretvaranje teksta na jedinice analize koje su u ovom slučaju su  riječi:
+
+<br>
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block4"> Pregled tokeniziranih objava </button>  
+<div id="Block4" class="collapse">
 
 ```{r tokeni}
 # tokenizacija
@@ -260,7 +291,14 @@ newskava %>%
 datatable(newskava_token, rownames = FALSE, filter="top", options = list(pageLength = 5, scrollX=T) )
 ```
 
-Potom valja očistiti riječi od brojeva i nepotrebnih riječi. Na tako uređenim podatcima ćemo napraviti deskriptivno- statistički pregled teksta.
+</div>
+<br>
+
+Potom valja očistiti riječi od brojeva i nepotrebnih riječi. Na tako uređenim podatcima ćemo potom napraviti deskriptivno-statistički pregled teksta.
+
+<br>
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block5"> Pregled tokeniziranih i uređenih riječi </button>  
+<div id="Block5" class="collapse">
 
 ```{r ocisti}
 ## Ukloni "stop words", brojeve, veznike i pojedinačna slova
@@ -274,12 +312,19 @@ newskava_token %>%
 datatable(newskava_tokenTidy, rownames = FALSE, filter="top", options = list(pageLength = 5, scrollX=T) )
 ```
 
+</div>
+<br>
+
 Na tako uređenim podatcima ćemo napraviti deskriptivno-statistički pregled teksta:
 
-```{r dekriptivnoTxt, warning=F, message=F, fig.height=10, fig.width=10 }
-# DESKRIPTIVNI PREGLED PODATAKA
+<br>
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block6"> Osnovni deskriptivni pregled teksta </button>  
+<div id="Block6" class="collapse">
 
-## Vremenski raspon analize
+```{r dekriptivnoTxt, warning=F, message=F, fig.height=10, fig.width=10 }
+
+
+## Vremenski raspon podatka
 range(newskava_token$DATE)
 
 ## Najčešće riječi
@@ -316,17 +361,22 @@ newskava_tokenTidy %>%
 
 ```
 
-Također je moguće napraviti i deskriptivno-statistički pregled domena:
+</div>
+<br>
+
+...i  deskriptivno-statistički pregled objava:
+
+<br>
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block7"> Osnovni deskriptivni pregled objava </button>  
+<div id="Block7" class="collapse">
 
 ```{r dekriptivnoDom, warning=F,message=F, fig.height=15, fig.width=10}
-# DESKRIPTIVNI PREGLED DOMENA
 
 ## Broj domena
 newskava_tokenTidy %>% 
   summarise(Domena = n_distinct(SOURCE_TYPE))
 
-
-## Broj članaka po domeni
+## Broj objava po domeni
 
 kava %>% 
  # drop_na(.) %>%
@@ -336,7 +386,7 @@ kava %>%
   head(20)
 
 
-## Broj članaka po brandu
+## Broj objava po brandu
 
 kava %>% 
  # drop_na(.) %>%
@@ -360,7 +410,7 @@ newskava %>%
    facet_wrap(~ SOURCE_TYPE, scales = "free_y") +
    theme_economist()
    
-## Broj članaka po brandu 
+## Broj objava kroz vrijeme 
 
 newskava %>% 
    mutate(Datum = floor_date(datum, "week")) %>%
@@ -377,6 +427,9 @@ newskava %>%
      
 
 ```
+
+</div>
+<br>
 
 ## Analiza sentimenta
 
