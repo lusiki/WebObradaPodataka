@@ -19,7 +19,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, cache = TRUE, dpi=300)
+knitr::opts_chunk$set(echo = TRUE, cache = FALSE, dpi=300)
 ```
 
 
@@ -197,8 +197,8 @@ stopwords_cro <- get_stopwords(language = "hr", source = "stopwords-iso")
 my_stop_words <- tibble(
   word = c(
     "jedan","i", "za", "je", "ti","mp","50","4300","5400",
-    "e","prvi", "dva","dvije","drugi","u","na",
-    "tri","tre?i","pet","kod",
+    "e","prvi", "dva","dvije","drugi","u","na","my",
+    "tri","tre?i","pet","kod", "bit.ly", "pixie", "https","family.hr",
     "ove","ova",  "ovo","bez",
     "evo","oko",  "om", "ek",
     "mil","tko","?est", "sedam",
@@ -856,6 +856,11 @@ ggraph(bigram_graph, layout = "fr") +
 
 Provjerimo koje su riječi najviše korelirane sa izabranim ključnim riječima:
 
+
+<br>
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block15"> Pregled korelacije između branda i riječi </button>  
+<div id="Block15" class="collapse">
+
 ```{r message=F, warning=F, fig.height=10, fig.width=10}
 # Korelacije riječi ( R crash na T=30)
 
@@ -888,9 +893,17 @@ corsWords %>%
 
 ```
 
+</div>
+<br>
+
 ## Tematska analiza
 
-Na kraju provodimo tematsku analizu kao najsloženiji dio do sada provedene analize. Pri tome koristimo LDA (Latent Dirichlet allocation) algoritam kako bismo pronašli najvažnije riječi u algoritamski identificiranim temama. Ovdje je važno primijetiti da prije provedbe LDA modela valja tokenizirane riječi pretvoriti u matricu pojmova (document term matrix) koju ćemo kasnije koristiti kao input za LDA algoritam.
+Na kraju provodimo tematsku analizu kao najsloženiji dio do sada provedene analize. Pri tome koristimo LDA (Latent Dirichlet allocation) algoritam kako bismo pronašli najvažnije riječi u algoritamski identificiranim temama. Ovdje je važno primijetiti da prije provedbe LDA modela tokenizirane riječi treba pretvoriti u matricu pojmova (document term matrix) koju ćemo kasnije koristiti kao input za LDA algoritam.
+
+
+<br>
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block16"> Tematska (4) analiza </button>  
+<div id="Block16" class="collapse">
 
 ```{r TEME, message=F, warning=F, fig.height=10, fig.width=10}
 
@@ -923,7 +936,15 @@ newskava_terms %>%
 
 ```
 
+</div>
+<br>
+
 Tematsku analizu je moguće i napraviti na bigramski tokeniziranom tekstu. Tada je često moguće doći do preciznijih i kontekstualno relevantnijih uvida:
+
+
+<br>
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block17"> Tematska (4) analiza -  bigrami </button>  
+<div id="Block17" class="collapse">
 
 ```{r TEMEbigram, eval=T, message=F, warning=F,fig.height=10, fig.width=10}
 
@@ -957,11 +978,14 @@ newskava_terms %>%
   theme_economist()
 ```
 
+</div>
+<br>
+
 
 ## Zaključak
 
 U ovom smo predavanju dali uvodni pregled mogućnosti analize teksta u okviru `tidytext` paketa. Riječ je o skupu alata koji omogućavaju "prilagodbu" teksta u *tidy* format i daljnu analizu s `tidyverse` alatima koje smo do sada već dobro upoznali. `tidytext` nije jedini dostupan okvir za analizu teksta u R, već postoji i niz drugih paketa (vidi na početku) koji omogućavaju korištenje naprednijih (algoritamkskih tehnika.
 
-U predavanju su korišteni tekstovi objavljeni na tri domaća portala o temi COVID-19 u razdoblju od prvog zabilježenog slučaja u RH do danas. Analiza je pokazala mogućnosti tekstualne analize te osnovnih tehnika i alata na aktualnom primjeru.
+U predavanju su korišteni tekstovi objavljeni u svim hrvatskim medijima o proizvođačima aparata za kavu u razdoblju četiri mjeseca. Predavanje je imalo za cilj demonstrirati uvodne mogućnosti tekstualne analize te osnovnih tehnika i alata.
 
-Analiza teksta je trenutno (brzo) rastuće istraživačko područje sa sve većim brojem primjena, novih metodoloških pristupa i perspektiva. Dostupno je mnoštvo kvalitetnih i korisnih resursa pa se zainteresiranim studentima preporuča uključivanje u ovu (vrlo perspektivnu) istraživačku paradigmu.
+Analiza teksta (NLP) je trenutno (brzo) rastuće istraživačko područje sa sve većim brojem primjena, novih etodoloških pristupa i perspektiva. Dostupno je mnoštvo kvalitetnih i korisnih resursa pa se zainteresiranim studentima preporuča uključivanje u ovu (vrlo perspektivnu) istraživačku paradigmu.
