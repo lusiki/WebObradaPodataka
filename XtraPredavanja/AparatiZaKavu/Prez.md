@@ -32,7 +32,7 @@ output:
 
 
 
-### Što je unutra?
+## **Što je unutra?**
 
 
 
@@ -40,13 +40,13 @@ output:
 <br><br>
 - Cijeli medijski prostor u Hrvatskoj 
 <br><br>
-- razdoblje od 2021-01-09 do 2022-11-01
+- Razdoblje od 2021-01-09 do 2022-11-01
 <br><br>
-- Podatci sa [mediatoolkit servisa](https://www.mediatoolkit.com/) 
+- Podatci sa [mediatoolkit](https://www.mediatoolkit.com/) servisa
 <br><br>
 - 290 objava koje sadrže ukupno 8.980 riječi
 <br><br>
-- Izvještaj uključuje: **dekriptivni pregled medijskog prostora**, **analizu sentimenta**, **analizu frekvencija** i **tematsku analizu**.
+- Izvještaj uključuje: *pregled medijskog prostora*, *analizu sentimenta*, *analizu sadržaja* i *tematsku analizu*
 
 
 
@@ -63,18 +63,337 @@ output:
 
 
 
+## **Medijski prostor:**
 
 
-Medijski prostor:
+<br>
+
+- Najvažniji mediji su Web, facebook, instagram i forum
+<br><br>
+- Nespresso dominira u medijskom prostoru, a DeLonghi slijedi
+<br><br>
+- Krups i LatteGo zaostaju i na sličnim pozicijama
+<br><br>
+- Medijske kampanje u dvomjesečnim ciklusima
+<br><br>
+- Facebook, forum, Instagram imaju jednaku dinamiku
+<br><br>
+- Brandovi se međusobno prate u medijskom prostoru
 
 <br>
 <button class="btn btn-primary" data-toggle="collapse" data-target="#Block6"> Pregled medijskog prostora </button>  
 <div id="Block6" class="collapse">
 
-![](Prez_files/figure-html/dekriptivnoDom-1.png)<!-- -->![](Prez_files/figure-html/dekriptivnoDom-2.png)<!-- -->![](Prez_files/figure-html/dekriptivnoDom-3.png)<!-- -->![](Prez_files/figure-html/dekriptivnoDom-4.png)<!-- -->
+![](Prez_files/figure-html/dekriptivnoDom-1.png)<!-- -->
+
+```
+## List of 41
+##  $ line                :List of 6
+##   ..$ colour       : chr "black"
+##   ..$ size         : NULL
+##   ..$ linetype     : NULL
+##   ..$ lineend      : NULL
+##   ..$ arrow        : logi FALSE
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_line" "element"
+##  $ rect                :List of 5
+##   ..$ fill         : Named chr NA
+##   .. ..- attr(*, "names")= chr NA
+##   ..$ colour       : logi NA
+##   ..$ size         : NULL
+##   ..$ linetype     : num 1
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_rect" "element"
+##  $ text                :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : chr "black"
+##   ..$ size         : NULL
+##   ..$ hjust        : NULL
+##   ..$ vjust        : NULL
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : NULL
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ axis.title          :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : 'rel' num 1
+##   ..$ hjust        : NULL
+##   ..$ vjust        : NULL
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : NULL
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ axis.title.x        :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : NULL
+##   ..$ vjust        : NULL
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : NULL
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ axis.title.y        :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : NULL
+##   ..$ vjust        : NULL
+##   ..$ angle        : num 90
+##   ..$ lineheight   : NULL
+##   ..$ margin       : NULL
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ axis.text           :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : 'rel' num 1
+##   ..$ hjust        : NULL
+##   ..$ vjust        : NULL
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : NULL
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ axis.text.x         :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : NULL
+##   ..$ vjust        : num 0
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : 'margin' num [1:4] 10points 0points 0points 0points
+##   .. ..- attr(*, "unit")= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ axis.text.x.top     :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : NULL
+##   ..$ vjust        : num 0
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : 'margin' num [1:4] 0points 0points 10points 0points
+##   .. ..- attr(*, "unit")= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ axis.text.y         :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : num 0
+##   ..$ vjust        : NULL
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : 'margin' num [1:4] 0points 10points 0points 0points
+##   .. ..- attr(*, "unit")= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ axis.ticks          :List of 6
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ linetype     : NULL
+##   ..$ lineend      : NULL
+##   ..$ arrow        : logi FALSE
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_line" "element"
+##  $ axis.ticks.y        : list()
+##   ..- attr(*, "class")= chr [1:2] "element_blank" "element"
+##  $ axis.ticks.length   : 'simpleUnit' num -5points
+##   ..- attr(*, "unit")= int 8
+##  $ axis.line           :List of 6
+##   ..$ colour       : NULL
+##   ..$ size         : 'rel' num 0.8
+##   ..$ linetype     : NULL
+##   ..$ lineend      : NULL
+##   ..$ arrow        : logi FALSE
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_line" "element"
+##  $ axis.line.y         : list()
+##   ..- attr(*, "class")= chr [1:2] "element_blank" "element"
+##  $ legend.background   :List of 5
+##   ..$ fill         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ linetype     : num 0
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_rect" "element"
+##  $ legend.spacing      : 'simpleUnit' num 15points
+##   ..- attr(*, "unit")= int 8
+##  $ legend.key          :List of 5
+##   ..$ fill         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ linetype     : num 0
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_rect" "element"
+##  $ legend.key.size     : 'simpleUnit' num 1.2lines
+##   ..- attr(*, "unit")= int 3
+##  $ legend.key.height   : NULL
+##  $ legend.key.width    : NULL
+##  $ legend.text         :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : 'rel' num 1.25
+##   ..$ hjust        : NULL
+##   ..$ vjust        : NULL
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : NULL
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ legend.text.align   : NULL
+##  $ legend.title        :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : 'rel' num 1
+##   ..$ hjust        : num 0
+##   ..$ vjust        : NULL
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : NULL
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ legend.title.align  : NULL
+##  $ legend.position     : chr "top"
+##  $ legend.direction    : NULL
+##  $ legend.justification: chr "center"
+##  $ panel.background    :List of 5
+##   ..$ fill         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ linetype     : num 0
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_rect" "element"
+##  $ panel.border        : list()
+##   ..- attr(*, "class")= chr [1:2] "element_blank" "element"
+##  $ panel.spacing       : 'simpleUnit' num 0.25lines
+##   ..- attr(*, "unit")= int 3
+##  $ panel.grid.major    :List of 6
+##   ..$ colour       : chr "white"
+##   ..$ size         : 'rel' num 1.75
+##   ..$ linetype     : NULL
+##   ..$ lineend      : NULL
+##   ..$ arrow        : logi FALSE
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_line" "element"
+##  $ panel.grid.minor    : list()
+##   ..- attr(*, "class")= chr [1:2] "element_blank" "element"
+##  $ plot.background     :List of 5
+##   ..$ fill         : Named chr "#d5e4eb"
+##   .. ..- attr(*, "names")= chr "blue-gray"
+##   ..$ colour       : logi NA
+##   ..$ size         : NULL
+##   ..$ linetype     : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_rect" "element"
+##  $ plot.title          :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : chr "bold"
+##   ..$ colour       : NULL
+##   ..$ size         : 'rel' num 1.5
+##   ..$ hjust        : num 0
+##   ..$ vjust        : NULL
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : NULL
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ plot.margin         : 'simpleUnit' num [1:4] 12points 10points 12points 10points
+##   ..- attr(*, "unit")= int 8
+##  $ strip.background    :List of 5
+##   ..$ fill         : Named chr NA
+##   .. ..- attr(*, "names")= chr NA
+##   ..$ colour       : logi NA
+##   ..$ size         : NULL
+##   ..$ linetype     : num 0
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_rect" "element"
+##  $ strip.text          :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : 'rel' num 1.25
+##   ..$ hjust        : NULL
+##   ..$ vjust        : NULL
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : NULL
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ strip.text.x        :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : NULL
+##   ..$ vjust        : NULL
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : NULL
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ strip.text.y        :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : NULL
+##   ..$ vjust        : NULL
+##   ..$ angle        : num -90
+##   ..$ lineheight   : NULL
+##   ..$ margin       : NULL
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ panel.grid.major.x  : list()
+##   ..- attr(*, "class")= chr [1:2] "element_blank" "element"
+##  - attr(*, "class")= chr [1:2] "theme" "gg"
+##  - attr(*, "complete")= logi TRUE
+##  - attr(*, "validate")= logi TRUE
+```
+
+![](Prez_files/figure-html/dekriptivnoDom-2.png)<!-- -->![](Prez_files/figure-html/dekriptivnoDom-3.png)<!-- -->![](Prez_files/figure-html/dekriptivnoDom-4.png)<!-- -->
 
 </div>
 <br>
+
+- Najčešće riječi su nazivi brandova (Nespresso,DeLonghi i LatteGo)
+<br><br>
+- Često se spominju i riječi *dom, namještaj, akcije i veliki saloni namještaja*
+<br><br>
+- Ovo ukazuje na *važnost "mitologije doma"* (manja važnost "mitologije okusa" i/ili "mitologije stila")
+<br><br>
+- Od prosinca zaoštrena konkurencija između Nespresso, LatteGo i Krups
 
 
 <br>
@@ -87,8 +406,11 @@ Medijski prostor:
 </div>
 <br>
 
+- Općenito **pozitivan sentiment** medijskih objava
+<br><br>
+- Pozitivan sentiment na osnovi tematike vezane uz **dom, obitelj i kvalitetu života**
+<br><br>
 
-Ovako izgleda WordCloud koji sadržava i prikaz sentimenta:
 
 <button class="btn btn-primary" data-toggle="collapse" data-target="#Block8"> Najčešće riječi u tekstu </button>  
 <div id="Block8" class="collapse">
@@ -99,11 +421,12 @@ Ovako izgleda WordCloud koji sadržava i prikaz sentimenta:
 <br>
 
 
-## Analiza sentimenta
+## **Analiza sentimenta**
 
 
-Provjerimo kretanje sentimenta u vremenu:
-
+- Pozitivan sentiment u periodu pred i za vrijeme blagdana
+<br><br>
+- Razdoblje za plasman proizvoda na tržište kada je dom u fokusu
 
 <br>
 <button class="btn btn-primary" data-toggle="collapse" data-target="#Block9"> Kretanje sentimenta kroz vrijeme </button>  
@@ -115,7 +438,10 @@ Provjerimo kretanje sentimenta u vremenu:
 <br>
 
 
-Korisno je i promotriti koje riječi najviše doprinose sentimentu (pozitivnom, negativnom i neutralnom):
+- Riječi koje najviše doprinose pozitivnom sentimentu vezane uz **dom**, zdravlje i kvalitetu života
+<br><br>
+- Važnost nagradnih igara i darivanja
+
 
 <br>
 <button class="btn btn-primary" data-toggle="collapse" data-target="#Block10"> Doprinos sentimentu </button>  
@@ -128,7 +454,11 @@ Korisno je i promotriti koje riječi najviše doprinose sentimentu (pozitivnom, 
 
 
 
-Analiza sentimenta se može iskoristiti za pregled pozitivnosti pojedinih brandova:
+- Najbolje plasirane medijske objave ima DeLongi (indeks pozitivbnosti)
+<br><br>
+- Dobra medijska strategija;znatno bolje pozicija od tržišnog lidera Nespresso
+<br><br>
+- Tržišni lider Nespresso, LatteGo i Krups slični
 
 
 
@@ -139,7 +469,7 @@ Analiza sentimenta se može iskoristiti za pregled pozitivnosti pojedinih brando
 <button class="btn btn-primary" data-toggle="collapse" data-target="#Block12"> Indeks pozitivnosti brandova </button>  
 <div id="Block12" class="collapse">
 
-<table>
+<table class=" lightable-classic-2" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; margin-left: auto; margin-right: auto;'>
  <thead>
   <tr>
    <th style="text-align:left;"> kword </th>
@@ -152,20 +482,20 @@ Analiza sentimenta se može iskoristiti za pregled pozitivnosti pojedinih brando
   <tr>
    <td style="text-align:left;"> DeLonghi </td>
    <td style="text-align:right;"> 41 </td>
-   <td style="text-align:right;"> 1368 </td>
-   <td style="text-align:right;"> 2.997076 </td>
+   <td style="text-align:right;"> 1196 </td>
+   <td style="text-align:right;"> 3.428094 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Nespresso </td>
    <td style="text-align:right;"> 20 </td>
-   <td style="text-align:right;"> 1086 </td>
-   <td style="text-align:right;"> 1.841621 </td>
+   <td style="text-align:right;"> 1083 </td>
+   <td style="text-align:right;"> 1.846722 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> LatteGo </td>
    <td style="text-align:right;"> 10 </td>
-   <td style="text-align:right;"> 547 </td>
-   <td style="text-align:right;"> 1.828154 </td>
+   <td style="text-align:right;"> 546 </td>
+   <td style="text-align:right;"> 1.831502 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Krups </td>
