@@ -7,7 +7,7 @@ title: " "
 <br>
 
 
-**11/01/2022** - Predavanje iz strojne obrada teksta na člancima o [tržištu aparata za kavu](https://raw.githack.com/lusiki/WebObradaPodataka/main/XtraPredavanja/Aparati%20za%20kavu/Prez.html) 
+**11/01/2022** - Predavanje iz strojne obrada teksta na člancima o [tržištu aparata za kavu](https://raw.githack.com/lusiki/WebObradaPodataka/main/XtraPredavanja/AparatiZaKavu/Prez.html) 
 
 **08/11/2021** - Predavanje na temu [Metode, alati i izvori podataka za digitalnu sociologiju](https://raw.githack.com/lusiki/WebObradaPodataka/main/XtraPredavanja/Digitalna sociologija/MAI.html#1)
 
