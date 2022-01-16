@@ -1,6 +1,6 @@
 ---
 title: "<center><div class='mytitle'>Analiza tržišta aparata za kavu</div></center>"
-author: "<center><div class='mysubtitle'>Konkurenti: De`Longhi, LatteGo, Krups, Nespresso, Q4 2021</div></center>"
+author: "<center><div class='mysubtitle'>Konkurenti: De`Longhi, LatteGo, Krups, Nespresso</div></center>"
 date: "<center><div class='mysubtitle'></div></center>"
 output:
   html_document:
@@ -681,7 +681,7 @@ newsCOVID_tokenTidy %>%
 
 ```
 
-## Analiza važnosti pojmova
+## Analiza vaznosti pojmova
 
 Nakon analize sentimenta je korisno analizirati i **najbitnije** riječi. To se radi pomoću [IDF (inverse document frequency)](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.438.2284&rep=rep1&type=pdf) metode. IDF metoda omogućuje identifikaciju važnih (ne nužno čestih) riječi u korpusu i može poslužiti za analizu najvažnijih pojmova po brandovima.
 
