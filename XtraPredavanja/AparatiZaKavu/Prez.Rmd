@@ -169,7 +169,7 @@ stop_corpus <- my_stop_words %>%
 
 
 ## **Što je unutra?**
-
+<br>
 
 
 - Medijske objave o aparatima za kavu u Hrvatskoj (*LatteGo*, *De`Longhi*, *Krups* i *Nesspreso*)
@@ -429,7 +429,7 @@ newskava_tokenTidy %>%
 
 
 ## **Analiza sentimenta**
-
+<br>
 
 - Pozitivan sentiment u periodu pred i za vrijeme blagdana
 <br><br>
@@ -532,7 +532,7 @@ doprinos_sentimentu(newskava_tokenTidy,15)
 
 - Najbolje plasirane medijske objave ima DeLongi (najveći indeks pozitivnosti)
 <br><br>
-- Dobra medijska strategija;znatno bolje pozicija od tržišnog lidera Nespresso
+- Dobra medijska strategija;znatno bolja pozicija od tržišnog lidera Nespresso
 <br><br>
 - Tržišni lider Nespresso, LatteGo i Krups slični
 
@@ -624,17 +624,21 @@ newsCOVID_tokenTidy %>%
 
 ```
 
-## Najvazniji pojmovi
+## **Najvazniji pojmovi**
+<br>
 
--  **Najbitnije** riječi
-
-- To se radi pomoću [IDF (inverse document frequency)](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.438.2284&rep=rep1&type=pdf) metode 
-
-- IDF metoda omogućuje identifikaciju važnih (ne nužno čestih) riječi u korpusu i može poslužiti za analizu najvažnijih pojmova po brandovima
-
+- Najbitnije riječi izračunate pomoću [IDF (inverse document frequency)](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.438.2284&rep=rep1&type=pdf) metode 
+<br><br>
+- Vidljiv **fokus DeLonghija na dom**, salone namještaja i općenito tematiku doma (saloni namještaja)
+<br><br>
+- **Krups pozicioniran u domenu bijele tehnike** (saloni bijele tehnike)
+<br><br>
+- **LatteGo jako ističe okus, kvalitetu i tehnologiju** (prepoznatljivost u okviru branda Phillips)
+<br><br>
+- **Nespresso gradi brand na okusu i stilu življenja** (socijalizacija i kultura pijenja kave)
 
 <br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block13"> Pregled najvažnijih riječi za svaki brand </button>  
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block13"> Pregled najvažnijih riječi za brand </button>  
 <div id="Block13" class="collapse">
 
 ```{r frekvencija, message=F, warning=F, fig.height=10, fig.width=10}
@@ -663,8 +667,7 @@ domenaWords <- left_join(domenaWords, ukupnoWords)
 ## Najbitnije riječi po domenma
 
 idf <- domenaWords %>%
-  bind_tf_idf(word, kword, n)
-
+  bind_tf_idf(word, kword, n) 
 #idf %>% head(30)
 
 # idf %>% 
@@ -672,7 +675,8 @@ idf <- domenaWords %>%
 #   arrange(desc(tf_idf))
 
 idf %>%
-  arrange(desc(tf_idf)) %>%
+  arrange(desc(tf_idf))  %>%
+  filter(word != c("5400","family.hr","moj","50","4300","ti","1","ep4341","ea8170","mp")) %>%
   mutate(word = factor(word, levels = rev(unique(word)))) %>% 
   mutate(domena = factor(kword)) %>%
   group_by(domena) %>% 
@@ -692,14 +696,14 @@ idf %>%
 <br>
 
 
-### nGrami
+- jednaki zaključci na osnovi fraza (bigrami)
 
 
 <br>
 <button class="btn btn-primary" data-toggle="collapse" data-target="#Block14"> Pregled najvažnijih bigrama </button>  
 <div id="Block14" class="collapse">
 
-```{r nGRAMI, message=F, warning=F, fig.height=10, fig.width=10}
+```{r nGRAMI, message=F, warning=F, fig.height=8, fig.width=6}
 
 
 ## tokeniziraj na bigram
@@ -714,9 +718,9 @@ newskava_bigram <- newskava %>%
 
 ## najvažniji bigrami
 
-newskava_bigram %>%
-  count(bigram, sort = T) %>%
-  head(25)
+# newskava_bigram %>%
+#   count(bigram, sort = T) %>%
+#   head(25)
 
 newskava_bigram_sep <- newskava_bigram %>%
   separate(bigram, c("word1","word2"), sep = " ")
@@ -784,7 +788,7 @@ newskava_bigram_tidy %>%
 # Vizualiziraj bigrame
 
 bigram_graph <- newskava_bigram_tidy_bigram_counts %>%
-  filter(n >50) %>%
+  filter(n >30) %>%
    graph_from_data_frame()
 
 a <- grid::arrow(type = "closed", length = unit(.15, "inches"))
@@ -800,7 +804,14 @@ ggraph(bigram_graph, layout = "fr") +
 ```
 
 
-Povezane riječi:
+- Korelacija između DeLonghi i pojmova dom i Bauhaus
+<br><br>
+- LatteGo jako vezan uz brand Phillips
+<br><br>
+- Nespresso fokusiran na kavu (kvaliteta, priprema, stil)
+
+
+
 
 
 <br>
@@ -825,10 +836,12 @@ newskava_tokenTidy %>%
 #corsWords %>%
 #  filter(item1 == "oporavak")
 
+brandovi <- c("de’longhi", "krups", "lattego", "nespresso")
+
 corsWords %>%
-  filter(item1 %in% c("de’longhi", "krups", "lattego", "nespresso", "dom")) %>%
+  filter(item1 %in% brandovi) %>%
   group_by(item1) %>%
-  top_n(10) %>%
+  top_n(20) %>%
   ungroup() %>%
   mutate(item2 = reorder(item2, correlation)) %>%
   ggplot(aes(item2, correlation)) +
@@ -842,10 +855,17 @@ corsWords %>%
 </div>
 <br>
 
-## Tematska analiza
+## **Tematska analiza**
 
-- Glavne teme u su: 
-
+- Identificirane **četiri teme**
+<br><br>
+- Jedna tema se odnosi na uređaje, karakteristike i brandove (tehnički aspekt)
+<br><br>
+- Druga tema je dom, opremanje doma i udobnost življenja
+<br><br>
+- Treća tema je okus i užitak pijenja kave
+<br><br>
+- Četvta tema tema su ponude, akcije, konkurencija
 
 <br>
 <button class="btn btn-primary" data-toggle="collapse" data-target="#Block16"> Tematska analiza </button>  
@@ -885,11 +905,12 @@ newskava_terms %>%
 </div>
 <br>
 
-- 
-
+- Slični rezultati i na tematskoj analizi fraza
+<br><br>
+- Phillips se izdvaja kao zasebna tema
 
 <br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block17"> Tematska (4) analiza -  bigrami </button>  
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block17"> Tematska analiza -  fraze </button>  
 <div id="Block17" class="collapse">
 
 ```{r TEMEbigram, eval=T, message=F, warning=F,fig.height=10, fig.width=10}
@@ -928,6 +949,6 @@ newskava_terms %>%
 <br>
 
 
-## Zaključak
+## **Zaključak**
 
 

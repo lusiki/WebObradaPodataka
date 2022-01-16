@@ -33,7 +33,7 @@ output:
 
 
 ## **Što je unutra?**
-
+<br>
 
 
 - Medijske objave o aparatima za kavu u Hrvatskoj (*LatteGo*, *De`Longhi*, *Krups* i *Nesspreso*)
@@ -422,7 +422,7 @@ output:
 
 
 ## **Analiza sentimenta**
-
+<br>
 
 - Pozitivan sentiment u periodu pred i za vrijeme blagdana
 <br><br>
@@ -454,9 +454,9 @@ output:
 
 
 
-- Najbolje plasirane medijske objave ima DeLongi (indeks pozitivbnosti)
+- Najbolje plasirane medijske objave ima DeLongi (najveći indeks pozitivnosti)
 <br><br>
-- Dobra medijska strategija;znatno bolje pozicija od tržišnog lidera Nespresso
+- Dobra medijska strategija;znatno bolja pozicija od tržišnog lidera Nespresso
 <br><br>
 - Tržišni lider Nespresso, LatteGo i Krups slični
 
@@ -511,17 +511,21 @@ output:
 
 
 
-## Najvazniji pojmovi
+## **Najvazniji pojmovi**
+<br>
 
--  **Najbitnije** riječi
-
-- To se radi pomoću [IDF (inverse document frequency)](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.438.2284&rep=rep1&type=pdf) metode 
-
-- IDF metoda omogućuje identifikaciju važnih (ne nužno čestih) riječi u korpusu i može poslužiti za analizu najvažnijih pojmova po brandovima
-
+- Najbitnije riječi izračunate pomoću [IDF (inverse document frequency)](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.438.2284&rep=rep1&type=pdf) metode 
+<br><br>
+- Vidljiv **fokus DeLonghija na dom**, salone namještaja i općenito tematiku doma (saloni namještaja)
+<br><br>
+- **Krups pozicioniran u domenu bijele tehnike** (saloni bijele tehnike)
+<br><br>
+- **LatteGo jako ističe okus, kvalitetu i tehnologiju** (prepoznatljivost u okviru branda Phillips)
+<br><br>
+- **Nespresso gradi brand na okusu i stilu življenja** (socijalizacija i kultura pijenja kave)
 
 <br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block13"> Pregled najvažnijih riječi za svaki brand </button>  
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block13"> Pregled najvažnijih riječi za brand </button>  
 <div id="Block13" class="collapse">
 
 ![](Prez_files/figure-html/frekvencija-1.png)<!-- -->
@@ -530,42 +534,12 @@ output:
 <br>
 
 
-### nGrami
+- jednaki zaključci na osnovi fraza (bigrami)
 
 
 <br>
 <button class="btn btn-primary" data-toggle="collapse" data-target="#Block14"> Pregled najvažnijih bigrama </button>  
 <div id="Block14" class="collapse">
-
-
-```
-##                      bigram  n
-## 1                   za kavu 64
-## 2        de’longhi hrvatska 44
-## 3                 aparat za 36
-## 4          bauhaus hrvatska 33
-## 5              nespresso je 24
-## 6                      je u 22
-## 7          istria de’longhi 20
-## 8                 my istria 20
-## 9             jysk hrvatska 18
-## 10            kler hrvatska 18
-## 11          namještaja kler 18
-## 12             qualis salon 18
-## 13         salon namještaja 18
-## 14                    dom s 16
-## 15       hrvatska family.hr 16
-## 16         mirjanom mikulec 16
-## 17               s mirjanom 16
-## 18              tražimo dom 16
-## 19                   dom po 15
-## 20                  moj dom 15
-## 21                   za sve 15
-## 22      family.hr de’longhi 14
-## 23          hrvatska svijet 14
-## 24             lesnina xxxl 14
-## 25 philipshomeliving coffee 14
-```
 
 ![](Prez_files/figure-html/nGRAMI-1.png)<!-- -->
 
@@ -576,7 +550,14 @@ output:
 
 
 
-Povezane riječi:
+- Korelacija između DeLonghi i pojmova dom i Bauhaus
+<br><br>
+- LatteGo jako vezan uz brand Phillips
+<br><br>
+- Nespresso fokusiran na kavu (kvaliteta, priprema, stil)
+
+
+
 
 
 <br>
@@ -588,10 +569,17 @@ Povezane riječi:
 </div>
 <br>
 
-## Tematska analiza
+## **Tematska analiza**
 
-- Glavne teme u su: 
-
+- Identificirane **četiri teme**
+<br><br>
+- Jedna tema se odnosi na uređaje, karakteristike i brandove (tehnički aspekt)
+<br><br>
+- Druga tema je dom, opremanje doma i udobnost življenja
+<br><br>
+- Treća tema je okus i užitak pijenja kave
+<br><br>
+- Četvta tema tema su ponude, akcije, konkurencija
 
 <br>
 <button class="btn btn-primary" data-toggle="collapse" data-target="#Block16"> Tematska analiza </button>  
@@ -602,8 +590,9 @@ Povezane riječi:
 </div>
 <br>
 
-- 
-
+- Slični rezultati i na tematskoj analizi fraza
+<br><br>
+- Phillips se izdvaja kao zasebna tema
 
 <br>
 <button class="btn btn-primary" data-toggle="collapse" data-target="#Block17"> Tematska (4) analiza -  bigrami </button>  
@@ -615,6 +604,6 @@ Povezane riječi:
 <br>
 
 
-## Zaključak
+## **Zaključak**
 
 
