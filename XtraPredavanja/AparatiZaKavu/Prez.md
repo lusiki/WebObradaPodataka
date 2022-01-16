@@ -32,7 +32,8 @@ output:
 
 
 
-## **Što je unutra?**
+## **Opće**
+***
 <br>
 
 
@@ -63,12 +64,11 @@ output:
 
 
 
-## **Medijski prostor:**
-
-
+## **Medijski prostor**
+***
 <br>
 
-- Najvažniji mediji su Web, facebook, instagram i forum
+- Najvažniji mediji su Web, Facebook, Instagram i forum
 <br><br>
 - Nespresso dominira u medijskom prostoru, a DeLonghi slijedi
 <br><br>
@@ -422,6 +422,7 @@ output:
 
 
 ## **Analiza sentimenta**
+***
 <br>
 
 - Pozitivan sentiment u periodu pred i za vrijeme blagdana
@@ -511,7 +512,8 @@ output:
 
 
 
-## **Najvazniji pojmovi**
+## **Najvažniji pojmovi**
+***
 <br>
 
 - Najbitnije riječi izračunate pomoću [IDF (inverse document frequency)](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.438.2284&rep=rep1&type=pdf) metode 
@@ -534,7 +536,7 @@ output:
 <br>
 
 
-- jednaki zaključci na osnovi fraza (bigrami)
+- Jednaki zaključci na osnovi fraza (bigrami)
 
 
 <br>
@@ -570,7 +572,7 @@ output:
 <br>
 
 ## **Tematska analiza**
-
+***
 - Identificirane **četiri teme**
 <br><br>
 - Jedna tema se odnosi na uređaje, karakteristike i brandove (tehnički aspekt)
@@ -595,7 +597,7 @@ output:
 - Phillips se izdvaja kao zasebna tema
 
 <br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block17"> Tematska (4) analiza -  bigrami </button>  
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block17"> Tematska analiza -  fraze </button>  
 <div id="Block17" class="collapse">
 
 ![](Prez_files/figure-html/TEMEbigram-1.png)<!-- -->
@@ -605,5 +607,47 @@ output:
 
 
 ## **Zaključak**
+***
+<br>
+
+- Web najbitniji medij
+
+<br><br>
+
+- Dijeljenje originalnog web sadržaja na mrežama
+
+<br><br>
+
+- Nespresso tržišni lider ali DeLonghi bolje pozicioniran u objavma
+<br><br>
+
+>  *Mitologija doma* bolje prolazi kod domaće publike (DeLonghi)
+
+
+> *Mitologija okusa i stila* manje populrna kod domaće publike (Nespresso)
+
+<br><br>
+
+ - Važne teme: tehnički aspekti, opremanje doma, užitak konzumacije i okus, akcije i ponuda
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
