@@ -148,7 +148,7 @@ my_stop_words <- tibble(
   word = c(
     "jedan","i", "za", "je", "ti","mp","50","4300","5400",
     "e","prvi", "dva","dvije","drugi","u","na","my",
-    "tri","tre?i","pet","kod", "bit.ly", "pixie", "https","family.hr",
+    "tri","tre?i","pet","kod", "bit.ly", "pixie", "https","family.hr","www.elipso.hr", "ea8170", "mp","ti","1","50","5400","4300",
     "ove","ova",  "ovo","bez",
     "evo","oko",  "om", "ek",
     "mil","tko","?est", "sedam",
@@ -209,31 +209,21 @@ newskava <- kava %>%
 ```
 
 
-<br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block3"> Pregled uređenih podatka </button>  
-<div id="Block3" class="collapse">
 
 ```{r }
 
 # brzi pregled strukture podataka
-glimpse(newskava)
+#glimpse(newskava)
 # izgled podataka
 # newskava %>%
 #   sample_n(.,10)
 
-datatable(newskava, rownames = FALSE, filter="top", options = list(pageLength = 5, scrollX=T) )
+#datatable(newskava, rownames = FALSE, filter="top", options = list(pageLength = 5, scrollX=T) )
 
 
 ```
 
-</div>
-<br>
 
-U sljedećem koraku provodimo *tokenizaciju*, odnosno pretvaranje teksta na jedinice analize koje su u ovom slučaju su  riječi:
-
-<br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block4"> Pregled tokeniziranih objava </button>  
-<div id="Block4" class="collapse">
 
 ```{r tokeni}
 # tokenizacija
@@ -243,17 +233,10 @@ newskava %>%
 
 #newsCOVID_token$word <- stri_encode(newsCOVID_token$word, "", "UTF-8") # prilagodi encoding
 
-datatable(newskava_token, rownames = FALSE, filter="top", options = list(pageLength = 5, scrollX=T) )
+#datatable(newskava_token, rownames = FALSE, filter="top", options = list(pageLength = 5, scrollX=T) )
 ```
 
-</div>
-<br>
 
-Potom valja očistiti riječi od brojeva i nepotrebnih riječi. Na tako uređenim podatcima ćemo potom napraviti deskriptivno-statistički pregled teksta.
-
-<br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block5"> Pregled tokeniziranih i uređenih riječi </button>  
-<div id="Block5" class="collapse">
 
 ```{r ocisti}
 ## Ukloni "stop words", brojeve, veznike i pojedinačna slova
@@ -264,72 +247,19 @@ newskava_token %>%
   mutate(word = gsub("^[a-zA-Z]$", NA, word)) %>% 
   drop_na(.)-> newskava_tokenTidy
 
-datatable(newskava_tokenTidy, rownames = FALSE, filter="top", options = list(pageLength = 5, scrollX=T) )
+#datatable(newskava_tokenTidy, rownames = FALSE, filter="top", options = list(pageLength = 5, scrollX=T) )
 ```
-
-</div>
-<br>
-
-Na tako uređenim podatcima ćemo napraviti deskriptivno-statistički pregled teksta:
+Medijski prostor:
 
 <br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block6"> Osnovni deskriptivni pregled teksta </button>  
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block6"> Pregled medijskog prostora </button>  
 <div id="Block6" class="collapse">
 
-```{r dekriptivnoTxt, warning=F, message=F, fig.height=10, fig.width=10 }
-
-
-## Vremenski raspon podatka
-range(newskava_token$DATE)
-
-## Najčešće riječi
-newskava_tokenTidy %>%
-  count(word, sort = T) %>%
-  head(25)
-
-## Vizualizacija najčešćih riječi
-newskava_tokenTidy %>%
-  count(word, sort = T) %>%
-  filter(n > 10) %>%
-  mutate(word = reorder(word, n)) %>%
-  ggplot(aes(word, n)) +
-  geom_col() +
-  xlab(NULL) +
-  coord_flip() +
-  theme_economist()
-
-## Vizualizacija najčešćih riječi kroz vrijeme
-newskava_tokenTidy %>%
-   mutate(Datum = floor_date(datum, "day")) %>%
-   group_by(Datum) %>%
-   count(word) %>% 
-   mutate(gn = sum(n)) %>%
-   filter(word %in%  c("nespresso", "de’longhi", "lattego", "krups")) %>%
-   ggplot(., aes(Datum,  n / gn)) + 
-   geom_point() +
-   ggtitle("Učestalost korištenja kroz vrijeme") +
-   ylab("% ukupnih riječi") +
-   geom_smooth() +
-   facet_wrap(~ word, scales = "free_y") +
-   scale_y_continuous(labels = scales::percent_format())+
-   theme_economist()
-
-```
-
-</div>
-<br>
-
-...i  deskriptivno-statistički pregled objava:
-
-<br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block7"> Osnovni deskriptivni pregled objava </button>  
-<div id="Block7" class="collapse">
-
-```{r dekriptivnoDom, warning=F,message=F, fig.height=15, fig.width=10}
+```{r dekriptivnoDom, warning=F,message=F, fig.height=6, fig.width=10}
 
 ## Broj domena
-newskava_tokenTidy %>% 
-  summarise(Domena = n_distinct(SOURCE_TYPE))
+# newskava_tokenTidy %>% 
+#   summarise(Domena = n_distinct(SOURCE_TYPE))
 
 ## Broj objava po domeni
 
@@ -338,7 +268,13 @@ kava %>%
   group_by(SOURCE_TYPE) %>%
   summarise(n = n()) %>%
   arrange(desc(n)) %>% 
-  head(20)
+  head(20)  %>%
+  ggplot(., aes(SOURCE_TYPE,  n, fill = SOURCE_TYPE)) + 
+  geom_bar(stat = "identity") +
+  ggtitle("Broj članaka na pojedinom mediju") +
+  ylab("Broj članaka") +
+  xlab("") +
+  theme_economist()
 
 
 ## Broj objava po brandu
@@ -348,7 +284,13 @@ kava %>%
   group_by(kword) %>%
   summarise(n = n()) %>%
   arrange(desc(n)) %>% 
-  head(20)
+  head(20) %>%
+  ggplot(., aes(kword,  n, fill = kword)) + 
+  geom_bar(stat = "identity") +
+  ggtitle("Broj članaka o pojedinom brandu") +
+  ylab("Broj članaka") +
+  xlab("") +
+  theme_economist()
 
 ## Broj članaka po domeni 
 
@@ -386,27 +328,49 @@ newskava %>%
 </div>
 <br>
 
-## Analiza sentimenta
-
-Nakon uređivanja podataka i osnovnog pregleda ćemo provesti analizu **sentimenta**. Za analizu sentimenta je potrebno preuzeti leksikone koji su za hrvatski jezik napravljeni u okviru FER-ovog [Croatian Sentiment Lexicon](http://meta-share.ffzg.hr/repository/browse/croatian-sentiment-lexicon/940fe19e6c6d11e28a985ef2e4e6c59eff8b12d75f284d58aacfa8d732467509/). Analiza sentimenta i uključuje sentiment kroz vrijeme, doprinos riječi sentimentu, 'wordCloud' i analizu negativnosti brandova.
-
-Pogledajmo prvo kako izgledaju leksikoni (koje smo učitali još na početku):
-
 
 <br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block8"> Pregled leksikona sentimenta </button>  
-<div id="Block8" class="collapse">
 
-```{r sentiment, message=F, warning=F}
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block7"> Najčešće riječi u tekstu </button>  
+<div id="Block7" class="collapse">
 
-## Pregled leksikona (negativne riječi)
-CroSentilex_n %>% sample_n(10)
-## Pregled leksikona (pozitivne riječi)
-CroSentilex_p %>% sample_n(10)
-## Pregled leksikona (sve riječi)
-Crosentilex_sve %>% sample_n(10)
-## Pregled leksikona (crosentilex Gold)
-CroSentilex_Gold %>% sample_n(10)
+```{r dekriptivnoTxt, warning=F, message=F, fig.height=10, fig.width=10 }
+
+
+## Vremenski raspon podatka
+#range(newskava_token$DATE)
+
+## Najčešće riječi
+# newskava_tokenTidy %>%
+#   count(word, sort = T) %>%
+#   head(25)
+
+## Vizualizacija najčešćih riječi
+newskava_tokenTidy %>%
+  count(word, sort = T) %>%
+  filter(n > 10) %>%
+  mutate(word = reorder(word, n)) %>%
+  ggplot(aes(word, n)) +
+  geom_col() +
+  xlab(NULL) +
+  coord_flip() +
+  theme_economist()
+
+## Vizualizacija najčešćih riječi kroz vrijeme
+newskava_tokenTidy %>%
+   mutate(Datum = floor_date(datum, "day")) %>%
+   group_by(Datum) %>%
+   count(word) %>% 
+   mutate(gn = sum(n)) %>%
+   filter(word %in%  c("nespresso", "de’longhi", "lattego", "krups")) %>%
+   ggplot(., aes(Datum,  n / gn)) + 
+   geom_point() +
+   ggtitle("Medijske kampanje") +
+   ylab("% ukupnih riječi") +
+   geom_smooth() +
+   facet_wrap(~ word, scales = "free_y") +
+   scale_y_continuous(labels = scales::percent_format())+
+   theme_economist()
 
 ```
 
@@ -414,11 +378,40 @@ CroSentilex_Gold %>% sample_n(10)
 <br>
 
 
+Ovako izgleda WordCloud koji sadržava i prikaz sentimenta:
+
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block8"> Najčešće riječi u tekstu </button>  
+<div id="Block8" class="collapse">
+
+```{r WCloutSent, warning=F, message=F}
+
+## ComparisonCloud
+newskava_tokenTidy %>%
+  inner_join(CroSentilex_Gold,by="word") %>% 
+  count(word, sentiment) %>% 
+  top_n(200) %>%
+  mutate(sentiment = case_when(sentiment == 0 ~ "+/-",
+                                 sentiment == 1 ~ "-",
+                                 sentiment == 2 ~ "+")) %>%
+  acast(word ~ sentiment, value.var = "n", fill = 0) %>%
+  comparison.cloud(colors = c("firebrick3", "deepskyblue3","darkslategray"),
+                   max.words = 120)
+
+
+```
+
+</div>
+<br>
+
+
+## Analiza sentimenta
+
+
 Provjerimo kretanje sentimenta u vremenu:
 
 
 <br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block9"> Pregled leksikona sentimenta </button>  
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block9"> Kretanje sentimenta kroz vrijeme </button>  
 <div id="Block9" class="collapse">
 
 ```{r sentimentTempus, message=F, warning=F}
@@ -470,9 +463,8 @@ vizualiziraj_sentiment(newskava_tokenTidy,"week")
 Korisno je i promotriti koje riječi najviše doprinose sentimentu (pozitivnom, negativnom i neutralnom):
 
 <br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block10"> Pregled riječi prema doprinosu sentimentu </button>  
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block10"> Doprinos sentimentu </button>  
 <div id="Block10" class="collapse">
-
 
 ```{r doprinoSentimentu, message=F, warning=F}
 
@@ -509,44 +501,9 @@ doprinos_sentimentu(newskava_tokenTidy,15)
 <br>
 
 
-Korisno je pogledati i WordCloud sentiment. Pogledajmo "obični" WordCloud prije toga:
 
-```{r WCloud, message=F, warning=F}
+Analiza sentimenta se može iskoristiti za pregled pozitivnosti pojedinih brandova:
 
-## WordCloud(vulgaris)
-newskava_tokenTidy %>%
-  anti_join(CroSentilex_Gold,by="word") %>% 
-  count(word) %>% 
-  arrange(desc(n)) %>%
-  top_n(100) %>%
-  with(wordcloud(word, n, max.words = 80)) 
-
-```
-
-Ovako izgleda WordCloud koji sadržava i prikaz sentimenta:
-
-```{r WCloutSent, warning=F, message=F}
-
-## ComparisonCloud
-newskava_tokenTidy %>%
-  inner_join(CroSentilex_Gold,by="word") %>% 
-  count(word, sentiment) %>% 
-  top_n(200) %>%
-  mutate(sentiment = case_when(sentiment == 0 ~ "+/-",
-                                 sentiment == 1 ~ "-",
-                                 sentiment == 2 ~ "+")) %>%
-  acast(word ~ sentiment, value.var = "n", fill = 0) %>%
-  comparison.cloud(colors = c("firebrick3", "deepskyblue3","darkslategray"),
-                   max.words = 120)
-
-
-```
-
-Analiza sentimenta se može iskoristiti za pregled negativnosti pojedinih brandova:
-
-<br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block11"> Pregled brandova prema negativnosti </button>  
-<div id="Block11" class="collapse">
 
 ```{r  include=T, warning=F, message=F}
 ## Najnegativniji brandovi
@@ -558,23 +515,20 @@ CroSentilex_Gold_neg <- CroSentilex_Gold %>% filter(sentiment == 1)
 CroSentilex_Gold_poz <- CroSentilex_Gold %>% filter(sentiment == 2)
 
 
-newskava_tokenTidy %>% 
-  semi_join(CroSentilex_Gold_neg, by= "word") %>%
-  group_by(kword) %>% 
-  summarise(negWords = n()) %>%
-  left_join(wCount, by = "kword") %>%
-  mutate(negativnostIndex = (negWords/word)*100) %>%
-  arrange(desc(negativnostIndex))
+# newskava_tokenTidy %>% 
+#   semi_join(CroSentilex_Gold_neg, by= "word") %>%
+#   group_by(kword) %>% 
+#   summarise(negWords = n()) %>%
+#   left_join(wCount, by = "kword") %>%
+#   mutate(negativnostIndex = (negWords/word)*100) %>%
+#   arrange(desc(negativnostIndex))
 
 ```
 
-</div>
-<br>
 
-...također i pozitivnosti brandova:
 
 <br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block12"> Pregled brandova prema pozitivnosti </button>  
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block12"> Indeks pozitivnosti brandova </button>  
 <div id="Block12" class="collapse">
 
 ```{r pozDomen, warning=F, message=F}
@@ -588,7 +542,8 @@ newskava_tokenTidy %>%
   summarise(pozWords = n()) %>%
   left_join(wCount, by = "kword") %>%
   mutate(pozitivnostIndex = (pozWords/word)*100) %>%
-  arrange(desc(pozitivnostIndex))  
+  arrange(desc(pozitivnostIndex)) %>%
+  kbl() 
 
 ```
 
@@ -636,13 +591,17 @@ newsCOVID_tokenTidy %>%
 
 ```
 
-## Analiza vaznosti pojmova
+## Najvazniji pojmovi
 
-Nakon analize sentimenta je korisno analizirati i **najbitnije** riječi. To se radi pomoću [IDF (inverse document frequency)](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.438.2284&rep=rep1&type=pdf) metode. IDF metoda omogućuje identifikaciju važnih (ne nužno čestih) riječi u korpusu i može poslužiti za analizu najvažnijih pojmova po brandovima.
+-  **Najbitnije** riječi
+
+- To se radi pomoću [IDF (inverse document frequency)](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.438.2284&rep=rep1&type=pdf) metode 
+
+- IDF metoda omogućuje identifikaciju važnih (ne nužno čestih) riječi u korpusu i može poslužiti za analizu najvažnijih pojmova po brandovima
 
 
 <br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block13"> Pregled najvažnijih riječi </button>  
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block13"> Pregled najvažnijih riječi za svaki brand </button>  
 <div id="Block13" class="collapse">
 
 ```{r frekvencija, message=F, warning=F, fig.height=10, fig.width=10}
@@ -673,7 +632,7 @@ domenaWords <- left_join(domenaWords, ukupnoWords)
 idf <- domenaWords %>%
   bind_tf_idf(word, kword, n)
 
-idf %>% head(30)
+#idf %>% head(30)
 
 # idf %>% 
 #   select(-totWords) %>%
@@ -700,9 +659,8 @@ idf %>%
 <br>
 
 
-## nGrami
+### nGrami
 
-Do sada smo analizirali tekst na osnovi pojedinačnih riječi. Takav pristup ograničava  nalaze do kojih je moguće doći kada se tekst sagleda na osnovi fraza (dvije ili *n* riječi). U sljedećemo koraku ćemo tokenizirati tekst na bigrame (dvije riječi) kako bismo proveli frazeološku analizu. Korištenje bigrama otvara mogućnosti korištenja dodatnih pokazatelja pa ćemo provesti i analizu korelacije među riječima.
 
 <br>
 <button class="btn btn-primary" data-toggle="collapse" data-target="#Block14"> Pregled najvažnijih bigrama </button>  
@@ -809,7 +767,7 @@ ggraph(bigram_graph, layout = "fr") +
 ```
 
 
-Provjerimo koje su riječi najviše korelirane sa izabranim ključnim riječima:
+Povezane riječi:
 
 
 <br>
@@ -853,11 +811,11 @@ corsWords %>%
 
 ## Tematska analiza
 
-Na kraju provodimo tematsku analizu kao najsloženiji dio do sada provedene analize. Pri tome koristimo LDA (Latent Dirichlet allocation) algoritam kako bismo pronašli najvažnije riječi u algoritamski identificiranim temama. Ovdje je važno primijetiti da prije provedbe LDA modela tokenizirane riječi treba pretvoriti u matricu pojmova (document term matrix) koju ćemo kasnije koristiti kao input za LDA algoritam.
+- Glavne teme u su: 
 
 
 <br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block16"> Tematska (4) analiza </button>  
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block16"> Tematska analiza </button>  
 <div id="Block16" class="collapse">
 
 ```{r TEME, message=F, warning=F, fig.height=10, fig.width=10}
@@ -894,7 +852,7 @@ newskava_terms %>%
 </div>
 <br>
 
-Tematsku analizu je moguće i napraviti na bigramski tokeniziranom tekstu. Tada je često moguće doći do preciznijih i kontekstualno relevantnijih uvida:
+- 
 
 
 <br>
@@ -939,8 +897,4 @@ newskava_terms %>%
 
 ## Zaključak
 
-U ovom smo predavanju dali uvodni pregled mogućnosti analize teksta u okviru `tidytext` paketa. Riječ je o skupu alata koji omogućavaju "prilagodbu" teksta u *tidy* format i daljnu analizu s `tidyverse` alatima koje smo do sada već dobro upoznali. `tidytext` nije jedini dostupan okvir za analizu teksta u R, već postoji i niz drugih paketa (vidi na početku) koji omogućavaju korištenje naprednijih (algoritamkskih tehnika.
 
-U predavanju su korišteni tekstovi objavljeni u svim hrvatskim medijima o proizvođačima aparata za kavu u razdoblju četiri mjeseca. Predavanje je imalo za cilj demonstrirati uvodne mogućnosti tekstualne analize te osnovnih tehnika i alata.
-
-Analiza teksta (NLP) je trenutno (brzo) rastuće istraživačko područje sa sve većim brojem primjena, novih etodoloških pristupa i perspektiva. Dostupno je mnoštvo kvalitetnih i korisnih resursa pa se zainteresiranim studentima preporuča uključivanje u ovu (vrlo perspektivnu) istraživačku paradigmu.
