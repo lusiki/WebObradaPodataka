@@ -186,7 +186,7 @@ stop_corpus <- my_stop_words %>%
 - Izvještaj uključuje: *pregled medijskog prostora*, *analizu sentimenta*, *analizu sadržaja* i *tematsku analizu*
 
 
-```{r, message=F, warning=F}
+```{r message=F, warning=F}
 
 kava %>%
    mutate(kword = case_when(grepl("latteg", MENTION_SNIPPET, ignore.case = TRUE) ~ "LatteGo",
@@ -286,7 +286,7 @@ kava %>%
   geom_bar(stat = "identity", show.legend = FALSE) +
   ggtitle("Broj članaka na pojedinom mediju") +
   ylab("Broj članaka") +
-  xlab("") 
+  xlab("") +
   theme_economist() 
 
 
