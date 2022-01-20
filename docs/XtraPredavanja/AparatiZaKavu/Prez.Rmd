@@ -6,7 +6,6 @@ output:
   html_document:
     theme: yeti
     highlight: espresso
-    code_folding: hide
     toc: yes
     toc_depth: 4
     toc_float: yes
@@ -19,30 +18,21 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, cache = FALSE, dpi=300)
+knitr::opts_chunk$set(echo = FALSE, cache = FALSE, dpi=300)
 ```
 
-
-## Analiza teksta
-
-
-Analiza teksta dobiva na popularnosti zbog sve veće dostupnosti podataka i razvoja **user friendly** podrške za provedbu takve analize. Konceptualni pregled analize teksta ya sociologe je dostupan i u nedavno objavljenoj [knjizi](https://isi.f.bg.ac.rs/wp-content/uploads/2019/03/Zeljka_Manic_Analiza-sadr%C5%BEaja.pdf), koja se preporuča tek nakon savladavanja osnovnih tehničkih vještina i alata za obradu teksta. Provedba analize tekstualnih podataka je moguća na mnogo načina, a najšire korišten pristup je **bag-of-words** u kojem je frekvencija riječi polazište za analizu dok se (npr.) pozicija riječi u rečenici ili paragrafu zanemaruje. Bag of words pristup je ujedno i najjednostavniji (konceptualno i računarski) pa će biti korišten u ovom predavanju. 
-
-Postupak analize teksta započinje *pripremom teksta (podataka)*, koja je često dosta zahtjevna i uključuje: **uvoz teksta**, **operacije sa riječima**, **uređivanje i tokenizaciju**, **izradu matrice pojmova**, **filtiranje i ponderiranje podataka**. Pri tome valja imati na umu da vrsta analize i korištena metoda određuju način na koji je potrebno pripremiti podatke za daljnu analizu te da svaka metoda ima svoje specifičnosti. Nakon pripreme podataka se vrši *analiza teksta (podataka)* metodama **nadziranog strojnog učenja**, **ne-nadziranog strojnog učenja**, **statistike na tekstualnim podatcima**, **analize riječnika**, **analize sentimenta**. *Napredne metode analize podataka* uključuju **NLP**, **analizu pozicije riječi i sintakse**...Sažeti prikaz *workflow-a* za analizu teksta izgleda ovako:
+```{r exc1 , include=F, echo = F,message=F, warning=F }
 
 
-```{r, include=TRUE, out.width="700px", fig.align="center", fig.cap=c("Procedura za analizu teksta."),  echo=FALSE}
+# Svaka analiza (teksta)  počinje od podataka. Pribava tekstualnih podataka o specifičnim temama najčešće nije jednostavna. Najčešći je način preuzimanja podataka neki od dostupnih API servisa za novinske članke ili tekstualnih repozitorija ili servisi poput Twitter-a. No to često nije dovoljno ukolilko želimo analizirati specifičnu temu ili temu na specifičnom jeziku (npr. hrvatskom). Ovdje još valja napomeniti da je preuzimanje kvalitetnih tekstualnih podataka često moguće isključivo uz nadoplatu kao što je to slučaj člancima na hrvatskom jeziku kroz [webhose.io](https://webhose.io/) servis, [presscliping](https://www.pressclipping.hr/), [presscut](https://www1.presscut.hr/en/) i [mediatoolkit](https://www.mediatoolkit.com/)
 
-knitr::include_graphics("D:/LUKA/Academic/HS/NASTAVA/20-21/Obrada podataka/Foto/potupakAnalize.png")
 
 
 ```
 
-### Software i korisni resursi
 
-U ovom predavanju ćemo koristiti `tidytext` pristup (i istoimeni paket) za analizu tekstualnih podatka, detaljno opisan u knjizi [Text Mining with R](https://www.tidytextmining.com/). Ovaj paket služi kako bismo tekstualne podatke "uveli" u tidyverse ovir pomoću kojeg je moguće nestrukturirani tekst analizirati sa otprije poznatim alatima iz `dplyr` i `ggplot` paketa. Učitajmo potrebne pakete: 
 
-```{r paketi, echo = T,message=F, warning=F }
+```{r paketi, echo = F,message=F, warning=F }
 library(tidyverse)
 library(tidytext)
 library(data.table)
@@ -71,49 +61,9 @@ library(readxl)
 ```
 
 
-Prije opisa podataka koje ćemo koristiti valja naglasiti da `tidytext` pristup nije jedini način za rad s podatcima u R. Ovdje ga koristimo jer je kompatibilan sa pristupima koje smo do sada koristili u okviru ovog kolegija. Drugi paketi (pristupi) za rad sa tekstom u R su:
-
-- `quanteda` je sveobuhvatan i funkcijama bogat paket, neophodan u za složeniju analizu teksta. Izvrstan tutorial je dostupan na [linku](https://tutorials.quanteda.io/).
-
-- `text2vec` je izrazito koristan paket za ML algoritme sa tekstualnim podatcima. Posebno je pogodan za izradu *dtm* i *tcm* matrica. Paket je motiviran python-ovom Gensim knjižnicom, a tutorial je dostupan na [linku](http://text2vec.org/index.html).
-
-- `stringr` paket je neophodan za manipulaciju *string* podataka u R i kao dio `tidyverse` svijeta će biti izrazito koristan u čišćenju i pripremi podataka. Vrlo je praktičan za rad sa [*regex-om*](https://en.wikipedia.org/wiki/Regular_expression)  i ima nekoliko izvrsnih funkcija za *pattern matching*. Službeni R Tutorial je dostupan na [linku](https://cran.r-project.org/web/packages/stringr/vignettes/stringr.html).
-
-- `spacyr` je *wrapper* paket za spaCy knjižnicu iz python-a i omogućava provedbu naprednijih NLP modela (deep learning, speech tagging, tkoenization, parsing) u R. Također je kompatibilan sa quanteda i tidytext paketima. Tutorial je dostupan na [linku](https://spacyr.quanteda.io/articles/using_spacyr.html).  
-
-- za one koji žele znati više mogu biti korisni i sljedeći resursi: [vodič za tekstualnu analizu u R](http://eprints.lse.ac.uk/86659/1/Benoit_Text%20analysis%20in%20R_2018.pdf) i [kolegij za obradu prirodnog teksta](https://github.com/BrbanMiro/Analiza-teksta) u najstajnju koji sadrži i mnoštvo referenci.
-
-
-### Podatci
-
-Svaka analiza (teksta)  počinje od podataka. Pribava tekstualnih podataka o specifičnim temama najčešće nije jednostavna. Najčešći je način preuzimanja podataka neki od dostupnih API servisa za novinske članke ili tekstualnih repozitorija ili servisi poput Twitter-a. No to često nije dovoljno ukolilko želimo analizirati specifičnu temu ili temu na specifičnom jeziku (npr. hrvatskom). Ovdje još valja napomeniti da je preuzimanje kvalitetnih tekstualnih podataka često moguće isključivo uz nadoplatu kao što je to slučaj člancima na hrvatskom jeziku kroz [webhose.io](https://webhose.io/) servis, [presscliping](https://www.pressclipping.hr/), [presscut](https://www1.presscut.hr/en/) i [mediatoolkit](https://www.mediatoolkit.com/)
-
-U ovom ćemo predavanju analizirati tržište aparata za kavu u Hrvatskoj na osnovi osnovi svih tekstova objavljenih u svim domaćim medijima u perodu od  2021-01-09 do 2022-11-01. Članci su preuzeti strojno sa [mediatoolkit servisa](https://www.mediatoolkit.com/) i identificirani na način da sadrže riječ: *LatteGo*, *De`Longhi*, *Krups* i *Nesspreso*. Na taj je način prikupljeno 290 objava koje sadrže ukupno 8.980 riječi. Analiza teksta koju ćemo provesti uključuje nekoliko etapa: **čišćenje, uređivanje i prilagodbu podataka**, **dekriptivnu statistiku na tekstualnim podatcima**, **analizu sentimenta**, **analizu frekvencija** i **tematsku analizu**.
-
-
-## Uvoz podataka
-
-Podatci za analizu su prikupljeni na prethodno opisan način i dostupni u GitHub repozitoriju kolegija. Učitajmo i pregledajmo cjelopkupni podatkovni skup:
-
-<br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block1"> Pregled podataka </button>  
-<div id="Block1" class="collapse">
-
 ```{r podatci, eval=T,message=F, warning=F}
-kava <- read_excel("D:/LUKA/Academic/HS/NASTAVA/20-21/WebObradaPodataka/Dta/kava.xlsx") #, encoding="UTF-8"
-glimpse(kava)
+kava <- read_excel("D:/LUKA/Academic/HS/NASTAVA/20-21/WebObradaPodataka/Dta/kava.xlsx") 
 ```
-
-</div>
-<br>
-
-
-Nakon što smo učitali podatke u radni prostor R, potrebno je učitati i druge podatke koji su nam potrebni za ovu  analizu. Osim **članaka**, potrebni su nam **leksikoni** i **stop riječi**. Leksikone ćemo preuzeti iz FER-ovog [repozitorija](http://meta-share.ffzg.hr/repository/browse/croatian-sentiment-lexicon/940fe19e6c6d11e28a985ef2e4e6c59eff8b12d75f284d58aacfa8d732467509/), a "stop riječi" ćemo napraviti sami. Ti su podatci trenutno pohranjeni na privatnoj MFiles bazi pa ćemo ih od tamo preuzeti na lokalno računalno:
-
-<br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block2"> Preuzimanje leksikona i stop riječi </button>  
-<div id="Block2" class="collapse">
-
 
 ```{r leksikoni, message=F, warning=F}
 
@@ -198,8 +148,8 @@ my_stop_words <- tibble(
   word = c(
     "jedan","i", "za", "je", "ti","mp","50","4300","5400",
     "e","prvi", "dva","dvije","drugi","u","na","my",
-    "tri","tre?i","pet","kod", "bit.ly", "pixie", "https","family.hr",
-    "ove","ova",  "ovo","bez",
+    "tri","tre?i","pet","kod", "bit.ly", "pixie", "https","family.hr","www.elipso.hr", "ea8170", "mp","ti","1","50","5400","4300",
+    "ove","ova",  "ovo","bez","hrvatska","momax","možete",
     "evo","oko",  "om", "ek",
     "mil","tko","?est", "sedam",
     "osam",   "?im", "zbog",
@@ -217,18 +167,26 @@ stop_corpus <- my_stop_words %>%
 ```
 
 
-</div>
+
+## **Opće**
+***
 <br>
 
 
+- Medijske objave o aparatima za kavu u Hrvatskoj (*LatteGo*, *De`Longhi*, *Krups* i *Nesspreso*)
+<br><br>
+- Cijeli medijski prostor u Hrvatskoj 
+<br><br>
+- Razdoblje od 2021-01-09 do 2022-11-01
+<br><br>
+- Podatci sa [mediatoolkit](https://www.mediatoolkit.com/) servisa
+<br><br>
+- 290 objava koje sadrže ukupno 8.980 riječi
+<br><br>
+- Izvještaj uključuje: *pregled medijskog prostora*, *analizu sentimenta*, *analizu sadržaja* i *tematsku analizu*
 
 
-
-## Prilagodba podataka
-
-U sljedećem koraku ćemo stvoriti neke dodatne varijable korisne za analizu:
-
-```{r, message=F, warning=F}
+```{r message=F, warning=F}
 
 kava %>%
    mutate(kword = case_when(grepl("latteg", MENTION_SNIPPET, ignore.case = TRUE) ~ "LatteGo",
@@ -239,9 +197,6 @@ kava %>%
 
 
 ```
-
-
-Potom pretvaramo podatke u `dataframe`, izabiremo varijable za analizu, specificiramo vremenski pečat članka kao datumsku varijablu, pripisujemo id svakom članku, izabiremo vremenski raspon analize i dodajemo numerički označitelj svakom članku: 
 
 ```{r prilagodi, message=F, warning=F}
 # prilagodi podatke
@@ -254,31 +209,21 @@ newskava <- kava %>%
 ```
 
 
-<br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block3"> Pregled uređenih podatka </button>  
-<div id="Block3" class="collapse">
 
 ```{r }
 
 # brzi pregled strukture podataka
-glimpse(newskava)
+#glimpse(newskava)
 # izgled podataka
 # newskava %>%
 #   sample_n(.,10)
 
-datatable(newskava, rownames = FALSE, filter="top", options = list(pageLength = 5, scrollX=T) )
+#datatable(newskava, rownames = FALSE, filter="top", options = list(pageLength = 5, scrollX=T) )
 
 
 ```
 
-</div>
-<br>
 
-U sljedećem koraku provodimo *tokenizaciju*, odnosno pretvaranje teksta na jedinice analize koje su u ovom slučaju su  riječi:
-
-<br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block4"> Pregled tokeniziranih objava </button>  
-<div id="Block4" class="collapse">
 
 ```{r tokeni}
 # tokenizacija
@@ -288,17 +233,8 @@ newskava %>%
 
 #newsCOVID_token$word <- stri_encode(newsCOVID_token$word, "", "UTF-8") # prilagodi encoding
 
-datatable(newskava_token, rownames = FALSE, filter="top", options = list(pageLength = 5, scrollX=T) )
+#datatable(newskava_token, rownames = FALSE, filter="top", options = list(pageLength = 5, scrollX=T) )
 ```
-
-</div>
-<br>
-
-Potom valja očistiti riječi od brojeva i nepotrebnih riječi. Na tako uređenim podatcima ćemo potom napraviti deskriptivno-statistički pregled teksta.
-
-<br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block5"> Pregled tokeniziranih i uređenih riječi </button>  
-<div id="Block5" class="collapse">
 
 ```{r ocisti}
 ## Ukloni "stop words", brojeve, veznike i pojedinačna slova
@@ -309,28 +245,126 @@ newskava_token %>%
   mutate(word = gsub("^[a-zA-Z]$", NA, word)) %>% 
   drop_na(.)-> newskava_tokenTidy
 
-datatable(newskava_tokenTidy, rownames = FALSE, filter="top", options = list(pageLength = 5, scrollX=T) )
+#datatable(newskava_tokenTidy, rownames = FALSE, filter="top", options = list(pageLength = 5, scrollX=T) )
+```
+
+## **Medijski prostor**
+***
+<br>
+
+- Najvažniji mediji su Web, Facebook, Instagram i forum
+<br><br>
+- Nespresso dominira u medijskom prostoru, a DeLonghi slijedi
+<br><br>
+- Krups i LatteGo zaostaju i na sličnim pozicijama
+<br><br>
+- Medijske kampanje u dvomjesečnim ciklusima
+<br><br>
+- Facebook, forum, Instagram imaju jednaku dinamiku
+<br><br>
+- Brandovi se međusobno prate u medijskom prostoru
+
+<br>
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block6"> Pregled medijskog prostora </button>  
+<div id="Block6" class="collapse">
+
+```{r dekriptivnoDom, warning=F,message=F, fig.height=6, fig.width=10}
+
+## Broj domena
+# newskava_tokenTidy %>% 
+#   summarise(Domena = n_distinct(SOURCE_TYPE))
+
+## Broj objava po domeni
+
+kava %>% 
+ # drop_na(.) %>%
+  group_by(SOURCE_TYPE) %>%
+  summarise(n = n()) %>%
+  arrange(desc(n)) %>% 
+  head(20)  %>%
+  ggplot(., aes(SOURCE_TYPE,  n, fill = SOURCE_TYPE)) + 
+  geom_bar(stat = "identity", show.legend = FALSE) +
+  ggtitle("Broj članaka na pojedinom mediju") +
+  ylab("Broj članaka") +
+  xlab("") +
+  theme_economist() 
+
+
+## Broj objava po brandu
+
+kava %>% 
+ # drop_na(.) %>%
+  group_by(kword) %>%
+  summarise(n = n()) %>%
+  arrange(desc(n)) %>% 
+  head(20) %>%
+  ggplot(., aes(kword,  n, fill = kword)) + 
+  geom_bar(stat = "identity", show.legend = FALSE) +
+  ggtitle("Broj članaka o pojedinom brandu") +
+  ylab("Broj članaka") +
+  xlab("") +
+  theme_economist()
+
+## Broj članaka po domeni 
+
+newskava %>% 
+   mutate(Datum = floor_date(datum, "week")) %>%
+   group_by(Datum, SOURCE_TYPE) %>%
+   summarise(n = n()) %>%
+   ungroup() %>%
+   ggplot(., aes(Datum,  n)) + 
+   geom_line() +
+   ggtitle("Dinamika objava (mediji)") +
+   ylab("Broj članaka") +
+   geom_smooth() +
+   facet_wrap(~ SOURCE_TYPE, scales = "free_y") +
+   theme_economist()
+   
+## Broj objava kroz vrijeme 
+
+newskava %>% 
+   mutate(Datum = floor_date(datum, "week")) %>%
+   group_by(Datum, kword) %>%
+   summarise(n = n()) %>%
+   ungroup() %>%
+   ggplot(., aes(Datum,  n)) + 
+   geom_line() +
+   ggtitle("Dinamika objava (brandovi)") +
+   ylab("Broj objavljenih COVID članaka") +
+   geom_smooth() +
+   facet_wrap(~ kword, scales = "free_y") +
+   theme_economist()
+     
+
 ```
 
 </div>
 <br>
 
-Na tako uređenim podatcima ćemo napraviti deskriptivno-statistički pregled teksta:
+- Najčešće riječi su nazivi brandova (Nespresso,DeLonghi i LatteGo)
+<br><br>
+- Često se spominju i riječi *dom, namještaj, akcije i veliki saloni namještaja*
+<br><br>
+- Ovo ukazuje na *važnost "mitologije doma"* (manja važnost "mitologije okusa" i/ili "mitologije stila")
+<br><br>
+- Od prosinca zaoštrena konkurencija između Nespresso, LatteGo i Krups
+
 
 <br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block6"> Osnovni deskriptivni pregled teksta </button>  
-<div id="Block6" class="collapse">
+
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block7"> Najčešće riječi u tekstu </button>  
+<div id="Block7" class="collapse">
 
 ```{r dekriptivnoTxt, warning=F, message=F, fig.height=10, fig.width=10 }
 
 
 ## Vremenski raspon podatka
-range(newskava_token$DATE)
+#range(newskava_token$DATE)
 
 ## Najčešće riječi
-newskava_tokenTidy %>%
-  count(word, sort = T) %>%
-  head(25)
+# newskava_tokenTidy %>%
+#   count(word, sort = T) %>%
+#   head(25)
 
 ## Vizualizacija najčešćih riječi
 newskava_tokenTidy %>%
@@ -352,7 +386,7 @@ newskava_tokenTidy %>%
    filter(word %in%  c("nespresso", "de’longhi", "lattego", "krups")) %>%
    ggplot(., aes(Datum,  n / gn)) + 
    geom_point() +
-   ggtitle("Učestalost korištenja kroz vrijeme") +
+   ggtitle("Medijske kampanje") +
    ylab("% ukupnih riječi") +
    geom_smooth() +
    facet_wrap(~ word, scales = "free_y") +
@@ -364,94 +398,29 @@ newskava_tokenTidy %>%
 </div>
 <br>
 
-...i  deskriptivno-statistički pregled objava:
-
-<br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block7"> Osnovni deskriptivni pregled objava </button>  
-<div id="Block7" class="collapse">
-
-```{r dekriptivnoDom, warning=F,message=F, fig.height=15, fig.width=10}
-
-## Broj domena
-newskava_tokenTidy %>% 
-  summarise(Domena = n_distinct(SOURCE_TYPE))
-
-## Broj objava po domeni
-
-kava %>% 
- # drop_na(.) %>%
-  group_by(SOURCE_TYPE) %>%
-  summarise(n = n()) %>%
-  arrange(desc(n)) %>% 
-  head(20)
+- Općenito **pozitivan sentiment** medijskih objava
+<br><br>
+- Pozitivan sentiment na osnovi tematike vezane uz **dom, obitelj i kvalitetu života**
+<br><br>
 
 
-## Broj objava po brandu
-
-kava %>% 
- # drop_na(.) %>%
-  group_by(kword) %>%
-  summarise(n = n()) %>%
-  arrange(desc(n)) %>% 
-  head(20)
-
-## Broj članaka po domeni 
-
-newskava %>% 
-   mutate(Datum = floor_date(datum, "week")) %>%
-   group_by(Datum, SOURCE_TYPE) %>%
-   summarise(n = n()) %>%
-   ungroup() %>%
-   ggplot(., aes(Datum,  n)) + 
-   geom_line() +
-   ggtitle("Broj članaka o kafe aparatima kroz vrijeme") +
-   ylab("Broj članaka") +
-   geom_smooth() +
-   facet_wrap(~ SOURCE_TYPE, scales = "free_y") +
-   theme_economist()
-   
-## Broj objava kroz vrijeme 
-
-newskava %>% 
-   mutate(Datum = floor_date(datum, "week")) %>%
-   group_by(Datum, kword) %>%
-   summarise(n = n()) %>%
-   ungroup() %>%
-   ggplot(., aes(Datum,  n)) + 
-   geom_line() +
-   ggtitle("Članci na najvažnijim portalima") +
-   ylab("Broj objavljenih COVID članaka") +
-   geom_smooth() +
-   facet_wrap(~ kword, scales = "free_y") +
-   theme_economist()
-     
-
-```
-
-</div>
-<br>
-
-## Analiza sentimenta
-
-Nakon uređivanja podataka i osnovnog pregleda ćemo provesti analizu **sentimenta**. Za analizu sentimenta je potrebno preuzeti leksikone koji su za hrvatski jezik napravljeni u okviru FER-ovog [Croatian Sentiment Lexicon](http://meta-share.ffzg.hr/repository/browse/croatian-sentiment-lexicon/940fe19e6c6d11e28a985ef2e4e6c59eff8b12d75f284d58aacfa8d732467509/). Analiza sentimenta i uključuje sentiment kroz vrijeme, doprinos riječi sentimentu, 'wordCloud' i analizu negativnosti brandova.
-
-Pogledajmo prvo kako izgledaju leksikoni (koje smo učitali još na početku):
-
-
-<br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block8"> Pregled leksikona sentimenta </button>  
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block8"> Najčešće riječi u tekstu </button>  
 <div id="Block8" class="collapse">
 
-```{r sentiment, message=F, warning=F}
+```{r WCloutSent, warning=F, message=F}
 
-## Pregled leksikona (negativne riječi)
-CroSentilex_n %>% sample_n(10)
-## Pregled leksikona (pozitivne riječi)
-CroSentilex_p %>% sample_n(10)
-## Pregled leksikona (sve riječi)
-Crosentilex_sve %>% sample_n(10)
-## Pregled leksikona (crosentilex Gold)
-CroSentilex_Gold %>% sample_n(10)
+## ComparisonCloud
+newskava_tokenTidy %>%
+  inner_join(CroSentilex_Gold,by="word") %>% 
+  count(word, sentiment) %>% 
+  top_n(200) %>%
+  mutate(sentiment = case_when(sentiment == 0 ~ "+/-",
+                                 sentiment == 1 ~ "-",
+                                 sentiment == 2 ~ "+")) %>%
+  acast(word ~ sentiment, value.var = "n", fill = 0) %>%
+  comparison.cloud(colors = c("firebrick3", "deepskyblue3","darkslategray"),
+                   max.words = 120)
+
 
 ```
 
@@ -459,14 +428,19 @@ CroSentilex_Gold %>% sample_n(10)
 <br>
 
 
-Provjerimo kretanje sentimenta u vremenu:
+## **Analiza sentimenta**
+***
+<br>
 
+- Pozitivan sentiment u periodu pred i za vrijeme blagdana
+<br><br>
+- Razdoblje za plasman proizvoda na tržište kada je dom u fokusu
 
 <br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block9"> Pregled leksikona sentimenta </button>  
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block9"> Kretanje sentimenta kroz vrijeme </button>  
 <div id="Block9" class="collapse">
 
-```{r sentimentTempus, message=F, warning=F}
+```{r sentimentTempus, message=F, warning=F, , fig.height=5, fig.width=6}
 
 ## Kretanje sentimenta u vremenu 
 
@@ -512,12 +486,14 @@ vizualiziraj_sentiment(newskava_tokenTidy,"week")
 <br>
 
 
-Korisno je i promotriti koje riječi najviše doprinose sentimentu (pozitivnom, negativnom i neutralnom):
+- Riječi koje najviše doprinose pozitivnom sentimentu vezane uz **dom**, zdravlje i kvalitetu života
+<br><br>
+- Važnost nagradnih igara i darivanja
+
 
 <br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block10"> Pregled riječi prema doprinosu sentimentu </button>  
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block10"> Doprinos sentimentu </button>  
 <div id="Block10" class="collapse">
-
 
 ```{r doprinoSentimentu, message=F, warning=F}
 
@@ -554,44 +530,13 @@ doprinos_sentimentu(newskava_tokenTidy,15)
 <br>
 
 
-Korisno je pogledati i WordCloud sentiment. Pogledajmo "obični" WordCloud prije toga:
 
-```{r WCloud, message=F, warning=F}
+- Najbolje plasirane medijske objave ima DeLongi (najveći indeks pozitivnosti)
+<br><br>
+- Dobra medijska strategija;znatno bolja pozicija od tržišnog lidera Nespresso
+<br><br>
+- Tržišni lider Nespresso, LatteGo i Krups slični
 
-## WordCloud(vulgaris)
-newskava_tokenTidy %>%
-  anti_join(CroSentilex_Gold,by="word") %>% 
-  count(word) %>% 
-  arrange(desc(n)) %>%
-  top_n(100) %>%
-  with(wordcloud(word, n, max.words = 80)) 
-
-```
-
-Ovako izgleda WordCloud koji sadržava i prikaz sentimenta:
-
-```{r WCloutSent, warning=F, message=F}
-
-## ComparisonCloud
-newskava_tokenTidy %>%
-  inner_join(CroSentilex_Gold,by="word") %>% 
-  count(word, sentiment) %>% 
-  top_n(200) %>%
-  mutate(sentiment = case_when(sentiment == 0 ~ "+/-",
-                                 sentiment == 1 ~ "-",
-                                 sentiment == 2 ~ "+")) %>%
-  acast(word ~ sentiment, value.var = "n", fill = 0) %>%
-  comparison.cloud(colors = c("firebrick3", "deepskyblue3","darkslategray"),
-                   max.words = 120)
-
-
-```
-
-Analiza sentimenta se može iskoristiti za pregled negativnosti pojedinih brandova:
-
-<br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block11"> Pregled brandova prema negativnosti </button>  
-<div id="Block11" class="collapse">
 
 ```{r  include=T, warning=F, message=F}
 ## Najnegativniji brandovi
@@ -603,23 +548,20 @@ CroSentilex_Gold_neg <- CroSentilex_Gold %>% filter(sentiment == 1)
 CroSentilex_Gold_poz <- CroSentilex_Gold %>% filter(sentiment == 2)
 
 
-newskava_tokenTidy %>% 
-  semi_join(CroSentilex_Gold_neg, by= "word") %>%
-  group_by(kword) %>% 
-  summarise(negWords = n()) %>%
-  left_join(wCount, by = "kword") %>%
-  mutate(negativnostIndex = (negWords/word)*100) %>%
-  arrange(desc(negativnostIndex))
+# newskava_tokenTidy %>% 
+#   semi_join(CroSentilex_Gold_neg, by= "word") %>%
+#   group_by(kword) %>% 
+#   summarise(negWords = n()) %>%
+#   left_join(wCount, by = "kword") %>%
+#   mutate(negativnostIndex = (negWords/word)*100) %>%
+#   arrange(desc(negativnostIndex))
 
 ```
 
-</div>
-<br>
 
-...također i pozitivnosti brandova:
 
 <br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block12"> Pregled brandova prema pozitivnosti </button>  
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block12"> Indeks pozitivnosti brandova </button>  
 <div id="Block12" class="collapse">
 
 ```{r pozDomen, warning=F, message=F}
@@ -633,7 +575,9 @@ newskava_tokenTidy %>%
   summarise(pozWords = n()) %>%
   left_join(wCount, by = "kword") %>%
   mutate(pozitivnostIndex = (pozWords/word)*100) %>%
-  arrange(desc(pozitivnostIndex))  
+  arrange(desc(pozitivnostIndex)) %>%
+  kbl() %>%
+  kable_classic_2()
 
 ```
 
@@ -681,13 +625,22 @@ newsCOVID_tokenTidy %>%
 
 ```
 
-## Analiza vaznosti pojmova
+## **Najvažniji pojmovi**
+***
+<br>
 
-Nakon analize sentimenta je korisno analizirati i **najbitnije** riječi. To se radi pomoću [IDF (inverse document frequency)](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.438.2284&rep=rep1&type=pdf) metode. IDF metoda omogućuje identifikaciju važnih (ne nužno čestih) riječi u korpusu i može poslužiti za analizu najvažnijih pojmova po brandovima.
-
+- Najbitnije riječi izračunate pomoću [IDF (inverse document frequency)](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.438.2284&rep=rep1&type=pdf) metode 
+<br><br>
+- Vidljiv **fokus DeLonghija na dom**, salone namještaja i općenito tematiku doma (saloni namještaja)
+<br><br>
+- **Krups pozicioniran u domenu bijele tehnike** (saloni bijele tehnike)
+<br><br>
+- **LatteGo jako ističe okus, kvalitetu i tehnologiju** (prepoznatljivost u okviru branda Phillips)
+<br><br>
+- **Nespresso gradi brand na okusu i stilu življenja** (socijalizacija i kultura pijenja kave)
 
 <br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block13"> Pregled najvažnijih riječi </button>  
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block13"> Pregled najvažnijih riječi za brand </button>  
 <div id="Block13" class="collapse">
 
 ```{r frekvencija, message=F, warning=F, fig.height=10, fig.width=10}
@@ -716,16 +669,16 @@ domenaWords <- left_join(domenaWords, ukupnoWords)
 ## Najbitnije riječi po domenma
 
 idf <- domenaWords %>%
-  bind_tf_idf(word, kword, n)
-
-idf %>% head(30)
+  bind_tf_idf(word, kword, n) 
+#idf %>% head(30)
 
 # idf %>% 
 #   select(-totWords) %>%
 #   arrange(desc(tf_idf))
 
 idf %>%
-  arrange(desc(tf_idf)) %>%
+  arrange(desc(tf_idf))  %>%
+  filter(word != c("5400","family.hr","moj","50","4300","ti","1","ep4341","ea8170","mp")) %>%
   mutate(word = factor(word, levels = rev(unique(word)))) %>% 
   mutate(domena = factor(kword)) %>%
   group_by(domena) %>% 
@@ -745,15 +698,14 @@ idf %>%
 <br>
 
 
-## nGrami
+- Jednaki zaključci na osnovi fraza (bigrami)
 
-Do sada smo analizirali tekst na osnovi pojedinačnih riječi. Takav pristup ograničava  nalaze do kojih je moguće doći kada se tekst sagleda na osnovi fraza (dvije ili *n* riječi). U sljedećemo koraku ćemo tokenizirati tekst na bigrame (dvije riječi) kako bismo proveli frazeološku analizu. Korištenje bigrama otvara mogućnosti korištenja dodatnih pokazatelja pa ćemo provesti i analizu korelacije među riječima.
 
 <br>
 <button class="btn btn-primary" data-toggle="collapse" data-target="#Block14"> Pregled najvažnijih bigrama </button>  
 <div id="Block14" class="collapse">
 
-```{r nGRAMI, message=F, warning=F, fig.height=10, fig.width=10}
+```{r nGRAMI, message=F, warning=F, fig.height=8, fig.width=6}
 
 
 ## tokeniziraj na bigram
@@ -768,9 +720,9 @@ newskava_bigram <- newskava %>%
 
 ## najvažniji bigrami
 
-newskava_bigram %>%
-  count(bigram, sort = T) %>%
-  head(25)
+# newskava_bigram %>%
+#   count(bigram, sort = T) %>%
+#   head(25)
 
 newskava_bigram_sep <- newskava_bigram %>%
   separate(bigram, c("word1","word2"), sep = " ")
@@ -838,7 +790,7 @@ newskava_bigram_tidy %>%
 # Vizualiziraj bigrame
 
 bigram_graph <- newskava_bigram_tidy_bigram_counts %>%
-  filter(n >50) %>%
+  filter(n >30) %>%
    graph_from_data_frame()
 
 a <- grid::arrow(type = "closed", length = unit(.15, "inches"))
@@ -854,7 +806,14 @@ ggraph(bigram_graph, layout = "fr") +
 ```
 
 
-Provjerimo koje su riječi najviše korelirane sa izabranim ključnim riječima:
+- Korelacija između DeLonghi i pojmova dom i Bauhaus
+<br><br>
+- LatteGo jako vezan uz brand Phillips
+<br><br>
+- Nespresso fokusiran na kavu (kvaliteta, priprema, stil)
+
+
+
 
 
 <br>
@@ -879,10 +838,12 @@ newskava_tokenTidy %>%
 #corsWords %>%
 #  filter(item1 == "oporavak")
 
+brandovi <- c("de’longhi", "krups", "lattego", "nespresso")
+
 corsWords %>%
-  filter(item1 %in% c("de’longhi", "krups", "lattego", "nespresso", "dom")) %>%
+  filter(item1 %in% brandovi) %>%
   group_by(item1) %>%
-  top_n(10) %>%
+  top_n(20) %>%
   ungroup() %>%
   mutate(item2 = reorder(item2, correlation)) %>%
   ggplot(aes(item2, correlation)) +
@@ -896,13 +857,20 @@ corsWords %>%
 </div>
 <br>
 
-## Tematska analiza
-
-Na kraju provodimo tematsku analizu kao najsloženiji dio do sada provedene analize. Pri tome koristimo LDA (Latent Dirichlet allocation) algoritam kako bismo pronašli najvažnije riječi u algoritamski identificiranim temama. Ovdje je važno primijetiti da prije provedbe LDA modela tokenizirane riječi treba pretvoriti u matricu pojmova (document term matrix) koju ćemo kasnije koristiti kao input za LDA algoritam.
-
+## **Tematska analiza**
+***
+- Identificirane **četiri teme**
+<br><br>
+- Jedna tema se odnosi na uređaje, karakteristike i brandove (tehnički aspekt)
+<br><br>
+- Druga tema je dom, opremanje doma i udobnost življenja
+<br><br>
+- Treća tema je okus i užitak pijenja kave
+<br><br>
+- Četvta tema tema su ponude, akcije, konkurencija
 
 <br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block16"> Tematska (4) analiza </button>  
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block16"> Tematska analiza </button>  
 <div id="Block16" class="collapse">
 
 ```{r TEME, message=F, warning=F, fig.height=10, fig.width=10}
@@ -939,11 +907,12 @@ newskava_terms %>%
 </div>
 <br>
 
-Tematsku analizu je moguće i napraviti na bigramski tokeniziranom tekstu. Tada je često moguće doći do preciznijih i kontekstualno relevantnijih uvida:
-
+- Slični rezultati i na tematskoj analizi fraza
+<br><br>
+- Phillips se izdvaja kao zasebna tema
 
 <br>
-<button class="btn btn-primary" data-toggle="collapse" data-target="#Block17"> Tematska (4) analiza -  bigrami </button>  
+<button class="btn btn-primary" data-toggle="collapse" data-target="#Block17"> Tematska analiza -  fraze </button>  
 <div id="Block17" class="collapse">
 
 ```{r TEMEbigram, eval=T, message=F, warning=F,fig.height=10, fig.width=10}
@@ -982,10 +951,48 @@ newskava_terms %>%
 <br>
 
 
-## Zaključak
+## **Zaključak**
+***
+<br>
 
-U ovom smo predavanju dali uvodni pregled mogućnosti analize teksta u okviru `tidytext` paketa. Riječ je o skupu alata koji omogućavaju "prilagodbu" teksta u *tidy* format i daljnu analizu s `tidyverse` alatima koje smo do sada već dobro upoznali. `tidytext` nije jedini dostupan okvir za analizu teksta u R, već postoji i niz drugih paketa (vidi na početku) koji omogućavaju korištenje naprednijih (algoritamkskih tehnika.
+- Web najbitniji medij
 
-U predavanju su korišteni tekstovi objavljeni u svim hrvatskim medijima o proizvođačima aparata za kavu u razdoblju četiri mjeseca. Predavanje je imalo za cilj demonstrirati uvodne mogućnosti tekstualne analize te osnovnih tehnika i alata.
+<br><br>
 
-Analiza teksta (NLP) je trenutno (brzo) rastuće istraživačko područje sa sve većim brojem primjena, novih etodoloških pristupa i perspektiva. Dostupno je mnoštvo kvalitetnih i korisnih resursa pa se zainteresiranim studentima preporuča uključivanje u ovu (vrlo perspektivnu) istraživačku paradigmu.
+- Dijeljenje originalnog web sadržaja na mrežama
+
+<br><br>
+
+- Nespresso tržišni lider ali DeLonghi bolje pozicioniran u objavma
+<br><br>
+
+>  *Mitologija doma* bolje prolazi kod domaće publike (DeLonghi)
+
+
+> *Mitologija okusa i stila* manje populrna kod domaće publike (Nespresso)
+
+<br><br>
+
+ - Važne teme: tehnički aspekti, opremanje doma, užitak konzumacije i okus, akcije i ponuda
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

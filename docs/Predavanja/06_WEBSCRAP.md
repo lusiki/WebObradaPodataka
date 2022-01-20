@@ -134,7 +134,7 @@ m100 %>%
 ```
 
 ```
-## Error in xml_ns.xml_document(x): external pointer is not valid
+## Error in matrix(unlist(values), ncol = width, byrow = TRUE): 'data' must be of a vector type, was 'NULL'
 ```
 
 Izgleda da nešto nije u redu...!? Dobili smo error. Bez da ulazimo u detalje, valja znati da je SelectorGadget ponekad neprecizan....iako je riječ o izvrsnom alatu koji uglavnom radi dobro. Ipak, ponekad ono što izgleda kao dobar selektor (i.e. naglašeno žuto) nije točno ono što tražimo. Ovaj error je namjerno prikazan radi skretanja pažnje na potencijalne probleme koji se mogu javiti pri korištenju SelectorGadget-a. Treba još jednom reći: Webscraping je u jednakoj mjeri umjetnost i znanost!
@@ -155,18 +155,18 @@ m100 %>%
 ```
 ## [[1]]
 ## # A tibble: 21 x 5
-##     Time Athlete               Nationality    `Location of races`   Date        
-##    <dbl> <chr>                 <chr>          <chr>                 <chr>       
-##  1  10.8 Luther Cary           United States  Paris, France         July 4, 1891
-##  2  10.8 Cecil Lee             United Kingdom Brussels, Belgium     September 2~
-##  3  10.8 Étienne De Ré         Belgium        Brussels, Belgium     August 4, 1~
-##  4  10.8 L. Atcherley          United Kingdom Frankfurt/Main, Germ~ April 13, 1~
-##  5  10.8 Harry Beaton          United Kingdom Rotterdam, Netherlan~ August 28, ~
-##  6  10.8 Harald Anderson-Arbin Sweden         Helsingborg, Sweden   August 9, 1~
-##  7  10.8 Isaac Westergren      Sweden         Gävle, Sweden         September 1~
-##  8  10.8 Isaac Westergren      Sweden         Gävle, Sweden         September 1~
-##  9  10.8 Frank Jarvis          United States  Paris, France         July 14, 19~
-## 10  10.8 Walter Tewksbury      United States  Paris, France         July 14, 19~
+##     Time Athlete               Nationality    `Location of races`     Date      
+##    <dbl> <chr>                 <chr>          <chr>                   <chr>     
+##  1  10.8 Luther Cary           United States  Paris, France           July 4, 1~
+##  2  10.8 Cecil Lee             United Kingdom Brussels, Belgium       September~
+##  3  10.8 Étienne De Ré         Belgium        Brussels, Belgium       August 4,~
+##  4  10.8 L. Atcherley          United Kingdom Frankfurt/Main, Germany April 13,~
+##  5  10.8 Harry Beaton          United Kingdom Rotterdam, Netherlands  August 28~
+##  6  10.8 Harald Anderson-Arbin Sweden         Helsingborg, Sweden     August 9,~
+##  7  10.8 Isaac Westergren      Sweden         Gävle, Sweden           September~
+##  8  10.8 Isaac Westergren      Sweden         Gävle, Sweden           September~
+##  9  10.8 Frank Jarvis          United States  Paris, France           July 14, ~
+## 10  10.8 Walter Tewksbury      United States  Paris, France           July 14, ~
 ## # ... with 11 more rows
 ```
 
@@ -205,18 +205,18 @@ pre_iaaf
 
 ```
 ## # A tibble: 21 x 5
-##     Time Athlete            Nationality    `Location of races`   Date           
-##    <dbl> <chr>              <chr>          <chr>                 <chr>          
-##  1  10.8 Luther Cary        United States  Paris, France         July 4, 1891   
-##  2  10.8 Cecil Lee          United Kingdom Brussels, Belgium     September 25, ~
-##  3  10.8 Étienne De Ré      Belgium        Brussels, Belgium     August 4, 1893 
-##  4  10.8 L. Atcherley       United Kingdom Frankfurt/Main, Germ~ April 13, 1895 
-##  5  10.8 Harry Beaton       United Kingdom Rotterdam, Netherlan~ August 28, 1895
-##  6  10.8 Harald Anderson-A~ Sweden         Helsingborg, Sweden   August 9, 1896 
-##  7  10.8 Isaac Westergren   Sweden         Gävle, Sweden         September 11, ~
-##  8  10.8 10.8               Sweden         Gävle, Sweden         September 10, ~
-##  9  10.8 Frank Jarvis       United States  Paris, France         July 14, 1900  
-## 10  10.8 Walter Tewksbury   United States  Paris, France         July 14, 1900  
+##     Time Athlete               Nationality    `Location of races`     Date      
+##    <dbl> <chr>                 <chr>          <chr>                   <chr>     
+##  1  10.8 Luther Cary           United States  Paris, France           July 4, 1~
+##  2  10.8 Cecil Lee             United Kingdom Brussels, Belgium       September~
+##  3  10.8 Étienne De Ré         Belgium        Brussels, Belgium       August 4,~
+##  4  10.8 L. Atcherley          United Kingdom Frankfurt/Main, Germany April 13,~
+##  5  10.8 Harry Beaton          United Kingdom Rotterdam, Netherlands  August 28~
+##  6  10.8 Harald Anderson-Arbin Sweden         Helsingborg, Sweden     August 9,~
+##  7  10.8 Isaac Westergren      Sweden         Gävle, Sweden           September~
+##  8  10.8 Isaac Westergren      Sweden         Gävle, Sweden           September~
+##  9  10.8 Frank Jarvis          United States  Paris, France           July 14, ~
+## 10  10.8 Walter Tewksbury      United States  Paris, France           July 14, ~
 ## # ... with 11 more rows
 ```
 
@@ -233,18 +233,18 @@ pre_iaaf
 
 ```
 ## # A tibble: 21 x 5
-##     time athlete            nationality    location_of_races     date           
-##    <dbl> <chr>              <chr>          <chr>                 <chr>          
-##  1  10.8 Luther Cary        United States  Paris, France         July 4, 1891   
-##  2  10.8 Cecil Lee          United Kingdom Brussels, Belgium     September 25, ~
-##  3  10.8 Étienne De Ré      Belgium        Brussels, Belgium     August 4, 1893 
-##  4  10.8 L. Atcherley       United Kingdom Frankfurt/Main, Germ~ April 13, 1895 
-##  5  10.8 Harry Beaton       United Kingdom Rotterdam, Netherlan~ August 28, 1895
-##  6  10.8 Harald Anderson-A~ Sweden         Helsingborg, Sweden   August 9, 1896 
-##  7  10.8 Isaac Westergren   Sweden         Gävle, Sweden         September 11, ~
-##  8  10.8 10.8               Sweden         Gävle, Sweden         September 10, ~
-##  9  10.8 Frank Jarvis       United States  Paris, France         July 14, 1900  
-## 10  10.8 Walter Tewksbury   United States  Paris, France         July 14, 1900  
+##     time athlete               nationality    location_of_races       date      
+##    <dbl> <chr>                 <chr>          <chr>                   <chr>     
+##  1  10.8 Luther Cary           United States  Paris, France           July 4, 1~
+##  2  10.8 Cecil Lee             United Kingdom Brussels, Belgium       September~
+##  3  10.8 Étienne De Ré         Belgium        Brussels, Belgium       August 4,~
+##  4  10.8 L. Atcherley          United Kingdom Frankfurt/Main, Germany April 13,~
+##  5  10.8 Harry Beaton          United Kingdom Rotterdam, Netherlands  August 28~
+##  6  10.8 Harald Anderson-Arbin Sweden         Helsingborg, Sweden     August 9,~
+##  7  10.8 Isaac Westergren      Sweden         Gävle, Sweden           September~
+##  8  10.8 Isaac Westergren      Sweden         Gävle, Sweden           September~
+##  9  10.8 Frank Jarvis          United States  Paris, France           July 14, ~
+## 10  10.8 Walter Tewksbury      United States  Paris, France           July 14, ~
 ## # ... with 11 more rows
 ```
 
@@ -353,18 +353,18 @@ iaaf_76 %>%
 
 ```
 ## # A tibble: 54 x 8
-##     time wind   auto athlete       nationality  location_of_race      date ref  
-##    <dbl> <chr> <dbl> <chr>         <chr>        <chr>                <dbl> <chr>
-##  1  10.6 ""     NA   Donald Lippi~ United Stat~ Stockholm, Sweden   -20998 [2]  
-##  2  10.6 ""     NA   Jackson Scho~ United Stat~ Stockholm, Sweden   -18004 [2]  
-##  3  10.4 ""     NA   Charley Padd~ United Stat~ Redlands, USA       -17785 [2]  
-##  4  10.4 "0.0"  NA   Eddie Tolan   United Stat~ Stockholm, Sweden   -14756 [2]  
-##  5  10.4 ""     NA   Eddie Tolan   United Stat~ Copenhagen, Denmark -14739 [2]  
-##  6  10.3 ""     NA   Percy Willia~ Canada       Toronto, Canada     -14390 [2]  
-##  7  10.3 "0.4"  10.4 Eddie Tolan   United Stat~ Los Angeles, USA    -13667 [2]  
-##  8  10.3 ""     NA   Ralph Metcal~ United Stat~ Budapest, Hungary   -13291 [2]  
-##  9  10.3 ""     NA   Eulace Peaco~ United Stat~ Oslo, Norway        -12932 [2]  
-## 10  10.3 ""     NA   Chris Berger  Netherlands  Amsterdam, Netherl~ -12912 [2]  
+##     time wind   auto athlete           nationality location_of_race   date ref  
+##    <dbl> <chr> <dbl> <chr>             <chr>       <chr>             <dbl> <chr>
+##  1  10.6 ""     NA   Donald Lippincott United Sta~ Stockholm, Swed~ -20998 [2]  
+##  2  10.6 ""     NA   Jackson Scholz    United Sta~ Stockholm, Swed~ -18004 [2]  
+##  3  10.4 ""     NA   Charley Paddock   United Sta~ Redlands, USA    -17785 [2]  
+##  4  10.4 "0.0"  NA   Eddie Tolan       United Sta~ Stockholm, Swed~ -14756 [2]  
+##  5  10.4 ""     NA   Eddie Tolan       United Sta~ Copenhagen, Den~ -14739 [2]  
+##  6  10.3 ""     NA   Percy Williams    Canada      Toronto, Canada  -14390 [2]  
+##  7  10.3 "0.4"  10.4 Eddie Tolan       United Sta~ Los Angeles, USA -13667 [2]  
+##  8  10.3 ""     NA   Ralph Metcalfe    United Sta~ Budapest, Hunga~ -13291 [2]  
+##  9  10.3 ""     NA   Eulace Peacock    United Sta~ Oslo, Norway     -12932 [2]  
+## 10  10.3 ""     NA   Chris Berger      Netherlands Amsterdam, Neth~ -12912 [2]  
 ## # ... with 44 more rows
 ```
 
