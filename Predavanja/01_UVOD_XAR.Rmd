@@ -2,8 +2,8 @@
 title: "OBRADA PODATAKA"
 # subtitle: "<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>"
 subtitle: "Predavanje 1: Pregled kolegija i studentskih obveza"
-author: "Luka Sikic, PhD"
-date: "Fakultet hrvatskih studija | [OP](https://lusiki.github.io/WebObradaPodataka/index.html)" #"`r format(Sys.time(), '%d %B %Y')`"
+author: "Luka Sikic"
+date: "Fakultet hrvatskih studija" 
 output:
   xaringan::moon_reader:
     css: [default, metropolis, metropolis-fonts] 
@@ -12,6 +12,7 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
+
 ---
 ```{R, setup, include = F}
 # devtools::install_github("dill/emoGG")
@@ -161,68 +162,105 @@ tidy_table <- function(x, terms, highlight_row = 1, highlight_color = "black", h
 # TEHNIČKI DETALJI
 <br>
 <br>
+<br>
 - Nastava iz kolegija **Obrada podataka** sastoji se od dva sata predavanja tjedno (4 ECTS). 
+<br>
 <br>
 - Predavanja se održavaju u blok satima (dva školska sata od 45 min).
 <br>
+<br>
 - Pohađanje nastave (i predavanja i seminara) je obavezno i evidentira se. 
 <br>
-- Predavanje se održava četvrtkom od 16:00 do 17:30 u dvorani Split. 
 <br>
-- Tijekom nastave, molim studente da ne koriste mobitele i ne izlaze iz dvorane.
+- Predavanje se održava četvrtkom od 16:00 do 17:30 u dvorani Rijeka. 
+<br>
+<br>
+
+
 
 ---
 
 # CILJEVI KOLEGIJA
 
-1. Upoznati vas sa osnovama programskog sučelja [**R**](https://rstudio.com/).
-2. Osposobiti vas za primjenu osnovnih statističkih koncepata u programu **R**. 
-3. Naučiti vas kako operacionalizirati osnovne statističke koncepte u empirijskoj analizi i interpretirati rezultate. 
-4. Upoznati vas sa važnostima, korisnostima i znanstvenom relevantnosti domaćih i stranih sekundarnih izvora podataka (npr. Iz [**DZS**](https://www.dzs.hr/), [**HGK**](https://www.hgk.hr/), [**EUROSTAT**](https://ec.europa.eu/eurostat/data/database) i sl.).
+
+<br>
+<br>
+<br>
+<br>
+- Osnove programskog sučelja [**R**](https://rstudio.com/).
+<br>
+<br>
+- Primjena osnovnih statističkih koncepata u programu **R**.
+<br>
+<br>
+- Osnovni statistički koncepti u empirijskoj analizi i interpretacija rezultata.
+<br>
+<br>
+- Važnost, korist i znanstvena relevantnost domaćih i stranih izvora podataka.
 
 ---
 
 # SADRŽAJ KOLEGIJA
-
+<br>
+<br>
+<br>
 - Računalna podrška: **R** osnove, dodatni koncepti u **R**.
+<br>
+<br>
 - Pregled podataka: deskriptivna statistika, vizualizacija podataka.
+<br>
+<br>
 - Statistička teorija: vjerojatnost, distribucije, procjena parametara, testiranje hipoteza.
+<br>
+<br>
 - Statistički alati: kategorijalna analiza, usporedba dva prosjeka, usporedba više prosjeka, osnove regresijske analize.
 ---
 
 # STUDENTSKE OBVEZE (Predavanja)
 
+<br><br><br>
+
 - Studentima se preporučuje da na predavanjima koriste svoje prijenosno računalo i zapisuju bilješke.
+<br><br>
 - Predavanja su OpenSource.
+<br><br>
 - Predavanja su sastavni dio ispita.
-- Nije dopušteno snimanje predavanja.
+<br><br>
+
 ---
 
 # STUDENTSKE OBVEZE (Prezentacija)
-
-- Svi studenti tijekom semestra moraju održati jednu prezentaciju prema zadanoj literaturi u .ppt formi.   
+<br><br><br>
+- Svi studenti tijekom semestra moraju održati jednu prezentaciju prema zadanoj literaturi u .ppt formi.
+<br><br>
 - Izlagači  moraju pripremiti na kraju prezentacije i nekoliko (2-3) ključnih pitanja za raspravu koju imamo na kraju obrađene teme.
+<br><br>
 - Prezentaciju studenti moraju poslati na e-mail najkasnije u petak, tjedan dana prije seminara. 
+<br><br>
 - Seminari osim prezentacije uključuju: povezivanje teorijskih koncepata s praktičnom primjenom, zajednička empirijska analiza, rasprava o društvenim aspektima statističkih rezultata, aktivno sudjelovanje u raspravi na zadanu temu.
 
 ---
 
 # STUDENTSKE OBVEZE (Ispit)
-
+<br><br><br>
 - U zimskom , ljetnom   i jesenskom  ispitnom roku studenti imaju završni pismeni ispit iz tema obrađenih na predavanjima i prema priloženoj literaturi. 
+<br><br>
 - Ispit je položen ako student ostvari 60% od ukupno mogućih bodova: 60-64% = (2); 65-74% = (3); 75-84% = (4); 85% = (5)
 ---
 
 # KONZULTACIJE
-
+<br><br><br>
 Konzultacije:  od 15:00 do 16:00 u sobi 18 (I.kat) uz prethodnu najavu na mail: luka.sikic@hrstud.hr
 ---
 
 # LITERATURA ZA ISPIT
-
+<br><br><br>
 - **Petz, B. (1997).** *Osnovne statističke metode za nematematičare*, III, Naklada  Slap, Jastrebarsko
+<br><br>
 - [**Navarro, D. (2014)** *Learning statistics with R: A tutorial*](https://learningstatisticswithr.com/)
+<br><br>
 - Predavanja
+<br><br>
 - [**Materijali**](https://lusiki.github.io/WebObradaPodataka/index.html) koji će biti distribuirani u toku kolegija
 ---
 class: inverse, middle
