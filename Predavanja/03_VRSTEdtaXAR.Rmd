@@ -3,7 +3,7 @@ title: "OBRADA PODATAKA"
 # subtitle: "<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>"
 subtitle: "Predavanje 2: Vrste podataka"
 author: "Luka Sikic, PhD"
-date: "Fakultet hrvatskih studija | [OP](https://lusiki.github.io/WebObradaPodataka/)" #"`r format(Sys.time(), '%d %B %Y')`"
+date: "Fakultet hrvatskih studija" #"`r format(Sys.time(), '%d %B %Y')`"
 output:
   xaringan::moon_reader:
     css: [default, metropolis, metropolis-fonts] 
@@ -22,7 +22,7 @@ knitr::opts_chunk$set(echo = F)
 
 library(tidyverse)
 library(reticulate)
-use_virtualenv("r-reticulate")
+#use_virtualenv("r-reticulate")
 library(kableExtra)
 library(ggplot2)
 library(dplyr)
@@ -82,7 +82,7 @@ layout: true
 
 ---
 
-#### Primjer strukturiranih podataka
+#### Primjer strukturiranih podataka [Maddison](https://www.rug.nl/ggdc/historicaldevelopment/maddison/releases/maddison-project-database-2020?lang=en)
 
 ```{r echo=TRUE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
 # Učitaj paket
@@ -97,7 +97,7 @@ head(maddi,6)
 
 ---
 
-#### Primjer strukturiranih podataka
+#### Primjer strukturiranih podataka 
 
 ```{r echo=TRUE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
 # Vizualiziraj podatke
@@ -124,18 +124,19 @@ ltg
 
 ---
 
-#### Primjer nestrukturiranih podataka ([bilbord](https://www.billboard.com/charts/hot-100))
+#### Primjer nestrukturiranih podataka [Wikipedia](https://en.wikipedia.org/wiki/Houston)
 
 ```{r echo=TRUE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
 # Učitaj pakete
+library(tidyverse)
 library(rvest)
-library(dplyr)
 # Url
-hot100page <- "https://www.billboard.com/charts/hot-100"
+url = "https://en.wikipedia.org/wiki/Houston"
 # Učitaj url
-hot100 <- read_html(hot100page)
+houston_html = read_html(url)
 # Pogledaj objekt
-hot100
+houston_html
+
 ```
 
 ---
@@ -143,12 +144,15 @@ hot100
 #### Primjer nestrukturiranih podataka
 
 ```{r echo=TRUE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
-# Pogledaj strukturu objekta
-str(hot100)
-# Preuzmi podatke od interesa
-body_nodes <- hot100 %>% 
- html_node("body") %>% 
- html_children()
+# Pogledaj sve tablice 
+houston_html %>% 
+  html_nodes(css = "table")
+# Izvuci željenu tablicu
+pop_table = 
+  houston_html %>% 
+  html_nodes(css = "table") %>% 
+  nth(4) %>% 
+  html_table(fill = TRUE) 
 ```
 
 ---
@@ -156,8 +160,8 @@ body_nodes <- hot100 %>%
 #### Primjer nestrukturiranih podataka
 
 ```{r echo=TRUE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
-# Pregledaj podatke
-head(body_nodes,5)
+# Pogledaj tablicu
+head(pop_table)
 ```
 
 ---
@@ -165,34 +169,26 @@ head(body_nodes,5)
 #### Primjer nestrukturiranih podataka
 
 ```{r echo=TRUE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
-# Preuzmi rang
-rank <- hot100 %>% 
-  rvest::html_nodes('body') %>% 
-  xml2::xml_find_all("//span[contains(@class, 'chart-element__rank__number')]") %>% 
-  rvest::html_text()
-# Preuzmi pjevača
-artist <- hot100 %>% 
-  rvest::html_nodes('body') %>% 
-  xml2::xml_find_all("//span[contains(@class, 'chart-element__information__artist')]") %>% 
-  rvest::html_text()
-# Preuzmi naslov
-title <- hot100 %>% 
-  rvest::html_nodes('body') %>% 
-  xml2::xml_find_all("//span[contains(@class, 'chart-element__information__song')]") %>% 
-  rvest::html_text()
+# Uredi podatke 
+colnames(pop_table) = c("year", "population", "blank", "percent_change")
+
+pop_table = pop_table[2:19, ]
+
+pop_table = 
+  pop_table %>% 
+  select(-blank) %>% 
+  mutate(
+    percent_change = str_replace(percent_change, "%", ""),
+    percent_change = str_replace(percent_change, "—", ""),
+    year = str_replace(year, "\\(est.\\)", ""),
+    population = str_replace_all(population, ",", ""),
+    year = lubridate::ymd(year, truncated = 2L),
+    population = as.numeric(population),
+    percent_change = as.numeric(percent_change)
+  )
   
 ```
 
----
-
-#### Primjer nestrukturiranih podataka
-
-```{r echo=TRUE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
-# Poveži podatke
-chart_df <- data.frame(rank, artist, title)
-# Pregledaj podatke
-head(chart_df,6)
-```
 
 ---
 
@@ -200,7 +196,7 @@ head(chart_df,6)
 
 ```{r echo=TRUE,warning=FALSE,message=FALSE, fig.height=5, fig.width=7}
 # Tablično prikaži
-knitr::kable(chart_df %>% head(8))
+knitr::kable(pop_table %>% head(8))
 ```
 ---
 

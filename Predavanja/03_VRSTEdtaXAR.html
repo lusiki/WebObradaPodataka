@@ -4,7 +4,7 @@
     <title>OBRADA PODATAKA</title>
     <meta charset="utf-8" />
     <meta name="author" content="Luka Sikic, PhD" />
-    <script src="libs/header-attrs-2.10/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/metropolis.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/metropolis-fonts.css" rel="stylesheet" />
@@ -16,7 +16,7 @@ class: center, middle, inverse, title-slide
 # OBRADA PODATAKA
 ## Predavanje 2: Vrste podataka
 ### Luka Sikic, PhD
-### Fakultet hrvatskih studija | <a href="https://lusiki.github.io/WebObradaPodataka/">OP</a>
+### Fakultet hrvatskih studija
 
 ---
 
@@ -104,7 +104,7 @@ head(maddi,6)
 
 ---
 
-#### Primjer strukturiranih podataka
+#### Primjer strukturiranih podataka [Maddison](https://www.rug.nl/ggdc/historicaldevelopment/maddison/releases/maddison-project-database-2020?lang=en)
 
 
 ```r
@@ -130,26 +130,26 @@ ltg &lt;- ggplot(maddi,aes(x = year, y = rgdpnapc)) +
 
 ---
 
-#### Primjer nestrukturiranih podataka ([bilbord](https://www.billboard.com/charts/hot-100))
+#### Primjer nestrukturiranih podataka [Wikipedia](https://en.wikipedia.org/wiki/Houston)
 
 
 ```r
 # Učitaj pakete
+library(tidyverse)
 library(rvest)
-library(dplyr)
 # Url
-hot100page &lt;- "https://www.billboard.com/charts/hot-100"
+url = "https://en.wikipedia.org/wiki/Houston"
 # Učitaj url
-hot100 &lt;- read_html(hot100page)
+houston_html = read_html(url)
 # Pogledaj objekt
-hot100
+houston_html
 ```
 
 ```
 ## {html_document}
-## &lt;html class="" lang=""&gt;
+## &lt;html class="client-nojs" lang="en" dir="ltr"&gt;
 ## [1] &lt;head&gt;\n&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8 ...
-## [2] &lt;body class="chart-page chart-page-" data-trackcategory="Charts-TheHot100 ...
+## [2] &lt;body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject  ...
 ```
 
 ---
@@ -158,22 +158,41 @@ hot100
 
 
 ```r
-# Pogledaj strukturu objekta
-str(hot100)
+# Pogledaj sve tablice 
+houston_html %&gt;% 
+  html_nodes(css = "table")
 ```
 
 ```
-## List of 2
-##  $ node:&lt;externalptr&gt; 
-##  $ doc :&lt;externalptr&gt; 
-##  - attr(*, "class")= chr [1:2] "xml_document" "xml_node"
+## {xml_nodeset (19)}
+##  [1] &lt;table class="infobox ib-settlement vcard"&gt;&lt;tbody&gt;\n&lt;tr&gt;&lt;th colspan="2"  ...
+##  [2] &lt;table class="wikitable mw-collapsible mw-collapsed" style="width:auto;  ...
+##  [3] &lt;table class="wikitable mw-collapsible mw-collapsed" style="width:auto;  ...
+##  [4] &lt;table class="toccolours" style="border-spacing: 1px; float: right; clea ...
+##  [5] &lt;table class="wikitable sortable collapsible" style="font-size: 90%;"&gt;&lt;t ...
+##  [6] &lt;table style="text-align:left; border-collapse:collapse; width:100%;"&gt;&lt;t ...
+##  [7] &lt;table class="wikitable" style="float:right; font-size:75%; text-align:c ...
+##  [8] &lt;table class="box-More_citations_needed_section plainlinks metadata ambo ...
+##  [9] &lt;table class="nowraplinks hlist mw-collapsible autocollapse navbox-inner ...
+## [10] &lt;table class="nowraplinks mw-collapsible autocollapse navbox-inner" styl ...
+## [11] &lt;table class="nowraplinks hlist mw-collapsible autocollapse navbox-inner ...
+## [12] &lt;table class="nowraplinks mw-collapsible autocollapse navbox-inner" styl ...
+## [13] &lt;table class="nowraplinks mw-collapsible mw-collapsed navbox-inner" styl ...
+## [14] &lt;table class="nowraplinks mw-collapsible autocollapse navbox-inner" styl ...
+## [15] &lt;table class="nowraplinks mw-collapsible autocollapse navbox-inner" styl ...
+## [16] &lt;table class="nowraplinks mw-collapsible autocollapse navbox-inner" styl ...
+## [17] &lt;table class="nowraplinks mw-collapsible autocollapse navbox-inner" styl ...
+## [18] &lt;table class="nowraplinks mw-collapsible autocollapse navbox-inner" styl ...
+## [19] &lt;table class="nowraplinks hlist mw-collapsible autocollapse navbox-inner ...
 ```
 
 ```r
-# Preuzmi podatke od interesa
-body_nodes &lt;- hot100 %&gt;% 
- html_node("body") %&gt;% 
- html_children()
+# Izvuci željenu tablicu
+pop_table = 
+  houston_html %&gt;% 
+  html_nodes(css = "table") %&gt;% 
+  nth(4) %&gt;% 
+  html_table(fill = TRUE) 
 ```
 
 ---
@@ -182,40 +201,20 @@ body_nodes &lt;- hot100 %&gt;%
 
 
 ```r
-# Pregledaj podatke
-head(body_nodes,5)
+# Pogledaj tablicu
+head(pop_table)
 ```
 
 ```
-## {xml_nodeset (5)}
-## [1] &lt;div class="header-wrapper "&gt;\n&lt;header id="site-header" class="site-heade ...
-## [2] &lt;div class="site-header__placeholder"&gt;&lt;/div&gt;
-## [3] &lt;script&gt;\n        var PGM = window.PGM || {};\n        PGM.config = PGM.c ...
-## [4] &lt;main id="main" class="page-content"&gt;&lt;div id="charts" data-page-title="TH ...
-## [5] &lt;div class="ad_desktop dfp-ad dfp-ad-promo " data-position="promo" data-d ...
-```
-
----
-
-#### Primjer nestrukturiranih podataka
-
-
-```r
-# Preuzmi rang
-rank &lt;- hot100 %&gt;% 
-  rvest::html_nodes('body') %&gt;% 
-  xml2::xml_find_all("//span[contains(@class, 'chart-element__rank__number')]") %&gt;% 
-  rvest::html_text()
-# Preuzmi pjevača
-artist &lt;- hot100 %&gt;% 
-  rvest::html_nodes('body') %&gt;% 
-  xml2::xml_find_all("//span[contains(@class, 'chart-element__information__artist')]") %&gt;% 
-  rvest::html_text()
-# Preuzmi naslov
-title &lt;- hot100 %&gt;% 
-  rvest::html_nodes('body') %&gt;% 
-  xml2::xml_find_all("//span[contains(@class, 'chart-element__information__song')]") %&gt;% 
-  rvest::html_text()
+## # A tibble: 6 x 4
+##   `Historical population` `Historical popul~ `Historical popu~ `Historical popu~
+##   &lt;chr&gt;                   &lt;chr&gt;              &lt;chr&gt;             &lt;chr&gt;            
+## 1 Census                  Pop.               ""                %±               
+## 2 1850                    2,396              ""                —                
+## 3 1860                    4,845              ""                102.2%           
+## 4 1870                    9,382              ""                93.6%            
+## 5 1880                    16,513             ""                76.0%            
+## 6 1890                    27,557             ""                66.9%
 ```
 
 ---
@@ -224,21 +223,25 @@ title &lt;- hot100 %&gt;%
 
 
 ```r
-# Poveži podatke
-chart_df &lt;- data.frame(rank, artist, title)
-# Pregledaj podatke
-head(chart_df,6)
+# Uredi podatke 
+colnames(pop_table) = c("year", "population", "blank", "percent_change")
+
+pop_table = pop_table[2:19, ]
+
+pop_table = 
+  pop_table %&gt;% 
+  select(-blank) %&gt;% 
+  mutate(
+    percent_change = str_replace(percent_change, "%", ""),
+    percent_change = str_replace(percent_change, "—", ""),
+    year = str_replace(year, "\\(est.\\)", ""),
+    population = str_replace_all(population, ",", ""),
+    year = lubridate::ymd(year, truncated = 2L),
+    population = as.numeric(population),
+    percent_change = as.numeric(percent_change)
+  )
 ```
 
-```
-##   rank                              artist         title
-## 1    1             Lil Nas X &amp; Jack Harlow Industry Baby
-## 2    2       The Kid LAROI &amp; Justin Bieber          Stay
-## 3    3                        Walker Hayes    Fancy Like
-## 4    4                          Ed Sheeran    Bad Habits
-## 5    5 Drake Featuring Future &amp; Young Thug    Way 2 Sexy
-## 6    6                      Olivia Rodrigo      Good 4 U
-```
 
 ---
 
@@ -247,57 +250,57 @@ head(chart_df,6)
 
 ```r
 # Tablično prikaži
-knitr::kable(chart_df %&gt;% head(8))
+knitr::kable(pop_table %&gt;% head(8))
 ```
 
 &lt;table&gt;
  &lt;thead&gt;
   &lt;tr&gt;
-   &lt;th style="text-align:left;"&gt; rank &lt;/th&gt;
-   &lt;th style="text-align:left;"&gt; artist &lt;/th&gt;
-   &lt;th style="text-align:left;"&gt; title &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; year &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; population &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; percent_change &lt;/th&gt;
   &lt;/tr&gt;
  &lt;/thead&gt;
 &lt;tbody&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Lil Nas X &amp;amp; Jack Harlow &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Industry Baby &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1850-01-01 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2396 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; 2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; The Kid LAROI &amp;amp; Justin Bieber &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Stay &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1860-01-01 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4845 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 102.2 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; 3 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Walker Hayes &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Fancy Like &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1870-01-01 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9382 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 93.6 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; 4 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Ed Sheeran &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Bad Habits &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1880-01-01 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16513 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 76.0 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; 5 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Drake Featuring Future &amp;amp; Young Thug &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Way 2 Sexy &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1890-01-01 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27557 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 66.9 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; 6 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Olivia Rodrigo &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Good 4 U &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1900-01-01 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 44633 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 62.0 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; 7 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Doja Cat Featuring SZA &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Kiss Me More &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1910-01-01 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 78800 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 76.6 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; 8 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Dua Lipa &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Levitating &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1920-01-01 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 138276 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 75.5 &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
