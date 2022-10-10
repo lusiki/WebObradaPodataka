@@ -10,11 +10,11 @@ title: " "
 ### Osnovne informacije
 
 
-**Obrada podataka** je kolegij na diplomskoj razini koji u zimskom semestru akademske godine 2021/22 na Fakultetu hrvatskih studija u Zagrebu izvodi [Luka Sikic](https://www.lukasikic.info/). Kolegij je prvenstveno namijenjen sociolozima, ali i prilagođen za studente iz drugih društvenih zananosti poput politologije, komunikologije, povijesti i ekonomije te služi kao [premosnica](http://croecon.contentio.biz/post/2021-03-16-nova-statistika/) od osnovne razine statističkih znanja do primjene statistike u modernom i praktičnom kontekstu.
+**Obrada podataka** je kolegij na diplomskoj razini koji u zimskom semestru akademske godine 2022/23 na Fakultetu hrvatskih studija u Zagrebu izvodi [Luka Sikic](https://www.lukasikic.info/). Kolegij je prvenstveno namijenjen sociolozima, ali i prilagođen za studente iz drugih društvenih zananosti poput politologije, komunikologije, povijesti i ekonomije te služi kao [premosnica](http://croecon.contentio.biz/post/2021-03-16-nova-statistika/) od osnovne razine statističkih znanja do primjene statistike u modernom i praktičnom kontekstu.
 
 <br>
 
-Kolegij polazi od računalnog pristupa društvenim znanostima (**computational social science (CSS)**) i modernih izvora podatka puput Web-a, aplikacija, društvenih mreža, urbanih senzora i dr. Fokus je na korištenju računalnih tehnologija za obradu i analizu podataka (**Data Science**) te kolegij ne predstavlja sveobuhvatnu referencu za rad s *Big Data* tehnologijama u društvenim znanostima. Ipak, sadržaj kolegija će studentima koristiti kao korisno polazište za daljnji studij *Big Data* principa i alata u drštvenim znanostima i općenito. Za studente zainteresirane za rad sa *Big Data* tehnologijama se preporuča samostalno nadupunjavanje kolegija temama: rad sa terminalom (*Bash Shell*), rad sa platformama za suradnju i razmjenu koda (*Git*, *GitHub*), rad sa *Docker*-om, programiranje i iteraciju, paralelno programiranje, rad u oblaku (*Cloud*). 
+Kolegij polazi od računalnog pristupa društvenim znanostima **computational social science (CSS)** i modernih izvora podatka puput Web-a, aplikacija, društvenih mreža, urbanih senzora i dr. Fokus je na upoznavanju i korištenju osnovnih računalnih tehnologija za obradu i analizu podataka (**Data Science**). Kolegij ne predstavlja sveobuhvatnu referencu za rad s *Big Data* tehnologijama u društvenim znanostima. Ipak, sadržaj kolegija će studentima koristiti kao korisno polazište za daljnji studij *Big Data* principa i alata u društvenim znanostima i općenito. Za studente zainteresirane za sveobuhvatnije razumijevanje i rad sa *Big Data* tehnologijama, preporuča se samostalno nadupunjavanje kolegija temama: rad sa terminalom (*Bash Shell*), rad sa platformama za suradnju i razmjenu koda (*Git*, *GitHub*), rad sa *Docker*-om, programiranje i iteracija, paralelno programiranje, rad u oblaku (*Cloud*). 
 
 <br>
 
@@ -55,7 +55,7 @@ U zimskom , ljetnom i jesenskom ispitnom roku studenti imaju završni pismeni is
 
 Svi studenti tijekom semestra moraju održati jednu prezentaciju prema zadanoj literaturi u .ppt formi. Izlagači moraju pripremiti na kraju prezentacije i nekoliko (2-3) ključnih pitanja za raspravu na kraju obrađene teme. Prezentaciju je potrebno poslati na e-mail najkasnije u petak, tjedan dana prije seminara.
 
-Seminarski rad se sastoji od (min) 5 stranica teksta i (min) 5 akademskih referenci na temu povezanu sa kolegijem. Rad je potrebno poslati na e-mail najkasnije u petak, tjedan dana prije izlaska na ispit. Svi oblici plagiranja će se sankcionirati.
+Seminarski rad se sastoji od (min) 5 stranica teksta i (min) 5 akademskih referenci o prethodno dogovorenoj temi. Svi oblici plagiranja će se sankcionirati.
 
 
 
