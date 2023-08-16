@@ -589,11 +589,11 @@ layout: true
 <br>
 <br>
 - zbog veličine se ne mogu pohraniti na standardne relacijske baze
-<br>
+<br><br>
 - nestrukturirani, semi-srtukturirani i strukturirani podatci
-<br>
+<br><br>
 - od terabayt-a do zettabayt-a veličine
-<br>
+<br><br>
 - osnova za strojno učenje, AI, predviđanje budućnosti
 
 ---
@@ -605,7 +605,7 @@ layout: true
 <br>
 - SQL, Excel
 <br>
-- podatkovni "polymorphism" zbog uspona novih tehnologije (web,mobile, socialNet,IoT, programming)
+- podatkovni polimorfizam zbog uspona novih tehnologije (web,mobile, socialNet,IoT, programming)
 <br>
 - [MongoDB](https://www.mongodb.com/), RAVENDB,RETHINKDB, ORIENTDB, PostrgreSQL, ArangoDB cassandra
 

@@ -515,6 +515,7 @@ plot(gtrendsR::gtrends(keyword = c("zavjera", "cjepljenje", "prosvjedi","mjere")
 
 ```{r ,fig.width=6, fig.height=3, warning=FALSE}
 # učitaj pakete
+#remotes::install_github("joachim-gassen/tidycovid19")
 library(tidycovid19)
 library(zoo)
 # preuzmi podatke
